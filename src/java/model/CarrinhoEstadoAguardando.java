@@ -9,28 +9,23 @@ package model;
  *
  * @author mathe
  */
-public class CarrinhoEstadoAguardando implements CarrinhoEstado {
+public class CarrinhoEstadoAguardando extends CarrinhoEstado {
 
+    public CarrinhoEstadoAguardando(){
+        this.estadoNome = "Aguardando";
+        this.estadoMsg = "Aguardando aprovação";
+    }
+    
     @Override
     public boolean aprovar(Carrinho carrinho) {
-        carrinho.setEstado("Aprovado");
+        carrinho.setEstado(new CarrinhoEstadoAprovado());
         return true;
     }
 
     @Override
     public boolean naoAprovar(Carrinho carrinho) {
-        carrinho.setEstado("Não Aprovado");
+        carrinho.setEstado(new CarrinhoEstadoNaoAprovado());
         return true;
     }
 
-    @Override
-    public boolean cancelar(Carrinho carrinho) {
-        return false;
-    }
-
-    @Override
-    public boolean aguardar(Carrinho carrinho) {
-        return false;
-    }
-    
 }

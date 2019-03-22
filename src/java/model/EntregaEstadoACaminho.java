@@ -11,27 +11,32 @@ package model;
  */
 public class EntregaEstadoACaminho extends EntregaEstado {
 
+    public EntregaEstadoACaminho() {
+        this.estadoNome = "ACaminho";
+        this.estadoMsg = "A Caminho";
+    }
+
     @Override
     public boolean acidentou(Entrega entrega) {
-        entrega.getEstado().setEstadoTxt("Ocorreu um acidente");
+        entrega.setEstado(new EntregaEstadoAcidente());
         return true;
     }
 
     @Override
     public boolean naoEncontrado(Entrega entrega) {
-        entrega.getEstado().setEstadoTxt("Endereço não encontrado");
+        entrega.setEstado(new EntregaEstadoNaoEncontrado());
         return true;
     }
 
     @Override
     public boolean entregue(Entrega entrega) {
-        entrega.getEstado().setEstadoTxt("Entrega feita");
+        entrega.setEstado(new EntregaEstadoEntregue());
         return true;
     }
 
     @Override
     public boolean roubado(Entrega entrega) {
-        entrega.getEstado().setEstadoTxt("Entrega roubada");
+        entrega.setEstado(new EntregaEstadoRoubado());
         return true;
     }
 

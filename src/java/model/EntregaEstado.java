@@ -11,7 +11,8 @@ package model;
  */
 public abstract class EntregaEstado {
     
-    private String estadoTxt;
+    protected String estadoNome;
+    protected String estadoMsg;
     
     public boolean encaminhar(Entrega entrega){
         return false;
@@ -29,11 +30,11 @@ public abstract class EntregaEstado {
         return false;
     };
     
-    public String getEstadoTxt(){
-        return this.estadoTxt;
+    public String getEstadoNome(){
+        return this.estadoNome;
     }
     
-    protected void setEstadoTxt(String estadoTxt){
-        this.estadoTxt = estadoTxt;
+    public String getEstadoMsg(){
+        return this.estadoMsg;
     }
 }

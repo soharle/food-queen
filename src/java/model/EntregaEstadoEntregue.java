@@ -11,4 +11,8 @@ package model;
  */
 public class EntregaEstadoEntregue extends EntregaEstado {
 
+    public EntregaEstadoEntregue() {
+        this.estadoNome = "Entregue";
+        this.estadoMsg = "Entrega feita";
+    }
 }

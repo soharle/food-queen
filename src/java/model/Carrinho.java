@@ -10,16 +10,17 @@ package model;
  * @author mathe
  */
 public class Carrinho {
+    
     private long id;
     private String valor;
     private String data;
     private String hora;
     private String pagamento;
-    private String estado;
+    private CarrinhoEstado estado;
     
     Consumidor consumidor;
 
-    public Carrinho(long id, String valor, String data, String hora, String pagamento, String estado, Consumidor consumidor) {
+    public Carrinho(long id, String valor, String data, String hora, String pagamento, CarrinhoEstado estado, Consumidor consumidor) {
         this.id = id;
         this.valor = valor;
         this.data = data;
@@ -69,11 +70,11 @@ public class Carrinho {
         this.pagamento = pagamento;
     }
 
-    protected String getEstado() {
+    protected CarrinhoEstado getEstado() {
         return estado;
     }
 
-    protected void setEstado(String estado) {
+    protected void setEstado(CarrinhoEstado estado) {
         this.estado = estado;
     }
 

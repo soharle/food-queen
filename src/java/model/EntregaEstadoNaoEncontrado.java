@@ -11,4 +11,8 @@ package model;
  */
 public class EntregaEstadoNaoEncontrado extends EntregaEstado{
     
+    public EntregaEstadoNaoEncontrado(){
+        this.estadoNome = "NaoEncontrado";
+        this.estadoMsg = "Endereço não encontrado";
+    }
 }

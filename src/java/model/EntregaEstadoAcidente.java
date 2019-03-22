@@ -10,5 +10,9 @@ package model;
  * @author mathe
  */
 public class EntregaEstadoAcidente extends EntregaEstado {
-
+    
+    public EntregaEstadoAcidente(){
+        this.estadoNome = "Acidente";
+        this.estadoMsg = "Ocorreu um acidente";
+    }
 }

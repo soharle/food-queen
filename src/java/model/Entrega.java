@@ -23,6 +23,13 @@ public class Entrega {
         this.carrinho = carrinho;
     }
 
+    public Entrega(long id, Loja loja, Carrinho carrinho) {
+        this.id = id;
+        this.loja = loja;
+        this.carrinho = carrinho;
+        this.estado = new EntregaEstadoACaminho();
+    }
+
     public long getId() {
         return id;
     }
