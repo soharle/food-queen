@@ -11,12 +11,12 @@ package model;
  */
 public class Entrega {
     private long id;
-    private String estado;
+    private EntregaEstado estado;
     
     private Loja loja;
     private Carrinho carrinho;
 
-    public Entrega(long id, String estado, Loja loja, Carrinho carrinho) {
+    public Entrega(long id, EntregaEstado estado, Loja loja, Carrinho carrinho) {
         this.id = id;
         this.estado = estado;
         this.loja = loja;
@@ -31,11 +31,11 @@ public class Entrega {
         this.id = id;
     }
 
-    public String getEstado() {
+    public EntregaEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EntregaEstado estado) {
         this.estado = estado;
     }
 
