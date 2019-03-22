@@ -10,11 +10,11 @@ package model;
  * @author mathe
  */
 public class Contato {
-    long id;
-    String telefone;
-    String ddd;
-    String email;
-    String telefoneComplementar;
+    private long id;
+    private String telefone;
+    private String ddd;
+    private String email;
+    private String telefoneComplementar;
 
     public Contato(long id, String telefone, String ddd, String email, String telefoneComplementar) {
         this.id = id;

@@ -10,11 +10,12 @@ package model;
  * @author mathe
  */
 public class Pedido {
-    long id;
-    String observacao;
-    
-    Produto produto;
-    Carrinho carrinho;
+
+    private long id;
+    private String observacao;
+
+    private Produto produto;
+    private Carrinho carrinho;
 
     public Pedido(long id, String observacao, Produto produto, Carrinho carrinho) {
         this.id = id;
@@ -54,6 +55,5 @@ public class Pedido {
     public void setCarrinho(Carrinho carrinho) {
         this.carrinho = carrinho;
     }
-    
-    
+
 }

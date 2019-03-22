@@ -10,10 +10,10 @@ package model;
  * @author mathe
  */
 public class Conta {
-    long id;
-    String login;
-    String senha;
-    String tipo;
+    private long id;
+    private String login;
+    private String senha;
+    private String tipo;
 
     public Conta(long id, String login, String senha, String tipo) {
         this.id = id;

@@ -10,15 +10,15 @@ package model;
  * @author mathe
  */
 public class Loja {
-    long id;
-    String nome;
-    String cnpj;
-    String descricao;
+    private long id;
+    private String nome;
+    private String cnpj;
+    private String descricao;
     
-    EnderecoLoja enderecoLoja;
-    Conta conta;
-    Contato contato;
-    Categoria categoria;
+    private EnderecoLoja enderecoLoja;
+    private Conta conta;
+    private Contato contato;
+    private Categoria categoria;
 
     public Loja(long id, String nome, String cnpj, String descricao, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.id = id;

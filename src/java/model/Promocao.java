@@ -10,10 +10,10 @@ package model;
  * @author mathe
  */
 public class Promocao {
-    long id;
-    String nome;
-    String desconto;
-    String tipo;
+    private long id;
+    private String nome;
+    private String desconto;
+    private String tipo;
 
     public Promocao(long id, String nome, String desconto, String tipo) {
         this.id = id;

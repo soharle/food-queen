@@ -10,12 +10,12 @@ package model;
  * @author mathe
  */
 public class Carrinho {
-    long id;
-    String valor;
-    String data;
-    String hora;
-    String pagamento;
-    String estado;
+    private long id;
+    private String valor;
+    private String data;
+    private String hora;
+    private String pagamento;
+    private String estado;
     
     Consumidor consumidor;
 
@@ -69,11 +69,11 @@ public class Carrinho {
         this.pagamento = pagamento;
     }
 
-    public String getEstado() {
+    protected String getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    protected void setEstado(String estado) {
         this.estado = estado;
     }
 

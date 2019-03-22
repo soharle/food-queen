@@ -10,14 +10,14 @@ package model;
  * @author mathe
  */
 public class EnderecoLoja {
-    long id;
-    String logradouro;
-    String numero;
-    String complemento;
-    String bairro;
-    String cidade;
-    String estado;
-    String pais;
+    private long id;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+    private String cidade;
+    private String estado;
+    private String pais;
 
     public EnderecoLoja(long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
         this.id = id;

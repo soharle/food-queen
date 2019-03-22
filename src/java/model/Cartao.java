@@ -10,11 +10,11 @@ package model;
  * @author mathe
  */
 public class Cartao {
-    long id;
-    String numero;
-    String cod;
-    String titular;
-    String validade;
+    private long id;
+    private String numero;
+    private String cod;
+    private String titular;
+    private String validade;
     
     Consumidor consumidor;
 

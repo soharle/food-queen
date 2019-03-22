@@ -10,13 +10,13 @@ package model;
  * @author mathe
  */
 public class Consumidor {
-    long id;
-    String nome;
-    String cpf;
-    String nascimento;
+    private long id;
+    private String nome;
+    private String cpf;
+    private String nascimento;
     
-    Contato contato;
-    Conta conta;
+    private Contato contato;
+    private Conta conta;
 
     public Consumidor(long id, String nome, String cpf, String nascimento, Contato contato, Conta conta) {
         this.id = id;

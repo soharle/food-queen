@@ -10,10 +10,10 @@ package model;
  * @author mathe
  */
 public class Favoritos {
-    long id;
+    private long id;
     
-    Consumidor consumidor;
-    Loja loja;
+    private Consumidor consumidor;
+    private Loja loja;
 
     public Favoritos(long id, Consumidor consumidor, Loja loja) {
         this.id = id;

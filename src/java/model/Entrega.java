@@ -10,11 +10,11 @@ package model;
  * @author mathe
  */
 public class Entrega {
-    long id;
-    String estado;
+    private long id;
+    private String estado;
     
-    Loja loja;
-    Carrinho carrinho;
+    private Loja loja;
+    private Carrinho carrinho;
 
     public Entrega(long id, String estado, Loja loja, Carrinho carrinho) {
         this.id = id;
