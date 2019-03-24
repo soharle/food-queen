@@ -1,61 +1,63 @@
+package persistence;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.Promocao;
+import model.Conta;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author mathe
  */
-public class PromocaoDAO {
-    private static PromocaoDAO instance = new PromocaoDAO();
+public class ContaDAO {
 
-    public static PromocaoDAO getInstance() {
+    private static ContaDAO instance = new ContaDAO();
+
+    public static ContaDAO getInstance() {
         return instance;
     }
 
-    public Promocao getPromocao(int id) throws ClassNotFoundException, SQLException {
-        Promocao promocao = null;
+    public Conta getConta(int id) throws ClassNotFoundException, SQLException {
+        Conta conta = null;
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from promocao where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from conta where id =" + id + "");
             rs.first();
-            promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
+            conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
 
-        return promocao;
+        return conta;
 
     }
 
-    public ArrayList<Promocao> getPromocaos() throws ClassNotFoundException, SQLException {
-        ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
+    public ArrayList<Conta> getContas() throws ClassNotFoundException, SQLException {
+        ArrayList<Conta> contas = new ArrayList<Conta>();
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from promocao;");
+            ResultSet rs = st.executeQuery("select * from conta;");
             while (rs.next()) {
-                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
-                promocoes.add(promocao);
+                Conta conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
+                contas.add(conta);
             }
         } catch (SQLException e) {
             throw e;
@@ -63,11 +65,11 @@ public class PromocaoDAO {
             closeResources(conn, st);
         }
 
-        return promocoes;
+        return contas;
 
     }
 
-    public void update(Promocao promocao) throws ClassNotFoundException, SQLException {
+    public void update(Conta conta) throws ClassNotFoundException, SQLException {
 
         Connection conn = null;
         Statement st = null;
@@ -75,8 +77,7 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update promocao set nome = '" + promocao.getNome() + ", desconto = '" + promocao.getDesconto()
-                    + ", tipo = '" + promocao.getTipo() + "' where id = " + promocao.getId() + ";");
+            st.execute("update conta set login = '" + conta.getLogin() + ", senha = '" + conta.getSenha() + "' where id = " + conta.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -92,7 +93,7 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from promocao where id =" + id + "");
+            st.executeUpdate("delete from conta where id =" + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -100,15 +101,14 @@ public class PromocaoDAO {
         }
     }
 
-    public void save(Promocao promocao) throws SQLException, ClassNotFoundException {
+    public void save(Conta conta) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-             st.execute("update promocao set nome = '" + promocao.getNome() + ", desconto = '" + promocao.getDesconto()
-                    + ", tipo = '" + promocao.getTipo() + "' where id = " + promocao.getId() + ";");
+            st.execute("insert into conta (login, senha, tipo)" + " values ('" + conta.getLogin() + "', '" + conta.getSenha() + "', '" + conta.getTipo() + "')");
 
         } catch (SQLException e) {
             throw e;

@@ -1,10 +1,12 @@
+package persistence;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.Categoria;
+import model.Contato;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,47 +17,47 @@ import model.Categoria;
  *
  * @author mathe
  */
-public class CategoriaDAO {
+public class ContatoDAO {
 
-    private static CategoriaDAO instance = new CategoriaDAO();
+    private static ContatoDAO instance = new ContatoDAO();
 
-    public static CategoriaDAO getInstance() {
+    public static ContatoDAO getInstance() {
         return instance;
     }
 
-    public Categoria getCategoria(int id) throws ClassNotFoundException, SQLException {
-        Categoria categoria = null;
+    public Contato getContato(int id) throws ClassNotFoundException, SQLException {
+        Contato contato = null;
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria where id =" + id + "");
+            ResultSet rs = st.executeQuery("select * from contato where id =" + id + "");
             rs.first();
-            categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
+            contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
         }
 
-        return categoria;
+        return contato;
 
     }
 
-    public ArrayList<Categoria> getCategorias() throws ClassNotFoundException, SQLException {
-        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+    public ArrayList<Contato> getContatos() throws ClassNotFoundException, SQLException {
+        ArrayList<Contato> contatos = new ArrayList<Contato>();
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria;");
+            ResultSet rs = st.executeQuery("select * from contato;");
             while (rs.next()) {
-                Categoria categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
-                categorias.add(categoria);
+                Contato contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
+                contatos.add(contato);
             }
         } catch (SQLException e) {
             throw e;
@@ -63,11 +65,11 @@ public class CategoriaDAO {
             closeResources(conn, st);
         }
 
-        return categorias;
+        return contatos;
 
     }
 
-    public void update(Categoria categoria) throws ClassNotFoundException, SQLException {
+    public void update(Contato contato) throws ClassNotFoundException, SQLException {
 
         Connection conn = null;
         Statement st = null;
@@ -75,7 +77,8 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update categoria set nome = '" + categoria.getNome() + "' where id = " + categoria.getId() + ";");
+            st.execute("update contato set telefone = '" + contato.getTelefone() + ", ddd = '" + contato.getDdd()
+                    + ", email = '" + contato.getEmail() + ", telefoneComplementar = '" + contato.getTelefoneComplementar() + "' where id = " + contato.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -91,7 +94,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from categoria where id =" + id + "");
+            st.executeUpdate("delete from contato where id =" + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -99,14 +102,15 @@ public class CategoriaDAO {
         }
     }
 
-    public void save(Categoria categoria) throws SQLException, ClassNotFoundException {
+    public void save(Contato contato) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into categoria (login, senha, tipo)" + " values ('" + categoria.getNome() + "')");
+            st.execute("insert into contato (telefone, ddd, email, telefone_complementar)" + " values ('" 
+                    + contato.getTelefone() + "', '" + contato.getDdd() + "', '" + contato.getEmail() + "', '" + contato.getTelefoneComplementar() + "')");
 
         } catch (SQLException e) {
             throw e;
