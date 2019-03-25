@@ -108,7 +108,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into categoria (login, senha, tipo)" + " values ('" + categoria.getNome() + "')");
+            st.execute("insert into categoria (nome)" + " values ('" + categoria.getNome() + "')");
 
         } catch (SQLException e) {
             throw e;

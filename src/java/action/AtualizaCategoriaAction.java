@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Action;
+package action;
 
 import controller.Action;
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class AtualizaCategoriaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        long id = Long.parseLong(request.getParameter("txtId"));
+        long id = Long.parseLong(request.getParameter("id"));
         String nome = request.getParameter("txtNome");
 
         try {

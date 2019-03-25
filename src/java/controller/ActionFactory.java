@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
-
+import action.PreparaCategoriaAction;
 import controller.Action;
 
 public class ActionFactory {
