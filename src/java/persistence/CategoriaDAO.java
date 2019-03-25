@@ -25,7 +25,7 @@ public class CategoriaDAO {
         return instance;
     }
 
-    public Categoria getCategoria(int id) throws ClassNotFoundException, SQLException {
+    public Categoria getCategoria(long id) throws ClassNotFoundException, SQLException {
         Categoria categoria = null;
         Connection conn = null;
         Statement st = null;
@@ -86,7 +86,7 @@ public class CategoriaDAO {
         }
     }
 
-    public void delete(int id) throws ClassNotFoundException, SQLException {
+    public void delete(long id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;
 

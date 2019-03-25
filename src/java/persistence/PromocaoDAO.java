@@ -25,7 +25,7 @@ public class PromocaoDAO {
         return instance;
     }
 
-    public Promocao getPromocao(int id) throws ClassNotFoundException, SQLException {
+    public Promocao getPromocao(long id) throws ClassNotFoundException, SQLException {
         Promocao promocao = null;
         Connection conn = null;
         Statement st = null;
@@ -87,7 +87,7 @@ public class PromocaoDAO {
         }
     }
 
-    public void delete(int id) throws ClassNotFoundException, SQLException {
+    public void delete(long id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;
 

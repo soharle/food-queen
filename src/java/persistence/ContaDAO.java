@@ -25,7 +25,7 @@ public class ContaDAO {
         return instance;
     }
 
-    public Conta getConta(int id) throws ClassNotFoundException, SQLException {
+    public Conta getConta(long id) throws ClassNotFoundException, SQLException {
         Conta conta = null;
         Connection conn = null;
         Statement st = null;
@@ -86,7 +86,7 @@ public class ContaDAO {
         }
     }
 
-    public void delete(int id) throws ClassNotFoundException, SQLException {
+    public void delete(long id) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;
 
