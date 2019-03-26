@@ -20,6 +20,18 @@ public class Loja {
     private Contato contato;
     private Categoria categoria;
 
+    public Loja(String nome, String cnpj, String descricao, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.descricao = descricao;
+        this.enderecoLoja = enderecoLoja;
+        this.conta = conta;
+        this.contato = contato;
+        this.categoria = categoria;
+    }
+    
+    
+    
     public Loja(long id, String nome, String cnpj, String descricao, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.id = id;
         this.nome = nome;
