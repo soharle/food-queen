@@ -31,11 +31,15 @@ public class LerCategoriaAction implements Action {
         Categoria categoria;
         
         try {
-            categoria = CategoriaDAO.getInstance().getCategoria(id);
+            categoria = CategoriaDAO.getInstance().get(id);
             request.setAttribute("categoria", categoria);
             RequestDispatcher view = request.getRequestDispatcher("categoriaPages/exibitCategoria.jsp");
             view.forward(request, response);
-        } catch (SQLException | ClassNotFoundException | ServletException | IOException ex) {
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 

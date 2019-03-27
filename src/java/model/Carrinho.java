@@ -70,11 +70,11 @@ public class Carrinho {
         this.pagamento = pagamento;
     }
 
-    protected CarrinhoEstado getEstado() {
+    public CarrinhoEstado getEstado() {
         return estado;
     }
 
-    protected void setEstado(CarrinhoEstado estado) {
+    public void setEstado(CarrinhoEstado estado) {
         this.estado = estado;
     }
 

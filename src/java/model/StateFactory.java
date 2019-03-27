@@ -11,7 +11,7 @@ package model;
  */
 public class StateFactory {
 
-    private static CarrinhoEstado createCarrinhoEstado(String state) {
+    public static CarrinhoEstado createCarrinhoEstado(String state) {
         CarrinhoEstado actionObject = null;
         String nomeClasse = "model.CarrinhoEstado" + state;
         Class classe = null;
@@ -29,7 +29,7 @@ public class StateFactory {
         return actionObject;
     }
 
-    private static EntregaEstado createEntregaEstado(String state) {
+    public static EntregaEstado createEntregaEstado(String state) {
         EntregaEstado actionObject = null;
         String nomeClasse = "model.EntregaEstado" + state;
         Class classe = null;

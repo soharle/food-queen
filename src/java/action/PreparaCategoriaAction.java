@@ -28,7 +28,7 @@ public class PreparaCategoriaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getCategorias();
+            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
             request.setAttribute("categorias", categorias);
             RequestDispatcher view = request.getRequestDispatcher("pages/categoria/listar.jsp");
             view.forward(request, response);
