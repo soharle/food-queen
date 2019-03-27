@@ -1,6 +1,5 @@
 package persistence;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ public class ContatoDAO {
         return instance;
     }
 
-    public Contato getContato(long id) throws ClassNotFoundException, SQLException {
+    public Contato get(long id) throws ClassNotFoundException, SQLException {
         Contato contato = null;
         Connection conn = null;
         Statement st = null;
@@ -33,7 +32,7 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from contato where id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM contato WHERE id = " + id + "");
             rs.first();
             contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
         } catch (SQLException e) {
@@ -46,7 +45,7 @@ public class ContatoDAO {
 
     }
 
-    public ArrayList<Contato> getContatos() throws ClassNotFoundException, SQLException {
+    public ArrayList<Contato> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<Contato> contatos = new ArrayList<Contato>();
         Connection conn = null;
         Statement st = null;
@@ -54,7 +53,7 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from contato;");
+            ResultSet rs = st.executeQuery("SELECT * FROM contato;");
             while (rs.next()) {
                 Contato contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
                 contatos.add(contato);
@@ -77,8 +76,12 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update contato set telefone = '" + contato.getTelefone() + ", ddd = '" + contato.getDdd()
-                    + ", email = '" + contato.getEmail() + ", telefoneComplementar = '" + contato.getTelefoneComplementar() + "' where id = " + contato.getId() + ";");
+            st.execute("UPDATE contato SET "
+                    + "telefone = '" + contato.getTelefone() + "', "
+                    + "ddd = '" + contato.getDdd() + "', "
+                    + "email = '" + contato.getEmail() + "', "
+                    + "telefoneComplementar = '" + contato.getTelefoneComplementar() + "' "
+                    + "WHERE id = " + contato.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -94,7 +97,7 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from contato where id =" + id + "");
+            st.executeUpdate("DELETE FROM contato WHERE id =" + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -109,8 +112,11 @@ public class ContatoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into contato (telefone, ddd, email, telefone_complementar)" + " values ('" 
-                    + contato.getTelefone() + "', '" + contato.getDdd() + "', '" + contato.getEmail() + "', '" + contato.getTelefoneComplementar() + "')");
+            st.execute("INSERT INTO contato (telefone, ddd, email, telefone_complementar)" + " "
+                    + "VALUES ('" + contato.getTelefone() + "', "
+                    + "'" + contato.getDdd() + "', "
+                    + "'" + contato.getEmail() + "', "
+                    + "'" + contato.getTelefoneComplementar() + "');");
 
         } catch (SQLException e) {
             throw e;
@@ -129,7 +135,7 @@ public class ContatoDAO {
                 conn.close();
             }
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 }

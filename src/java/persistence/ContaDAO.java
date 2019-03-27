@@ -1,6 +1,5 @@
 package persistence;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ public class ContaDAO {
         return instance;
     }
 
-    public Conta getConta(long id) throws ClassNotFoundException, SQLException {
+    public Conta get(long id) throws ClassNotFoundException, SQLException {
         Conta conta = null;
         Connection conn = null;
         Statement st = null;
@@ -33,7 +32,7 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from conta where id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE id = " + id + "");
             rs.first();
             conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
         } catch (SQLException e) {
@@ -46,7 +45,7 @@ public class ContaDAO {
 
     }
 
-    public ArrayList<Conta> getContas() throws ClassNotFoundException, SQLException {
+    public ArrayList<Conta> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<Conta> contas = new ArrayList<Conta>();
         Connection conn = null;
         Statement st = null;
@@ -54,7 +53,7 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from conta;");
+            ResultSet rs = st.executeQuery("SELECT * FROM conta;");
             while (rs.next()) {
                 Conta conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
                 contas.add(conta);
@@ -77,7 +76,10 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update conta set login = '" + conta.getLogin() + ", senha = '" + conta.getSenha() + "' where id = " + conta.getId() + ";");
+            st.execute("UPDATE conta "
+                    + "SET login = '" + conta.getLogin() + ", "
+                    + "senha = '" + conta.getSenha() + "' "
+                    + "WHERE id = " + conta.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -93,7 +95,7 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from conta where id =" + id + "");
+            st.executeUpdate("DELETE FROM conta WHERE id = " + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -108,7 +110,10 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into conta (login, senha, tipo)" + " values ('" + conta.getLogin() + "', '" + conta.getSenha() + "', '" + conta.getTipo() + "')");
+            st.execute("INSERT INTO conta (login, senha, tipo)" + " "
+                    + "VALUES ('" + conta.getLogin() + "', "
+                    + "'" + conta.getSenha() + "', "
+                    + "'" + conta.getTipo() + "');");
 
         } catch (SQLException e) {
             throw e;
@@ -127,7 +132,7 @@ public class ContaDAO {
                 conn.close();
             }
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 }

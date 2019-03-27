@@ -1,6 +1,5 @@
 package persistence;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,19 +12,19 @@ import model.Promocao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author mathe
  */
 public class PromocaoDAO {
+
     private static PromocaoDAO instance = new PromocaoDAO();
 
     public static PromocaoDAO getInstance() {
         return instance;
     }
 
-    public Promocao getPromocao(long id) throws ClassNotFoundException, SQLException {
+    public Promocao get(long id) throws ClassNotFoundException, SQLException {
         Promocao promocao = null;
         Connection conn = null;
         Statement st = null;
@@ -33,7 +32,7 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from promocao where id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM promocao WHERE id = " + id + ";");
             rs.first();
             promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
         } catch (SQLException e) {
@@ -54,7 +53,7 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from promocao;");
+            ResultSet rs = st.executeQuery("SELECT * FROM promocao;");
             while (rs.next()) {
                 Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
                 promocoes.add(promocao);
@@ -77,8 +76,8 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update promocao set nome = '" + promocao.getNome() + ", desconto = '" + promocao.getDesconto()
-                    + ", tipo = '" + promocao.getTipo() + "' where id = " + promocao.getId() + ";");
+            st.execute("UPDATE promocao SET nome = '" + promocao.getNome() + "', desconto = '" + promocao.getDesconto()
+                    + "', tipo = '" + promocao.getTipo() + "' WHERE id = " + promocao.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -94,7 +93,7 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from promocao where id =" + id + "");
+            st.executeUpdate("DELETE FROM promocao WHERE id = " + id + ";");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -109,8 +108,11 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-             st.execute("update promocao set nome = '" + promocao.getNome() + ", desconto = '" + promocao.getDesconto()
-                    + ", tipo = '" + promocao.getTipo() + "' where id = " + promocao.getId() + ";");
+            st.execute("INSERT INTO promocao (nome, desconto, tipo) "
+                    + "VALUES ('" + promocao.getNome() + "', "
+                    + "'" + promocao.getDesconto() + "', "
+                    + "'" + promocao.getTipo() + "' "
+                    + "WHERE id = " + promocao.getId() + ";");
 
         } catch (SQLException e) {
             throw e;

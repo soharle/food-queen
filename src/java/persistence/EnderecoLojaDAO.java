@@ -12,31 +12,30 @@ import model.EnderecoLoja;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author mathe
  */
 public class EnderecoLojaDAO {
-    
+
     private static EnderecoLojaDAO instance = new EnderecoLojaDAO();
 
     public static EnderecoLojaDAO getInstance() {
         return instance;
     }
 
-    public EnderecoLoja getEnderecoLoja(long id) throws ClassNotFoundException, SQLException {
+    public EnderecoLoja get(long id) throws ClassNotFoundException, SQLException {
         EnderecoLoja endereco = null;
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from endereco_loja where id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja WHERE id =" + id + "");
             rs.first();
             endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
-            rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
+                    rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -47,7 +46,7 @@ public class EnderecoLojaDAO {
 
     }
 
-    public ArrayList<EnderecoLoja> getEnderecoLojas() throws ClassNotFoundException, SQLException {
+    public ArrayList<EnderecoLoja> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<EnderecoLoja> enderecos = new ArrayList<EnderecoLoja>();
         Connection conn = null;
         Statement st = null;
@@ -55,10 +54,10 @@ public class EnderecoLojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from endereco_loja;");
+            ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja;");
             while (rs.next()) {
                 EnderecoLoja endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
-            rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
+                        rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
                 enderecos.add(endereco);
             }
         } catch (SQLException e) {
@@ -79,9 +78,14 @@ public class EnderecoLojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update endereco_loja set logradouro = '" + endereco.getLogradouro() + ", numero = '" + endereco.getNumero() + ", complemento = '" +
-                    endereco.getComplemento() + ", bairro = '" + endereco.getBairro() + ", cidade = '" + endereco.getCidade() + ", estado = '" + endereco.getEstado() +
-                    ", pais = '" + endereco.getPais() + "' where id = " + endereco.getId() + ";");
+            st.execute("UPDATE  endereco_loja SET logradouro = '" + endereco.getLogradouro() + "', "
+                    + "numero = '" + endereco.getNumero() + "', "
+                    + "complemento = '" + endereco.getComplemento() + "', "
+                    + "bairro = '" + endereco.getBairro() + "', "
+                    + "cidade = '" + endereco.getCidade() + "', "
+                    + "estado = '" + endereco.getEstado() + "', "
+                    + "pais = '" + endereco.getPais() + "' "
+                    + "WHERE id = " + endereco.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -97,7 +101,7 @@ public class EnderecoLojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from endereco_loja where id =" + id + "");
+            st.executeUpdate("DELETE FROM endereco_loja WHERE id = " + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -112,9 +116,14 @@ public class EnderecoLojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into endereco_loja set logradouro = '" + endereco.getLogradouro() + ", numero = '" + endereco.getNumero() + ", complemento = '" +
-                    endereco.getComplemento() + ", bairro = '" + endereco.getBairro() + ", cidade = '" + endereco.getCidade() + ", estado = '" + endereco.getEstado() +
-                    ", pais = '" + endereco.getPais() + "' where id = " + endereco.getId() + ";");
+            st.execute("INSERT INTO endereco_loja (logradouro, numero, complemento, bairro, cidade, estado, pais)"
+                    + "VALUES ('" + endereco.getLogradouro() + ", "
+                    + "'" + endereco.getNumero() + ", "
+                    + "'" + endereco.getComplemento() + ", "
+                    + "'" + endereco.getBairro() + ", "
+                    + "'" + endereco.getCidade() + ", "
+                    + "'" + endereco.getEstado() + "', "
+                    + "'" + endereco.getPais() + "');");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -132,7 +141,7 @@ public class EnderecoLojaDAO {
                 conn.close();
             }
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 }

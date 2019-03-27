@@ -25,7 +25,7 @@ public class CategoriaDAO {
         return instance;
     }
 
-    public Categoria getCategoria(long id) throws ClassNotFoundException, SQLException {
+    public Categoria get(long id) throws ClassNotFoundException, SQLException {
         Categoria categoria = null;
         Connection conn = null;
         Statement st = null;
@@ -33,7 +33,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria where id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
             rs.first();
             categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class CategoriaDAO {
 
     }
 
-    public ArrayList<Categoria> getCategorias() throws ClassNotFoundException, SQLException {
+    public ArrayList<Categoria> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
         Connection conn = null;
         Statement st = null;
@@ -54,7 +54,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("select * from categoria;");
+            ResultSet rs = st.executeQuery("SELECT * FROM categoria;");
             while (rs.next()) {
                 Categoria categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
                 categorias.add(categoria);
@@ -77,7 +77,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("update categoria set nome = '" + categoria.getNome() + "' where id = " + categoria.getId() + ";");
+            st.execute("UPDATE categoria SET nome = '" + categoria.getNome() + "' WHERE id = " + categoria.getId() + ";");
 
         } catch (SQLException e) {
             throw e;
@@ -93,7 +93,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("delete from categoria where id =" + id + "");
+            st.executeUpdate("DELETE FROM categoria WHERE id = " + id + ";");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -108,7 +108,7 @@ public class CategoriaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("insert into categoria (nome)" + " values ('" + categoria.getNome() + "')");
+            st.execute("INSERT INTO categoria (nome)" + " VALUES ('" + categoria.getNome() + "');");
 
         } catch (SQLException e) {
             throw e;
@@ -127,7 +127,7 @@ public class CategoriaDAO {
                 conn.close();
             }
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 }
