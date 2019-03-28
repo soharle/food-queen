@@ -26,7 +26,7 @@ public class AtualizaPromocaoAction implements Action {
         long id = Long.parseLong(request.getParameter("id"));
         String nome = request.getParameter("txtNome");
         String desconto = request.getParameter("txtDesconto");
-        String tipo = request.getParameter("txtTipo");
+        String tipo = request.getParameter("optTipo");
         
         
         try {

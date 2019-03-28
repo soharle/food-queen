@@ -8,31 +8,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title> <c:out value="${acao}"/> Promoção</title>
+    <title> <c:out value="${acao}"/> Conta</title>
   </head>
   <body>
     <h2> <c:out value="${acao}" /></h2>
     <c:if test="${acao=='Cadastrar'}">
-      <form action="FrontController?action=SalvarPromocao" method="post">
+      <form action="FrontController?action=SalvarConta" method="post">
     </c:if>
     <c:if test="${acao=='Editar'}">
-      <form action="FrontController?action=AtualizaPromocao&id=${promocao.id}" method="post">
+      <form action="FrontController?action=AtualizaConta&id=${conta.id}" method="post">
     </c:if>
       <table>
         <tr>
-          <td>Nome da promocao</td>
-          <td><input type="text" name="txtNome" <c:if test="${promocao.nome != null}"> value="${promocao.nome}"</c:if> /></td>
+          <td>Login</td>
+          <td><input type="text" name="txtLogin" <c:if test="${conta.login != null}"> value="${conta.login}"</c:if> /></td>
         </tr>
         <tr>
-          <td>Desconto</td>
-          <td><input type="text" name="txtDesconto" <c:if test="${promocao.desconto != null}"> value="${promocao.desconto}"</c:if> /></td>
+          <td>Senha</td>
+          <td><input type="text" name="txtSenha" <c:if test="${conta.senha != null}"> value="${conta.senha}"</c:if> /></td>
         </tr>
         <tr>
           <td>Tipo</td>
           <td>
-              <select name="optTipo">
-                <option value="Valor bruto" <c:if test="${promocao.tipo == 'Valor bruto'}"> selected </c:if>>Valor bruto</option>
-                <option value="Porcentagem" <c:if test="${promocao.tipo == 'Porcentagem'}"> selected </c:if>>Porcentagem</option>
+              <select name="optTipo" <c:if test="${acao=='Editar'}"> disabled </c:if>>
+                <option value="Loja" <c:if test="${conta.tipo == 'Loja'}"> selected </c:if>>Loja</option>
+                <option value="Consumidor" <c:if test="${conta.tipo == 'Consumidor'}"> selected </c:if>>Consumidor</option>
               </select>
           </td>
         </tr>

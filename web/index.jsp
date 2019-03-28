@@ -10,6 +10,8 @@
     <body>
         <ul>
             <li><a href="FrontController?action=PreparaCategoria"> Categorias </a></li>
+            <li><a href="FrontController?action=PreparaConta"> Conta </a></li>
+            <li><a href="FrontController?action=PreparaContato"> Contato</a></li>
             <li><a href="FrontController?action=PreparaPromocao"> Promoções </a></li>
         </ul>
     </body>

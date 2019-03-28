@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.promocao;
+package action.contato;
 
 import controller.Action;
 import java.io.IOException;
@@ -12,27 +12,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Promocao;
-import persistence.PromocaoDAO;
+import model.Contato;
+import persistence.ContatoDAO;
 
 /**
  *
  * @author mathe
  */
-public class SalvarPromocaoAction implements Action {
+public class SalvarContatoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        String nome = request.getParameter("txtNome");
-        String desconto = request.getParameter("txtDesconto");
-        String tipo = request.getParameter("optTipo");
+        String telefone = request.getParameter("txtTelefone");
+        String ddd = request.getParameter("txtDdd");
+        String email = request.getParameter("txtEmail");
+        String telefoneComplementar = request.getParameter("txtTelefoneComplementar");
         
         try {
-            Promocao promocao = new Promocao(nome, desconto, tipo);
-            PromocaoDAO.getInstance().save(promocao);
+            Contato contato = new Contato(telefone, ddd, email, telefoneComplementar);
+            ContatoDAO.getInstance().save(contato);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarPromocaoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }

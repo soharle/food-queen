@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.promocao;
+package action.conta;
 
 import controller.Action;
 import java.io.IOException;
@@ -12,27 +12,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Promocao;
-import persistence.PromocaoDAO;
+import model.Conta;
+import persistence.ContaDAO;
 
 /**
  *
  * @author mathe
  */
-public class SalvarPromocaoAction implements Action {
+public class SalvarContaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        String nome = request.getParameter("txtNome");
-        String desconto = request.getParameter("txtDesconto");
+        String login = request.getParameter("txtLogin");
+        String senha = request.getParameter("txtSenha");
         String tipo = request.getParameter("optTipo");
         
         try {
-            Promocao promocao = new Promocao(nome, desconto, tipo);
-            PromocaoDAO.getInstance().save(promocao);
+            Conta conta = new Conta(login, senha, tipo);
+            ContaDAO.getInstance().save(conta);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarPromocaoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
 }
