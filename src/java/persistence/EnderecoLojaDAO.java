@@ -117,11 +117,11 @@ public class EnderecoLojaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO endereco_loja (logradouro, numero, complemento, bairro, cidade, estado, pais)"
-                    + "VALUES ('" + endereco.getLogradouro() + ", "
-                    + "'" + endereco.getNumero() + ", "
-                    + "'" + endereco.getComplemento() + ", "
-                    + "'" + endereco.getBairro() + ", "
-                    + "'" + endereco.getCidade() + ", "
+                    + "VALUES ('" + endereco.getLogradouro() + "', "
+                    + "'" + endereco.getNumero() + "', "
+                    + "'" + endereco.getComplemento() + "', "
+                    + "'" + endereco.getBairro() + "', "
+                    + "'" + endereco.getCidade() + "', "
                     + "'" + endereco.getEstado() + "', "
                     + "'" + endereco.getPais() + "');");
         } catch (SQLException e) {

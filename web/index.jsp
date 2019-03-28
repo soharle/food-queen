@@ -13,6 +13,7 @@
             <li><a href="FrontController?action=PreparaConta"> Conta </a></li>
             <li><a href="FrontController?action=PreparaContato"> Contato</a></li>
             <li><a href="FrontController?action=PreparaPromocao"> Promoções </a></li>
+            <li><a href="FrontController?action=PreparaEnderecoLoja"> Endereçoes de Loja </a></li>
         </ul>
     </body>
 </html>
