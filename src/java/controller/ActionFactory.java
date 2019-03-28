@@ -4,13 +4,31 @@
  * and open the template in the editor.
  */
 package controller;
-import action.PreparaCategoriaAction;
+
 import controller.Action;
 
 public class ActionFactory {
+
     public static Action create(String action) {
         Action actionObject = null;
-        String nomeClasse = "action." + action + "Action";
+
+        int index = 0;
+        String actionUpper = action.toUpperCase();
+        for (int i = 1; i < action.length(); i++) {
+            if (action.charAt(i) == action.toUpperCase().charAt(i)) {
+                index = i;
+                break;
+            }
+        }
+
+        String pacote = action.substring(index);
+        
+        char c[] = pacote.toCharArray();
+        c[0] += 32;  // Se for somado 32 em um código ASCII, o correspondente é a letra minuscula da mesma
+                     // Exceto caracteres especiais.
+        pacote = new String(c);
+
+        String nomeClasse = "action." + pacote + "." + action + "Action";
         Class classe = null;
         Object objeto = null;
         try {
