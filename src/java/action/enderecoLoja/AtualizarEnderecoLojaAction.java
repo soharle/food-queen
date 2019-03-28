@@ -19,7 +19,7 @@ import persistence.EnderecoLojaDAO;
  *
  * @author mathe
  */
-public class AtualizaEnderecoLojaAction implements Action {
+public class AtualizarEnderecoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {

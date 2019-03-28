@@ -11,7 +11,7 @@
   </head>
   <body>
     <div>
-      <h1>Endereç os de Loja</h1>
+      <h1>Endereços de Loja</h1>
       <div>
         <table class="tableCrud">
           <thead>

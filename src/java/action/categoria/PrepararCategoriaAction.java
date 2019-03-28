@@ -22,7 +22,7 @@ import persistence.CategoriaDAO;
  *
  * @author mathe
  */
-public class PreparaCategoriaAction implements Action {
+public class PrepararCategoriaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
@@ -33,7 +33,7 @@ public class PreparaCategoriaAction implements Action {
             RequestDispatcher view = request.getRequestDispatcher("pages/categoria/listar.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException | SQLException | ServletException | IOException ex) {
-            Logger.getLogger(PreparaCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrepararCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

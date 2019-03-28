@@ -5,7 +5,7 @@
  */
 package action.loja;
 
-import action.categoria.LerCategoriaAction;
+import action.categoria.CadastrarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +20,6 @@ import model.Categoria;
 import model.Conta;
 import model.Contato;
 import model.EnderecoLoja;
-import model.Loja;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
@@ -31,14 +30,12 @@ import persistence.LojaDAO;
  *
  * @author Gabriel
  */
-public class LerLojaAction implements Action {
+public class CadastrarLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("acao", "Cadastrar");
 
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        Loja loja = null;
         ArrayList<Categoria> categorias;
         ArrayList<Conta> contas;
         ArrayList<Contato> contatos;
@@ -49,21 +46,19 @@ public class LerLojaAction implements Action {
             contas = ContaDAO.getInstance().getAll();
             contatos = ContatoDAO.getInstance().getAll();
             enderecosLoja = EnderecoLojaDAO.getInstance().getAll();
-            loja= LojaDAO.getInstance().get(id);
-            
+
             request.setAttribute("categorias", categorias);
             request.setAttribute("contas", contas);
             request.setAttribute("contatos", contatos);
             request.setAttribute("enderecosLoja", enderecosLoja);
-            request.setAttribute("loja", loja);
-            
-            request.setAttribute("acao", "Editar");
-            
+
             RequestDispatcher view = request.getRequestDispatcher("pages/loja/loja.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(CadastrarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastrarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
+
 }

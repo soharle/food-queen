@@ -22,63 +22,59 @@
             <form action="FrontController?action=SalvarLoja" method="post">
             </c:if>
             <c:if test="${acao=='Editar'}">
-                <form action="FrontController?action=AtualizaLoja&id=${loja.id}" method="post">
+                <form action="FrontController?action=AtualizarLoja&id=${loja.id}" method="post">
                 </c:if>
                 <table>
                     <tr>
                         <td>Nome</td>
-                        <td><input type="text" name="textNome" <c:if test="${loja.nome != null}"> value="${loja.nome}"</c:if> /></td>
+                        <td><input type="text" name="txtNome" <c:if test="${loja.nome != null}"> value="${loja.nome}"</c:if> /></td>
                         </tr>
                         <tr>
                             <td>CNPJ</td>
-                            <td><input type="text" name="textCnpj" <c:if test="${loja.cnpj != null}"> value="${loja.cnpj}"</c:if> /></td>
+                            <td><input type="text" name="txtCnpj" <c:if test="${loja.cnpj != null}"> value="${loja.cnpj}"</c:if> /></td>
                         </tr>
                         <tr>
                             <td>Descrição do estabelecimento</td>
-                            <td><input type="text" name="textDescricao" <c:if test="${loja.descricao != null}"> value="${loja.descricao}"</c:if> /></td>
+                            <td><input type="text" name="txtDescricao" <c:if test="${loja.descricao != null}"> value="${loja.descricao}"</c:if> /></td>
                         </tr>
                         <tr>
                             <td>Endereço</td>
                             <td>
-                                <select name="enderecoLojaId">
-                                    <c:forEach items="${enderecos}" var="endereco">
-                                        <option value="${endereco.id}">${endereco.logradouro} - ${endereco.numero} - ${endereco.cidade}</option>  
+                                <select name="optEnderecoLoja">
+                                    <c:forEach items="${enderecosLoja}" var="enderecoLoja">
+                                        <option value="${enderecoLoja.id}" <c:if test="${enderecoLoja.id == loja.enderecoLoja.id}"> selected </c:if>>${enderecoLoja.logradouro} - ${enderecoLoja.numero} - ${enderecoLoja.cidade}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" name="enderecoLojaIdx" <c:if test="${loja.enderecoLoja.id != null}"> value="${loja.enderecoLoja.id}"</c:if> />
                             </td>
                         </tr>
                         <tr>
                             <td>Conta</td>
                             <td>
-                                <select name="contaId">
+                                <select name="optConta">
                                     <c:forEach items="${contas}" var="conta">
-                                        <option value="${conta.id}">${conta.login} - ${conta.tipo}</option>  
+                                        <option value="${conta.id}" <c:if test="${conta.id == loja.conta.id}"> selected </c:if>>${conta.login} - ${conta.tipo}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" name="contaIdx" <c:if test="${loja.conta.id != null}"> value="${loja.conta.id}"</c:if> />
                             </td>
                         </tr>
                         <tr>
                             <td>Contato</td>
                             <td>
-                                <select name="contatoId">
+                                <select name="optContato">
                                     <c:forEach items="${contatos}" var="contato">
-                                        <option value="${contato.id}">${contato.email} - ${cotnato.telefone}</option>  
+                                        <option value="${contato.id}" <c:if test="${contato.id == loja.contato.id}"> selected </c:if>>${contato.email} - ${cotnato.telefone}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" name="contatoIdx" <c:if test="${loja.contato.id != null}"> value="${loja.contato.id}"</c:if> />
                             </td>
                         </tr>
                         <tr>
                             <td>Categoria</td>
                             <td>
-                                <select name="categoriaId">
+                                <select name="optCategoria">
                                     <c:forEach items="${categorias}" var="categoria">
-                                        <option value="${categoria.id}">${categoria.nome}</option>  
+                                        <option value="${categoria.id}" <c:if test="${categoria.id == loja.categoria.id}"> selected </c:if>>${categoria.nome}</option>  
                                     </c:forEach>
                                 </select>
-                                <input type="hidden" name="categoriaIdx" <c:if test="${loja.categoria.id != null}"> value="${loja.categoria.id}"</c:if> />
                             </td>
                         </tr>
                         <tr>

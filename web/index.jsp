@@ -9,11 +9,13 @@
     </head>
     <body>
         <ul>
-            <li><a href="FrontController?action=PreparaCategoria"> Categorias </a></li>
-            <li><a href="FrontController?action=PreparaConta"> Conta </a></li>
-            <li><a href="FrontController?action=PreparaContato"> Contato</a></li>
-            <li><a href="FrontController?action=PreparaPromocao"> Promoções </a></li>
-            <li><a href="FrontController?action=PreparaEnderecoLoja"> Endereçoes de Loja </a></li>
+            <li><a href="FrontController?action=PrepararCategoria"> Categorias </a></li>
+            <li><a href="FrontController?action=PrepararConta"> Conta </a></li>
+            <li><a href="FrontController?action=PrepararContato"> Contato</a></li>
+            <li><a href="FrontController?action=PrepararPromocao"> Promoções </a></li>
+            <li><a href="FrontController?action=PrepararEnderecoLoja"> Endereços de Loja </a></li>
+            <li><a href="FrontController?action=PrepararLoja"> Lojas </a></li>
+
         </ul>
     </body>
 </html>

@@ -16,7 +16,7 @@
       <form action="FrontController?action=SalvarConta" method="post">
     </c:if>
     <c:if test="${acao=='Editar'}">
-      <form action="FrontController?action=AtualizaConta&id=${conta.id}" method="post">
+      <form action="FrontController?action=AtualizarConta&id=${conta.id}" method="post">
     </c:if>
       <table>
         <tr>

@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.contato;
-
+package action.categoria;
+import action.categoria.SalvarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,29 +12,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Contato;
-import persistence.ContatoDAO;
+import model.Categoria;
+import persistence.CategoriaDAO;
 
 /**
  *
  * @author mathe
  */
-public class AtualizaContatoAction implements Action {
+public class AtualizarCategoriaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         long id = Long.parseLong(request.getParameter("id"));
-        String telefone = request.getParameter("txtTelefone");
-        String ddd = request.getParameter("txtDdd");
-        String email = request.getParameter("txtEmail");
-        String telefoneComplementar = request.getParameter("txtTelefoneComplementar");
-        
+        String nome = request.getParameter("txtNome");
+
         try {
-            Contato contato = new Contato(id, telefone, ddd, email, telefoneComplementar);
-            ContatoDAO.getInstance().update(contato);
+            Categoria categoria = new Categoria(id, nome);
+            CategoriaDAO.getInstance().update(categoria);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarContatoAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
