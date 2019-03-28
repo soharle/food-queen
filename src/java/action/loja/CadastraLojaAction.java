@@ -3,38 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.loja;
 
+import action.categoria.CadastrarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Loja;
-import persistence.LojaDAO;
 
 /**
  *
  * @author Gabriel
  */
-public class PreparaLojaAction implements Action {
+public class CadastraLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        ArrayList<Loja> lojas = LojaDAO.getInstance().getAll();
-        request.setAttribute("lojas", lojas);
-        RequestDispatcher view = request.getRequestDispatcher("pages/loja/listar.jsp");
-        
+        request.setAttribute("acao", "Cadastrar");
+        RequestDispatcher view = request.getRequestDispatcher("pages/loja/loja.jsp");
         try {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(PreparaLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
-
+    
 }

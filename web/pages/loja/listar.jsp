@@ -37,7 +37,7 @@
                         <td><c:out value="${loja.contato.telefone}"/></td>
                         <td
                             ><form
-                                action="FrontController?action=DeletarCategoria&id=${loja.id}"
+                                action="FrontController?action=DeletarLoja&id=${loja.id}"
                                 method="post"
                                 >
                                 <input type="submit" value="Apagar" /> </form
