@@ -77,7 +77,7 @@ public class ContaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("UPDATE conta "
-                    + "SET login = '" + conta.getLogin() + ", "
+                    + "SET login = '" + conta.getLogin() + "', "
                     + "senha = '" + conta.getSenha() + "' "
                     + "WHERE id = " + conta.getId() + ";");
 

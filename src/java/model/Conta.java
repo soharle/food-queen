@@ -21,6 +21,12 @@ public class Conta {
         this.senha = senha;
         this.tipo = tipo;
     }
+
+    public Conta(String login, String senha, String tipo) {
+        this.login = login;
+        this.senha = senha;
+        this.tipo = tipo;
+    }
     
     public long getId() {
         return id;

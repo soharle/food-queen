@@ -7,11 +7,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Categorias</title>
+    <title>Contatos</title>
   </head>
   <body>
     <div>
-      <h1>Categorias</h1>
+      <h1>Contatos</h1>
       <div>
         <table class="tableCrud">
           <thead>
@@ -19,7 +19,10 @@
               Id:
             </th>
             <th>
-              Nome:
+              Telefone:
+            </th>
+            <th>
+              Email:
             </th>
             <th>
               Excluir
@@ -29,20 +32,21 @@
             </th>
           </thead>
           <tbody>
-            <c:forEach items="${categorias}" var="categoria">
+            <c:forEach items="${contatos}" var="contato">
               <tr>
-                <td><c:out value="${categoria.id}"/></td>
-                <td><c:out value="${categoria.nome}"/></td>
+                <td><c:out value="${contato.id}"/></td>
+                <td><c:out value="${contato.telefone}"/></td>
+                <td><c:out value="${contato.email}"/></td>
                 <td
                   ><form
-                    action="FrontController?action=DeletarCategoria&id=${categoria.id}"
+                    action="FrontController?action=DeletarContato&id=${contato.id}"
                     method="post"
                   >
                     <input type="submit" value="X" /> </form
                 ></td>
                 <td
                   ><form
-                    action="FrontController?action=LerCategoria&id=${categoria.id}"
+                    action="FrontController?action=LerContato&id=${contato.id}"
                     method="post"
                   >
                     <input type="submit" value="Visualizar" /> </form
@@ -52,7 +56,7 @@
           </tbody>
         </table>
       </div>
-      <form action="FrontController?action=CadastrarCategoria"
+      <form action="FrontController?action=CadastrarContato"
       method="post">
       <input type="submit" value="Cadastrar">
       </form>

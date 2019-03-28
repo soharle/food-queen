@@ -3,11 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Index</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <ul>
+            <li><a href="FrontController?action=PreparaCategoria"> Categorias </a></li>
+            <li><a href="FrontController?action=PreparaConta"> Conta </a></li>
+            <li><a href="FrontController?action=PreparaContato"> Contato</a></li>
+            <li><a href="FrontController?action=PreparaPromocao"> Promoções </a></li>
+            <li><a href="FrontController?action=PreparaEnderecoLoja"> Endereçoes de Loja </a></li>
+        </ul>
     </body>
 </html>

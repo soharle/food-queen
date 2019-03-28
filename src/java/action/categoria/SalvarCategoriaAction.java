@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.categoria;
 
 import controller.Action;
 import java.io.IOException;
@@ -12,24 +12,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.LojaDAO;
+import model.Categoria;
+import persistence.CategoriaDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class DeletarLojaAction implements Action{
+public class SalvarCategoriaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        long id = Long.parseLong(request.getParameter("id"));
+        //long id = Long.parseLong(request.getParameter("id"));
+        String nome = request.getParameter("txtNome");
         
-        try{
-            LojaDAO.getInstance().delete(id);
+        try {
+            Categoria categoria = new Categoria(nome);
+            CategoriaDAO.getInstance().save(categoria);
             response.sendRedirect("sucesso.jsp");
-        }catch(IOException ex) {
-            Logger.getLogger(DeletarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (IOException | SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
-    
 }
+

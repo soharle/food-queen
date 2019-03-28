@@ -3,33 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.conta;
 
 import controller.Action;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.LojaDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class DeletarLojaAction implements Action{
+public class CadastrarContaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        try{
-            LojaDAO.getInstance().delete(id);
-            response.sendRedirect("sucesso.jsp");
-        }catch(IOException ex) {
-            Logger.getLogger(DeletarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+        request.setAttribute("acao", "Cadastrar");
+        RequestDispatcher view = request.getRequestDispatcher("pages/conta/conta.jsp");
+        try {
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(CadastrarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package action.conta;
 
-import action.SalvarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,26 +12,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Categoria;
-import persistence.CategoriaDAO;
-
+import model.Conta;
+import persistence.ContaDAO;
 /**
  *
  * @author mathe
  */
-public class AtualizaCategoriaAction implements Action {
+public class DeletarContaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("txtNome");
-
         try {
-            Categoria categoria = new Categoria(id, nome);
-            CategoriaDAO.getInstance().update(categoria);
+            ContaDAO.getInstance().delete(id);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

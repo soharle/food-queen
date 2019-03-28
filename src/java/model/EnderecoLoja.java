@@ -30,6 +30,16 @@ public class EnderecoLoja {
         this.pais = pais;
     }
 
+    public EnderecoLoja(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+    }
+
     public long getId() {
         return id;
     }

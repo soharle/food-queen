@@ -34,7 +34,7 @@ public class ContatoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM contato WHERE id = " + id + "");
             rs.first();
-            contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
+            contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefone_complementar"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -55,7 +55,7 @@ public class ContatoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM contato;");
             while (rs.next()) {
-                Contato contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefoneComplementar"));
+                Contato contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefone_complementar"));
                 contatos.add(contato);
             }
         } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class ContatoDAO {
                     + "telefone = '" + contato.getTelefone() + "', "
                     + "ddd = '" + contato.getDdd() + "', "
                     + "email = '" + contato.getEmail() + "', "
-                    + "telefoneComplementar = '" + contato.getTelefoneComplementar() + "' "
+                    + "telefone_complementar = '" + contato.getTelefoneComplementar() + "' "
                     + "WHERE id = " + contato.getId() + ";");
 
         } catch (SQLException e) {
