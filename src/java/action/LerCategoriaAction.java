@@ -33,7 +33,8 @@ public class LerCategoriaAction implements Action {
         try {
             categoria = CategoriaDAO.getInstance().get(id);
             request.setAttribute("categoria", categoria);
-            RequestDispatcher view = request.getRequestDispatcher("categoriaPages/exibitCategoria.jsp");
+            request.setAttribute("acao", "Editar");
+            RequestDispatcher view = request.getRequestDispatcher("pages/categoria/categoria.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);

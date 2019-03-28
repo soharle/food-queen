@@ -37,11 +37,22 @@
                   >
                     <input type="submit" value="X" /> </form
                 ></td>
+                <td
+                  ><form
+                    action="FrontController?action=LerCategoria&id=${categoria.id}"
+                    method="post"
+                  >
+                    <input type="submit" value="Visualizar" /> </form
+                ></td>
               </tr>
             </c:forEach>
           </tbody>
         </table>
       </div>
+      <form action="FrontController?action=CadastrarCategoria"
+      method="post">
+      <input type="submit" value="Cadastrar">
+      </form>
     </div>
   </body>
 </html>
