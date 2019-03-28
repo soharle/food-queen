@@ -22,6 +22,12 @@ public class Promocao {
         this.tipo = tipo;
     }
 
+    public Promocao(String nome, String desconto, String tipo) {
+        this.nome = nome;
+        this.desconto = desconto;
+        this.tipo = tipo;
+    }
+
     public long getId() {
         return id;
     }

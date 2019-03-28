@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.categoria;
+package action.promocao;
 
 import controller.Action;
 import java.io.IOException;
@@ -14,30 +14,30 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Categoria;
-import persistence.CategoriaDAO;
+import model.Promocao;
+import persistence.PromocaoDAO;
 
 /**
  *
  * @author mathe
  */
-public class LerCategoriaAction implements Action {
+public class LerPromocaoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         long id = Long.parseLong(request.getParameter("id"));
 
-        Categoria categoria;
+        Promocao promocao;
         
         try {
-            categoria = CategoriaDAO.getInstance().get(id);
-            request.setAttribute("categoria", categoria);
+            promocao = PromocaoDAO.getInstance().get(id);
+            request.setAttribute("promocao", promocao);
             request.setAttribute("acao", "Editar");
-            RequestDispatcher view = request.getRequestDispatcher("pages/categoria/categoria.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("pages/promocao/promocao.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LerPromocaoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
