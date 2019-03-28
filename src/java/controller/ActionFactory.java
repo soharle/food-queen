@@ -4,13 +4,27 @@
  * and open the template in the editor.
  */
 package controller;
-import action.PreparaCategoriaAction;
+
+import action.categoria.PreparaCategoriaAction;
 import controller.Action;
 
 public class ActionFactory {
+
     public static Action create(String action) {
         Action actionObject = null;
-        String nomeClasse = "action." + action + "Action";
+
+        int index = 0;
+        String actionUpper = action.toUpperCase();
+        for (int i = 1; i < action.length(); i++) {
+            if (action.charAt(i) == action.toUpperCase().charAt(i)) {
+                index = i;
+                break;
+            }
+        }
+
+        String pacote = action.substring(index);
+
+        String nomeClasse = "action." + pacote.toLowerCase() + "." + action + "Action";
         Class classe = null;
         Object objeto = null;
         try {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.categoria;
 
 import controller.Action;
 import java.io.IOException;
@@ -19,16 +19,13 @@ import persistence.CategoriaDAO;
  *
  * @author mathe
  */
-public class AtualizaCategoriaAction implements Action {
+public class DeletarCategoriaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("txtNome");
-
         try {
-            Categoria categoria = new Categoria(id, nome);
-            CategoriaDAO.getInstance().update(categoria);
+            CategoriaDAO.getInstance().delete(id);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
