@@ -46,7 +46,7 @@ public class AtualizarLojaAction implements Action {
             Categoria categoria = CategoriaDAO.getInstance().get(categoriaId);
             EnderecoLoja enderecoLoja = EnderecoLojaDAO.getInstance().get(enderecoLojaId);
 
-            Loja loja = new Loja(nome, cnpj, descricao, enderecoLoja, conta, contato, categoria);
+            Loja loja = new Loja(id, nome, cnpj, descricao, enderecoLoja, conta, contato, categoria);
             LojaDAO.getInstance().update(loja);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | ClassNotFoundException | SQLException ex) {

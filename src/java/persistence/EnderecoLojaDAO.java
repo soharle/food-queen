@@ -34,7 +34,7 @@ public class EnderecoLojaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja WHERE id =" + id + "");
             rs.first();
-            endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
+            endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
                     rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
         } catch (SQLException e) {
             throw e;
@@ -56,7 +56,7 @@ public class EnderecoLojaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja;");
             while (rs.next()) {
-                EnderecoLoja endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
+                EnderecoLoja endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
                         rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
                 enderecos.add(endereco);
             }
@@ -79,6 +79,7 @@ public class EnderecoLojaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("UPDATE  endereco_loja SET logradouro = '" + endereco.getLogradouro() + "', "
+                    + "cep = '" + endereco.getCep() + "', "
                     + "numero = '" + endereco.getNumero() + "', "
                     + "complemento = '" + endereco.getComplemento() + "', "
                     + "bairro = '" + endereco.getBairro() + "', "
@@ -116,8 +117,9 @@ public class EnderecoLojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO endereco_loja (logradouro, numero, complemento, bairro, cidade, estado, pais)"
-                    + "VALUES ('" + endereco.getLogradouro() + "', "
+            st.execute("INSERT INTO endereco_loja (cep, logradouro, numero, complemento, bairro, cidade, estado, pais)"
+                    + "VALUES ('" + endereco.getCep() + "', "
+                    + "'" + endereco.getLogradouro() + "', "
                     + "'" + endereco.getNumero() + "', "
                     + "'" + endereco.getComplemento() + "', "
                     + "'" + endereco.getBairro() + "', "

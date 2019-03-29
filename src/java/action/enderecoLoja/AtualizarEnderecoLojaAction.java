@@ -25,6 +25,7 @@ public class AtualizarEnderecoLojaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         long id = Long.parseLong(request.getParameter("id"));
+        String cep = request.getParameter("txtCep");
         String logradouro = request.getParameter("txtLogradouro");
         String numero = request.getParameter("txtNumero");
         String complemento = request.getParameter("txtComplemento");
@@ -34,7 +35,7 @@ public class AtualizarEnderecoLojaAction implements Action {
         String pais = request.getParameter("txtPais");
 
         try {
-            EnderecoLoja enderecoLoja = new EnderecoLoja(id, logradouro, numero, complemento, bairro, cidade, estado, pais);
+            EnderecoLoja enderecoLoja = new EnderecoLoja(id, cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
             EnderecoLojaDAO.getInstance().update(enderecoLoja);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {

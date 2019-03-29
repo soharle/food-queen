@@ -18,11 +18,13 @@ public class EnderecoConsumidor {
     private String cidade;
     private String estado;
     private String pais;
-
+    private String cep;
+    
     private Consumidor consumidor;
     
-    public EnderecoConsumidor(long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais, Consumidor consumidor) {
+    public EnderecoConsumidor(long id, String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais, Consumidor consumidor) {
         this.id = id;
+        this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -39,6 +41,14 @@ public class EnderecoConsumidor {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getLogradouro() {
@@ -95,6 +105,14 @@ public class EnderecoConsumidor {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+    
+    public Consumidor getConsumidor() {
+        return consumidor;
+    }
+
+    public void setConsumidor(Consumidor consumidor) {
+        this.consumidor = consumidor;
     }
     
     

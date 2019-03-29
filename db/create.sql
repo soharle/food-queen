@@ -65,6 +65,7 @@ DROP TABLE IF EXISTS food_queen.endereco_loja ;
 
 CREATE TABLE IF NOT EXISTS food_queen.endereco_loja (
   id INT NOT NULL AUTO_INCREMENT,
+  cep VARCHAR(45) NULL,
   logradouro VARCHAR(45) NULL,
   numero VARCHAR(45) NULL,
   complemento VARCHAR(45) NULL,
@@ -150,6 +151,7 @@ DROP TABLE IF EXISTS food_queen.endereco_consumidor ;
 CREATE TABLE IF NOT EXISTS food_queen.endereco_consumidor (
   id INT NOT NULL AUTO_INCREMENT,
   consumidor_id INT NOT NULL,
+  cep VARCHAR(45) NULL,
   logradouro VARCHAR(45) NULL,
   numero VARCHAR(45) NULL,
   complemento VARCHAR(45) NULL,

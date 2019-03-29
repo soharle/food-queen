@@ -11,6 +11,7 @@ package model;
  */
 public class EnderecoLoja {
     private long id;
+    private String cep;
     private String logradouro;
     private String numero;
     private String complemento;
@@ -19,8 +20,9 @@ public class EnderecoLoja {
     private String estado;
     private String pais;
 
-    public EnderecoLoja(long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+    public EnderecoLoja(long id, String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
         this.id = id;
+        this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -47,6 +49,16 @@ public class EnderecoLoja {
     public void setId(long id) {
         this.id = id;
     }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+    
+    
 
     public String getLogradouro() {
         return logradouro;

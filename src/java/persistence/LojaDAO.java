@@ -51,7 +51,7 @@ public class LojaDAO {
                     rs.getString("conta.senha"), rs.getString("conta.tipo"));
             Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                     rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("endereco_loja.logradouro"),
+            EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
                     rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
                     rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                     rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
@@ -88,7 +88,7 @@ public class LojaDAO {
                         rs.getString("conta.senha"), rs.getString("conta.tipo"));
                 Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                         rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("endereco_loja.logradouro"),
+                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
                         rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
                         rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                         rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
@@ -114,14 +114,15 @@ public class LojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("UPDATE loja SET endereco_loja_id = " + loja.getEnderecoLoja().getId() + ", "
+            String query = "UPDATE loja SET endereco_loja_id = " + loja.getEnderecoLoja().getId() + ", "
                     + "conta_id = " + loja.getConta().getId() + ", "
                     + "nome = '" + loja.getNome() + "', "
                     + "cnpj = '" + loja.getCnpj() + "', "
                     + "descricao = '" + loja.getDescricao() + "', "
                     + "contato_id = " + loja.getContato().getId() + ", "
                     + "categoria_id = " + loja.getCategoria().getId() + " "
-                    + "WHERE id = " + loja.getId() + ";");
+                    + "WHERE id = " + loja.getId() + ";";
+            st.execute(query);
 
         } catch (SQLException e) {
             System.out.println(e);
