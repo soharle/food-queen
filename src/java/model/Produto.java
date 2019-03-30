@@ -29,6 +29,17 @@ public class Produto {
         this.promocao = promocao;
     }
 
+    public Produto(String nome, String preco, String disponivel, String descricao, Loja loja, Promocao promocao) {
+        this.nome = nome;
+        this.preco = preco;
+        this.disponivel = disponivel;
+        this.descricao = descricao;
+        this.loja = loja;
+        this.promocao = promocao;
+    }
+    
+    
+
     public long getId() {
         return id;
     }

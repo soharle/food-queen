@@ -12,7 +12,6 @@ package model;
 public class Entrega {
     private long id;
     private EntregaEstado estado;
-    
     private Loja loja;
     private Carrinho carrinho;
 
@@ -23,8 +22,7 @@ public class Entrega {
         this.carrinho = carrinho;
     }
 
-    public Entrega(long id, Loja loja, Carrinho carrinho) {
-        this.id = id;
+    public Entrega(EntregaEstado entregaEstado, Loja loja, Carrinho carrinho) {
         this.loja = loja;
         this.carrinho = carrinho;
         this.estado = new EntregaEstadoACaminho();

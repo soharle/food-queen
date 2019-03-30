@@ -21,6 +21,11 @@ public class Favoritos {
         this.loja = loja;
     }
 
+    public Favoritos(Consumidor consumidor, Loja loja) {
+        this.consumidor = consumidor;
+        this.loja = loja;
+    }
+
     public long getId() {
         return id;
     }

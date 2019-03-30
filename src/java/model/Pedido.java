@@ -24,6 +24,12 @@ public class Pedido {
         this.carrinho = carrinho;
     }
 
+    public Pedido(String observacao, Produto produto, Carrinho carrinho) {
+        this.observacao = observacao;
+        this.produto = produto;
+        this.carrinho = carrinho;
+    }
+
     public long getId() {
         return id;
     }

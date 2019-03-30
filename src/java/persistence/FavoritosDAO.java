@@ -28,7 +28,7 @@ public class FavoritosDAO {
 
     private static FavoritosDAO instance = new FavoritosDAO();
 
-    public FavoritosDAO getInstance() {
+    public static FavoritosDAO getInstance() {
         return instance;
     }
 

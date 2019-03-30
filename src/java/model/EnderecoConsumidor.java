@@ -22,7 +22,7 @@ public class EnderecoConsumidor {
     
     private Consumidor consumidor;
     
-    public EnderecoConsumidor(long id, String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais, Consumidor consumidor) {
+    public EnderecoConsumidor(long id, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais, String cep, Consumidor consumidor) {
         this.id = id;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -35,6 +35,18 @@ public class EnderecoConsumidor {
         this.consumidor = consumidor;
     }
 
+    public EnderecoConsumidor(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais, String cep, Consumidor consumidor) {
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.pais = pais;
+        this.cep = cep;
+        this.consumidor = consumidor;
+    }
+    
     public long getId() {
         return id;
     }

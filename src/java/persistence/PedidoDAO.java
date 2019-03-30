@@ -30,7 +30,7 @@ public class PedidoDAO {
 
     private static PedidoDAO instance = new PedidoDAO();
 
-    public PedidoDAO getInstance() {
+    public static PedidoDAO getInstance() {
         return instance;
     }
 
@@ -73,7 +73,7 @@ public class PedidoDAO {
         return pedido;
     }
 
-    public ArrayList<Pedido> getAll(long id) {
+    public ArrayList<Pedido> getAll() {
         ArrayList<Pedido> pedidos = new ArrayList();
         Connection conn = null;
         Statement st = null;
@@ -87,8 +87,7 @@ public class PedidoDAO {
                     + "INNER JOIN produto ON pedido.produto_id = produto.id "
                     + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
-                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "WHERE pedido.id = " + id + ";");
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id;");
             while (rs.next()) {
                 Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                         rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));

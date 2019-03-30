@@ -30,7 +30,7 @@ public class EntregaDAO {
 
     private static EntregaDAO instance = new EntregaDAO();
 
-    public EntregaDAO getInstance() {
+    public static EntregaDAO getInstance() {
         return instance;
     }
 
@@ -77,7 +77,7 @@ public class EntregaDAO {
             Carrinho carrinho = new Carrinho(rs.getLong("carrinho.id"), rs.getString("carrinho.valor"), rs.getString("carrinho.data"),
                     rs.getString("carrinho.hora"), rs.getString("carrinho.pagamento"),
                     StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado")), consumidor);
-            entrega = new Entrega(rs.getLong("entrega.id"), loja, carrinho);
+            entrega = new Entrega(rs.getLong("entrega.id"),StateFactory.createEntregaEstado("entrega.estado"), loja, carrinho);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(EntregaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -127,7 +127,7 @@ public class EntregaDAO {
                 Carrinho carrinho = new Carrinho(rs.getLong("carrinho.id"), rs.getString("carrinho.valor"), rs.getString("carrinho.data"),
                         rs.getString("carrinho.hora"), rs.getString("carrinho.pagamento"),
                         StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado")), consumidor);
-                Entrega entrega = new Entrega(rs.getLong("entrega.id"), loja, carrinho);
+                Entrega entrega = new Entrega(rs.getLong("entrega.id"),StateFactory.createEntregaEstado("entrega.estado"), loja, carrinho);
                 entregas.add(entrega);
             }
         } catch (SQLException | ClassNotFoundException ex) {
