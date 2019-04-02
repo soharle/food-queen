@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.promocao;
 
 import controller.Action;
 import java.io.IOException;
@@ -15,25 +15,25 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Categoria;
-import persistence.CategoriaDAO;
+import model.Promocao;
+import persistence.PromocaoDAO;
 
 /**
  *
  * @author mathe
  */
-public class PreparaCategoriaAction implements Action {
+public class PrepararPromocaoAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-            request.setAttribute("categorias", categorias);
-            RequestDispatcher view = request.getRequestDispatcher("pages/categoria/listar.jsp");
+            ArrayList<Promocao> promocoes = PromocaoDAO.getInstance().getAll();
+            request.setAttribute("promocoes", promocoes);
+            RequestDispatcher view = request.getRequestDispatcher("pages/promocao/listar.jsp");
             view.forward(request, response);
         } catch (ClassNotFoundException | SQLException | ServletException | IOException ex) {
-            Logger.getLogger(PreparaCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PrepararPromocaoAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

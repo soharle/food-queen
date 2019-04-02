@@ -45,7 +45,7 @@ public class PromocaoDAO {
 
     }
 
-    public ArrayList<Promocao> getPromocaos() throws ClassNotFoundException, SQLException {
+    public ArrayList<Promocao> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
         Connection conn = null;
         Statement st = null;
@@ -111,8 +111,7 @@ public class PromocaoDAO {
             st.execute("INSERT INTO promocao (nome, desconto, tipo) "
                     + "VALUES ('" + promocao.getNome() + "', "
                     + "'" + promocao.getDesconto() + "', "
-                    + "'" + promocao.getTipo() + "' "
-                    + "WHERE id = " + promocao.getId() + ";");
+                    + "'" + promocao.getTipo() + "');");
 
         } catch (SQLException e) {
             throw e;

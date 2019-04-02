@@ -23,6 +23,13 @@ public class Contato {
         this.email = email;
         this.telefoneComplementar = telefoneComplementar;
     }
+
+    public Contato(String telefone, String ddd, String email, String telefoneComplementar) {
+        this.telefone = telefone;
+        this.ddd = ddd;
+        this.email = email;
+        this.telefoneComplementar = telefoneComplementar;
+    }
     
     public long getId() {
         return id;

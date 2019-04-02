@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.categoria;
 
 import controller.Action;
 import java.io.IOException;
@@ -33,13 +33,10 @@ public class LerCategoriaAction implements Action {
         try {
             categoria = CategoriaDAO.getInstance().get(id);
             request.setAttribute("categoria", categoria);
-            RequestDispatcher view = request.getRequestDispatcher("categoriaPages/exibitCategoria.jsp");
+            request.setAttribute("acao", "Editar");
+            RequestDispatcher view = request.getRequestDispatcher("pages/categoria/categoria.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
+        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action;
+package action.conta;
 
 import controller.Action;
 import java.io.IOException;
@@ -12,27 +12,29 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Categoria;
-import persistence.CategoriaDAO;
+import model.Conta;
+import persistence.ContaDAO;
 
 /**
  *
  * @author mathe
  */
-public class SalvarCategoriaAction implements Action {
+public class AtualizarContaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        //long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("txtNome");
+        long id = Long.parseLong(request.getParameter("id"));
+        String login = request.getParameter("txtLogin");
+        String senha = request.getParameter("txtSenha");
+        String tipo = request.getParameter("optTipo");
+        
         
         try {
-            Categoria categoria = new Categoria(nome);
-            CategoriaDAO.getInstance().save(categoria);
+            Conta conta = new Conta(id, login, senha, tipo);
+            ContaDAO.getInstance().update(conta);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
-

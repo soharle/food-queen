@@ -7,11 +7,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Categorias</title>
+    <title>Promoções</title>
   </head>
   <body>
     <div>
-      <h1>Categorias</h1>
+      <h1>Promoções</h1>
       <div>
         <table class="tableCrud">
           <thead>
@@ -22,6 +22,9 @@
               Nome:
             </th>
             <th>
+              Desconto:
+            </th>
+            <th>
               Excluir
             </th>
             <th>
@@ -29,20 +32,21 @@
             </th>
           </thead>
           <tbody>
-            <c:forEach items="${categorias}" var="categoria">
+            <c:forEach items="${promocoes}" var="promocao">
               <tr>
-                <td><c:out value="${categoria.id}"/></td>
-                <td><c:out value="${categoria.nome}"/></td>
+                <td><c:out value="${promocao.id}"/></td>
+                <td><c:out value="${promocao.nome}"/></td>
+                <td><c:out value="${promocao.desconto}"/></td>
                 <td
                   ><form
-                    action="FrontController?action=DeletarCategoria&id=${categoria.id}"
+                    action="FrontController?action=DeletarPromocao&id=${promocao.id}"
                     method="post"
                   >
                     <input type="submit" value="X" /> </form
                 ></td>
                 <td
                   ><form
-                    action="FrontController?action=LerCategoria&id=${categoria.id}"
+                    action="FrontController?action=LerPromocao&id=${promocao.id}"
                     method="post"
                   >
                     <input type="submit" value="Visualizar" /> </form
@@ -52,7 +56,7 @@
           </tbody>
         </table>
       </div>
-      <form action="FrontController?action=CadastrarCategoria"
+      <form action="FrontController?action=CadastrarPromocao"
       method="post">
       <input type="submit" value="Cadastrar">
       </form>

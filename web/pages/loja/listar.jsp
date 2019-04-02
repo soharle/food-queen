@@ -1,17 +1,22 @@
+<%-- 
+    Document   : listar
+    Created on : 28/03/2019, 12:16:08
+    Author     : Gabriel
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Categorias</title>
-  </head>
-  <body>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Lojas</title>
+    </head>
+   <body>
     <div>
-      <h1>Categorias</h1>
+      <h1>Lojas</h1>
       <div>
         <table class="tableCrud">
           <thead>
@@ -22,6 +27,9 @@
               Nome:
             </th>
             <th>
+              Descrição:
+            </th>
+            <th>
               Excluir
             </th>
             <th>
@@ -29,20 +37,21 @@
             </th>
           </thead>
           <tbody>
-            <c:forEach items="${categorias}" var="categoria">
+            <c:forEach items="${lojas}" var="loja">
               <tr>
-                <td><c:out value="${categoria.id}"/></td>
-                <td><c:out value="${categoria.nome}"/></td>
+                <td><c:out value="${loja.id}"/></td>
+                <td><c:out value="${loja.nome}"/></td>
+                <td><c:out value="${loja.descricao}"/></td>
                 <td
                   ><form
-                    action="FrontController?action=DeletarCategoria&id=${categoria.id}"
+                    action="FrontController?action=DeletarLoja&id=${loja.id}"
                     method="post"
                   >
                     <input type="submit" value="X" /> </form
                 ></td>
                 <td
                   ><form
-                    action="FrontController?action=LerCategoria&id=${categoria.id}"
+                    action="FrontController?action=LerLoja&id=${loja.id}"
                     method="post"
                   >
                     <input type="submit" value="Visualizar" /> </form
@@ -52,7 +61,7 @@
           </tbody>
         </table>
       </div>
-      <form action="FrontController?action=CadastrarCategoria"
+      <form action="FrontController?action=CadastrarLoja"
       method="post">
       <input type="submit" value="Cadastrar">
       </form>
