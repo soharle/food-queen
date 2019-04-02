@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/model/Consumidor.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/model/Favoritos.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/model/Loja.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/model/Conta.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/persistence/CarrinhoDAO.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/model/Carrinho.java</file>
-            <file>file:/C:/Users/raiss/Documents/GitHub/food-queen/food-queen/src/java/persistence/ConsumidorDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/ConsumidorDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/controller/Action.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>

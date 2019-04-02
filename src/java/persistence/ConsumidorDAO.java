@@ -93,13 +93,12 @@ public class ConsumidorDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("UPDATE consumidor SET consumidor_id= " + carrinho.getConsumidor().getId() + ", "
-                    + "valor = '" + carrinho.getValor()+ "', "
-                    + "data = '" + carrinho.getData()+ "', "
-                    + "hora = '" + carrinho.getHora()+ "', "
-                    + "pagamento = '" + carrinho.getPagamento()+ "', "
-                    + "estado = '" + carrinho.getEstado().toString() + "' "
-                    + "WHERE id = " + carrinho.getId() + ";");
+            st.execute("UPDATE consumidor SET nome = '" + consumidor.getNome()+ "', "
+                    + "cpf = '" + consumidor.getCpf()+ "', "
+                    + "nascimento = '" + consumidor.getNascimento()+ "', "
+                    + "conta_id = " + consumidor.getConta().getId() + ", "
+                    + "contato_id = " + consumidor.getContato().getId() + " "
+                    + "WHERE id = " + consumidor.getId() + ";");
 
         } catch (SQLException e) {
             System.out.println(e);
@@ -117,7 +116,7 @@ public class ConsumidorDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("DELETE FROM carrinho WHERE id = " + id + "");
+            st.executeUpdate("DELETE FROM consumidor WHERE id = " + id + "");
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {
@@ -127,20 +126,19 @@ public class ConsumidorDAO {
         }
     }
     
-    public void save(Carrinho carrinho) throws SQLException, ClassNotFoundException {
+    public void save(Consumidor consumidor) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO loja (consumidor_id, valor, data, hora, pagamento, estado) "
-                    + "VALUES (" + carrinho.getConsumidor().getId() + ", "
-                    + "" + carrinho.getValor() + ", "
-                    + "'" + carrinho.getData()+ "', "
-                    + "'" + carrinho.getHora() + "', "
-                    + "'" + carrinho.getPagamento() + "', "
-                    + "'" + carrinho.getEstado().toString() + "', "
+            st.execute("INSERT INTO consumidor ( nome, cpf, nascimento, conta_id, contato_id) "
+                    + "VALUES ('" + consumidor.getNome()+ "', "
+                    + "'" + consumidor.getCpf()+ "', "
+                    + "'" + consumidor.getNascimento()+ "', "
+                    + "" + consumidor.getConta().getId()+ ", "
+                    + "" + consumidor.getContato().getId()+ ", "
                     + ");");
         } catch (SQLException e) {
             System.out.println(e);;
