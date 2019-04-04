@@ -15,16 +15,18 @@ public class Produto {
     private String preco;
     private String disponivel;
     private String descricao;
+    private String imagem;
     
     private Loja loja;
     private Promocao promocao;
 
-    public Produto(long id, String nome, String preco, String disponivel, String descricao, Loja loja, Promocao promocao) {
+    public Produto(long id, String nome, String preco, String disponivel, String descricao, String imagem, Loja loja, Promocao promocao) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.disponivel = disponivel;
         this.descricao = descricao;
+        this.imagem = imagem;
         this.loja = loja;
         this.promocao = promocao;
     }
@@ -69,6 +71,14 @@ public class Produto {
         this.descricao = descricao;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
     public Loja getLoja() {
         return loja;
     }

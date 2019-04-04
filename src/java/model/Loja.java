@@ -14,16 +14,18 @@ public class Loja {
     private String nome;
     private String cnpj;
     private String descricao;
+    private String imagem;
     
     private EnderecoLoja enderecoLoja;
     private Conta conta;
     private Contato contato;
     private Categoria categoria;
 
-    public Loja(String nome, String cnpj, String descricao, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
+    public Loja(String nome, String cnpj, String descricao, String imagem, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.descricao = descricao;
+        this.imagem = imagem;
         this.enderecoLoja = enderecoLoja;
         this.conta = conta;
         this.contato = contato;
@@ -32,11 +34,12 @@ public class Loja {
     
     
     
-    public Loja(long id, String nome, String cnpj, String descricao, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
+    public Loja(long id, String nome, String cnpj, String descricao, String imagem, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
         this.descricao = descricao;
+        this.imagem = imagem;
         this.enderecoLoja = enderecoLoja;
         this.conta = conta;
         this.contato = contato;
@@ -75,6 +78,14 @@ public class Loja {
         this.descricao = descricao;
     }
 
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
     public EnderecoLoja getEnderecoLoja() {
         return enderecoLoja;
     }

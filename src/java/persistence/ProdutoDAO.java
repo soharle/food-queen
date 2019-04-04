@@ -46,7 +46,7 @@ public class ProdutoDAO {
                     rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
             produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                     rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                    rs.getString("produto.descricao"), loja, promocao);
+                    rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {
@@ -73,7 +73,7 @@ public class ProdutoDAO {
                         rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                        rs.getString("produto.descricao"), loja, promocao);
+                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
                 produtos.add(produto);
             }
 
@@ -99,6 +99,7 @@ public class ProdutoDAO {
                     + "preco = '" + produto.getPreco() + "', "
                     + "disponivel = '" + produto.getDisponivel() + "', "
                     + "descricao = '" + produto.getDescricao() + "' "
+                    + "imagem = '" + produto.getImagem() + "' "
                     + "WHERE id = " + produto.getId() + ";");
 
         } catch (SQLException e) {
@@ -134,13 +135,14 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO produto (loja_id, promocao_id, nome, preco, disponivel, descricao) "
+            st.execute("INSERT INTO produto (loja_id, promocao_id, nome, preco, disponivel, descricao, imagem) "
                     + "VALUES (" + produto.getLoja().getId() + ", "
                     + "" + produto.getPromocao().getId() + ", "
                     + "'" + produto.getNome() + "', "
                     + "'" + produto.getPreco() + "', "
                     + "'" + produto.getDisponivel() + "', "
-                    + "'" + produto.getDescricao() + "' "
+                    + "'" + produto.getDescricao() + "', "
+                    + "'" + produto.getImagem() + "' "
                     + ");");
         } catch (SQLException e) {
             System.out.println(e);;

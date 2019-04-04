@@ -56,7 +56,8 @@ public class LojaDAO {
                     rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                     rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
             Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-            loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), rs.getString("loja.cnpj"), rs.getString("loja.descricao"),
+            loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
+                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                     enderecoLoja, conta, contato, categoria);
         } catch (SQLException e) {
             System.out.println(e);
@@ -93,7 +94,8 @@ public class LojaDAO {
                         rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                         rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
                 Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), rs.getString("loja.cnpj"), rs.getString("loja.descricao"),
+                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
+                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                         enderecoLoja, conta, contato, categoria);
                 lojas.add(loja);
             }
@@ -119,6 +121,7 @@ public class LojaDAO {
                     + "nome = '" + loja.getNome() + "', "
                     + "cnpj = '" + loja.getCnpj() + "', "
                     + "descricao = '" + loja.getDescricao() + "', "
+                    + "imagem = '" + loja.getImagem() + "', "
                     + "contato_id = " + loja.getContato().getId() + ", "
                     + "categoria_id = " + loja.getCategoria().getId() + " "
                     + "WHERE id = " + loja.getId() + ";";
@@ -157,12 +160,13 @@ public class LojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO loja (endereco_loja_id, conta_id, nome, cnpj, descricao, contato_id, categoria_id) "
+            st.execute("INSERT INTO loja (endereco_loja_id, conta_id, nome, cnpj, descricao, imagem, contato_id, categoria_id) "
                     + "VALUES (" + loja.getEnderecoLoja().getId() + ", "
                     + "" + loja.getConta().getId() + ", "
                     + "'" + loja.getNome() + "', "
                     + "'" + loja.getCnpj() + "', "
                     + "'" + loja.getDescricao() + "', "
+                    + "'" + loja.getImagem() + "', "
                     + "" + loja.getContato().getId() + ", "
                     + "" + loja.getCategoria().getId() + ""
                     + ");");

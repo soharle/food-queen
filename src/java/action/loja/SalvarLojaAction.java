@@ -46,8 +46,8 @@ public class SalvarLojaAction implements Action {
             Categoria categoria = CategoriaDAO.getInstance().get(categoriaId);
             EnderecoLoja enderecoLoja = EnderecoLojaDAO.getInstance().get(enderecoLojaId);
 
-            Loja loja = new Loja(nome, cnpj, descricao, enderecoLoja, conta, contato, categoria);
-            LojaDAO.getInstance().save(loja);
+            //Loja loja = new Loja(nome, cnpj, descricao, enderecoLoja, conta, contato, categoria);
+            //LojaDAO.getInstance().save(loja);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);

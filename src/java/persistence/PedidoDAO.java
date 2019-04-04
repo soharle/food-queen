@@ -62,7 +62,7 @@ public class PedidoDAO {
                     rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
             Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                     rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                    rs.getString("produto.descricao"), loja, promocao);
+                    rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
             Carrinho carrinho = new Carrinho(rs.getLong("carrinho.id"), rs.getString("carrinho.valor"),
                     rs.getString("carrinho.data"), rs.getString("carrinho.hora"), rs.getString("carrinho.pagamento"),
                     StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado")), consumidor);
@@ -101,7 +101,7 @@ public class PedidoDAO {
                         rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                        rs.getString("produto.descricao"), loja, promocao);
+                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
                 Carrinho carrinho = new Carrinho(rs.getLong("carrinho.id"), rs.getString("carrinho.valor"),
                         rs.getString("carrinho.data"), rs.getString("carrinho.hora"), rs.getString("carrinho.pagamento"),
                         StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado")), consumidor);

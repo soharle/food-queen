@@ -63,7 +63,8 @@ public class FavoritosDAO {
                     rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                     rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
             Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-            Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), rs.getString("loja.cnpj"), rs.getString("loja.descricao"),
+            Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), 
+                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                     enderecoLoja, contaLoja, contatoLoja, categoria);
             Contato contatoConsumidor = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                     rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
@@ -110,7 +111,8 @@ public class FavoritosDAO {
                         rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                         rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
                 Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), rs.getString("loja.cnpj"), rs.getString("loja.descricao"),
+                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), 
+                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                         enderecoLoja, contaLoja, contatoLoja, categoria);
                 Contato contatoConsumidor = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                         rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
