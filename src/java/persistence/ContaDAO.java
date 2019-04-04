@@ -44,6 +44,27 @@ public class ContaDAO {
         return conta;
 
     }
+    
+    public Conta get(String login) throws ClassNotFoundException, SQLException {
+        Conta conta = null;
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE login = " + login + "");
+            rs.first();
+            conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+
+        return conta;
+
+    }
 
     public ArrayList<Conta> getAll() throws ClassNotFoundException, SQLException {
         ArrayList<Conta> contas = new ArrayList<Conta>();
