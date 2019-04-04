@@ -26,6 +26,14 @@ public class Cartao {
         this.validade = validade;
         this.consumidor = consumidor;
     }
+
+    public Cartao(String numero, String cod, String titular, String validade, Consumidor consumidor) {
+        this.numero = numero;
+        this.cod = cod;
+        this.titular = titular;
+        this.validade = validade;
+        this.consumidor = consumidor;
+    }
     
     public long getId() {
         return id;

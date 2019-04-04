@@ -56,7 +56,7 @@ public class ProdutoDAO {
         return produto;
     }
 
-    public ArrayList<Produto> getAll(int id) {
+    public ArrayList<Produto> getAll() {
         ArrayList<Produto> produtos = new ArrayList();
         Connection conn = null;
         Statement st = null;

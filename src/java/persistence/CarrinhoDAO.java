@@ -26,7 +26,7 @@ public class CarrinhoDAO {
 
     private static CarrinhoDAO instance = new CarrinhoDAO();
 
-    public CarrinhoDAO getInstance() {
+    public static CarrinhoDAO getInstance() {
         return instance;
     }
 

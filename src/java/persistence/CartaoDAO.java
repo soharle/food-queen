@@ -25,11 +25,11 @@ public class CartaoDAO {
 
     private static CartaoDAO instance = new CartaoDAO();
 
-    public CartaoDAO getInstance() {
+    public static CartaoDAO getInstance() {
         return instance;
     }
 
-    public Cartao get(int id) {
+    public Cartao get(long id) {
         Cartao cartao = null;
         Connection conn = null;
         Statement st = null;

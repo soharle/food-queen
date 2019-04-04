@@ -25,7 +25,7 @@ public class EnderecoConsumidorDAO {
 
     private static EnderecoConsumidorDAO instance = new EnderecoConsumidorDAO();
 
-    public EnderecoConsumidorDAO getInstance() {
+    public static EnderecoConsumidorDAO getInstance() {
         return instance;
     }
 
