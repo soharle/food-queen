@@ -32,6 +32,7 @@ public class AtualizarProdutoAction implements Action {
         String preco = request.getParameter("txtPreco");
         String disponivel = request.getParameter("txtDisponivel");
         String descricao = request.getParameter("txtDescricao");
+        String imagem = request.getParameter("txtImagem");
         long idLoja = Long.parseLong(request.getParameter("optLoja"));
         long idPromocao = Long.parseLong(request.getParameter("optPromocao"));
 
@@ -41,7 +42,7 @@ public class AtualizarProdutoAction implements Action {
         try {
             loja = LojaDAO.getInstance().get(idLoja);
             promocao = PromocaoDAO.getInstance().get(idPromocao);
-            Produto produto = new Produto(id, nome, preco, disponivel, descricao, loja, promocao);
+            Produto produto = new Produto(id, nome, preco, disponivel, descricao, imagem, loja, promocao);
             ProdutoDAO.getInstance().update(produto);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
