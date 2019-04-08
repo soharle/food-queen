@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 
 <!-- Start Header Area -->
 <header class="htc__header bg--white">
@@ -15,7 +16,8 @@
                 <div class="col-lg-2 col-sm-4 col-md-6 order-1 order-lg-1">
                     <div class="logo">
                         <a href="index.html">
-                            <img src="images/logo/foody.png" alt="logo images">
+                            <img src="./assets/images/foodqueen.png" alt="logo images" style="height: 48px;">
+                            <span class="brand"> FoodQueen</span>
                         </a>
                     </div>
                 </div>
@@ -23,19 +25,10 @@
                     <div class="main__menu__wrap">
                         <nav class="main__menu__nav d-none d-lg-block">
                             <ul class="mainmenu">
-                                <li class="drop"><a href="index.html">Home</a></li>
-                                <li><a href="about-us.html">About</a></li>
-                                <li class="drop"><a href="menu-list.html">Menu</a>
+                                <li class="drop"><a href="menu-list.html">Produtos</a>
                                     <ul class="dropdown__menu">
                                         <li><a href="menu-list.html">Menu List</a></li>
                                         <li><a href="menu-details.html">Menu Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="gallery.html">Gallery</a></li>
-                                <li class="drop"><a href="blog-mesonry.html">Blog</a>
-                                    <ul class="dropdown__menu">
-                                        <li><a href="blog-mesonry.html">Blog Mesonry</a></li>
-                                        <li><a href="blog-details.html">Blog Details</a></li>
                                     </ul>
                                 </li>
                                 <li class="drop"><a href="#">Pages</a>
@@ -46,7 +39,6 @@
                                         <li><a href="contact.html">Contact Page</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>
 
@@ -55,12 +47,12 @@
                 <div class="col-lg-1 col-sm-4 col-md-4 order-2 order-lg-3">
                     <div class="header__right d-flex justify-content-end">
                         <div class="log__in">
-                            <a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i></a>
+                            <a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i><span> ${sessionScope.usuario.nome}</span></a>
                         </div>
                         <div class="shopping__cart">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
                             <div class="shop__qun">
-                                <span>03</span>
+                                <span>${sessionScope.carrinho.count}</span>
                             </div>
                         </div>
                     </div>
