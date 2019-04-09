@@ -17,6 +17,9 @@ public class Pedido {
     private Produto produto;
     private Carrinho carrinho;
 
+    public Pedido() {
+    }
+    
     public Pedido(long id, String observacao, Produto produto, Carrinho carrinho) {
         this.id = id;
         this.observacao = observacao;

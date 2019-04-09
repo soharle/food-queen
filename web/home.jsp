@@ -48,13 +48,15 @@
                     </div>
                     <div class="food__category__wrapper mt--40">
                         <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-12">
-                                <div class="food__item foo">
-                                    <div>
-                                        <h2><a href="menu-details.html">Breakfast Iteam</a></h2>
+                            <c:forEach items="${categorias}" var="categoria">
+                                <div class="col-lg-3 col-md-4 col-sm-12">
+                                    <div class="food__item foo">
+                                        <div>
+                                            <h2><a href="menu-details.html">${categoria.nome}</a></h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -63,7 +65,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
-                             <div class="slider__content" style="color: #ffffff;">
+                            <div class="slider__content" style="color: #ffffff;">
                                 <div class="slider__inner">
                                     <h2>FoodQueen</h2>
                                     <h1>O pedido do tamanho da sua fome!</h1>
@@ -72,8 +74,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="special__food__menu mt--50">
-                    <div class="food__menu__prl">
+                <div class="special__food__menu mt-0">
+                    <div class="food__menu__prl bg-image--4">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
@@ -81,26 +83,28 @@
                                         <div class="single__tab__panel tab-pane fade show active" id="nav-coffee"
                                              role="tabpanel">
                                             <div class="tab__content__wrap">
-                                                <div class="single__tab__content">
-                                                    <div class="food__menu">
-                                                        <div class="food__menu__thumb">
-                                                            <a href="menu-details.html">
-                                                                <img src="images/product/sm-img/1.jpg" alt="product images">
-                                                            </a>
-                                                        </div>
-                                                        <div class="food__menu__details">
-                                                            <div class="fd__menu__title__prize">
-                                                                <h4><a href="menu-details.html">Maxican Food Fev</a></h4>
-                                                                <span class="menu__prize">$15</span>
+                                                <div class="single__tab__content row">
+
+                                                    <c:forEach items="${produtos}" var="produto">
+                                                        <div class="food__menu col-md-3">
+                                                            <div class="food__menu__thumb">
+                                                                <a href="menu-details.html">
+                                                                    <img src="${produto.imagem}" alt="product images" style="max-height: 105px; max-width: 109px;">
+                                                                </a>
                                                             </div>
-                                                            <div class="fd__menu__details">
-                                                                <p>Food Type : Chicken Stack</p>
-                                                                <div class="delivery__time__rating">
-                                                                    <p>Delivery Time : 60 min, Delivery Cost : Free</p>
+                                                            <div class="food__menu__details px-2">
+                                                                <div class="fd__menu__title__prize">
+                                                                    <h4><a href="menu-details.html">${produto.nome}</a></h4>
+                                                                    <span class="menu__prize">$ ${produto.preco}</span>
+                                                                </div>
+                                                                <div class="fd__menu__details">
+                                                                    <div class="delivery__time__rating">
+                                                                        <p>${produto.descricao}</p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                         </div>
@@ -110,9 +114,10 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- End Special Menu -->
         </div>
-    </body>
+    </section>
+    <!-- End Special Menu -->
+</div>
+</body>
 
 </html>

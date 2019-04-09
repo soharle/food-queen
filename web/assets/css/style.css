@@ -3284,19 +3284,20 @@ Special Menu
     -webkit-justify-content: space-between;
     -moz-justify-content: space-between;
     justify-content: space-between; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
     display: -ms-flexbox;
     display: flex; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__thumb {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__thumb {
     margin-right: 20px;
     max-width: 100px;
-    flex-basis: 20%; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details {
+    flex-basis: 20%; 
+}
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details {
     flex-basis: 80%; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__title__prize {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details .fd__menu__title__prize {
     border-bottom: 1px dashed #fff;
     display: -webkit-box;
     display: -webkit-flex;
@@ -3322,7 +3323,7 @@ Special Menu
     transition: 0.3s; }
 .special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__title__prize h4 a:hover {
     color: #d50c0d; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__title__prize span.menu__prize {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details .fd__menu__title__prize span.menu__prize {
     -webkit-align-self: flex-end;
     -moz-align-self: flex-end;
     -ms-flex-item-align: end;
@@ -3334,12 +3335,12 @@ Special Menu
     font-weight: 700;
     line-height: 37px;
     margin-left: 19px; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__details {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details .fd__menu__details {
     margin-top: 13px; }
 .special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__details p {
     color: #fff;
     font-size: 14px; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__details .delivery__time__rating {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details .fd__menu__details .delivery__time__rating {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
@@ -3350,7 +3351,7 @@ Special Menu
     -webkit-justify-content: space-between;
     -moz-justify-content: space-between;
     justify-content: space-between; }
-.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu .food__menu__details .fd__menu__details .delivery__time__rating .fd__rating {
+.special__food__menu .fd__tab__content .single__tab__panel .tab__content__wrap .single__tab__content .food__menu__details .fd__menu__details .delivery__time__rating .fd__rating {
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-flex;
@@ -3362,10 +3363,17 @@ Special Menu
     color: #5a5314; }
 
 .food__menu__prl {
-    padding: 130px 0; }
+    padding: 50px 0; }
 
-.single__tab__content .food__menu + .food__menu {
-    margin-top: 110px; }
+.single__tab__content .food__menu{
+    margin-top: 80px; 
+    background-color: #111111;
+    margin-left: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+
+}
 
 .fd__rating li + li {
     margin-left: 7px; }

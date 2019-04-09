@@ -8,6 +8,7 @@ package action.conta;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -15,8 +16,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Categoria;
 import model.Conta;
+import model.Pedido;
+import model.Produto;
+import persistence.CategoriaDAO;
 import persistence.ContaDAO;
+import persistence.ProdutoDAO;
 
 /**
  *
@@ -39,6 +45,14 @@ public class LogarContaAction implements Action {
                     HttpSession session = request.getSession();
                     session.setAttribute("tipo", conta.getLogin());
                     session.setAttribute("login", conta.getLogin());
+                    ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+                    ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
+                    ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
+                    request.setAttribute("produtos", produtos);
+                    request.setAttribute("categorias", categorias);
+                    request.setAttribute("pedidos", pedidos);
+                } else {
+                    RequestDispatcher view = request.getRequestDispatcher("index.jsp");
                 }
             } else {
                 RequestDispatcher view = request.getRequestDispatcher("index.jsp");

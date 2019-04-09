@@ -25,8 +25,9 @@
             }
 
             .box {
-                padding: 25px;
-                background-color: rgba(224, 242, 250, 0.8); 
+                padding: 75px;
+                background-color: rgba(167, 164, 154, 0.85); 
+                
             }
 
             body {
@@ -41,7 +42,7 @@
                 justify-content: center;
                 padding-top: 40px;
                 padding-bottom: 40px;
-                background-image: url("../img/dentista.jpg");
+                background-image: url("./assets/images/bg-login.jpg");
                 background-repeat: no-repeat;
                 background-size: cover;
             }
@@ -87,8 +88,7 @@
     <body class="text-center">
         <div class="text-center">
             <div class="box">
-                <h1 class="mb-3 font-weight-bold">Dental Master -
-                    <small>Consultorio X</small>
+                <h1 class="mb-3 font-weight-bold">FoodQueen
                 </h1>
                 <br />
                 <form  action="FrontController?action=LogarConta" method="post" action="./" id="form1" class="form-signin">
@@ -104,8 +104,6 @@
                     </label>
                     <input name="txtSenha" type="password" class="form-control" placeholder="Senha" required="" />
                     <button type="submit" value="submit" class="btn btn-lg btn-outline-elegant btn-block">Entrar</button>
-                    <!-- <input type="submit" name="cmdEntrar" value="Entrar" id="cmdEntrar" class="btn btn-lg btn-outline-elegant btn-block" /> -->
-                    <p class="mt-5 mb-3 text-muted">&copy; Startupida - 2018</p>
                 </form>
                 <a href="FrontController?action=CadastrarConta">Cadastrar</a>
             </div>

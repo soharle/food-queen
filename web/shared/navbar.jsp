@@ -47,12 +47,12 @@
                 <div class="col-lg-1 col-sm-4 col-md-4 order-2 order-lg-3">
                     <div class="header__right d-flex justify-content-end">
                         <div class="log__in">
-                            <a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i><span> ${sessionScope.usuario.nome}</span></a>
+                            <a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i><span> ${sessionScope.login}</span></a>
                         </div>
                         <div class="shopping__cart">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
                             <div class="shop__qun">
-                                <span>${sessionScope.carrinho.count}</span>
+                                <span>${sessionScope.pedidos.count()}</span>
                             </div>
                         </div>
                     </div>

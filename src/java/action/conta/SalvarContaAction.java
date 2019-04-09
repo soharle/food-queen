@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,17 +29,23 @@ public class SalvarContaAction implements Action {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
         String tipo = request.getParameter("optTipo");
-        
+
         try {
             Conta conta = new Conta(login, senha, tipo);
             ContaDAO.getInstance().save(conta);
             HttpSession session = request.getSession();
             session.setAttribute("tipo", tipo);
             session.setAttribute("login", login);
-            response.sendRedirect("home.jsp");
-        } catch (IOException | SQLException | ClassNotFoundException ex) {
+
+            if (tipo == "Consumidor") {
+                RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararHome");
+                view.forward(request, response);
+            } else {
+                response.sendRedirect("index.jsp");
+            }
+
+        } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {
             Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 }
-
