@@ -85,6 +85,38 @@ public class ProdutoDAO {
 
         return produtos;
     }
+    
+    public ArrayList<Produto> getAllByLoja(String nomeLoja) {
+        ArrayList<Produto> produtos = new ArrayList();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT produto.*, promocao.*, loja.* "
+                    + "FROM produto "
+                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
+                    + "INNER JOIN loja ON produto.loja_id = loja.id "
+                    + "WHERE loja.nome = '" + nomeLoja + "';");
+            while (rs.next()) {
+                Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
+                Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
+                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
+                Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
+                        rs.getString("produto.preco"), rs.getString("produto.disponivel"),
+                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
+                produtos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return produtos;
+    }
 
     public void update(Produto produto) {
         Connection conn = null;

@@ -47,7 +47,7 @@ public class LogarContaAction implements Action {
                     session.setAttribute("tipo", conta.getTipo());
                     session.setAttribute("login", conta.getLogin());
 
-                    if (conta.getTipo() == "Loja") {
+                    if (conta.getTipo().equals("Loja")) {
                         view = request.getRequestDispatcher("estabelecimento/index.jsp");
                     } else {
                         ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
