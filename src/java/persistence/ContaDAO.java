@@ -53,7 +53,7 @@ public class ContaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE login = " + login + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE login = '" + login + "'");
             rs.first();
             conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
         } catch (SQLException e) {

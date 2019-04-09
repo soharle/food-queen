@@ -28,7 +28,6 @@ public class LogarContaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
-        String tipo = request.getParameter("optTipo");
 
         Conta conta;
 
@@ -38,13 +37,13 @@ public class LogarContaAction implements Action {
             if (conta != null) {
                 if (conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("tipo", tipo);
-                    session.setAttribute("login", login);
+                    session.setAttribute("tipo", conta.getLogin());
+                    session.setAttribute("login", conta.getLogin());
                 }
             } else {
                 RequestDispatcher view = request.getRequestDispatcher("index.jsp");
             }
-            RequestDispatcher view = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");

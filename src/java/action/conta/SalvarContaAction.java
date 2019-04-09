@@ -34,7 +34,7 @@ public class SalvarContaAction implements Action {
             HttpSession session = request.getSession();
             session.setAttribute("tipo", tipo);
             session.setAttribute("login", login);
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("home.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         } 

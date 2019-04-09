@@ -2,117 +2,124 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
     <head>
-        <title>Index</title>
-        <%@ include file="./shared/head.jsp" %>
-    </head>
-    <body>
-        <div class="wrapper" id="wrapper">
-            <%@ include file="./shared/navbar.jsp" %>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Login - DentalMaster</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+        <!-- Bootstrap core CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="assets/css/mdb.min.css" rel="stylesheet">
+        <!-- Your custom styles (optional) -->
+        <link href="assets/css/sigin.css" rel="stylesheet">
+        <style>
+            html,
+            body {
+                height: 100%;
+            }
 
-            <!-- Start Single Slide -->
-            <div class="slide fullscreen" style="background-image: url('./assets/images/bg-food.jpg');">
-                <div class="container ">
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="slider__content">
-                                <div class="slider__inner">
-                                    <h2>FoodQueen</h2>
-                                    <h1>Delivery de comida</h1>
-                                    <div class="slider__input">
-                                        <input class="res__search" type="text" placeholder="O que deseja?">
-                                        <div class="src__btn">
-                                            <a href="#">Buscar</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            .box {
+                padding: 25px;
+                background-color: rgba(224, 242, 250, 0.8); 
+            }
+
+            body {
+                display: -ms-flexbox;
+                display: -webkit-box;
+                display: flex;
+                -ms-flex-align: center;
+                -ms-flex-pack: center;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                justify-content: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-image: url("../img/dentista.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .form-signin {
+                width: 100%;
+                max-width: 330px;
+                padding: 15px;
+                margin: 0 auto;
+            }
+
+            .form-signin .checkbox {
+                font-weight: 400;
+            }
+
+            .form-signin .form-control {
+                position: relative;
+                box-sizing: border-box;
+                height: auto;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .form-signin .form-control:focus {
+                z-index: 2;
+            }
+
+            .form-signin input[type="email"] {
+                margin-bottom: -1px;
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+            .form-signin input[type="password"] {
+                margin-bottom: 10px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        </style>
+
+    </head>
+
+    <body class="text-center">
+        <div class="text-center">
+            <div class="box">
+                <h1 class="mb-3 font-weight-bold">Dental Master -
+                    <small>Consultorio X</small>
+                </h1>
+                <br />
+                <form  action="FrontController?action=LogarConta" method="post" action="./" id="form1" class="form-signin">
+                    <span id="lblMsg"></span>
+                    <label for="txtLogin" class="sr-only">
+                        <b>Usuário:
+                        </b>
+                    </label>
+                    <input name="txtLogin" type="text"  class="form-control" placeholder="Usuário" required="" />
+                    <label for="txtSenha" class="sr-only">
+                        <b>Senha:
+                        </b>
+                    </label>
+                    <input name="txtSenha" type="password" class="form-control" placeholder="Senha" required="" />
+                    <button type="submit" value="submit" class="btn btn-lg btn-outline-elegant btn-block">Entrar</button>
+                    <!-- <input type="submit" name="cmdEntrar" value="Entrar" id="cmdEntrar" class="btn btn-lg btn-outline-elegant btn-block" /> -->
+                    <p class="mt-5 mb-3 text-muted">&copy; Startupida - 2018</p>
+                </form>
+                <a href="FrontController?action=CadastrarConta">Cadastrar</a>
             </div>
-            <!-- End Slider Area -->
-            <!-- Start Food Category -->
-            <section class=" section-padding--lg" style="background-color: #ffffff;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                            <div class="section__title service__align--left">
-                                <p>Vamos organizar!</p>
-                                <h2 class="title__line">Busque comida pela categoria que preferir! </h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="food__category__wrapper mt--40">
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 col-sm-12">
-                                <div class="food__item foo">
-                                    <div>
-                                        <h2><a href="menu-details.html">Breakfast Iteam</a></h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="bg-image--3 section-pt--lg" style="background-image: url('./assets/images/bg-wood.jpg');">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-lg-12">
-                             <div class="slider__content" style="color: #ffffff;">
-                                <div class="slider__inner">
-                                    <h2>FoodQueen</h2>
-                                    <h1>O pedido do tamanho da sua fome!</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="special__food__menu mt--50">
-                    <div class="food__menu__prl">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="fd__tab__content tab-content" id="nav-tabContent">
-                                        <div class="single__tab__panel tab-pane fade show active" id="nav-coffee"
-                                             role="tabpanel">
-                                            <div class="tab__content__wrap">
-                                                <div class="single__tab__content">
-                                                    <div class="food__menu">
-                                                        <div class="food__menu__thumb">
-                                                            <a href="menu-details.html">
-                                                                <img src="images/product/sm-img/1.jpg" alt="product images">
-                                                            </a>
-                                                        </div>
-                                                        <div class="food__menu__details">
-                                                            <div class="fd__menu__title__prize">
-                                                                <h4><a href="menu-details.html">Maxican Food Fev</a></h4>
-                                                                <span class="menu__prize">$15</span>
-                                                            </div>
-                                                            <div class="fd__menu__details">
-                                                                <p>Food Type : Chicken Stack</p>
-                                                                <div class="delivery__time__rating">
-                                                                    <p>Delivery Time : 60 min, Delivery Cost : Free</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- End Special Menu -->
         </div>
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
     </body>
 
 </html>
