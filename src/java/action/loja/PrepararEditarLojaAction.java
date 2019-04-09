@@ -40,7 +40,8 @@ public class PrepararEditarLojaAction implements Action {
             RequestDispatcher view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
 
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(PrepararEditarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+            RequestDispatcher view = request.getRequestDispatcher("erro.jsp");
+
         }
     }
 

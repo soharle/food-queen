@@ -30,7 +30,7 @@ public class LojaDAO {
         return instance;
     }
 
-    public Loja get(long id) {
+    public Loja get(long id) throws SQLException, ClassNotFoundException {
         Loja loja = null;
         Connection conn = null;
         Statement st = null;
@@ -59,10 +59,6 @@ public class LojaDAO {
             loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
                     rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                     enderecoLoja, conta, contato, categoria);
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
