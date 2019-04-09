@@ -30,6 +30,8 @@ public class PrepararEditarLojaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
+        RequestDispatcher view = null;
+        
         try {
             ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
             HttpSession session = request.getSession();
@@ -37,11 +39,13 @@ public class PrepararEditarLojaAction implements Action {
             Loja loja = LojaDAO.getInstance().get(id);
             request.setAttribute("loja", loja);
             request.setAttribute("categorias", categorias);
-            RequestDispatcher view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
+            view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
 
         } catch (ClassNotFoundException | SQLException ex) {
-            RequestDispatcher view = request.getRequestDispatcher("erro.jsp");
+            view = request.getRequestDispatcher("erro.jsp");
 
+        }finally{
+            view.forward(request, response);
         }
     }
 

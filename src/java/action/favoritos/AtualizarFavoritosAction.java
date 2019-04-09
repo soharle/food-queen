@@ -39,7 +39,7 @@ public class AtualizarFavoritosAction implements Action {
             Favoritos favoritos = new Favoritos(id, consumidor, loja);
             FavoritosDAO.getInstance().update(favoritos);
             response.sendRedirect("sucesso.jsp");
-        } catch (IOException ex) {
+        } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AtualizarFavoritosAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

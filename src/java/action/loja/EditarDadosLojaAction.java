@@ -33,10 +33,13 @@ public class EditarDadosLojaAction implements Action {
         String descricao = request.getParameter("txtDescricao");
         String imagem = request.getParameter("txtImagem");
         Long idCategoria = Long.parseLong(request.getParameter("optCategoria"));
-
+        
         HttpSession session = request.getSession();
+        
         long id = Long.parseLong((String) session.getAttribute("lojaId"));
 
+        RequestDispatcher view = null;
+        
         try {
             Loja loja = LojaDAO.getInstance().get(id);
             loja.setNome(nome);
@@ -48,10 +51,12 @@ public class EditarDadosLojaAction implements Action {
             loja.setCategoria(categoria);
 
             LojaDAO.getInstance().update(loja);
-            RequestDispatcher view = request.getRequestDispatcher("pages/estabelecimento/index.jsp");
+            view = request.getRequestDispatcher("pages/estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {
-            RequestDispatcher view = request.getRequestDispatcher("erro.jsp");
+            view = request.getRequestDispatcher("erro.jsp");
+        }finally{
+            view.forward(request, response);
         }
 
     }
