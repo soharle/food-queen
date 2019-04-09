@@ -42,28 +42,28 @@
                             <div class="col-md-6">
                                 <div class="form-group mt-5">
                                     <label for="txtImagem">Nova imagem</label>
-                                    <input type="text" name="txtImagem" id="txtImagem" class="form-control"/>
+                                    <input type="text" name="txtImagem" id="txtImagem" <c:if test="${loja.imagem != null}"> value="${loja.imagem}"</c:if> class="form-control"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="txtNome">Nome</label>
-                                    <input type="text" name="txtNome" id="txtNome" class="form-control"/>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="txtNome">Nome</label>
+                                        <input type="text" name="txtNome" id="txtNome" <c:if test="${loja.nome != null}"> value="${loja.nome}"</c:if> class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="txtCnpj">CNPJ</label>
+                                        <input type="text" name="txtCnpj" id="txtCnpj" <c:if test="${loja.cnpj != null}"> value="${loja.cnpj}"</c:if> class="form-control"/>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="txtCnpj">CNPJ</label>
-                                    <input type="text" name="txtCnpj" id="txtCnpj" class="form-control"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="optCategoria">Descrição</label>
-                                <select class="custom-select" name="optCategoria" id="optCategoria">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="optCategoria">Descrição</label>
+                                    <select class="custom-select" name="optCategoria" id="optCategoria">
                                     <c:forEach items="${categorias}" var="categoria">
                                         <option <c:if test="${loja.categoria.id == categoria.id}"> selected </c:if> value="${categoria.id}"> ${categoria.nome}</option>  
                                     </c:forEach>
@@ -74,7 +74,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="txtDescricao">Descrição</label>
-                                    <textarea class="form-control" id="txtDescricao" name="txtDescricao" placeholder="Descrição">
+                                    <textarea class="form-control" id="txtDescricao" name="txtDescricao" 
+                                              <c:if test="${loja.descricao != null}"> value="${loja.descricao}"</c:if> 
+                                              placeholder="Descrição">
                                     </textarea>
                                 </div>
                             </div>
@@ -88,13 +90,31 @@
                     </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="endereco">
-
+                    <form class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mt-5">
+                                    <label for="txtImagem">Logradouro</label>
+                                    <input type="text" name="txtLogradouro" id="txtImagem" <c:if test="${loja.imagem != null}"> value="${loja.imagem}"</c:if> class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="contato">
+                    <form class="container">
+                        <div class="row">
 
+                        </div>
+                    </form>
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="senha">
+                    <form class="container">
+                        <div class="row">
 
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

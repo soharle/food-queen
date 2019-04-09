@@ -10,3 +10,14 @@
 	Note: This is main css. All plugins css files import here.
 
 **********************************************************************************/
+.profile-image{
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+  border-radius: 5%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  
+}
