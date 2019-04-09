@@ -25,27 +25,18 @@ import persistence.ContaDAO;
 public class SalvarContaAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) {
+    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
         String tipo = request.getParameter("optTipo");
 
+        Conta conta = new Conta(login, senha, tipo);
         try {
-            Conta conta = new Conta(login, senha, tipo);
             ContaDAO.getInstance().save(conta);
-            HttpSession session = request.getSession();
-            session.setAttribute("tipo", tipo);
-            session.setAttribute("login", login);
-
-            if (tipo == "Consumidor") {
-                RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararHome");
-                view.forward(request, response);
-            } else {
-                response.sendRedirect("index.jsp");
-            }
-
-        } catch (IOException | SQLException | ClassNotFoundException | ServletException ex) {
-            Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            response.sendRedirect("erro.jsp");
         }
+        response.sendRedirect("index.jsp");
+
     }
 }

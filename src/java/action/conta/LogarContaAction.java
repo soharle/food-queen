@@ -43,6 +43,7 @@ public class LogarContaAction implements Action {
             if (conta != null) {
                 if (conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
                     HttpSession session = request.getSession();
+                    session.setAttribute("id", conta.getId());
                     session.setAttribute("tipo", conta.getTipo());
                     session.setAttribute("login", conta.getLogin());
 

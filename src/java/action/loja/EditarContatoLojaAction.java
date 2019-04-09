@@ -14,51 +14,38 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Categoria;
 import model.Loja;
-import persistence.CategoriaDAO;
 import persistence.LojaDAO;
 
 /**
  *
  * @author soharle
  */
-public class EditarDadosLojaAction implements Action {
+public class EditarContatoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String nome = request.getParameter("txtNome");
-        String cnpj = request.getParameter("txtCnpj");
-        String descricao = request.getParameter("txtDescricao");
-        String imagem = request.getParameter("txtImagem");
-        Long idCategoria = Long.parseLong(request.getParameter("optCategoria"));
-        
-        HttpSession session = request.getSession();
-        
-        long id = Long.parseLong((String) session.getAttribute("id"));
-
+        String telefone = request.getParameter("txtTelefone");
+        String ddd = request.getParameter("txtDdd");
+        String email = request.getParameter("txtEmail");
+        String telefoneComplementar = request.getParameter("txtTelefoneComplementar");
         RequestDispatcher view = null;
         
+        long idLoja = Long.parseLong((String) request.getSession().getAttribute("id"));
         try {
-            Loja loja = LojaDAO.getInstance().get(id);
-            loja.setNome(nome);
-            loja.setCnpj(cnpj);
-            loja.setDescricao(descricao);
-            loja.setImagem(imagem);
-
-            Categoria categoria = CategoriaDAO.getInstance().get(idCategoria);
-            loja.setCategoria(categoria);
-
+            Loja loja = LojaDAO.getInstance().get(idLoja);
+            loja.getContato().setTelefone(telefone);
+            loja.getContato().setDdd(ddd);
+            loja.getContato().setEmail(email);
+            loja.getContato().setTelefoneComplementar(telefoneComplementar);
             LojaDAO.getInstance().update(loja);
             view = request.getRequestDispatcher("pages/estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {
             view = request.getRequestDispatcher("erro.jsp");
-        }finally{
+        } finally {
             view.forward(request, response);
         }
-
     }
 
 }
