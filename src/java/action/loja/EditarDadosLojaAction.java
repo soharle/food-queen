@@ -36,7 +36,7 @@ public class EditarDadosLojaAction implements Action {
         
         HttpSession session = request.getSession();
         
-        long id = Long.parseLong((String) session.getAttribute("id"));
+        long id = Long.parseLong(session.getAttribute("id").toString());
 
         RequestDispatcher view = null;
         
@@ -51,7 +51,7 @@ public class EditarDadosLojaAction implements Action {
             loja.setCategoria(categoria);
 
             LojaDAO.getInstance().update(loja);
-            view = request.getRequestDispatcher("pages/estabelecimento/index.jsp");
+            view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {
             view = request.getRequestDispatcher("erro.jsp");

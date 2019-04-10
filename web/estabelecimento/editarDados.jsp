@@ -14,29 +14,31 @@
     <head>
         <title>Admin - Home</title>
         <%@ include file="shared/head.jsp" %>
+        
     </head>
+
 
     <body>
         <%@ include file="shared/navbar.jsp" %>
         <div class="container mt-5">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#dados" role="tab" id="defaultOpen" data-toggle="tab">Dados</a>
+                    <a class="nav-item nav-link active" id="nav-dados-tab" data-toggle="tab" href="#nav-dados" role="tab" aria-controls="nav-dados" aria-selected="true">Dados</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#endereco" role="tab" id="second" data-toggle="tab">Endereço</a>
+                    <a class="nav-item nav-link" id="nav-endereco-tab" data-toggle="tab" href="#nav-endereco" role="tab" aria-controls="nav-endereco" aria-selected="false">Endereço</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contato" role="tab" data-toggle="tab">Contato</a>
+                    <a class="nav-item nav-link" id="nav-contato-tab" data-toggle="tab" href="#nav-contato" role="tab" aria-controls="nav-contato" aria-selected="false">Contato</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#senha" role="tab" data-toggle="tab">Senha</a>
+                    <a class="nav-item nav-link" id="nav-senha-tab" data-toggle="tab" href="#nav-senha" role="tab" aria-controls="nav-senha" aria-selected="false">Senha</a>
                 </li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade container-fluid pt-1" aria-labelledby="dados-tab" id="dados">
-                    <form class="container">
+                <div class="tab-pane fade show active" id="nav-dados" role="tabpanel" aria-labelledby="nav-dados-tab">
+                    <form class="container" action="FrontController?action=EditarDadosLoja" method="post">
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <img src="${loja.imagem}" class="img-fluid profile-image" style="border: 1px solid #f5f5f5;"
@@ -71,8 +73,7 @@
                                     <label for="optCategoria">Categoria</label>
                                     <select class="custom-select" name="optCategoria" id="optCategoria">
                                     <c:forEach items="${categorias}" var="categoria">
-                                        <option <c:if test="${loja.categoria.id == categoria.id}"> selected </c:if>
-                                                                                                   value="${categoria.id}"> ${categoria.nome}</option>
+                                        <option <c:if test="${loja.categoria.id == categoria.id}"> selected </c:if> value="${categoria.id}"> ${categoria.nome}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -81,9 +82,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="txtDescricao">Descrição</label>
-                                    <textarea class="form-control" id="txtDescricao" name="txtDescricao" <c:if
-                                                  test="${loja.descricao != null}"> value="${loja.descricao}"</c:if> placeholder="Descrição">
-                                              </textarea>
+                                    <input type="text" class="form-control" id="txtDescricao" name="txtDescricao" <c:if
+                                               test="${loja.descricao != null}"> value="${loja.descricao}"</c:if> placeholder="Descrição" />
+
                                     </div>
                                 </div>
                             </div>
@@ -95,14 +96,14 @@
                             </div>
                         </form>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" aria-labelledby="endereco-tab" id="endereco">
-                        <form class="container">
+                    <div class="tab-pane fade" id="nav-endereco" role="tabpanel" aria-labelledby="nav-endereco-tab">
+                        <form class="container" action="FrontController?action=EditarEnderecoLoja" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mt-5">
                                         <label for="txtLogradouro">Logradouro</label>
                                         <input type="text" name="txtLogradouro" id="txtLogradouro" <c:if
-                                               test="${loja.endereco.logradouro != null}"> value="${loja.endereco.logradouro}"
+                                               test="${loja.enderecoLoja.logradouro != null}"> value="${loja.enderecoLoja.logradouro}"
                                            </c:if> class="form-control"/>
                                 </div>
                             </div>
@@ -110,7 +111,7 @@
                                 <div class="form-group mt-5">
                                     <label for="txtNumero">Numero</label>
                                     <input type="text" name="txtNumero" id="txtNumero" <c:if
-                                               test="${loja.endereco.numero != null}"> value="${loja.endereco.numero}"</c:if>
+                                               test="${loja.enderecoLoja.numero != null}"> value="${loja.enderecoLoja.numero}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -120,7 +121,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtComplemento">Complemento</label>
                                         <input type="text" name="txtComplemento" id="txtComplemento" <c:if
-                                               test="${loja.endereco.complemento != null}"> value="${loja.endereco.complemento}"
+                                               test="${loja.enderecoLoja.complemento != null}"> value="${loja.enderecoLoja.complemento}"
                                            </c:if> class="form-control"/>
                                 </div>
                             </div>
@@ -128,7 +129,7 @@
                                 <div class="form-group mt-5">
                                     <label for="txtBairro">Bairro</label>
                                     <input type="text" name="txtBairro" id="txtBairro" <c:if
-                                               test="${loja.endereco.bairro != null}"> value="${loja.endereco.bairro}"</c:if>
+                                               test="${loja.enderecoLoja.bairro != null}"> value="${loja.enderecoLoja.bairro}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -138,7 +139,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtCidade">Cidade</label>
                                         <input type="text" name="txtCidade" id="txtCidade" <c:if
-                                               test="${loja.endereco.cidade != null}"> value="${loja.endereco.cidade}"</c:if>
+                                               test="${loja.enderecoLoja.cidade != null}"> value="${loja.enderecoLoja.cidade}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -146,7 +147,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtEstado">Estado</label>
                                         <input type="text" name="txtEstado" id="txtEstado" <c:if
-                                               test="${loja.endereco.estado != null}"> value="${loja.endereco.estado}"</c:if>
+                                               test="${loja.enderecoLoja.estado != null}"> value="${loja.enderecoLoja.estado}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -156,15 +157,15 @@
                                     <div class="form-group mt-5">
                                         <label for="txtPais">Pais</label>
                                         <input type="text" name="txtPais" id="txtPais" <c:if
-                                               test="${loja.endereco.pais != null}"> value="${loja.endereco.pais}"</c:if>
+                                               test="${loja.enderecoLoja.pais != null}"> value="${loja.enderecoLoja.pais}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mt-5">
                                         <label for="txtCep">CEP</label>
-                                        <input type="text" name="txtCep" id="txtCep" <c:if test="${loja.endereco.cep != null}">
-                                           value="${loja.endereco.cep}"</c:if> class="form-control"/>
+                                        <input type="text" name="txtCep" id="txtCep" <c:if test="${loja.enderecoLoja.cep != null}">
+                                           value="${loja.enderecoLoja.cep}"</c:if> class="form-control"/>
                                     </div>
                                 </div>
                             </div>
@@ -176,8 +177,8 @@
                             </div>
                         </form>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" aria-labelledby="contato-tab" id="contato">
-                        <form class="container">
+                    <div class="tab-pane fade" id="nav-contato" role="tabpanel" aria-labelledby="nav-contato-tab">
+                        <form class="container" action="FrontController?action=EditarContatoLoja" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group mt-5">
@@ -222,8 +223,8 @@
                         </div>
                     </form>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" aria-labelledby="senha-tab" id="senha">
-                    <form class="container">
+                <div class="tab-pane fade" id="nav-senha" role="tabpanel" aria-labelledby="nav-senha-tab">
+                    <form class="container" action="FrontController?action=EditarSenhaLoja  " method="post">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mt-5">
@@ -249,21 +250,4 @@
             </div>
         </div>
     </body>
-    <script>
-        document.getElementById("second").click();
-        document.getElementById("defaultOpen").click();
-
-        function validarSenha() {
-            NovaSenha = document.getElementById('txtNovaSenha').value;
-            CNovaSenha = document.getElementById('txtNovaSenha2').value;
-            if (NovaSenha != CNovaSenha) {
-                if(!CNovaSenha.classlist.contains("is-invalid")){
-                    CNovaSenha.classlist.add("is-invalid");
-                }
-            } else {
-                CNovaSenha.classlist.remove("is-invalid");
-            }
-        }
-    </script>
-
 </html>

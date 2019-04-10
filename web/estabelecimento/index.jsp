@@ -63,7 +63,7 @@
                             <h5 class="card-title">Pedidos</h5>
                             <p class="card-text">Veja todos os pedidos do seu estabelecimento</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-dark btn-block">Avançar</a>
+                                <a href="FrontController?action=PrepararPedidosLoja" class="btn btn-dark btn-block">Avançar</a>
                             </div>
                         </div>
                     </div>
