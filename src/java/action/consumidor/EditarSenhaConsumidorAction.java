@@ -3,48 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.loja;
+package action.consumidor;
 
 import controller.Action;
-import model.Categoria;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.Consumidor;
 import model.Loja;
-import persistence.CategoriaDAO;
+import persistence.ConsumidorDAO;
 import persistence.LojaDAO;
 
 /**
  *
  * @author soharle
  */
-public class PrepararEditarLojaAction implements Action {
+public class EditarSenhaConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String senha = request.getParameter("txtSenha");
 
         RequestDispatcher view = null;
-        
+
+        long id = Long.parseLong((String) request.getSession().getAttribute("id"));
         try {
-            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-            HttpSession session = request.getSession();
-            long id = Long.parseLong((String) session.getAttribute("id"));
-            Loja loja = LojaDAO.getInstance().get(id);
-            request.setAttribute("loja", loja);
-            request.setAttribute("categorias", categorias);
-            view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
+            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+            consumidor.getConta().setSenha(senha);
+            ConsumidorDAO.getInstance().update(consumidor);
+            view = request.getRequestDispatcher("home.jsp");
 
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (ClassNotFoundException ex) {
             view = request.getRequestDispatcher("erro.jsp");
-
-        }finally{
+        } catch (SQLException ex) {
+            Logger.getLogger(EditarSenhaConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
             view.forward(request, response);
         }
     }

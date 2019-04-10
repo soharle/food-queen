@@ -2,6 +2,46 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Repos/java/food-queen/web/shared/head.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/PrepararContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LerContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararEditarLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/CarrinhoEstadoCancelado.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/controller/ActionFactory.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EditarEnderecoLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/AtualizarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/shared/navbar.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararEditarConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/pages/conta/login.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EditarContatoLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/nbproject/build-impl.xml</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarSenhaConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/EnderecoLoja.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EditarDadosLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarDadosLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/carrinho/DeletarCarrinhoAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EditarSenhaLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/pages/conta/conta.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/web/sucesso.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/ConsumidorDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/home.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/CadastrarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/SalvarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/cartao/CadastrarCartaoAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararHomeAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/PedidoDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/ContaDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/EntregaDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/index.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/web/pages/enderecoLoja/enderecoLoja.jsp</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Entrega.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/DeletarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/controller/FrontController.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarEnderecoLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Consumidor.java</file>
+        </group>
     </open-files>
 </project-private>

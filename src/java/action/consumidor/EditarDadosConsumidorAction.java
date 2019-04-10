@@ -6,10 +6,8 @@
 package action.loja;
 
 import controller.Action;
-import model.Categoria;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -17,36 +15,46 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Categoria;
+import model.Consumidor;
 import model.Loja;
 import persistence.CategoriaDAO;
+import persistence.ConsumidorDAO;
 import persistence.LojaDAO;
 
 /**
  *
  * @author soharle
  */
-public class PrepararEditarLojaAction implements Action {
+public class EditarDadosConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String nome = request.getParameter("txtNome");
+        String cpf = request.getParameter("txtCnpj");
+        String nascimento = request.getParameter("txtDescricao");
+
+        HttpSession session = request.getSession();
+
+        long id = Long.parseLong((String) session.getAttribute("id"));
 
         RequestDispatcher view = null;
-        
+
         try {
-            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-            HttpSession session = request.getSession();
-            long id = Long.parseLong((String) session.getAttribute("id"));
-            Loja loja = LojaDAO.getInstance().get(id);
-            request.setAttribute("loja", loja);
-            request.setAttribute("categorias", categorias);
-            view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
+            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+            consumidor.setNome(nome);
+            consumidor.setCpf(cpf);
+            consumidor.setNascimento(nascimento);
 
-        } catch (ClassNotFoundException | SQLException ex) {
+            ConsumidorDAO.getInstance().update(consumidor);
+            view = request.getRequestDispatcher("home.jsp");
+
+        } catch (SQLException | ClassNotFoundException ex) {
             view = request.getRequestDispatcher("erro.jsp");
-
-        }finally{
+        } finally {
             view.forward(request, response);
         }
+
     }
 
 }
