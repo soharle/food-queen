@@ -14,7 +14,7 @@ public class ActionFactory {
 
         int index = 0;
         String actionUpper = action.toUpperCase();
-        for (int i = 1; i < action.length(); i++) {
+        for (int i = action.length() -1; i > 0; i--) {
             if (action.charAt(i) == action.toUpperCase().charAt(i)) {
                 index = i;
                 break;

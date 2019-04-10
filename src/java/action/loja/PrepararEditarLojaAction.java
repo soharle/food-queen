@@ -35,11 +35,12 @@ public class PrepararEditarLojaAction implements Action {
         try {
             ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
             HttpSession session = request.getSession();
-            long id = Long.parseLong((String) session.getAttribute("id"));
+
+            long id = Long.parseLong(session.getAttribute("id").toString());
             Loja loja = LojaDAO.getInstance().get(id);
             request.setAttribute("loja", loja);
             request.setAttribute("categorias", categorias);
-            view = request.getRequestDispatcher("pages/estabelecimento/editarDados.jsp");
+            view = request.getRequestDispatcher("estabelecimento/editarDados.jsp");
 
         } catch (ClassNotFoundException | SQLException ex) {
             view = request.getRequestDispatcher("erro.jsp");

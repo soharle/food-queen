@@ -25,7 +25,7 @@
                             <h5 class="card-title">Dados do estabelecimento</h5>
                             <p class="card-text">Nesta opção você pode atualizar os dados do seu estabelecimento</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-dark btn-block">Editar dados</a>
+                                <a href="FrontController?action=PrepararEditarLoja" class="btn btn-dark btn-block">Editar dados</a>
                             </div>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                             <h5 class="card-title">Promoções</h5>
                             <p class="card-text">Cadastre e edite promoções para o seu restaurante!</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-dark btn-block">Avançar</a>
+                                <a href="FrontController?action=PrepararPromocoesLoja" class="btn btn-dark btn-block">Avançar</a>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                             <h5 class="card-title">Produtos</h5>
                             <p class="card-text">Aqui você pode cadastrar e editar produtos para o seu restaurante!</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-dark btn-block">Avançar</a>
+                                <a href="FrontController?action=PrepararProdutosLoja" class="btn btn-dark btn-block">Avançar</a>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <h5 class="card-title">Pedidos</h5>
                             <p class="card-text">Veja todos os pedidos do seu estabelecimento</p>
                             <div class="text-center">
-                                <a href="#" class="btn btn-dark btn-block">Avançar</a>
+                                <a href="FrontController?action=PrepararPedidosLoja" class="btn btn-dark btn-block">Avançar</a>
                             </div>
                         </div>
                     </div>

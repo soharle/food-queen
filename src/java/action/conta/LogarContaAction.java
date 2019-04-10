@@ -17,11 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Categoria;
+import model.Consumidor;
 import model.Conta;
+import model.Loja;
 import model.Pedido;
 import model.Produto;
 import persistence.CategoriaDAO;
+import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
+import persistence.LojaDAO;
 import persistence.ProdutoDAO;
 
 /**
@@ -43,7 +47,15 @@ public class LogarContaAction implements Action {
             if (conta != null) {
                 if (conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
                     HttpSession session = request.getSession();
-                    session.setAttribute("id", conta.getId());
+                    long id = 0;
+                    if(conta.getTipo().equals("Loja")){
+                        Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
+                        id = loja.getId();
+                    }else{
+                        Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
+                    }
+                    
+                    session.setAttribute("id", id);
                     session.setAttribute("tipo", conta.getTipo());
                     session.setAttribute("login", conta.getLogin());
 

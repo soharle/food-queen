@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Loja;
+import persistence.ContatoDAO;
 import persistence.LojaDAO;
 
 /**
@@ -31,15 +32,15 @@ public class EditarContatoLojaAction implements Action {
         String telefoneComplementar = request.getParameter("txtTelefoneComplementar");
         RequestDispatcher view = null;
         
-        long idLoja = Long.parseLong((String) request.getSession().getAttribute("id"));
+        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
             loja.getContato().setTelefone(telefone);
             loja.getContato().setDdd(ddd);
             loja.getContato().setEmail(email);
             loja.getContato().setTelefoneComplementar(telefoneComplementar);
-            LojaDAO.getInstance().update(loja);
-            view = request.getRequestDispatcher("pages/estabelecimento/index.jsp");
+            ContatoDAO.getInstance().update(loja.getContato());
+            view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {
             view = request.getRequestDispatcher("erro.jsp");
