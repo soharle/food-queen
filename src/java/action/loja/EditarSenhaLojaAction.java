@@ -26,7 +26,7 @@ public class EditarSenhaLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String senha = request.getParameter("txtSenha");
+        String senha = request.getParameter("txtNovaSenha");
        
         RequestDispatcher view = null;
         
@@ -34,7 +34,7 @@ public class EditarSenhaLojaAction implements Action {
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
             loja.getConta().setSenha(senha);
-           ContaDAO.getInstance().update(loja.getConta());
+            ContaDAO.getInstance().update(loja.getConta());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {

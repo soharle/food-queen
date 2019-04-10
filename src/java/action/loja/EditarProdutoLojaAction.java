@@ -18,16 +18,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gabriel
  */
-public class PreparaPromocoesAction implements Action{
+public class EditarProdutoLojaAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/promocoes.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
         try {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }
