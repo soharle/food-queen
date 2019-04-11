@@ -9,6 +9,7 @@ import model.Loja;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -28,7 +29,11 @@ public class PrepararPromocoesLojaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        PromocaoDAO.getInstance();
+        try {
+            ArrayList<Promocao> promocao = PromocaoDAO.getInstance().getAllByLoja(id);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(PrepararPromocoesLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+        }
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/promocoes.jsp");
         try {
             view.forward(request, response);

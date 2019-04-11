@@ -114,7 +114,7 @@ public class PromocaoDAO {
 
     }
 
-    public ArrayList<Promocao> getAllByLoja(int lojaId) throws ClassNotFoundException, SQLException {
+    public ArrayList<Promocao> getAllByLoja(long lojaId) throws ClassNotFoundException, SQLException {
         ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
         Connection conn = null;
         Statement st = null;
