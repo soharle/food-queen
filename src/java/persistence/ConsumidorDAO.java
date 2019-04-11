@@ -23,7 +23,8 @@ import model.StateFactory;
  * @author raiss
  */
 public class ConsumidorDAO {
-     private static ConsumidorDAO instance = new ConsumidorDAO();
+
+    private static ConsumidorDAO instance = new ConsumidorDAO();
 
     public static ConsumidorDAO getInstance() {
         return instance;
@@ -43,11 +44,11 @@ public class ConsumidorDAO {
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
                     + "WHERE consumidor.id = " + id + ";");
             rs.first();
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"), 
+            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                     rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"), 
+            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
                     rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"), 
+            consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
                     rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +56,7 @@ public class ConsumidorDAO {
 
         return consumidor;
     }
-    
+
     public Consumidor getByConta(long id) {
         Consumidor consumidor = null;
         Connection conn = null;
@@ -95,47 +96,41 @@ public class ConsumidorDAO {
                     + "FROM consumidor "
                     + "INNER JOIN contato ON contato.id = consumidor.contato_id"
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id ");
-            
-            while(rs.next()){
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"), 
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"), 
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"), 
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
-            consumidores.add(consumidor);
+
+            while (rs.next()) {
+                Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
+                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
+                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
+                        rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
+                consumidores.add(consumidor);
             }
-            
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return consumidores;
     }
-    
-        public void update(Consumidor consumidor) {
+
+    public void update(Consumidor consumidor) throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Statement st = null;
 
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("UPDATE consumidor SET nome = '" + consumidor.getNome()+ "', "
-                    + "cpf = '" + consumidor.getCpf()+ "', "
-                    + "nascimento = '" + consumidor.getNascimento()+ "', "
-                    + "conta_id = " + consumidor.getConta().getId() + ", "
-                    + "contato_id = " + consumidor.getContato().getId() + " "
-                    + "WHERE id = " + consumidor.getId() + ";");
+        conn = DatabaseLocator.getInstance().getConnection();
+        st = conn.createStatement();
+        st.execute("UPDATE consumidor SET nome = '" + consumidor.getNome() + "', "
+                + "cpf = '" + consumidor.getCpf() + "', "
+                + "nascimento = '" + consumidor.getNascimento() + "', "
+                + "conta_id = " + consumidor.getConta().getId() + ", "
+                + "contato_id = " + consumidor.getContato().getId() + " "
+                + "WHERE id = " + consumidor.getId() + ";");
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
+        closeResources(conn, st);
+
     }
-    
+
     public void delete(long id) {
         Connection conn = null;
         Statement st = null;
@@ -152,7 +147,7 @@ public class ConsumidorDAO {
             closeResources(conn, st);
         }
     }
-    
+
     public void save(Consumidor consumidor) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
@@ -161,11 +156,11 @@ public class ConsumidorDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO consumidor ( nome, cpf, nascimento, conta_id, contato_id) "
-                    + "VALUES ('" + consumidor.getNome()+ "', "
-                    + "'" + consumidor.getCpf()+ "', "
-                    + "'" + consumidor.getNascimento()+ "', "
-                    + "" + consumidor.getConta().getId()+ ", "
-                    + "" + consumidor.getContato().getId()+ ", "
+                    + "VALUES ('" + consumidor.getNome() + "', "
+                    + "'" + consumidor.getCpf() + "', "
+                    + "'" + consumidor.getNascimento() + "', "
+                    + "" + consumidor.getConta().getId() + ", "
+                    + "" + consumidor.getContato().getId() + ", "
                     + ");");
         } catch (SQLException e) {
             System.out.println(e);;
@@ -189,4 +184,3 @@ public class ConsumidorDAO {
     }
 
 }
-
