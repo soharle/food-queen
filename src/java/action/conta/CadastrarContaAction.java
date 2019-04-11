@@ -23,7 +23,7 @@ public class CadastrarContaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("acao", "Cadastrar");
-        RequestDispatcher view = request.getRequestDispatcher("pages/conta/conta.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("cadastroLoja.jsp");
         try {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

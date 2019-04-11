@@ -27,7 +27,7 @@
             .box {
                 padding: 75px;
                 background-color: rgba(167, 164, 154, 0.85); 
-                
+
             }
 
             body {
@@ -91,21 +91,24 @@
                 <h1 class="mb-3 font-weight-bold">FoodQueen
                 </h1>
                 <br />
-                <form  action="FrontController?action=LogarConta" method="post" action="./" id="form1" class="form-signin">
+                <form  action="FrontController?action=LogarConta" method="post" id="form1" class="form-signin">
                     <span id="lblMsg"></span>
                     <label for="txtLogin" class="sr-only">
                         <b>Usuário:
                         </b>
                     </label>
-                    <input name="txtLogin" type="text"  class="form-control" placeholder="Usuário" required="" />
+                    <input name="txtLogin" type="text"  class="form-control mb-1" placeholder="Usuário" required="" />
                     <label for="txtSenha" class="sr-only">
                         <b>Senha:
                         </b>
                     </label>
                     <input name="txtSenha" type="password" class="form-control" placeholder="Senha" required="" />
                     <button type="submit" value="submit" class="btn btn-lg btn-outline-elegant btn-block">Entrar</button>
+                    <a href="FrontController?action=CadastrarConta" class="btn btn-lg btn-info btn-block mt-5">Cadastrar usuário</a>
+                    <a href="FrontController?action=CadastrarLoja" class="btn btn-lg btn-success btn-block">Cadastrar restaurante</a>
+
                 </form>
-                <a href="FrontController?action=CadastrarConta">Cadastrar</a>
+
             </div>
         </div>
 
