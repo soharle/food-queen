@@ -72,6 +72,7 @@ public class PedidoDAO {
         }
         return pedido;
     }
+    
 
     public ArrayList<Pedido> getAll() {
         ArrayList<Pedido> pedidos = new ArrayList();

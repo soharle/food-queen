@@ -86,7 +86,7 @@ public class ProdutoDAO {
         return produtos;
     }
     
-    public ArrayList<Produto> getAllByLoja(String nomeLoja) {
+    public ArrayList<Produto> getAllByLoja(long idLoja) {
         ArrayList<Produto> produtos = new ArrayList();
         Connection conn = null;
         Statement st = null;
@@ -98,7 +98,7 @@ public class ProdutoDAO {
                     + "FROM produto "
                     + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
                     + "INNER JOIN loja ON produto.loja_id = loja.id "
-                    + "WHERE loja.nome = '" + nomeLoja + "';");
+                    + "WHERE loja.id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),

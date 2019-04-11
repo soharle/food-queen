@@ -31,7 +31,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                            <c:forEach items="${carrinhos}" var="carrinho">
+                            <c:forEach items="${carrinhosPendentes}" var="carrinho">
                                 <td>${carrinho.consumidor.nome}</td>
                                 <td>${carrinho.valor}</td>
                                 <td>${carrinho.estado}</td>

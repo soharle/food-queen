@@ -13,16 +13,21 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.ProdutoDAO;
 
 /**
  *
  * @author Gabriel
  */
-public class PrepararProdutosLojaAction implements Action{
+public class PrepararProdutosLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        long id = Long.parseLong(request.getSession().getAttribute("id").toString());
+        request.setAttribute("produtos", ProdutoDAO.getInstance().getAllByLoja(id));
+
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/produtos.jsp");
+
         try {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
