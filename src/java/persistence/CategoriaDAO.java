@@ -1,6 +1,5 @@
 package persistence;
 
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -101,21 +100,26 @@ public class CategoriaDAO {
         }
     }
 
-    public void save(Categoria categoria) throws SQLException, ClassNotFoundException {
+    public Categoria save(Categoria categoria) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        long key = -1l;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO categoria (nome)" + " VALUES ('" + categoria.getNome() + "');");
-
+            st.execute("INSERT INTO categoria (nome)" + " VALUES ('" + categoria.getNome() + "');", Statement.RETURN_GENERATED_KEYS);
+            if (st.getGeneratedKeys().next()) {
+                key = st.getGeneratedKeys().getLong(1);
+            }
+            categoria.setId(key);
+            
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
+            return categoria;
         }
-
+        
     }
 
     private void closeResources(Connection conn, Statement st) {

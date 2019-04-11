@@ -105,10 +105,10 @@ public class ContatoDAO {
         }
     }
 
-    public void save(Contato contato) throws SQLException, ClassNotFoundException {
+    public Contato save(Contato contato) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        long key = -1l;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -116,12 +116,17 @@ public class ContatoDAO {
                     + "VALUES ('" + contato.getTelefone() + "', "
                     + "'" + contato.getDdd() + "', "
                     + "'" + contato.getEmail() + "', "
-                    + "'" + contato.getTelefoneComplementar() + "');");
-
+                    + "'" + contato.getTelefoneComplementar() + "');", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            contato.setId(key);
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
+            return contato;
         }
 
     }

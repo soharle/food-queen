@@ -44,7 +44,7 @@ public class ContaDAO {
         return conta;
 
     }
-    
+
     public Conta get(String login) throws ClassNotFoundException, SQLException {
         Conta conta = null;
         Connection conn = null;
@@ -124,22 +124,28 @@ public class ContaDAO {
         }
     }
 
-    public void save(Conta conta) throws SQLException, ClassNotFoundException {
+    public Conta save(Conta conta) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        long key = -1l;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO conta (login, senha, tipo)" + " "
                     + "VALUES ('" + conta.getLogin() + "', "
                     + "'" + conta.getSenha() + "', "
-                    + "'" + conta.getTipo() + "');");
-
+                    + "'" + conta.getTipo() + "');", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            conta.setId(key);
+            
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
+            return conta;
         }
 
     }

@@ -10,6 +10,7 @@ package model;
  * @author mathe
  */
 public class EnderecoLoja {
+
     private long id;
     private String cep;
     private String logradouro;
@@ -31,8 +32,9 @@ public class EnderecoLoja {
         this.estado = estado;
         this.pais = pais;
     }
-    
-    public EnderecoLoja(String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+
+    public EnderecoLoja(String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+        this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -57,8 +59,6 @@ public class EnderecoLoja {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    
-    
 
     public String getLogradouro() {
         return logradouro;
@@ -115,5 +115,5 @@ public class EnderecoLoja {
     public void setPais(String pais) {
         this.pais = pais;
     }
-    
+
 }

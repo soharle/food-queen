@@ -32,7 +32,7 @@ public class SalvarEnderecoLojaAction implements Action {
         String pais = request.getParameter("txtPais");
         
         try {
-            EnderecoLoja enderecoLoja = new EnderecoLoja(logradouro, numero, complemento, bairro, cidade, estado, pais);
+            EnderecoLoja enderecoLoja = new EnderecoLoja("cep", logradouro, numero, complemento, bairro, cidade, estado, pais);
             EnderecoLojaDAO.getInstance().save(enderecoLoja);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {

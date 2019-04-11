@@ -185,10 +185,10 @@ public class LojaDAO {
         }
     }
 
-    public void save(Loja loja) throws SQLException, ClassNotFoundException {
+    public Loja save(Loja loja) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        long key = -1l;
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
@@ -201,11 +201,17 @@ public class LojaDAO {
                     + "'" + loja.getImagem() + "', "
                     + "" + loja.getContato().getId() + ", "
                     + "" + loja.getCategoria().getId() + ""
-                    + ");");
+                    + ");",Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            loja.setId(key);
         } catch (SQLException e) {
             System.out.println(e);;
         } finally {
             closeResources(conn, st);
+            return loja;
         }
 
     }

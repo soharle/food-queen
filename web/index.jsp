@@ -104,7 +104,7 @@
                     </label>
                     <input name="txtSenha" type="password" class="form-control" placeholder="Senha" required="" />
                     <button type="submit" value="submit" class="btn btn-lg btn-outline-elegant btn-block">Entrar</button>
-                    <a href="FrontController?action=CadastrarConta" class="btn btn-lg btn-info btn-block mt-5">Cadastrar usuário</a>
+                    <a href="FrontController?action=CadastrarConsumidor" class="btn btn-lg btn-info btn-block mt-5">Cadastrar usuário</a>
                     <a href="FrontController?action=CadastrarLoja" class="btn btn-lg btn-success btn-block">Cadastrar restaurante</a>
 
                 </form>

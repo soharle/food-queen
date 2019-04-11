@@ -34,25 +34,10 @@ public class CadastrarLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("acao", "Cadastrar");
-
-        ArrayList<Categoria> categorias;
-        ArrayList<Conta> contas;
-        ArrayList<Contato> contatos;
-        ArrayList<EnderecoLoja> enderecosLoja;
-
         try {
-            categorias = CategoriaDAO.getInstance().getAll();
-            contas = ContaDAO.getInstance().getAll();
-            contatos = ContatoDAO.getInstance().getAll();
-            enderecosLoja = EnderecoLojaDAO.getInstance().getAll();
+            request.setAttribute("categorias", CategoriaDAO.getInstance().getAll());
+            RequestDispatcher view = request.getRequestDispatcher("cadastroLoja.jsp");
 
-            request.setAttribute("categorias", categorias);
-            request.setAttribute("contas", contas);
-            request.setAttribute("contatos", contatos);
-            request.setAttribute("enderecosLoja", enderecosLoja);
-
-            RequestDispatcher view = request.getRequestDispatcher("pages/loja/loja.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CadastrarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);

@@ -22,7 +22,7 @@
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <div class="container px-5 my-5">
                     <h3 class="h4 text-center">Cadastro de Restaurante</h3>
-                    <form>
+                    <form action="FrontController?action=SalvarLoja" method="post">
                         <div class="form-group">
                             <label for="txtLogin">Login</label>
                             <input type="text" class="form-control" id="txtLogin" name="txtLogin">
@@ -161,7 +161,7 @@
                             </div>
                         </div>
                         <div class="form-group text-right">
-                            <button type="submit" class="btn btn-lg btn-success">Cadastrar</button>
+                            <button type="submit" value="submit" class="btn btn-lg btn-success">Cadastrar</button>
                         </div>
                     </form>
                 </div>

@@ -110,9 +110,10 @@ public class EnderecoLojaDAO {
         }
     }
 
-    public void save(EnderecoLoja endereco) throws SQLException, ClassNotFoundException {
+    public EnderecoLoja save(EnderecoLoja endereco) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
+        long key = -1;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
@@ -125,11 +126,17 @@ public class EnderecoLojaDAO {
                     + "'" + endereco.getBairro() + "', "
                     + "'" + endereco.getCidade() + "', "
                     + "'" + endereco.getEstado() + "', "
-                    + "'" + endereco.getPais() + "');");
+                    + "'" + endereco.getPais() + "');", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            endereco.setId(key);
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
+            return endereco;
         }
 
     }
