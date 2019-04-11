@@ -30,6 +30,11 @@ public class ConsumidorDAO {
         return instance;
     }
 
+    private ConsumidorDAO() {
+    }
+    
+    
+
     public Consumidor get(long id) {
         Consumidor consumidor = null;
         Connection conn = null;

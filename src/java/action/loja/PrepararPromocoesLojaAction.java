@@ -28,7 +28,7 @@ public class PrepararPromocoesLojaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        //TODO PROMOCAO É POR PRODUTO NAO POR LOJA
+        PromocaoDAO.getInstance();
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/promocoes.jsp");
         try {
             view.forward(request, response);

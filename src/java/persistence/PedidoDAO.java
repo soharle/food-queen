@@ -34,6 +34,9 @@ public class PedidoDAO {
         return instance;
     }
 
+    private PedidoDAO() {
+    }
+
     public Pedido get(long id) {
         Pedido pedido = null;
         Connection conn = null;
@@ -59,7 +62,7 @@ public class PedidoDAO {
                     rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
             Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                    rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
+                    rs.getString("promocao.desconto"), rs.getString("promocao.tipo"), loja);
             Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                     rs.getString("produto.preco"), rs.getString("produto.disponivel"),
                     rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
@@ -98,7 +101,7 @@ public class PedidoDAO {
                         rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
+                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"), loja);
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
                         rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);

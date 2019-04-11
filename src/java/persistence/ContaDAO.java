@@ -23,6 +23,10 @@ public class ContaDAO {
     public static ContaDAO getInstance() {
         return instance;
     }
+    
+    private ContaDAO(){
+        
+    }
 
     public Conta get(long id) throws ClassNotFoundException, SQLException {
         Conta conta = null;

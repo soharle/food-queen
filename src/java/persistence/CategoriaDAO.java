@@ -24,6 +24,10 @@ public class CategoriaDAO {
         return instance;
     }
 
+    private CategoriaDAO() {
+    }
+    
+    
     public Categoria get(long id) throws ClassNotFoundException, SQLException {
         Categoria categoria = null;
         Connection conn = null;

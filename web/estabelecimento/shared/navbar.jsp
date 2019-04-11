@@ -26,7 +26,7 @@
         <span class="navbar-text">
             ${sessionScope.nomeLoja}
         </span>
-        <form class="form-inline my-2 my-lg-0" action="FrontController?action=DeslogarConta">
+        <form class="form-inline my-2 my-lg-0" action="FrontController?action=DeslogarConta" method="post">
             <button class="btn btn-outline-danger btn-sm my-2 my-sm-0" type="submit">Logout</button>
         </form>
     </div>

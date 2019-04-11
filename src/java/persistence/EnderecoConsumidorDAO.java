@@ -29,6 +29,11 @@ public class EnderecoConsumidorDAO {
         return instance;
     }
 
+    private EnderecoConsumidorDAO() {
+    }
+    
+    
+
     public EnderecoConsumidor get(long id) {
         EnderecoConsumidor endereco = null;
         Connection conn = null;

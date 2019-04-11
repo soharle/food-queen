@@ -30,6 +30,11 @@ public class LojaDAO {
         return instance;
     }
 
+    private LojaDAO() {
+    }
+    
+    
+
     public Loja get(long id) throws SQLException, ClassNotFoundException {
         Loja loja = null;
         Connection conn = null;

@@ -34,6 +34,11 @@ public class EntregaDAO {
         return instance;
     }
 
+    private EntregaDAO() {
+    }
+    
+    
+
     public Entrega get(long id) {
         Entrega entrega = null;
         Connection conn = null;

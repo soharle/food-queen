@@ -32,6 +32,11 @@ public class FavoritosDAO {
         return instance;
     }
 
+    private FavoritosDAO() {
+    }
+    
+    
+
     public Favoritos get(long id) {
         Favoritos favorito = null;
         Connection conn = null;

@@ -24,6 +24,11 @@ public class EnderecoLojaDAO {
         return instance;
     }
 
+    private EnderecoLojaDAO() {
+    }
+    
+    
+
     public EnderecoLoja get(long id) throws ClassNotFoundException, SQLException {
         EnderecoLoja endereco = null;
         Connection conn = null;

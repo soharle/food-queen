@@ -29,6 +29,10 @@ public class CartaoDAO {
         return instance;
     }
 
+    private CartaoDAO() {
+    }
+    
+    
     public Cartao get(long id) {
         Cartao cartao = null;
         Connection conn = null;

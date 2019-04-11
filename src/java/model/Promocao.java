@@ -10,22 +10,27 @@ package model;
  * @author mathe
  */
 public class Promocao {
+
     private long id;
     private String nome;
     private String desconto;
     private String tipo;
+    private Loja loja;
 
-    public Promocao(long id, String nome, String desconto, String tipo) {
+    public Promocao(long id, String nome, String desconto, String tipo, Loja loja) {
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
         this.tipo = tipo;
+        this.loja = loja;
     }
 
-    public Promocao(String nome, String desconto, String tipo) {
+    public Promocao(String nome, String desconto, String tipo, Loja loja) {
         this.nome = nome;
         this.desconto = desconto;
         this.tipo = tipo;
+        this.loja = loja;
+
     }
 
     public long getId() {
@@ -59,6 +64,5 @@ public class Promocao {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
+
 }

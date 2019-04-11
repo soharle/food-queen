@@ -5,6 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Categoria;
+import model.Conta;
+import model.Contato;
+import model.EnderecoLoja;
+import model.Loja;
+import model.Produto;
 import model.Promocao;
 
 /*
@@ -24,6 +32,9 @@ public class PromocaoDAO {
         return instance;
     }
 
+    private PromocaoDAO() {
+    }
+
     public Promocao get(long id) throws ClassNotFoundException, SQLException {
         Promocao promocao = null;
         Connection conn = null;
@@ -32,9 +43,27 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM promocao WHERE id = " + id + ";");
+            ResultSet rs = st.executeQuery("SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
+                    + "INNER JOIN loja ON promocao.loja_id = loja.id "
+                    + "INNER JOIN conta ON loja.conta_id = conta.id "
+                    + "INNER JOIN contato ON loja.contato_id = contato.id "
+                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
+                    + "WHERE id = " + id + ";");
             rs.first();
-            promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
+            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
+                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
+            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
+                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
+            EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+                    rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
+                    rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
+                    rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
+            Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
+            Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
+                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
+                    enderecoLoja, conta, contato, categoria);
+            promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -53,9 +82,67 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM promocao;");
+            ResultSet rs = st.executeQuery("SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
+                    + "INNER JOIN loja ON promocao.loja_id = loja.id "
+                    + "INNER JOIN conta ON loja.conta_id = conta.id "
+                    + "INNER JOIN contato ON loja.contato_id = contato.id "
+                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id ;");
             while (rs.next()) {
-                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
+                Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
+                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
+                Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
+                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
+                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+                        rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
+                        rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
+                        rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
+                Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
+                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
+                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
+                        enderecoLoja, conta, contato, categoria);
+                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
+                promocoes.add(promocao);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            closeResources(conn, st);
+        }
+
+        return promocoes;
+
+    }
+
+    public ArrayList<Promocao> getAllByLoja(int lojaId) throws ClassNotFoundException, SQLException {
+        ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
+                    + "INNER JOIN loja ON promocao.loja_id = loja.id "
+                    + "INNER JOIN conta ON loja.conta_id = conta.id "
+                    + "INNER JOIN contato ON loja.contato_id = contato.id "
+                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id ;"
+                    + "WHERE promocao.loja_id = " + lojaId + ";");
+            while (rs.next()) {
+                Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
+                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
+                Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
+                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
+                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+                        rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
+                        rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
+                        rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
+                Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
+                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
+                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
+                        enderecoLoja, conta, contato, categoria);
+                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
                 promocoes.add(promocao);
             }
         } catch (SQLException e) {

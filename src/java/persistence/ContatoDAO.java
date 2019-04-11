@@ -24,6 +24,10 @@ public class ContatoDAO {
         return instance;
     }
 
+    private ContatoDAO() {
+    }
+    
+
     public Contato get(long id) throws ClassNotFoundException, SQLException {
         Contato contato = null;
         Connection conn = null;

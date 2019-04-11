@@ -34,6 +34,9 @@ public class CarrinhoDAO {
         return instance;
     }
 
+    private CarrinhoDAO() {
+    }
+
     public Carrinho get(long id) {
         Carrinho carrinho = null;
         Connection conn = null;
