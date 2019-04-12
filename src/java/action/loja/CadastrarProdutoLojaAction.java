@@ -5,7 +5,6 @@
  */
 package action.loja;
 
-import model.Loja;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,31 +16,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Promocao;
-import persistence.LojaDAO;
 import persistence.PromocaoDAO;
 
 /**
  *
  * @author Gabriel
  */
-public class PrepararPromocoesLojaAction implements Action {
+public class CadastrarProdutoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        long id = Long.parseLong(request.getSession().getAttribute("id").toString());
+        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
         ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
         try {
-            promocoes = PromocaoDAO.getInstance().getAllByLoja(id);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(PrepararPromocoesLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("promocoes", promocoes);
-        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/promocoes.jsp");
-        try {
+            promocoes = PromocaoDAO.getInstance().getAllByLoja(idLoja);
+            request.setAttribute("promocoes", promocoes);
+            request.setAttribute("acao", "criar");
+            RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastrarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
 }

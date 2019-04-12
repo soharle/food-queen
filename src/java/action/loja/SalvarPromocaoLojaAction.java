@@ -5,17 +5,17 @@
  */
 package action.loja;
 
-import model.Loja;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Loja;
 import model.Promocao;
 import persistence.LojaDAO;
 import persistence.PromocaoDAO;
@@ -24,24 +24,25 @@ import persistence.PromocaoDAO;
  *
  * @author Gabriel
  */
-public class PrepararPromocoesLojaAction implements Action {
+public class SalvarPromocaoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
+        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
+        String nome = request.getParameter("txtNome");
+        String desconto = request.getParameter("txtDesconto");
+        String tipo = request.getParameter("optTipo");
+
         try {
-            promocoes = PromocaoDAO.getInstance().getAllByLoja(id);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(PrepararPromocoesLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("promocoes", promocoes);
-        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/promocoes.jsp");
-        try {
+            Loja loja = LojaDAO.getInstance().get(idLoja);
+            Promocao promo = new Promocao(nome, desconto, tipo, loja);
+            PromocaoDAO.getInstance().save(promo);
+            RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararPromocoesLoja");
             view.forward(request, response);
-        } catch (ServletException | IOException ex) {
-            Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(SalvarPromocaoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
 }

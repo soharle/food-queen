@@ -33,6 +33,14 @@ public class Promocao {
 
     }
 
+    public Promocao() {
+        this.id = 0;
+        this.nome = "";
+        this.desconto = "";
+        this.tipo = "";
+
+    }
+
     public long getId() {
         return id;
     }
@@ -63,6 +71,14 @@ public class Promocao {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public void setLoja(Loja loja) {
+        this.loja = loja;
     }
 
 }

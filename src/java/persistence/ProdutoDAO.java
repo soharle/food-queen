@@ -166,7 +166,7 @@ public class ProdutoDAO {
     public void save(Produto produto) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-
+        
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();

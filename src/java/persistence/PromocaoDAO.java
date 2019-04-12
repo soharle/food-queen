@@ -118,17 +118,17 @@ public class PromocaoDAO {
         ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
         Connection conn = null;
         Statement st = null;
-
+        String query = "SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
+                + "INNER JOIN loja ON promocao.loja_id = loja.id "
+                + "INNER JOIN conta ON loja.conta_id = conta.id "
+                + "INNER JOIN contato ON loja.contato_id = contato.id "
+                + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
+                + "WHERE promocao.loja_id = " + lojaId + ";";
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
-                    + "INNER JOIN loja ON promocao.loja_id = loja.id "
-                    + "INNER JOIN conta ON loja.conta_id = conta.id "
-                    + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
-                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id ;"
-                    + "WHERE promocao.loja_id = " + lojaId + ";");
+            ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
                         rs.getString("conta.senha"), rs.getString("conta.tipo"));
@@ -195,10 +195,11 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO promocao (nome, desconto, tipo) "
+            st.execute("INSERT INTO promocao (nome, desconto, tipo, loja_id) "
                     + "VALUES ('" + promocao.getNome() + "', "
                     + "'" + promocao.getDesconto() + "', "
-                    + "'" + promocao.getTipo() + "');");
+                    + "'" + promocao.getTipo() + "', "
+                    + "'" + promocao.getLoja().getId() + "');");
 
         } catch (SQLException e) {
             throw e;

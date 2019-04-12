@@ -19,7 +19,12 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="container" action="FrontController?action=EditarDadosLoja" method="post">
+                    <c:if test="${acao == 'criar'}"> 
+                        <form class="container" action="FrontController?action=SalvarProdutosLoja" method="post"> 
+                    </c:if>
+                    <c:if test="${acao != 'criar'}"> 
+                        <form class="container" action="FrontController?action=EditarProdutosLoja" method="post"> 
+                    </c:if>
                         <div class="row">
                             <div class="col-md-6 text-center">
                                 <img src="${produto.imagem}" class="img-fluid profile-image" style="border: 1px solid #f5f5f5;"
@@ -58,11 +63,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="optCategoria">Promoção</label>
-                                    <select class="custom-select" name="optCategoria" id="optCategoria">
-                                        <option value="0"> </option>
+                                    <label for="optPromocao">Promoção</label>
+                                    <select class="custom-select" name="optPromocao" id="optPromocao">
+                                        <option value="0">Nenhuma</option>
                                     <c:forEach items="${promocoes}" var="promocao">
-                                        <option <c:if test="${produto.promocao.id == promocao.id}"> selected </c:if> value="${categoria.id}"> ${categoria.nome}</option>
+                                        <option <c:if test="${produto.promocao.id == promocao.id}"> selected </c:if> value="${promocao.id}"> ${promocao.nome} - 
+                                            <c:if test="${promocao.tipo == 'valorBruto'}">R$ </c:if>${promocao.desconto}<c:if test="${promocao.tipo == 'percentual'}">%</c:if></option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -80,7 +86,7 @@
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                <button type="submit" class="btn btn-md btn-danger">Cancelar</button>
+                                <a href="FrontController?action=PrepararProdutosLoja" class="btn btn-md btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>

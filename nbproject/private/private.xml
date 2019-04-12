@@ -3,12 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/PromocaoDAO.java</file>
-            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/shared/head.jsp</file>
-            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/shared/navbar.jsp</file>
-            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/PrepararPromocoesLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/promocoes.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/manterProduto.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/ProdutoDAO.java</file>
             <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/controller/ActionFactory.java</file>
-            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/StateFactory.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/PromocaoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/controller/FrontController.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/SalvarProdutosLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/Promocao.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/Produto.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/DeletarPromocaoLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/PrepararPromocoesLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/SalvarPromocaoLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/produtos.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/CadastrarProdutoLojaAction.java</file>
         </group>
     </open-files>
 </project-private>

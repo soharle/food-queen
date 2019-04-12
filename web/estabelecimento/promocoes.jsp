@@ -28,24 +28,27 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="txtNome" id="txtNome" class="form-control"/></td>
-                        <td><input type="text" name="txtDesconto" id="txtDesconto" class="form-control"/></td>
-                        <td><select class="custom-select" name="optTipo" id="optTipo">
-                                <option value="valorBruto">Valor bruto</option>
-                                <option value="percentual">Percentual</option>
-                            </select>
-                        </td>
-                        <td><a href="FrontController?action=CadastrarPromocaoLoja" class="btn btn-sm btn-outline-Success">Cadastrar</a></td>
-                    </tr>
+                <form action="FrontController?action=SalvarPromocaoLoja" method="post">
+                    <td><input type="text" name="txtNome" id="txtNome" class="form-control"/></td>
+                    <td><input type="text" name="txtDesconto" id="txtDesconto" class="form-control"/></td>
+                    <td><select class="custom-select" name="optTipo" id="optTipo">
+                            <option value="valorBruto">Valor bruto</option>
+                            <option value="percentual">Percentual</option>
+                        </select>
+                    </td>
+                    <td><button type="submit" class="btn btn-sm btn-outline-Success">Cadastrar</button></td>
+                </form>
+                </tr>
+                <c:forEach items="${promocoes}" var="promocao">
                     <tr>
-                        <c:forEach items="${promocoes}" var="promocao">
-                            <td>${promocao.nome}</td>
-                            <td>${promocao.desconto}</td>
-                            <td>${promocao.tipo}</td>
-                            <td><a href="FrontController?action=LerPromocaoLoja&id=${promocao.id}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                <a href="FrontController?action=DeletarPromocaoLoja&id=${promocao.id}" class="btn btn-sm btn-outline-danger">Deletar</a></td>
-                            </c:forEach>
+                        <td>${promocao.nome}</td>
+                        <td>${promocao.desconto}</td>
+                        <td>${promocao.tipo}</td>
+                        <td>
+                            <a href="FrontController?action=DeletarPromocaoLoja&id=${promocao.id}" class="btn btn-sm btn-outline-danger">Deletar</a>
+                        </td>
                     </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
