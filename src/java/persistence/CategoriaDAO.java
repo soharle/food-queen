@@ -26,8 +26,7 @@ public class CategoriaDAO {
 
     private CategoriaDAO() {
     }
-    
-    
+
     public Categoria get(long id) throws ClassNotFoundException, SQLException {
         Categoria categoria = null;
         Connection conn = null;
@@ -38,7 +37,7 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
             rs.first();
-            categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
+            categoria = categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -59,7 +58,8 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM categoria;");
             while (rs.next()) {
-                Categoria categoria = new Categoria(rs.getInt("id"), rs.getString("nome"));
+                Categoria categoria = new Categoria();
+                categoria = categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
                 categorias.add(categoria);
             }
         } catch (SQLException e) {
@@ -116,14 +116,14 @@ public class CategoriaDAO {
                 key = st.getGeneratedKeys().getLong(1);
             }
             categoria.setId(key);
-            
+
         } catch (SQLException e) {
             throw e;
         } finally {
             closeResources(conn, st);
             return categoria;
         }
-        
+
     }
 
     private void closeResources(Connection conn, Statement st) {

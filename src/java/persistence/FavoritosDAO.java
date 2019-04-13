@@ -12,13 +12,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Carrinho;
 import model.Categoria;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
 import model.Endereco;
+import model.Entrega;
 import model.Favoritos;
 import model.Loja;
+import model.StateFactory;
 
 /**
  *
@@ -34,8 +37,6 @@ public class FavoritosDAO {
 
     private FavoritosDAO() {
     }
-    
-    
 
     public Favoritos get(long id) {
         Favoritos favorito = null;
@@ -46,39 +47,49 @@ public class FavoritosDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT favoritos.*, "
-                    + "loja.*, conta.*, contato.*, endereco_loja.*, categoria.*, "
+                    + "loja.*, conta.*, contato.*, endereco.*, categoria.*, "
                     + "consumidor.*, conta.*, contato.* "
                     + "FROM favoritos "
                     + "INNER JOIN loja ON favoritos.loja_id = loja.id "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
                     + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
                     + "INNER JOIN consumidor ON favoritos.consumidor_id = consumidor.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
                     + "WHERE favoritos.id =" + id + ";");
             rs.first();
-            Conta contaLoja = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Contato contatoLoja = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
-                    rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
-                    rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
-                    rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
-            Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-            Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), 
-                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
-                    enderecoLoja, contaLoja, contatoLoja, categoria);
-            Contato contatoConsumidor = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta contaConsumidor = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"),
-                    contatoConsumidor, contaConsumidor);
-            favorito = new Favoritos(rs.getLong("favoritos.id"), consumidor, loja);
+
+            Contato contatoLoja = new Contato();
+            contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta contaLoja = new Conta();
+            contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Endereco enderecoLoja = new Endereco();
+            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+            Categoria categoria = new Categoria();
+            categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            Loja loja = new Loja();
+            loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
+                    .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
+
+            Contato contatoConsumidor = new Contato();
+            contatoConsumidor = contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
+                    .setEmail((rs.getString("consumidor.contato.email"))).setTelefoneComplementar(rs.getString("consumidor.contato.telefone_complementar"));
+            Conta contaConsumidor = new Conta();
+            contaConsumidor = contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
+                    .setSenha(rs.getString("consumidor.conta.senha")).setTipo(rs.getString("consumidor.conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contatoLoja).setConta(contaLoja);
+            favorito = new Favoritos();
+            favorito = favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(FavoritosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,39 +105,47 @@ public class FavoritosDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT favoritos.*, "
-                    + "loja.*, conta.*, contato.*, endereco_loja.*, categoria.*, "
+                    + "loja.*, conta.*, contato.*, endereco.*, categoria.*, "
                     + "consumidor.*, conta.*, contato.* "
                     + "FROM favoritos "
                     + "INNER JOIN loja ON favoritos.loja_id = loja.id "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
                     + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
                     + "INNER JOIN consumidor ON favoritos.consumidor_id = consumidor.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id ;");
-            
+
             while (rs.next()) {
-                Conta contaLoja = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
-                Contato contatoLoja = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
-                        rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
-                        rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
-                        rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
-                Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"), 
-                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
-                        enderecoLoja, contaLoja, contatoLoja, categoria);
-                Contato contatoConsumidor = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                Conta contaConsumidor = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
-                Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                        rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"),
-                        contatoConsumidor, contaConsumidor);
-                Favoritos favorito = new Favoritos(rs.getLong("favoritos.id"), consumidor, loja);
+                Contato contatoLoja = new Contato();
+                contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta contaLoja = new Conta();
+                contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Endereco enderecoLoja = new Endereco();
+                enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                        .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                        .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+                Categoria categoria = new Categoria();
+                categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+                Loja loja = new Loja();
+                loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
+                        .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
+
+                Contato contatoConsumidor = new Contato();
+                contatoConsumidor = contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
+                        .setEmail((rs.getString("consumidor.contato.email"))).setTelefoneComplementar(rs.getString("consumidor.contato.telefone_complementar"));
+                Conta contaConsumidor = new Conta();
+                contaConsumidor = contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
+                        .setSenha(rs.getString("consumidor.conta.senha")).setTipo(rs.getString("consumidor.conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contatoLoja).setConta(contaLoja);
+                Favoritos favorito = new Favoritos();
+                favorito = favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
                 favoritos.add(favorito);
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -134,7 +153,7 @@ public class FavoritosDAO {
         }
         return favoritos;
     }
-    
+
     public void update(Favoritos favoritos) {
         Connection conn = null;
         Statement st = null;
@@ -155,7 +174,7 @@ public class FavoritosDAO {
             closeResources(conn, st);
         }
     }
-    
+
     public void delete(long id) {
         Connection conn = null;
         Statement st = null;
@@ -191,7 +210,7 @@ public class FavoritosDAO {
         }
 
     }
-    
+
     private void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {

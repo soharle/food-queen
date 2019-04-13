@@ -19,9 +19,6 @@ public class Cartao {
 
     Consumidor consumidor;
 
-    public Cartao() {
-    }
-
     public long getId() {
         return id;
     }

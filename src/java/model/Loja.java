@@ -17,13 +17,10 @@ public class Loja {
     private String descricao;
     private String imagem;
 
-    private Endereco enderecoLoja;
+    private Endereco endereco;
     private Conta conta;
     private Contato contato;
     private Categoria categoria;
-
-    public Loja() {
-    }
 
     public long getId() {
         return id;
@@ -71,12 +68,12 @@ public class Loja {
         return this;
     }
 
-    public Endereco getEnderecoLoja() {
-        return enderecoLoja;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public Loja setEnderecoLoja(Endereco enderecoLoja) {
-        this.enderecoLoja = enderecoLoja;
+    public Loja setEndereco(Endereco endereco) {
+        this.endereco = endereco;
         return this;
 
     }
@@ -108,7 +105,6 @@ public class Loja {
     public Loja setCategoria(Categoria categoria) {
         this.categoria = categoria;
         return this;
-
     }
 
 }

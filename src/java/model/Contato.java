@@ -17,9 +17,7 @@ public class Contato {
     private String email;
     private String telefoneComplementar;
 
-    public Contato() {
-    }
-
+  
     public long getId() {
         return id;
     }

@@ -20,9 +20,6 @@ public class Carrinho {
 
     Consumidor consumidor;
 
-    public Carrinho() {
-    }
-
     public long getId() {
         return id;
     }
@@ -84,6 +81,11 @@ public class Carrinho {
 
     public Consumidor getConsumidor() {
         return consumidor;
+    }
+
+    public Carrinho setConsumidor(Consumidor consumidor) {
+        this.consumidor = consumidor;
+        return this;
     }
 
     public Carrinho setCarrinho(Consumidor consumidor) {

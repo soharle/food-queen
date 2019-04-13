@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Loja;
 import model.Produto;
-import model.Promocao;
 
 /**
  *
@@ -39,17 +38,15 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT produto.*, promocao.* "
-                    + "FROM produto "
-                    + "LEFT JOIN promocao ON produto.promocao_id = promocao.id "
+            ResultSet rs = st.executeQuery("SELECT * from produto "
                     + "WHERE produto.id = " + id + ";");
             rs.first();
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-            Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                    rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
-            produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
-                    rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                    rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
+            produto = new Produto();
+            produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                    .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                    .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
+                    .setValorPromocional(rs.getString("produto.valor_promocional"));
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {
@@ -67,16 +64,13 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT produto.*, promocao.* "
-                    + "FROM produto "
-                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id;");
+            ResultSet rs = st.executeQuery("SELECT * from produto;");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
-                Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
-                        rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
+                Produto produto = new Produto();
+                produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);
             }
 
@@ -103,10 +97,11 @@ public class ProdutoDAO {
                     + "WHERE loja.id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                
-                Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
-                        rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja);
+
+                Produto produto = new Produto();
+                produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);
             }
 
@@ -127,7 +122,7 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("UPDATE produto SET loja_id = " + produto.getLoja().getId() + ", "
-                    + "promocao_id = " + produto.getPromocao().getId() + ", "
+                    + "valor_promocional = " + produto.getValorPromocional() + ", "
                     + "nome = '" + produto.getNome() + "', "
                     + "preco = '" + produto.getPreco() + "', "
                     + "disponivel = '" + produto.getDisponivel() + "', "
@@ -164,13 +159,13 @@ public class ProdutoDAO {
     public void save(Produto produto) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
-        
+
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("INSERT INTO produto (loja_id, promocao_id, nome, preco, disponivel, descricao, imagem) "
                     + "VALUES (" + produto.getLoja().getId() + ", "
-                    + "" + produto.getPromocao().getId() + ", "
+                    + "" + produto.getValorPromocional() + ", "
                     + "'" + produto.getNome() + "', "
                     + "'" + produto.getPreco() + "', "
                     + "'" + produto.getDisponivel() + "', "

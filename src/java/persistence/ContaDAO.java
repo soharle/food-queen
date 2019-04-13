@@ -23,9 +23,9 @@ public class ContaDAO {
     public static ContaDAO getInstance() {
         return instance;
     }
-    
-    private ContaDAO(){
-        
+
+    private ContaDAO() {
+
     }
 
     public Conta get(long id) throws ClassNotFoundException, SQLException {
@@ -38,7 +38,9 @@ public class ContaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE id = " + id + "");
             rs.first();
-            conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
+            conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -59,7 +61,10 @@ public class ContaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE login = '" + login + "'");
             rs.first();
-            conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
+
+            conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -80,7 +85,9 @@ public class ContaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM conta;");
             while (rs.next()) {
-                Conta conta = new Conta(rs.getInt("id"), rs.getString("login"), rs.getString("senha"), rs.getString("tipo"));
+                Conta conta = new Conta();
+                conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
                 contas.add(conta);
             }
         } catch (SQLException e) {
@@ -144,7 +151,7 @@ public class ContaDAO {
                 key = rs.getLong(1);
             }
             conta.setId(key);
-            
+
         } catch (SQLException e) {
             throw e;
         } finally {

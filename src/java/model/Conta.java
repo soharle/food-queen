@@ -16,19 +16,6 @@ public class Conta {
     private String senha;
     private String tipo;
 
-    public Conta(long id, String login, String senha, String tipo) {
-        this.id = id;
-        this.login = login;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
-
-    public Conta(String login, String senha, String tipo) {
-        this.login = login;
-        this.senha = senha;
-        this.tipo = tipo;
-    }
-
     public long getId() {
         return id;
     }

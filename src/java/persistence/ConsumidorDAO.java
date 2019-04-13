@@ -32,8 +32,6 @@ public class ConsumidorDAO {
 
     private ConsumidorDAO() {
     }
-    
-    
 
     public Consumidor get(long id) {
         Consumidor consumidor = null;
@@ -49,12 +47,16 @@ public class ConsumidorDAO {
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
                     + "WHERE consumidor.id = " + id + ";");
             rs.first();
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
+
+            Contato contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,19 +78,22 @@ public class ConsumidorDAO {
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
                     + "WHERE consumidor.conta_id = " + id + ";");
             rs.first();
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"), 
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"), 
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"), 
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
+            Contato contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return consumidor;
     }
-    
+
     public ArrayList<Consumidor> getAll() {
         ArrayList<Consumidor> consumidores = new ArrayList<Consumidor>();
         Connection conn = null;
@@ -103,12 +108,15 @@ public class ConsumidorDAO {
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id ");
 
             while (rs.next()) {
-                Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
-                Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                        rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
+                Contato contato = new Contato();
+                contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta();
+                conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
                 consumidores.add(consumidor);
             }
 

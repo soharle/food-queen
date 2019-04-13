@@ -24,9 +24,6 @@ public class Produto {
     private String imagem;
     private String valorPromocional;
     private Loja loja;
-
-    public Produto() {
-    }
     
     public long getId() {
         return id;

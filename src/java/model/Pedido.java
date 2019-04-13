@@ -17,9 +17,7 @@ public class Pedido {
     private Produto produto;
     private Carrinho carrinho;
 
-    public Pedido() {
-    }
-
+ 
     public long getId() {
         return id;
     }

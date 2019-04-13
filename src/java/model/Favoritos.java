@@ -16,9 +16,6 @@ public class Favoritos {
     private Consumidor consumidor;
     private Loja loja;
 
-    public Favoritos() {
-    }
-
     public long getId() {
         return id;
     }

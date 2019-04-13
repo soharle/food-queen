@@ -16,9 +16,6 @@ public class Entrega {
     private Loja loja;
     private Carrinho carrinho;
 
-    public Entrega() {
-    }
-
     public long getId() {
         return id;
     }

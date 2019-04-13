@@ -26,7 +26,6 @@ public class ContatoDAO {
 
     private ContatoDAO() {
     }
-    
 
     public Contato get(long id) throws ClassNotFoundException, SQLException {
         Contato contato = null;
@@ -38,7 +37,9 @@ public class ContatoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM contato WHERE id = " + id + "");
             rs.first();
-            contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefone_complementar"));
+            contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -59,7 +60,9 @@ public class ContatoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM contato;");
             while (rs.next()) {
-                Contato contato = new Contato(rs.getInt("id"), rs.getString("telefone"), rs.getString("ddd"), rs.getString("email"), rs.getString("telefone_complementar"));
+                Contato contato = new Contato();
+                contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
                 contatos.add(contato);
             }
         } catch (SQLException e) {

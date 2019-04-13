@@ -26,8 +26,6 @@ public class EnderecoDAO {
 
     private EnderecoDAO() {
     }
-    
-    
 
     public Endereco get(long id) throws ClassNotFoundException, SQLException {
         Endereco endereco = null;
@@ -37,10 +35,12 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja WHERE id =" + id + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM endereco WHERE id =" + id + "");
             rs.first();
-            endereco = new Endereco(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
-                    rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
+            endereco = new Endereco();
+            endereco = endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -59,10 +59,12 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja;");
+            ResultSet rs = st.executeQuery("SELECT * FROM endereco;");
             while (rs.next()) {
-                Endereco endereco = new Endereco(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
-                        rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
+                Endereco endereco = new Endereco();
+                endereco = endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                        .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                        .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
                 enderecos.add(endereco);
             }
         } catch (SQLException e) {
@@ -83,7 +85,7 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("UPDATE  endereco_loja SET logradouro = '" + endereco.getLogradouro() + "', "
+            st.execute("UPDATE  endereco SET logradouro = '" + endereco.getLogradouro() + "', "
                     + "cep = '" + endereco.getCep() + "', "
                     + "numero = '" + endereco.getNumero() + "', "
                     + "complemento = '" + endereco.getComplemento() + "', "
@@ -107,7 +109,7 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.executeUpdate("DELETE FROM endereco_loja WHERE id = " + id + "");
+            st.executeUpdate("DELETE FROM endereco WHERE id = " + id + "");
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -123,7 +125,7 @@ public class EnderecoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO endereco_loja (cep, logradouro, numero, complemento, bairro, cidade, estado, pais)"
+            st.execute("INSERT INTO endereco (cep, logradouro, numero, complemento, bairro, cidade, estado, pais)"
                     + "VALUES ('" + endereco.getCep() + "', "
                     + "'" + endereco.getLogradouro() + "', "
                     + "'" + endereco.getNumero() + "', "

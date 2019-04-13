@@ -20,8 +20,6 @@ public class Consumidor {
     private Conta conta;
     private Endereco endereco;
 
-    public Consumidor() {
-    }
 
     public long getId() {
         return id;

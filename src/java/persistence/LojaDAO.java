@@ -32,8 +32,6 @@ public class LojaDAO {
 
     private LojaDAO() {
     }
-    
-    
 
     public Loja get(long id) throws SQLException, ClassNotFoundException {
         Loja loja = null;
@@ -44,32 +42,37 @@ public class LojaDAO {
 
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT loja.*, conta.*, contato.*, endereco_loja.*, categoria.* "
+            ResultSet rs = st.executeQuery("SELECT loja.*, conta.*, contato.*, endereco.*, categoria.* "
                     + "FROM loja "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
                     + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
                     + "WHERE loja.id =" + id + "");
             rs.first();
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
-                    rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
-                    rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
-                    rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
-            Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-            loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
-                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
-                    enderecoLoja, conta, contato, categoria);
+            Contato contatoLoja = new Contato();
+            contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta contaLoja = new Conta();
+            contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Endereco enderecoLoja = new Endereco();
+            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+            Categoria categoria = new Categoria();
+            categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            loja = new Loja();
+            loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
+                    .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
+
         } finally {
             closeResources(conn, st);
         }
         return loja;
     }
-    
+
     public Loja getByConta(long contaId) throws SQLException, ClassNotFoundException {
         Loja loja = null;
         Connection conn = null;
@@ -79,27 +82,31 @@ public class LojaDAO {
 
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            String query = "SELECT loja.*, conta.*, contato.*, endereco_loja.*, categoria.* "
+            String query = "SELECT loja.*, conta.*, contato.*, endereco.*, categoria.* "
                     + "FROM loja "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
                     + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
                     + "WHERE loja.conta_id =" + contaId + "";
             ResultSet rs = st.executeQuery(query);
             rs.first();
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
-                    rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
-                    rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
-                    rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
-            Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-            loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
-                    rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
-                    enderecoLoja, conta, contato, categoria);
+            Contato contatoLoja = new Contato();
+            contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta contaLoja = new Conta();
+            contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Endereco enderecoLoja = new Endereco();
+            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+            Categoria categoria = new Categoria();
+            categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            loja = new Loja();
+            loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
+                    .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
         } finally {
             closeResources(conn, st);
         }
@@ -115,25 +122,29 @@ public class LojaDAO {
 
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT loja.*, conta.*, contato.*, endereco_loja.*, categoria.* "
+            ResultSet rs = st.executeQuery("SELECT loja.*, conta.*, contato.*, endereco.*, categoria.* "
                     + "FROM loja "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "
+                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
                     + "INNER JOIN categoria ON loja.categoria_id = categoria.id;");
             while (rs.next()) {
-                Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                        rs.getString("conta.senha"), rs.getString("conta.tipo"));
-                Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                        rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
-                        rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
-                        rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
-                        rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
-                Categoria categoria = new Categoria(rs.getInt("categoria.id"), rs.getString("categoria.nome"));
-                Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
-                        rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
-                        enderecoLoja, conta, contato, categoria);
+                Contato contatoLoja = new Contato();
+                contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta contaLoja = new Conta();
+                contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Endereco enderecoLoja = new Endereco();
+                enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                        .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
+                        .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+                Categoria categoria = new Categoria();
+                categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+                Loja loja = new Loja();
+                loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
+                        .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
                 lojas.add(loja);
             }
         } catch (SQLException e) {
@@ -153,7 +164,7 @@ public class LojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            String query = "UPDATE loja SET endereco_loja_id = " + loja.getEnderecoLoja().getId() + ", "
+            String query = "UPDATE loja SET endereco_id = " + loja.getEndereco().getId() + ", "
                     + "conta_id = " + loja.getConta().getId() + ", "
                     + "nome = '" + loja.getNome() + "', "
                     + "cnpj = '" + loja.getCnpj() + "', "
@@ -197,8 +208,8 @@ public class LojaDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO loja (endereco_loja_id, conta_id, nome, cnpj, descricao, imagem, contato_id, categoria_id) "
-                    + "VALUES (" + loja.getEnderecoLoja().getId() + ", "
+            st.execute("INSERT INTO loja (endereco_id, conta_id, nome, cnpj, descricao, imagem, contato_id, categoria_id) "
+                    + "VALUES (" + loja.getEndereco().getId() + ", "
                     + "" + loja.getConta().getId() + ", "
                     + "'" + loja.getNome() + "', "
                     + "'" + loja.getCnpj() + "', "
@@ -206,7 +217,7 @@ public class LojaDAO {
                     + "'" + loja.getImagem() + "', "
                     + "" + loja.getContato().getId() + ", "
                     + "" + loja.getCategoria().getId() + ""
-                    + ");",Statement.RETURN_GENERATED_KEYS);
+                    + ");", Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = st.getGeneratedKeys();
             if (rs != null && rs.next()) {
                 key = rs.getLong(1);

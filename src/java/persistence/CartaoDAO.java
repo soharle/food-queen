@@ -48,14 +48,18 @@ public class CartaoDAO {
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
                     + "WHERE cartao.id = " + id + ";");
             rs.first();
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
-            cartao = new Cartao(rs.getLong("cartao.id"), rs.getString("cartao.numero"), rs.getString("cartao.cod"),
-                    rs.getString("cartao.titular"), rs.getString("cartao.validade"), consumidor);
+            Contato contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            cartao = new Cartao();
+            cartao = cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
+                    .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,14 +81,18 @@ public class CartaoDAO {
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id ;");
             rs.first();
-            Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
-                    rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta(rs.getLong("conta.id"), rs.getString("conta.login"),
-                    rs.getString("conta.senha"), rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor(rs.getLong("consumidor.id"), rs.getString("consumidor.nome"),
-                    rs.getString("consumidor.cpf"), rs.getString("consumidor.nascimento"), contato, conta);
-            Cartao cartao = new Cartao(rs.getLong("cartao.id"), rs.getString("cartao.numero"), rs.getString("cartao.cod"),
-                    rs.getString("cartao.titular"), rs.getString("cartao.validade"), consumidor);
+            Contato contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            Cartao cartao = new Cartao();
+            cartao = cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
+                    .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
             cartoes.add(cartao);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
