@@ -7,31 +7,29 @@ package action.loja;
 
 import controller.Action;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Produto;
 import model.Promocao;
-import persistence.PromocaoDAO;
+import persistence.ProdutoDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class CadastrarProdutoLojaAction implements Action {
+public class LerProdutoLojaAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
-        ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
-        request.setAttribute("acao", "criar");
+        long id = Long.parseLong(request.getParameter("id"));
+        Produto produto = ProdutoDAO.getInstance().get(id);
+        request.setAttribute("produto", produto);
+        request.setAttribute("acao", "editar");
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
         view.forward(request, response);
-
     }
-
+    
 }

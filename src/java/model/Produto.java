@@ -10,13 +10,14 @@ package model;
  * @author mathe
  */
 public class Produto {
+
     private long id;
     private String nome;
     private String preco;
     private String disponivel;
     private String descricao;
     private String imagem;
-    
+
     private Loja loja;
     private Promocao promocao;
 
@@ -39,72 +40,84 @@ public class Produto {
         this.loja = loja;
         this.promocao = promocao;
     }
-    
-    
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Produto setId(long id) {
         this.id = id;
+        return this;
+
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Produto setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public Produto setPreco(String preco) {
         this.preco = preco;
+        return this;
+
     }
 
     public String getDisponivel() {
         return disponivel;
     }
 
-    public void setDisponivel(String disponivel) {
+    public Produto setDisponivel(String disponivel) {
         this.disponivel = disponivel;
+        return this;
+
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public Produto setDescricao(String descricao) {
         this.descricao = descricao;
+        return this;
+
     }
 
     public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(String imagem) {
+    public Produto setImagem(String imagem) {
         this.imagem = imagem;
+        return this;
+
     }
-    
+
     public Loja getLoja() {
         return loja;
     }
 
-    public void setLoja(Loja loja) {
+    public Produto setLoja(Loja loja) {
         this.loja = loja;
+        return this;
+
     }
 
     public Promocao getPromocao() {
         return promocao;
     }
 
-    public void setPromocao(Promocao promocao) {
+    public Produto setPromocao(Promocao promocao) {
         this.promocao = promocao;
+        return this;
+
     }
-    
-    
+
 }

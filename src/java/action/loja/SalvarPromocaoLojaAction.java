@@ -35,7 +35,7 @@ public class SalvarPromocaoLojaAction implements Action {
 
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
-            Promocao promo = new Promocao(nome, desconto, tipo, loja);
+            Promocao promo = new Promocao(nome, desconto, tipo);
             PromocaoDAO.getInstance().save(promo);
             RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararPromocoesLoja");
             view.forward(request, response);

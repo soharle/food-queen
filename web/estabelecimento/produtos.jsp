@@ -35,15 +35,16 @@
                                 <th scope="col">Ação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <c:forEach items="${produtos}" var="produto">
-                                    <td>${promocao.produto}</td>
-                                    <td>${promocao.preco}</td>
-                                    <td><a href="FrontController?action=LerProdutoLoja&id=${promocao.id}" class="btn btn-sm btn-outline-secondary">Editar</a>
-                                        <a href="FrontController?action=DeletarProdutoLoja&id=${promocao.id}" class="btn btn-sm btn-outline-danger">Deletar</a></td>
-                                    </c:forEach>
-                            </tr>
+                        <tbody><c:forEach items="${produtos}" var="produto">
+                                <tr>
+
+                                    <td>${produto.nome}</td>
+                                    <td>${produto.preco}</td>
+                                    <td><a href="FrontController?action=LerProdutoLoja&id=${produto.id}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                                        <a href="FrontController?action=DeletarProdutoLoja&id=${produto.id}" class="btn btn-sm btn-outline-danger">Deletar</a></td>
+                                </tr>
+                            </c:forEach>
+
                         </tbody>
                     </table>
                 </div>

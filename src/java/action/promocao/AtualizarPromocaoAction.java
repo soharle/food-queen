@@ -30,7 +30,7 @@ public class AtualizarPromocaoAction implements Action {
         
         
         try {
-            Promocao promocao = new Promocao(id, nome, desconto, tipo, null);
+            Promocao promocao = new Promocao(id, nome, desconto, tipo);
             PromocaoDAO.getInstance().update(promocao);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {

@@ -46,7 +46,7 @@ public class ProdutoDAO {
             rs.first();
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
             Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                    rs.getString("promocao.desconto"), rs.getString("promocao.tipo"), loja);
+                    rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
             produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                     rs.getString("produto.preco"), rs.getString("produto.disponivel"),
                     rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
@@ -73,7 +73,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"), loja);
+                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
                         rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
@@ -105,7 +105,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"), loja);
+                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
                         rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);

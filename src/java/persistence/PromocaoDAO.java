@@ -63,7 +63,7 @@ public class PromocaoDAO {
             Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
                     rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                     enderecoLoja, conta, contato, categoria);
-            promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
+            promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -101,7 +101,7 @@ public class PromocaoDAO {
                 Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
                         rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                         enderecoLoja, conta, contato, categoria);
-                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
+                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
                 promocoes.add(promocao);
             }
         } catch (SQLException e) {
@@ -142,7 +142,7 @@ public class PromocaoDAO {
                 Loja loja = new Loja(rs.getLong("loja.id"), rs.getString("loja.nome"),
                         rs.getString("loja.cnpj"), rs.getString("loja.descricao"), rs.getString("loja.imagem"),
                         enderecoLoja, conta, contato, categoria);
-                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"), loja);
+                Promocao promocao = new Promocao(rs.getInt("id"), rs.getString("nome"), rs.getString("desconto"), rs.getString("tipo"));
                 promocoes.add(promocao);
             }
         } catch (SQLException e) {
@@ -195,11 +195,10 @@ public class PromocaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO promocao (nome, desconto, tipo, loja_id) "
+            st.execute("INSERT INTO promocao (nome, desconto, tipo) "
                     + "VALUES ('" + promocao.getNome() + "', "
                     + "'" + promocao.getDesconto() + "', "
-                    + "'" + promocao.getTipo() + "', "
-                    + "'" + promocao.getLoja().getId() + "');");
+                    + "'" + promocao.getTipo() + "');");
 
         } catch (SQLException e) {
             throw e;

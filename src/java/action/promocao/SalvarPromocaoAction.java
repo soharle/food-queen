@@ -28,7 +28,7 @@ public class SalvarPromocaoAction implements Action {
         String tipo = request.getParameter("optTipo");
         
         try {
-            Promocao promocao = new Promocao(nome, desconto, tipo, null);
+            Promocao promocao = new Promocao(nome, desconto, tipo);
             PromocaoDAO.getInstance().save(promocao);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {

@@ -15,22 +15,18 @@ public class Promocao {
     private String nome;
     private String desconto;
     private String tipo;
-    private Loja loja;
 
-    public Promocao(long id, String nome, String desconto, String tipo, Loja loja) {
+    public Promocao(long id, String nome, String desconto, String tipo) {
         this.id = id;
         this.nome = nome;
         this.desconto = desconto;
         this.tipo = tipo;
-        this.loja = loja;
     }
 
-    public Promocao(String nome, String desconto, String tipo, Loja loja) {
+    public Promocao(String nome, String desconto, String tipo) {
         this.nome = nome;
         this.desconto = desconto;
         this.tipo = tipo;
-        this.loja = loja;
-
     }
 
     public Promocao() {
@@ -45,40 +41,35 @@ public class Promocao {
         return id;
     }
 
-    public void setId(long id) {
+    public Promocao setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Promocao setNome(String nome) {
         this.nome = nome;
+        return this;
     }
 
     public String getDesconto() {
         return desconto;
     }
 
-    public void setDesconto(String desconto) {
+    public Promocao setDesconto(String desconto) {
         this.desconto = desconto;
+        return this;
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public Promocao setTipo(String tipo) {
         this.tipo = tipo;
+        return this;
     }
-
-    public Loja getLoja() {
-        return loja;
-    }
-
-    public void setLoja(Loja loja) {
-        this.loja = loja;
-    }
-
 }
