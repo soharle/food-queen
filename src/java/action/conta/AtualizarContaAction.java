@@ -30,7 +30,8 @@ public class AtualizarContaAction implements Action {
         
         
         try {
-            Conta conta = new Conta(id, login, senha, tipo);
+            Conta conta = new Conta();
+            conta = conta.setId(id).setLogin(login).setSenha(senha).setTipo(tipo);
             ContaDAO.getInstance().update(conta);
             response.sendRedirect("sucesso.jsp");
         } catch (IOException | SQLException | ClassNotFoundException ex) {

@@ -5,7 +5,6 @@
  */
 package action.consumidor;
 
-import action.categoria.SalvarCategoriaAction;
 import action.loja.SalvarLojaAction;
 import controller.Action;
 import java.io.IOException;
@@ -20,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
-import model.EnderecoConsumidor;
 import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
@@ -29,7 +27,7 @@ import persistence.ContatoDAO;
  *
  * @author Gabriel
  */
-public class SalvarConsumidorAction implements Action{
+public class SalvarConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -46,13 +44,17 @@ public class SalvarConsumidorAction implements Action{
         String telefoneComplementar = request.getParameter("txtTelefone2");
 
         try {
-            Conta conta = new Conta(login, senha, "Consumidor");
+            Conta conta = new Conta();
+            conta = conta.setLogin(login).setSenha(senha).setTipo("Consumidor");
+
             conta = ContaDAO.getInstance().save(conta);
-            Contato contato = new Contato(telefone, ddd, email, telefoneComplementar);
+            Contato contato = new Contato();
+            contato.setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
             contato = ContatoDAO.getInstance().save(contato);
-            Consumidor consumidor = new Consumidor(nome, cpf, dataNascimento, contato, conta);
+            Consumidor consumidor = new Consumidor();
+            consumidor = consumidor.setNome(nome).setCpf(cpf).setNascimento(dataNascimento).setContato(contato).setConta(conta);
             ConsumidorDAO.getInstance().save(consumidor);
-            
+
             HttpSession sessao = request.getSession();
             sessao.invalidate();
 
@@ -60,10 +62,10 @@ public class SalvarConsumidorAction implements Action{
             view.forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

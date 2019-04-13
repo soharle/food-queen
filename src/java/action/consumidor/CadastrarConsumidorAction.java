@@ -5,7 +5,6 @@
  */
 package action.consumidor;
 
-import action.categoria.CadastrarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,7 +30,7 @@ public class CadastrarConsumidorAction implements Action{
 
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(CadastrarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastrarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CadastrarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }

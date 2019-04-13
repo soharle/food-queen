@@ -5,7 +5,6 @@
  */
 package action.loja;
 
-import action.categoria.LerCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -62,7 +61,7 @@ public class LerLojaAction implements Action {
             RequestDispatcher view = request.getRequestDispatcher("pages/loja/loja.jsp");
             view.forward(request, response);
         } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LerCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LerLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

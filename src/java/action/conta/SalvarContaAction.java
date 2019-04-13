@@ -30,7 +30,9 @@ public class SalvarContaAction implements Action {
         String senha = request.getParameter("txtSenha");
         String tipo = request.getParameter("optTipo");
 
-        Conta conta = new Conta(login, senha, tipo);
+        Conta conta = new Conta();
+        conta = conta.setLogin(login).setSenha(senha).setTipo(tipo);
+
         try {
             ContaDAO.getInstance().save(conta);
         } catch (SQLException | ClassNotFoundException ex) {

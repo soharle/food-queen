@@ -5,7 +5,6 @@
  */
 package action.loja;
 
-import action.categoria.SalvarCategoriaAction;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -60,14 +59,20 @@ public class SalvarLojaAction implements Action {
         String telefoneComplementar = request.getParameter("txtTelefoneComplementar");
 
         try {
-            Conta conta = new Conta(login, senha, "Loja");
+            Conta conta = new Conta();
+            conta = conta.setLogin(login).setSenha(senha).setTipo("Loja");
             conta = ContaDAO.getInstance().save(conta);
             Categoria categoria = CategoriaDAO.getInstance().get(Long.parseLong(optCategoria));
-            Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+            Endereco endereco = new Endereco();
+            endereco = endereco.setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
+                    .setBairro(bairro).setCidade(cidade).setEstado(estado).setPais(pais);
             endereco = EnderecoDAO.getInstance().save(endereco);
-            Contato contato = new Contato(telefone, ddd, email, telefoneComplementar);
+            Contato contato = new Contato();
+            contato = contato.setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
             contato = ContatoDAO.getInstance().save(contato);
-            Loja loja = new Loja(nome, cnpj, descricao, imagem, endereco, conta, contato, categoria);
+            Loja loja = new Loja();
+            loja = loja.setNome(nome).setCnpj(cnpj).setDescricao(descricao).setImagem(imagem).setEndereco(endereco).setConta(conta)
+                    .setContato(contato).setCategoria(categoria);
             LojaDAO.getInstance().save(loja);
 
             HttpSession sessao = request.getSession();
@@ -77,7 +82,7 @@ public class SalvarLojaAction implements Action {
             view.forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarCategoriaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }

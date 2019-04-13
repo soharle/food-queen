@@ -21,9 +21,9 @@ import persistence.ProdutoDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class EditarProdutoLojaAction implements Action {
+public class SalvarProdutoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -33,16 +33,14 @@ public class EditarProdutoLojaAction implements Action {
         String preco = request.getParameter("txtPreco");
         String disponivel = request.getParameter("optCategoria");
         String descricao = request.getParameter("txtDescricao");
-        String valorPromocional = request.getParameter("txtValorPromocional");
+
         try {
 
-            long id = Long.parseLong(request.getParameter("txtId"));
-            Produto produto = ProdutoDAO.getInstance().get(id);
-            produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem)
-                    .setPreco(preco).setDisponivel(disponivel).setValorPromocional(valorPromocional);
-            
-            ProdutoDAO.getInstance().update(produto);
-            produto.setLoja(LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString())));
+            Loja loja = LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString()));
+            Produto produto = new Produto();
+            produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel).setLoja(loja);
+            ProdutoDAO.getInstance().save(produto);
+
             RequestDispatcher view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
             view.forward(request, response);
@@ -52,4 +50,5 @@ public class EditarProdutoLojaAction implements Action {
             Logger.getLogger(EditarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
