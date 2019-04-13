@@ -6,7 +6,7 @@
 <html>
 
     <head>
-        <title>Index</title>
+        <title>FoodQueen - Delivery de comida</title>
         <%@ include file="./shared/head.jsp" %>
     </head>
     <body>
