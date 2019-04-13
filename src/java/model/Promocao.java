@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.sql.SQLException;
+import persistence.PromocaoDAO;
+
 /**
  *
  * @author mathe
@@ -71,5 +74,9 @@ public class Promocao {
     public Promocao setTipo(String tipo) {
         this.tipo = tipo;
         return this;
+    }
+
+    public void save() throws SQLException, ClassNotFoundException {
+        PromocaoDAO.getInstance().save(this);
     }
 }

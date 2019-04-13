@@ -29,49 +29,32 @@ public class EditarProdutoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        long id = Long.parseLong(request.getParameter("txtId"));
+
         String nome = request.getParameter("txtNome");
         String imagem = request.getParameter("txtImagem");
         String preco = request.getParameter("txtPreco");
         String disponivel = request.getParameter("optCategoria");
-
         String descricao = request.getParameter("txtDescricao");
-        String idPromo = request.getParameter("txtPromocaoId");
-        long idPromocao = 0;
-        if (!idPromo.equals("")) {
-            idPromocao = Long.parseLong(idPromo);
-        }
-        String promocaoNome = request.getParameter("txtPromocaoNome");
-        String promocaoTipo = request.getParameter("optPromocaoTipo");
-        String desconto = request.getParameter("txtPromocaoDesconto");
-
-        RequestDispatcher view = null;
-
-        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
+        String teste = request.getParameter("txtId");
         try {
-            Loja loja = LojaDAO.getInstance().get(idLoja);
-            Produto produto = ProdutoDAO.getInstance().get(id);
-            produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel);
-            Promocao promocao;
-            if (!idPromo.equals("")) {
-                promocao = PromocaoDAO.getInstance().get(idPromocao);
-                promocao.setNome(promocaoNome).setTipo(promocaoTipo).setDesconto(desconto);
+            
+            if (!request.getParameter("txtId").equals("")) {
+                long id = Long.parseLong(request.getParameter("txtId"));
+                Produto produto = ProdutoDAO.getInstance().get(id);
+                produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel);
                 ProdutoDAO.getInstance().update(produto);
-
             } else {
-                promocao = new Promocao();
-                promocao.setNome(promocaoNome).setTipo(promocaoTipo).setDesconto(desconto);
+                Loja loja = LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString()));
+                Produto produto = new Produto();
+                produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel).setLoja(loja);
                 ProdutoDAO.getInstance().save(produto);
             }
 
-            PromocaoDAO.getInstance().update(promocao);
+            RequestDispatcher view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
-            view = request.getRequestDispatcher("estabelecimento/index.jsp");
-            try {
-                view.forward(request, response);
-            } catch (ServletException | IOException ex) {
-                Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(EditarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }

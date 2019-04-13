@@ -41,7 +41,7 @@ public class ProdutoDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT produto.*, promocao.* "
                     + "FROM produto "
-                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
+                    + "LEFT JOIN promocao ON produto.promocao_id = promocao.id "
                     + "WHERE produto.id = " + id + ";");
             rs.first();
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
@@ -97,18 +97,16 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT produto.*, promocao.*, loja.* "
+            ResultSet rs = st.executeQuery("SELECT produto.*, loja.* "
                     + "FROM produto "
-                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
                     + "INNER JOIN loja ON produto.loja_id = loja.id "
                     + "WHERE loja.id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                Promocao promocao = new Promocao(rs.getLong("promocao.id"), rs.getString("promocao.nome"),
-                        rs.getString("promocao.desconto"), rs.getString("promocao.tipo"));
+                
                 Produto produto = new Produto(rs.getLong("produto.id"), rs.getString("produto.nome"),
                         rs.getString("produto.preco"), rs.getString("produto.disponivel"),
-                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja, promocao);
+                        rs.getString("produto.descricao"), rs.getString("produto.imagem"), loja);
                 produtos.add(produto);
             }
 
@@ -133,7 +131,7 @@ public class ProdutoDAO {
                     + "nome = '" + produto.getNome() + "', "
                     + "preco = '" + produto.getPreco() + "', "
                     + "disponivel = '" + produto.getDisponivel() + "', "
-                    + "descricao = '" + produto.getDescricao() + "' "
+                    + "descricao = '" + produto.getDescricao() + "', "
                     + "imagem = '" + produto.getImagem() + "' "
                     + "WHERE id = " + produto.getId() + ";");
 

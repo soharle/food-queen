@@ -5,6 +5,11 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.ProdutoDAO;
+
 /**
  *
  * @author mathe
@@ -39,6 +44,20 @@ public class Produto {
         this.descricao = descricao;
         this.loja = loja;
         this.promocao = promocao;
+    }
+
+    public Produto(long id, String nome, String preco, String disponivel, String descricao, String imagem, Loja loja) {
+        this.id = id;
+        this.nome = nome;
+        this.preco = preco;
+        this.disponivel = disponivel;
+        this.descricao = descricao;
+        this.imagem = imagem;
+        this.loja = loja;
+    }
+
+    public Produto() {
+        this.promocao = new Promocao();
     }
 
     public long getId() {
@@ -118,6 +137,14 @@ public class Produto {
         this.promocao = promocao;
         return this;
 
+    }
+
+    public void save() throws SQLException, ClassNotFoundException {
+        ProdutoDAO.getInstance().save(this);
+    }
+
+    public void update() {
+         ProdutoDAO.getInstance().update(this);
     }
 
 }

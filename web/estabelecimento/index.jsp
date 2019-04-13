@@ -30,18 +30,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4 my-3">
-                    <div class="card" style="width: 18rem;">
-                        <img src="./assets/images/estabelecimento/cad-promocao.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Promoções</h5>
-                            <p class="card-text">Cadastre e edite promoções para o seu restaurante!</p>
-                            <div class="text-center">
-                                <a href="FrontController?action=PrepararPromocoesLoja" class="btn btn-dark btn-block">Avançar</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-sm-12 col-md-6 col-lg-4 my-3">
                     <div class="card" style="width: 18rem;">
                         <img src="./assets/images/estabelecimento/cad-produtos.jpg" class="card-img-top" alt="...">
@@ -54,8 +43,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-5">
                 <div class="col-sm-12 col-md-6 col-lg-4 my-3">
                     <div class="card" style="width: 18rem;">
                         <img src="./assets/images/estabelecimento/orders.jpg" class="card-img-top" alt="...">
@@ -69,6 +56,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </body>
 </html>

@@ -44,7 +44,7 @@ public class PromocaoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT promocao.*, loja.*, conta.*, contato.*, endereco_loja.*, categoria.* FROM promocao "
-                    + "INNER JOIN loja ON promocao.loja_id = loja.id "
+                    + "LEFT JOIN loja ON promocao.loja_id = loja.id "
                     + "INNER JOIN conta ON loja.conta_id = conta.id "
                     + "INNER JOIN contato ON loja.contato_id = contato.id "
                     + "INNER JOIN endereco_loja ON loja.endereco_loja_id = endereco_loja.id "

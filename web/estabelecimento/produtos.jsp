@@ -16,13 +16,14 @@
     </head>
     <body>
         <%@ include file="shared/navbar.jsp" %>
+
+
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-12">
                     <form action="FrontController?action=CadastrarProdutoLoja" method="post" class="form-group">
                         <h3 class="h4 text-left">Cadastrar novos produto <button type="submit" class="btn btn-md btn-success">Cadastrar</button></h3>                         
                     </form>
-
                 </div>
             </div>
             <div class="row">
