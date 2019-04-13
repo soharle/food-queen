@@ -6,7 +6,7 @@
 <html>
 
     <head>
-        <title>Index</title>
+        <title>FoodQueen - Delivery de comida</title>
         <%@ include file="./shared/head.jsp" %>
     </head>
     <body>
@@ -114,10 +114,8 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-    </section>
-    <!-- End Special Menu -->
-</div>
-</body>
-
+    </body>
+    <%@ include file="./shared/footer.jsp" %>
 </html>

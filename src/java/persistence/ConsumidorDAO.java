@@ -45,7 +45,7 @@ public class ConsumidorDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT consumidor.*, contato.*, conta.* "
                     + "FROM consumidor "
-                    + "INNER JOIN contato ON contato.id = consumidor.contato_id"
+                    + "INNER JOIN contato ON contato.id = consumidor.contato_id "
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
                     + "WHERE consumidor.id = " + id + ";");
             rs.first();
@@ -72,7 +72,7 @@ public class ConsumidorDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT consumidor.*, contato.*, conta.* "
                     + "FROM consumidor "
-                    + "INNER JOIN contato ON contato.id = consumidor.contato_id"
+                    + "INNER JOIN contato ON contato.id = consumidor.contato_id "
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
                     + "WHERE consumidor.conta_id = " + id + ";");
             rs.first();
@@ -165,7 +165,7 @@ public class ConsumidorDAO {
                     + "'" + consumidor.getCpf() + "', "
                     + "'" + consumidor.getNascimento() + "', "
                     + "" + consumidor.getConta().getId() + ", "
-                    + "" + consumidor.getContato().getId() + ", "
+                    + "" + consumidor.getContato().getId() + " "
                     + ");");
         } catch (SQLException e) {
             System.out.println(e);;

@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 
 <!-- Start Header Area -->
@@ -15,7 +17,7 @@
             <div class="row">
                 <div class="col-lg-2 col-sm-4 col-md-6 order-1 order-lg-1">
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="FrontController?action=PrepararHomeConsumidor">
                             <img src="./assets/images/foodqueen.png" alt="logo images" style="height: 48px;">
                             <span class="brand"> FoodQueen</span>
                         </a>
@@ -66,3 +68,43 @@
     <!-- End Mainmenu Area -->
 </header>
 <!-- End Header Area -->
+<!-- Cartbox -->
+<div class="cartbox-wrap">
+    <div class="cartbox text-right">
+        <button class="cartbox-close"><i class="zmdi zmdi-close"></i></button>
+        <div class="cartbox__inner text-left">
+            <div class="cartbox__items">
+                <c:forEach items="${sessionScope.pedidos}" var="pedido">
+                    <!-- Cartbox Single Item -->
+                    <div class="cartbox__item">
+                        <div class="cartbox__item__thumb">
+                            <a href="product-details.html">
+                                <img src="${pedido.produto.imagem}" alt="small thumbnail">
+                            </a>
+                        </div>
+                        <div class="cartbox__item__content">
+                            <h5><a href="product-details.html" class="product-name">${pedido.produto.nome}</a></h5>
+                            <p>Quantidade: <span>01</span></p>
+                            <span class="price">${pedido.produto.preco}</span>
+                        </div>
+                        <form action="FrontController?DeletarProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
+                            <button type="submit" class="cartbox__item__remove">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </div><!-- //Cartbox Single Item -->
+                </c:forEach>
+            </div>
+            <div class="cartbox__total">
+                <ul>
+                    <li class="grandtotal">Total<span class="price">${sessionScope.carrinho.valor}</span></li>
+                </ul>
+            </div>
+            <div class="cartbox__buttons">
+                <form action="FrontController?action=PreparaCarrinhoConsumidor" method="post">
+                    <button type="submit" class="food__btn">Finalizar compra</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!-- //Cartbox -->

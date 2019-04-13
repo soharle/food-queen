@@ -27,12 +27,13 @@ import persistence.ProdutoDAO;
  *
  * @author Gabriel
  */
-public class PrepararHomeAction implements Action {
+public class PrepararHomeConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
-        if (session.getAttribute("tipo") == "Consumidor") {
+        String tipo = session.getAttribute("tipo").toString();
+        if (tipo.equals("Consumidor")) {
             try {
                 ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
@@ -44,7 +45,7 @@ public class PrepararHomeAction implements Action {
                 view.forward(request, response);
 
             } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(PrepararHomeAction.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PrepararHomeConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             response.sendRedirect("");

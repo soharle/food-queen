@@ -15,12 +15,11 @@
     <body>
         <div class="row">
             <div class="col-sm-0 col-md-4 col-lg-4" style="background-image: url('./assets/images/bg-login.jpg');">
-
             </div>
             <div class="col-sm-12 col-md-8 col-lg-8">
                 <div class="container px-5 my-5">
                     <h3 class="h4 text-center">Cadastro de usuário</h3>
-                    <form>
+                    <form action="FrontController?action=SalvarConsumidor" method="post">
                         <div class="form-group">
                             <label for="txtLogin">Login</label>
                             <input type="text" class="form-control" id="txtLogin" name="txtLogin">

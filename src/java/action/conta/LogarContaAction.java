@@ -38,7 +38,7 @@ public class LogarContaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
-
+        
         Conta conta;
         RequestDispatcher view = null;
         try {
@@ -53,6 +53,7 @@ public class LogarContaAction implements Action {
                         id = loja.getId();
                     }else{
                         Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
+                        id = consumidor.getId();
                     }
                     
                     session.setAttribute("id", id);
