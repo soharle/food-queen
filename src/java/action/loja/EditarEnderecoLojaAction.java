@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Loja;
-import persistence.EnderecoLojaDAO;
+import persistence.EnderecoDAO;
 import persistence.LojaDAO;
 
 /**
@@ -47,7 +47,7 @@ public class EditarEnderecoLojaAction implements Action {
             loja.getEnderecoLoja().setCidade(cidade);
             loja.getEnderecoLoja().setEstado(estado);
 
-            EnderecoLojaDAO.getInstance().update(loja.getEnderecoLoja());
+            EnderecoDAO.getInstance().update(loja.getEnderecoLoja());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
         } catch (SQLException | ClassNotFoundException ex) {

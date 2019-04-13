@@ -19,11 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.Categoria;
 import model.Conta;
 import model.Contato;
-import model.EnderecoLoja;
+import model.Endereco;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
-import persistence.EnderecoLojaDAO;
+import persistence.EnderecoDAO;
 import persistence.LojaDAO;
 
 /**

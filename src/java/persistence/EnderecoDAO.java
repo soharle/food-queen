@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.EnderecoLoja;
+import model.Endereco;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,21 +16,21 @@ import model.EnderecoLoja;
  *
  * @author mathe
  */
-public class EnderecoLojaDAO {
+public class EnderecoDAO {
 
-    private static EnderecoLojaDAO instance = new EnderecoLojaDAO();
+    private static EnderecoDAO instance = new EnderecoDAO();
 
-    public static EnderecoLojaDAO getInstance() {
+    public static EnderecoDAO getInstance() {
         return instance;
     }
 
-    private EnderecoLojaDAO() {
+    private EnderecoDAO() {
     }
     
     
 
-    public EnderecoLoja get(long id) throws ClassNotFoundException, SQLException {
-        EnderecoLoja endereco = null;
+    public Endereco get(long id) throws ClassNotFoundException, SQLException {
+        Endereco endereco = null;
         Connection conn = null;
         Statement st = null;
 
@@ -39,7 +39,7 @@ public class EnderecoLojaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja WHERE id =" + id + "");
             rs.first();
-            endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
+            endereco = new Endereco(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
                     rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
         } catch (SQLException e) {
             throw e;
@@ -51,8 +51,8 @@ public class EnderecoLojaDAO {
 
     }
 
-    public ArrayList<EnderecoLoja> getAll() throws ClassNotFoundException, SQLException {
-        ArrayList<EnderecoLoja> enderecos = new ArrayList<EnderecoLoja>();
+    public ArrayList<Endereco> getAll() throws ClassNotFoundException, SQLException {
+        ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
         Connection conn = null;
         Statement st = null;
 
@@ -61,7 +61,7 @@ public class EnderecoLojaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM endereco_loja;");
             while (rs.next()) {
-                EnderecoLoja endereco = new EnderecoLoja(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
+                Endereco endereco = new Endereco(rs.getInt("id"), rs.getString("cep"), rs.getString("logradouro"), rs.getString("numero"), rs.getString("complemento"),
                         rs.getString("bairro"), rs.getString("cidade"), rs.getString("estado"), rs.getString("pais"));
                 enderecos.add(endereco);
             }
@@ -75,7 +75,7 @@ public class EnderecoLojaDAO {
 
     }
 
-    public void update(EnderecoLoja endereco) throws ClassNotFoundException, SQLException {
+    public void update(Endereco endereco) throws ClassNotFoundException, SQLException {
 
         Connection conn = null;
         Statement st = null;
@@ -115,7 +115,7 @@ public class EnderecoLojaDAO {
         }
     }
 
-    public EnderecoLoja save(EnderecoLoja endereco) throws SQLException, ClassNotFoundException {
+    public Endereco save(Endereco endereco) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
         long key = -1;

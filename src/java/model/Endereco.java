@@ -9,7 +9,7 @@ package model;
  *
  * @author mathe
  */
-public class EnderecoLoja {
+public class Endereco {
 
     private long id;
     private String cep;
@@ -21,7 +21,7 @@ public class EnderecoLoja {
     private String estado;
     private String pais;
 
-    public EnderecoLoja(long id, String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+    public Endereco(long id, String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
         this.id = id;
         this.cep = cep;
         this.logradouro = logradouro;
@@ -33,7 +33,7 @@ public class EnderecoLoja {
         this.pais = pais;
     }
 
-    public EnderecoLoja(String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
+    public Endereco(String cep, String logradouro, String numero, String complemento, String bairro, String cidade, String estado, String pais) {
         this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;

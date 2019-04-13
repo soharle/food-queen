@@ -18,12 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Consumidor;
-import model.EnderecoConsumidor;
-import model.Loja;
+import model.Endereco;
 import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
-import persistence.EnderecoConsumidorDAO;
-import persistence.LojaDAO;
+import persistence.EnderecoDAO;
 
 /**
  *
@@ -44,7 +42,7 @@ public class PrepararEditarConsumidorAction implements Action {
             long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
 
             Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            EnderecoConsumidor endereco = EnderecoConsumidorDAO.getInstance().get(enderecoId);
+            Endereco endereco = EnderecoDAO.getInstance().get(enderecoId);
             request.setAttribute("consumidor", consumidor);
             request.setAttribute("endereco", endereco);
             view = request.getRequestDispatcher("editarDados.jsp");

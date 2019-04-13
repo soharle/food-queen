@@ -16,12 +16,12 @@ public class Loja {
     private String descricao;
     private String imagem;
     
-    private EnderecoLoja enderecoLoja;
+    private Endereco enderecoLoja;
     private Conta conta;
     private Contato contato;
     private Categoria categoria;
 
-    public Loja(String nome, String cnpj, String descricao, String imagem, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
+    public Loja(String nome, String cnpj, String descricao, String imagem, Endereco enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.nome = nome;
         this.cnpj = cnpj;
         this.descricao = descricao;
@@ -34,7 +34,7 @@ public class Loja {
     
     
     
-    public Loja(long id, String nome, String cnpj, String descricao, String imagem, EnderecoLoja enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
+    public Loja(long id, String nome, String cnpj, String descricao, String imagem, Endereco enderecoLoja, Conta conta, Contato contato, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -86,11 +86,11 @@ public class Loja {
         this.imagem = imagem;
     }
     
-    public EnderecoLoja getEnderecoLoja() {
+    public Endereco getEnderecoLoja() {
         return enderecoLoja;
     }
 
-    public void setEnderecoLoja(EnderecoLoja enderecoLoja) {
+    public void setEnderecoLoja(Endereco enderecoLoja) {
         this.enderecoLoja = enderecoLoja;
     }
 

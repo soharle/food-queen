@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.loja;
+package action.consumidor;
 
 import controller.Action;
 import java.io.IOException;
@@ -15,12 +15,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Consumidor;
-import model.EnderecoConsumidor;
-import model.Loja;
-import persistence.ConsumidorDAO;
-import persistence.EnderecoConsumidorDAO;
-import persistence.LojaDAO;
+import model.Endereco;
+import persistence.EnderecoDAO;
 
 /**
  *
@@ -40,12 +36,12 @@ public class EditarEnderecoConsumidorAction implements Action {
 
         RequestDispatcher view = null;
         HttpSession session = request.getSession();
-
-        long id = Long.parseLong((String) session.getAttribute("id"));
-        long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
         try {
-            
-            EnderecoConsumidor endereco = EnderecoConsumidorDAO.getInstance().get(enderecoId);
+            long id = Long.parseLong((String) session.getAttribute("id"));
+            long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
+            Endereco endereco;
+
+            endereco = EnderecoDAO.getInstance().get(enderecoId);
 
             endereco.setCep(cep);
             endereco.setLogradouro(logradouro);
@@ -54,14 +50,11 @@ public class EditarEnderecoConsumidorAction implements Action {
             endereco.setBairro(bairro);
             endereco.setCidade(cidade);
             endereco.setEstado(estado);
-
-            EnderecoConsumidorDAO.getInstance().update(endereco);
+            EnderecoDAO.getInstance().update(endereco);
             view = request.getRequestDispatcher("home.jsp");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
             view.forward(request, response);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(EditarEnderecoConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

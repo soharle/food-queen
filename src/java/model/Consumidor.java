@@ -17,15 +17,11 @@ public class Consumidor {
     
     private Contato contato;
     private Conta conta;
+    private Endereco endereco;
 
-    public Consumidor(long id, String nome, String cpf, String nascimento, Contato contato, Conta conta) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.nascimento = nascimento;
-        this.contato = contato;
-        this.conta = conta;
+    public Consumidor() {
     }
+
         
     public long getId() {
         return id;

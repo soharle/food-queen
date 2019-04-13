@@ -24,12 +24,12 @@ import javax.servlet.http.Part;
 import model.Categoria;
 import model.Conta;
 import model.Contato;
-import model.EnderecoLoja;
+import model.Endereco;
 import model.Loja;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
-import persistence.EnderecoLojaDAO;
+import persistence.EnderecoDAO;
 import persistence.LojaDAO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
@@ -87,7 +87,7 @@ public class AtualizarLojaAction implements Action {
                 Conta conta = ContaDAO.getInstance().get(contaId);
                 Contato contato = ContatoDAO.getInstance().get(contatoId);
                 Categoria categoria = CategoriaDAO.getInstance().get(categoriaId);
-                EnderecoLoja enderecoLoja = EnderecoLojaDAO.getInstance().get(enderecoLojaId);
+                Endereco enderecoLoja = EnderecoDAO.getInstance().get(enderecoLojaId);
 
                 //Loja loja = new Loja(id, nome, cnpj, descricao, enderecoLoja, conta, contato, categoria);
                 //LojaDAO.getInstance().update(loja);

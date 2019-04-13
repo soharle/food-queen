@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import model.Categoria;
 import model.Conta;
 import model.Contato;
-import model.EnderecoLoja;
+import model.Endereco;
 import model.Loja;
 import model.Produto;
 import model.Promocao;
@@ -55,7 +55,7 @@ public class PromocaoDAO {
                     rs.getString("conta.senha"), rs.getString("conta.tipo"));
             Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                     rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-            EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+            Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
                     rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
                     rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                     rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
@@ -93,7 +93,7 @@ public class PromocaoDAO {
                         rs.getString("conta.senha"), rs.getString("conta.tipo"));
                 Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                         rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+                Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
                         rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
                         rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                         rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));
@@ -134,7 +134,7 @@ public class PromocaoDAO {
                         rs.getString("conta.senha"), rs.getString("conta.tipo"));
                 Contato contato = new Contato(rs.getLong("contato.id"), rs.getString("contato.telefone"),
                         rs.getString("contato.ddd"), rs.getString("contato.email"), rs.getString("contato.telefone_complementar"));
-                EnderecoLoja enderecoLoja = new EnderecoLoja(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
+                Endereco enderecoLoja = new Endereco(rs.getLong("endereco_loja.id"), rs.getString("cep"), rs.getString("endereco_loja.logradouro"),
                         rs.getString("endereco_loja.numero"), rs.getString("endereco_loja.complemento"),
                         rs.getString("endereco_loja.bairro"), rs.getString("endereco_loja.cidade"),
                         rs.getString("endereco_loja.estado"), rs.getString("endereco_loja.pais"));

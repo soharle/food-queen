@@ -19,12 +19,12 @@ import javax.servlet.http.HttpSession;
 import model.Categoria;
 import model.Conta;
 import model.Contato;
-import model.EnderecoLoja;
+import model.Endereco;
 import model.Loja;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
-import persistence.EnderecoLojaDAO;
+import persistence.EnderecoDAO;
 import persistence.LojaDAO;
 
 /**
@@ -63,8 +63,8 @@ public class SalvarLojaAction implements Action {
             Conta conta = new Conta(login, senha, "Loja");
             conta = ContaDAO.getInstance().save(conta);
             Categoria categoria = CategoriaDAO.getInstance().get(Long.parseLong(optCategoria));
-            EnderecoLoja endereco = new EnderecoLoja(cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
-            endereco = EnderecoLojaDAO.getInstance().save(endereco);
+            Endereco endereco = new Endereco(cep, logradouro, numero, complemento, bairro, cidade, estado, pais);
+            endereco = EnderecoDAO.getInstance().save(endereco);
             Contato contato = new Contato(telefone, ddd, email, telefoneComplementar);
             contato = ContatoDAO.getInstance().save(contato);
             Loja loja = new Loja(nome, cnpj, descricao, imagem, endereco, conta, contato, categoria);

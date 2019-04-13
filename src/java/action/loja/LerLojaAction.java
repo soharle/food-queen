@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.Categoria;
 import model.Conta;
 import model.Contato;
-import model.EnderecoLoja;
+import model.Endereco;
 import model.Loja;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
-import persistence.EnderecoLojaDAO;
+import persistence.EnderecoDAO;
 import persistence.LojaDAO;
 
 /**
@@ -42,13 +42,13 @@ public class LerLojaAction implements Action {
         ArrayList<Categoria> categorias;
         ArrayList<Conta> contas;
         ArrayList<Contato> contatos;
-        ArrayList<EnderecoLoja> enderecosLoja;
+        ArrayList<Endereco> enderecosLoja;
 
         try {
             categorias = CategoriaDAO.getInstance().getAll();
             contas = ContaDAO.getInstance().getAll();
             contatos = ContatoDAO.getInstance().getAll();
-            enderecosLoja = EnderecoLojaDAO.getInstance().getAll();
+            enderecosLoja = EnderecoDAO.getInstance().getAll();
             loja= LojaDAO.getInstance().get(id);
             
             request.setAttribute("categorias", categorias);
