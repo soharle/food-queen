@@ -389,37 +389,6 @@
     });
 
 
-
-
-
-
-
-/*============= Login Register Form ==============*/
-
-    function loginRegisterForm(){
-        var trigger = $('.accountbox-trigger'),
-            container = $('.accountbox-wrapper');
-            $('<div class="body-overlay"></div>').prependTo(container);
-
-        trigger.on('click', function(e){
-            e.preventDefault();
-            container.addClass('is-visible');
-        });
-
-        $('.body-overlay').on('click', function(){
-            container.removeClass('is-visible');
-        });
-
-        $('span.accountbox-close-button').on('click', function(){
-            container.removeClass('is-visible');
-        });
-
-  };
-  loginRegisterForm();
-
-
-
-
 /*============= Cartbox Toggler ==============*/
 
     function cartboxToggler(){

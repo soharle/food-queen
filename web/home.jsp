@@ -114,10 +114,8 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-    </section>
-    <!-- End Special Menu -->
-</div>
-</body>
-
+    </body>
+    <%@ include file="./shared/footer.jsp" %>
 </html>

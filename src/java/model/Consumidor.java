@@ -26,6 +26,14 @@ public class Consumidor {
         this.contato = contato;
         this.conta = conta;
     }
+
+    public Consumidor(String nome, String cpf, String nascimento, Contato contato, Conta conta) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.nascimento = nascimento;
+        this.contato = contato;
+        this.conta = conta;
+    }
         
     public long getId() {
         return id;
