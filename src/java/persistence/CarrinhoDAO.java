@@ -18,8 +18,6 @@ import model.Conta;
 import model.Contato;
 import model.Entrega;
 import model.Loja;
-import model.Produto;
-import model.Promocao;
 import model.StateFactory;
 
 /**

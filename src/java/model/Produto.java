@@ -22,44 +22,12 @@ public class Produto {
     private String disponivel;
     private String descricao;
     private String imagem;
-
+    private String valorPromocional;
     private Loja loja;
-    private Promocao promocao;
-
-    public Produto(long id, String nome, String preco, String disponivel, String descricao, String imagem, Loja loja, Promocao promocao) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.disponivel = disponivel;
-        this.descricao = descricao;
-        this.imagem = imagem;
-        this.loja = loja;
-        this.promocao = promocao;
-    }
-
-    public Produto(String nome, String preco, String disponivel, String descricao, Loja loja, Promocao promocao) {
-        this.nome = nome;
-        this.preco = preco;
-        this.disponivel = disponivel;
-        this.descricao = descricao;
-        this.loja = loja;
-        this.promocao = promocao;
-    }
-
-    public Produto(long id, String nome, String preco, String disponivel, String descricao, String imagem, Loja loja) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
-        this.disponivel = disponivel;
-        this.descricao = descricao;
-        this.imagem = imagem;
-        this.loja = loja;
-    }
 
     public Produto() {
-        this.promocao = new Promocao();
     }
-
+    
     public long getId() {
         return id;
     }
@@ -129,14 +97,13 @@ public class Produto {
 
     }
 
-    public Promocao getPromocao() {
-        return promocao;
+    public String getValorPromocional() {
+        return valorPromocional;
     }
 
-    public Produto setPromocao(Promocao promocao) {
-        this.promocao = promocao;
+    public Produto setValorPromocional(String valorPromocional) {
+        this.valorPromocional = valorPromocional;
         return this;
-
     }
 
     public void save() throws SQLException, ClassNotFoundException {

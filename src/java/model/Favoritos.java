@@ -10,45 +10,41 @@ package model;
  * @author mathe
  */
 public class Favoritos {
+
     private long id;
-    
+
     private Consumidor consumidor;
     private Loja loja;
 
-    public Favoritos(long id, Consumidor consumidor, Loja loja) {
-        this.id = id;
-        this.consumidor = consumidor;
-        this.loja = loja;
-    }
-
-    public Favoritos(Consumidor consumidor, Loja loja) {
-        this.consumidor = consumidor;
-        this.loja = loja;
+    public Favoritos() {
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Favoritos setId(long id) {
         this.id = id;
+        return this;
     }
 
     public Consumidor getConsumidor() {
         return consumidor;
     }
 
-    public void setConsumidor(Consumidor consumidor) {
+    public Favoritos setConsumidor(Consumidor consumidor) {
         this.consumidor = consumidor;
+        return this;
+
     }
 
     public Loja getLoja() {
         return loja;
     }
 
-    public void setLoja(Loja loja) {
+    public Favoritos setLoja(Loja loja) {
         this.loja = loja;
+        return this;
     }
-    
-    
+
 }

@@ -19,27 +19,6 @@ public class Promocao {
     private String desconto;
     private String tipo;
 
-    public Promocao(long id, String nome, String desconto, String tipo) {
-        this.id = id;
-        this.nome = nome;
-        this.desconto = desconto;
-        this.tipo = tipo;
-    }
-
-    public Promocao(String nome, String desconto, String tipo) {
-        this.nome = nome;
-        this.desconto = desconto;
-        this.tipo = tipo;
-    }
-
-    public Promocao() {
-        this.id = 0;
-        this.nome = "";
-        this.desconto = "";
-        this.tipo = "";
-
-    }
-
     public long getId() {
         return id;
     }

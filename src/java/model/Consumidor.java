@@ -10,11 +10,12 @@ package model;
  * @author mathe
  */
 public class Consumidor {
+
     private long id;
     private String nome;
     private String cpf;
     private String nascimento;
-    
+
     private Contato contato;
     private Conta conta;
     private Endereco endereco;
@@ -26,49 +27,58 @@ public class Consumidor {
         return id;
     }
 
-    public void setId(long id) {
+    public Consumidor setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public Consumidor setNome(String nome) {
         this.nome = nome;
+        return this;
+
     }
 
     public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public Consumidor setCpf(String cpf) {
         this.cpf = cpf;
+        return this;
+
     }
 
     public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(String nascimento) {
+    public Consumidor setNascimento(String nascimento) {
         this.nascimento = nascimento;
+        return this;
+
     }
 
     public Contato getContato() {
         return contato;
     }
 
-    public void setContato(Contato contato) {
+    public Consumidor setContato(Contato contato) {
         this.contato = contato;
+        return this;
     }
 
     public Conta getConta() {
         return conta;
     }
 
-    public void setConta(Conta conta) {
+    public Consumidor setConta(Conta conta) {
         this.conta = conta;
+        return this;
+
     }
-    
-    
+
 }

@@ -10,65 +10,60 @@ package model;
  * @author mathe
  */
 public class Contato {
+
     private long id;
     private String telefone;
     private String ddd;
     private String email;
     private String telefoneComplementar;
 
-    public Contato(long id, String telefone, String ddd, String email, String telefoneComplementar) {
-        this.id = id;
-        this.telefone = telefone;
-        this.ddd = ddd;
-        this.email = email;
-        this.telefoneComplementar = telefoneComplementar;
+    public Contato() {
     }
 
-    public Contato(String telefone, String ddd, String email, String telefoneComplementar) {
-        this.telefone = telefone;
-        this.ddd = ddd;
-        this.email = email;
-        this.telefoneComplementar = telefoneComplementar;
-    }
-    
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Contato setId(long id) {
         this.id = id;
+        return this;
+
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public Contato setTelefone(String telefone) {
         this.telefone = telefone;
+        return this;
     }
 
     public String getDdd() {
         return ddd;
     }
 
-    public void setDdd(String ddd) {
+    public Contato setDdd(String ddd) {
         this.ddd = ddd;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Contato setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getTelefoneComplementar() {
         return telefoneComplementar;
     }
 
-    public void setTelefoneComplementar(String telefoneComplementar) {
+    public Contato setTelefoneComplementar(String telefoneComplementar) {
         this.telefoneComplementar = telefoneComplementar;
+        return this;
     }
-    
+
 }

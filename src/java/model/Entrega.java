@@ -10,55 +10,50 @@ package model;
  * @author mathe
  */
 public class Entrega {
+
     private long id;
     private EntregaEstado estado;
     private Loja loja;
     private Carrinho carrinho;
 
-    public Entrega(long id, EntregaEstado estado, Loja loja, Carrinho carrinho) {
-        this.id = id;
-        this.estado = estado;
-        this.loja = loja;
-        this.carrinho = carrinho;
-    }
-
-    public Entrega(EntregaEstado entregaEstado, Loja loja, Carrinho carrinho) {
-        this.loja = loja;
-        this.carrinho = carrinho;
-        this.estado = new EntregaEstadoACaminho();
+    public Entrega() {
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Entrega setId(long id) {
         this.id = id;
+        return this;
     }
 
     public EntregaEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(EntregaEstado estado) {
+    public Entrega setEstado(EntregaEstado estado) {
         this.estado = estado;
+        return this;
+
     }
 
     public Loja getLoja() {
         return loja;
     }
 
-    public void setLoja(Loja loja) {
+    public Entrega setLoja(Loja loja) {
         this.loja = loja;
+        return this;
     }
 
     public Carrinho getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
+    public Entrega setCarrinho(Carrinho carrinho) {
         this.carrinho = carrinho;
+        return this;
     }
-    
-    
+
 }

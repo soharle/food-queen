@@ -20,79 +20,76 @@ public class Carrinho {
 
     Consumidor consumidor;
 
-    public Carrinho(long id, String valor, String data, String hora, String pagamento, CarrinhoEstado estado, Consumidor consumidor) {
-        this.id = id;
-        this.valor = valor;
-        this.data = data;
-        this.hora = hora;
-        this.pagamento = pagamento;
-        this.estado = estado;
-        this.consumidor = consumidor;
-    }
-
-    public Carrinho(String valor, String data, String hora, String pagamento, CarrinhoEstado estado, Consumidor consumidor) {
-        this.valor = valor;
-        this.data = data;
-        this.hora = hora;
-        this.pagamento = pagamento;
-        this.estado = estado;
-        this.consumidor = consumidor;
+    public Carrinho() {
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Carrinho setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public Carrinho setValor(String valor) {
         this.valor = valor;
+        return this;
+
     }
 
     public String getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public Carrinho setData(String data) {
         this.data = data;
+        return this;
+
     }
 
     public String getHora() {
         return hora;
     }
 
-    public void setHora(String hora) {
+    public Carrinho setHora(String hora) {
         this.hora = hora;
+        return this;
+
     }
 
     public String getPagamento() {
         return pagamento;
     }
 
-    public void setPagamento(String pagamento) {
+    public Carrinho setPagamento(String pagamento) {
         this.pagamento = pagamento;
+        return this;
+
     }
 
     public CarrinhoEstado getEstado() {
         return estado;
     }
 
-    public void setEstado(CarrinhoEstado estado) {
+    public Carrinho setEstado(CarrinhoEstado estado) {
         this.estado = estado;
+        return this;
+
     }
 
     public Consumidor getConsumidor() {
         return consumidor;
     }
 
-    public void setConsumidor(Consumidor consumidor) {
+    public Carrinho setCarrinho(Consumidor consumidor) {
         this.consumidor = consumidor;
+        return this;
+
     }
 
 }

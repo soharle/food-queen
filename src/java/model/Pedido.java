@@ -19,50 +19,42 @@ public class Pedido {
 
     public Pedido() {
     }
-    
-    public Pedido(long id, String observacao, Produto produto, Carrinho carrinho) {
-        this.id = id;
-        this.observacao = observacao;
-        this.produto = produto;
-        this.carrinho = carrinho;
-    }
-
-    public Pedido(String observacao, Produto produto, Carrinho carrinho) {
-        this.observacao = observacao;
-        this.produto = produto;
-        this.carrinho = carrinho;
-    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Pedido setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getObservacao() {
         return observacao;
     }
 
-    public void setObservacao(String observacao) {
+    public Pedido setObservacao(String observacao) {
         this.observacao = observacao;
+        return this;
+
     }
 
     public Produto getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public Pedido setProduto(Produto produto) {
         this.produto = produto;
+        return this;
     }
 
     public Carrinho getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
+    public Pedido setCarrinho(Carrinho carrinho) {
         this.carrinho = carrinho;
+        return this;
     }
 
 }

@@ -10,6 +10,7 @@ package model;
  * @author mathe
  */
 public class Conta {
+
     private long id;
     private String login;
     private String senha;
@@ -27,38 +28,44 @@ public class Conta {
         this.senha = senha;
         this.tipo = tipo;
     }
-    
+
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Conta setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
+    public Conta setLogin(String login) {
         this.login = login;
+        return this;
+
     }
 
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public Conta setSenha(String senha) {
         this.senha = senha;
+        return this;
+
     }
 
     public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public Conta setTipo(String tipo) {
         this.tipo = tipo;
+        return this;
+
     }
-    
-    
+
 }

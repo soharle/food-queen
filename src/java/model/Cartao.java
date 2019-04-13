@@ -10,78 +10,72 @@ package model;
  * @author mathe
  */
 public class Cartao {
+
     private long id;
     private String numero;
     private String cod;
     private String titular;
     private String validade;
-    
+
     Consumidor consumidor;
 
-    public Cartao(long id, String numero, String cod, String titular, String validade, Consumidor consumidor) {
-        this.id = id;
-        this.numero = numero;
-        this.cod = cod;
-        this.titular = titular;
-        this.validade = validade;
-        this.consumidor = consumidor;
+    public Cartao() {
     }
 
-    public Cartao(String numero, String cod, String titular, String validade, Consumidor consumidor) {
-        this.numero = numero;
-        this.cod = cod;
-        this.titular = titular;
-        this.validade = validade;
-        this.consumidor = consumidor;
-    }
-    
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public Cartao setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public Cartao setNumero(String numero) {
         this.numero = numero;
+        return this;
     }
 
     public String getCod() {
         return cod;
     }
 
-    public void setCod(String cod) {
+    public Cartao setCod(String cod) {
         this.cod = cod;
+        return this;
     }
 
     public String getTitular() {
         return titular;
     }
 
-    public void setTitular(String titular) {
+    public Cartao setTitular(String titular) {
         this.titular = titular;
+        return this;
+
     }
 
     public String getValidade() {
         return validade;
     }
 
-    public void setValidade(String validade) {
+    public Cartao setValidade(String validade) {
         this.validade = validade;
+        return this;
+
     }
 
     public Consumidor getConsumidor() {
         return consumidor;
     }
 
-    public void setConsumidor(Consumidor consumidor) {
+    public Cartao setConsumidor(Consumidor consumidor) {
         this.consumidor = consumidor;
+        return this;
     }
-    
-    
+
 }
