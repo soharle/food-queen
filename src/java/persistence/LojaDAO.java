@@ -44,10 +44,10 @@ public class LojaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT loja.*, conta.*, contato.*, endereco.*, categoria.* "
                     + "FROM loja "
-                    + "INNER JOIN conta ON loja.conta_id = conta.id "
-                    + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
-                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
+                    + "LEFT JOIN conta ON loja.conta_id = conta.id "
+                    + "LEFT JOIN contato ON loja.contato_id = contato.id "
+                    + "LEFT JOIN endereco ON loja.endereco_id = endereco.id "
+                    + "LEFT JOIN categoria ON loja.categoria_id = categoria.id "
                     + "WHERE loja.id =" + id + "");
             rs.first();
             Contato contatoLoja = new Contato();
@@ -84,10 +84,10 @@ public class LojaDAO {
             st = conn.createStatement();
             String query = "SELECT loja.*, conta.*, contato.*, endereco.*, categoria.* "
                     + "FROM loja "
-                    + "INNER JOIN conta ON loja.conta_id = conta.id "
-                    + "INNER JOIN contato ON loja.contato_id = contato.id "
-                    + "INNER JOIN endereco ON loja.endereco_id = endereco.id "
-                    + "INNER JOIN categoria ON loja.categoria_id = categoria.id "
+                    + "LEFT JOIN conta ON loja.conta_id = conta.id "
+                    + "LEFT JOIN contato ON loja.contato_id = contato.id "
+                    + "LEFT JOIN endereco ON loja.endereco_id = endereco.id "
+                    + "LEFT JOIN categoria ON loja.categoria_id = categoria.id "
                     + "WHERE loja.conta_id =" + contaId + "";
             ResultSet rs = st.executeQuery(query);
             rs.first();

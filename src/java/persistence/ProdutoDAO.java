@@ -163,7 +163,7 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO produto (loja_id, promocao_id, nome, preco, disponivel, descricao, imagem) "
+            st.execute("INSERT INTO produto (loja_id, valor_promocional, nome, preco, disponivel, descricao, imagem) "
                     + "VALUES (" + produto.getLoja().getId() + ", "
                     + "" + produto.getValorPromocional() + ", "
                     + "'" + produto.getNome() + "', "

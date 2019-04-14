@@ -37,6 +37,7 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
             rs.first();
+            categoria = new Categoria();
             categoria = categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
         } catch (SQLException e) {
             throw e;

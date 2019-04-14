@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <c:if test="${acao == 'criar'}"> 
-                                <form class="container" action="FrontController?action=EditarProdutoLoja" method="post"> 
+                                <form class="container" action="FrontController?action=SalvarProdutoLoja" method="post"> 
                                 </c:if>
                                 <c:if test="${acao != 'criar'}"> 
                                     <form class="container" action="FrontController?action=EditarProdutoLoja" method="post"> 
@@ -93,13 +93,14 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <p>TESTE</p>
+
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="txtDescricao">Descrição</label>
                                                     <input type="text" class="form-control" id="txtDescricao" name="txtDescricao" <c:if
                                                            test="${produto.descricao != null}"> value="${produto.descricao}"</c:if> placeholder="Descrição" />
-
                                                 </div>
                                             </div>
                                         </div>
