@@ -35,7 +35,7 @@
                                         <li><a href="FrontController?action=PrepararManterCartaoConsumidor">Cartões cadastrados</a></li>
                                     </ul>
                                 </li>
-                                <li class="drop"><a href="#">Meus Pedidos</a></li>
+                                <li class="drop"><a href="FrontController?action=PrepararPedidosConsumidor">Meus Pedidos</a></li>
                             </ul>
                         </nav>
 
@@ -82,7 +82,7 @@
                             <p>Quantidade: <span>01</span></p>
                             <span class="price">${pedido.produto.preco}</span>
                         </div>
-                        <form action="FrontController?DeletarProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
+                        <form action="FrontController?RemoverProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
                             <button type="submit" class="cartbox__item__remove">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -96,8 +96,8 @@
                 </ul>
             </div>
             <div class="cartbox__buttons">
-                <form action="FrontController?action=PreparaCarrinhoConsumidor" method="post">
-                    <button type="submit" class="food__btn">Finalizar compra</button>
+                <form action="FrontController?action=PrepararFinalizarCompraConsumidor" method="post">
+                    <button type="submit" class="food__btn">Carrinho</button>
                 </form>
             </div>
         </div>
