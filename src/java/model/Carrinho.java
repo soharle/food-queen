@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.util.Observable;
+
 /**
  *
  * @author mathe
  */
-public class Carrinho {
+public class Carrinho extends Observable {
 
     private long id;
     private String valor;
@@ -75,6 +77,7 @@ public class Carrinho {
 
     public Carrinho setEstado(CarrinhoEstado estado) {
         this.estado = estado;
+        this.notificar();
         return this;
 
     }
@@ -92,6 +95,10 @@ public class Carrinho {
         this.consumidor = consumidor;
         return this;
 
+    }
+
+    public void notificar() {
+        notifyObservers();
     }
 
 }

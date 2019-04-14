@@ -5,11 +5,14 @@
  */
 package model;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author mathe
  */
-public class Consumidor {
+public class Consumidor implements Observer {
 
     private long id;
     private String nome;
@@ -19,7 +22,6 @@ public class Consumidor {
     private Contato contato;
     private Conta conta;
     private Endereco endereco;
-
 
     public long getId() {
         return id;
@@ -87,6 +89,21 @@ public class Consumidor {
         this.endereco = endereco;
         return this;
     }
-    
 
+    public void update(Observable o, Object arg) {
+        if (o instanceof Carrinho) {
+            Carrinho carrinho = (Carrinho) o;
+            System.out.println("Atenção " + this.getNome()
+                    + ", o seu Carrinho mudou de estado para "
+                    + carrinho.getEstado().getEstadoNome());
+        }
+
+        if (o instanceof Entrega) {
+            Entrega entrega = (Entrega) o;
+            System.out.println("Atenção " + this.getNome()
+                    + " a sua entrega mudou de estado para "
+                    + entrega.getEstado().getEstadoNome());
+        }
+
+    }
 }
