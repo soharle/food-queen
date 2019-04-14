@@ -43,7 +43,7 @@ public class EditarProdutoLojaAction implements Action {
             
             ProdutoDAO.getInstance().update(produto);
             produto.setLoja(LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString())));
-            RequestDispatcher view = request.getRequestDispatcher("estabelecimento/index.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararProdutosLoja");
 
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

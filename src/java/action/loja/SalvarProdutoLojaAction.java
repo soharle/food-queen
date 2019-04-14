@@ -31,6 +31,7 @@ public class SalvarProdutoLojaAction implements Action {
         String nome = request.getParameter("txtNome");
         String imagem = request.getParameter("txtImagem");
         String preco = request.getParameter("txtPreco");
+        String valorPromocional = request.getParameter("txtValorPromocional") + "";
         String disponivel = request.getParameter("optCategoria");
         String descricao = request.getParameter("txtDescricao");
 
@@ -38,10 +39,10 @@ public class SalvarProdutoLojaAction implements Action {
 
             Loja loja = LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString()));
             Produto produto = new Produto();
-            produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel).setLoja(loja);
+            produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco).setDisponivel(disponivel).setValorPromocional(valorPromocional).setLoja(loja);
             ProdutoDAO.getInstance().save(produto);
 
-            RequestDispatcher view = request.getRequestDispatcher("estabelecimento/index.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararProdutosLoja");
 
             view.forward(request, response);
         } catch (ServletException | IOException ex) {

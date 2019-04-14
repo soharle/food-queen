@@ -14,7 +14,7 @@
     <head>
         <title>Admin - Editar dados</title>
         <%@ include file="shared/head.jsp" %>
-        
+
     </head>
 
 
@@ -36,7 +36,7 @@
                 </li>
             </ul>
             <!-- Tab panes -->
-            <div class="tab-content">
+            <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-dados" role="tabpanel" aria-labelledby="nav-dados-tab">
                     <form class="container" action="FrontController?action=EditarDadosLoja" method="post">
                         <div class="row">

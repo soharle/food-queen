@@ -69,7 +69,7 @@ public class ProdutoDAO {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Produto produto = new Produto();
                 produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
-                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                        .setPreco(rs.getString("produto.preco")).setValorPromocional(rs.getString("produto.valor_promocional")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);
             }
@@ -100,7 +100,7 @@ public class ProdutoDAO {
 
                 Produto produto = new Produto();
                 produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
-                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                        .setPreco(rs.getString("produto.preco")).setValorPromocional(rs.getString("produto.valor_promocional")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);
             }
@@ -122,7 +122,7 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("UPDATE produto SET loja_id = " + produto.getLoja().getId() + ", "
-                    + "valor_promocional = " + produto.getValorPromocional() + ", "
+                    + "valor_promocional = '" + produto.getValorPromocional() + "', "
                     + "nome = '" + produto.getNome() + "', "
                     + "preco = '" + produto.getPreco() + "', "
                     + "disponivel = '" + produto.getDisponivel() + "', "
@@ -165,7 +165,7 @@ public class ProdutoDAO {
             st = conn.createStatement();
             st.execute("INSERT INTO produto (loja_id, valor_promocional, nome, preco, disponivel, descricao, imagem) "
                     + "VALUES (" + produto.getLoja().getId() + ", "
-                    + "" + produto.getValorPromocional() + ", "
+                    + "'" + produto.getValorPromocional() + "', "
                     + "'" + produto.getNome() + "', "
                     + "'" + produto.getPreco() + "', "
                     + "'" + produto.getDisponivel() + "', "

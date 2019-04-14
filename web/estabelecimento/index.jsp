@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4 my-3">
                     <div class="card" style="width: 18rem;">
-                        <img src="./assets/images/estabelecimento/orders.jpg" class="card-img-top" alt="...">
+                        <img src="./assets/images/estabelecimento/orders.jpg" style="max-height: 190px; " class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Pedidos</h5>
                             <p class="card-text">Veja todos os pedidos do seu estabelecimento</p>
