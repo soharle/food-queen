@@ -12,7 +12,7 @@
 <html>
 
     <head>
-        <title>Admin - Home</title>
+        <title>Admin - Editar dados</title>
         <%@ include file="shared/head.jsp" %>
         
     </head>

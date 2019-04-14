@@ -27,20 +27,15 @@
                     <div class="main__menu__wrap">
                         <nav class="main__menu__nav d-none d-lg-block">
                             <ul class="mainmenu">
-                                <li class="drop"><a href="menu-list.html">Produtos</a>
+                                <li class="drop"><a href="FrontController?action=PrepararListaProdutosFiltroConsumidor">Produtos</a></li>
+                                <li class="drop"><a href="">Dados pessoais</a>
                                     <ul class="dropdown__menu">
-                                        <li><a href="menu-list.html">Menu List</a></li>
-                                        <li><a href="menu-details.html">Menu Details</a></li>
+                                        <li><a href="FrontController?action=PrepararEditarDadosConsumidor">Editar dados</a></li>
+                                        <li><a href="FrontController?action=PrepararEditarEnderecoConsumidor">Editar endereço</a></li>
+                                        <li><a href="FrontController?action=PrepararManterCartaoConsumidor">Cartões cadastrados</a></li>
                                     </ul>
                                 </li>
-                                <li class="drop"><a href="#">Pages</a>
-                                    <ul class="dropdown__menu">
-                                        <li><a href="service.html">Service</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="checkout.html">Checkout Page</a></li>
-                                        <li><a href="contact.html">Contact Page</a></li>
-                                    </ul>
-                                </li>
+                                <li class="drop"><a href="FrontController?action=PrepararPedidosConsumidor">Meus Pedidos</a></li>
                             </ul>
                         </nav>
 
@@ -87,7 +82,7 @@
                             <p>Quantidade: <span>01</span></p>
                             <span class="price">${pedido.produto.preco}</span>
                         </div>
-                        <form action="FrontController?DeletarProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
+                        <form action="FrontController?RemoverProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
                             <button type="submit" class="cartbox__item__remove">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -101,8 +96,8 @@
                 </ul>
             </div>
             <div class="cartbox__buttons">
-                <form action="FrontController?action=PreparaCarrinhoConsumidor" method="post">
-                    <button type="submit" class="food__btn">Finalizar compra</button>
+                <form action="FrontController?action=PrepararFinalizarCompraConsumidor" method="post">
+                    <button type="submit" class="food__btn">Carrinho</button>
                 </form>
             </div>
         </div>

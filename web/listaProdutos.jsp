@@ -5,10 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Index</title>
+        <title>FoodQueen - lista de produtos</title>
         <%@ include file="./shared/head.jsp" %>
     </head>
     <body>
@@ -22,7 +24,7 @@
                                 <div class="bradcaump__inner text-center">
                                     <h2 class="bradcaump-title">Lista de produtos</h2>
                                     <nav class="bradcaump-inner">
-                                        <a class="breadcrumb-item" href="index.html">Início</a>
+                                        <a class="breadcrumb-item" href="FrontController?action=PrepararHomeConsumidor">Início</a>
                                         <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
                                         <span class="breadcrumb-item active">Lista de produtos</span>
                                     </nav>
