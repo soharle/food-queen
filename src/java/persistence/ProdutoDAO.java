@@ -43,7 +43,7 @@ public class ProdutoDAO {
             rs.first();
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
             produto = new Produto();
-            produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+            produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
                     .setValorPromocional(rs.getString("produto.valor_promocional"));
@@ -68,7 +68,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Produto produto = new Produto();
-                produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setValorPromocional(rs.getString("produto.valor_promocional")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);
@@ -99,7 +99,7 @@ public class ProdutoDAO {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
 
                 Produto produto = new Produto();
-                produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setValorPromocional(rs.getString("produto.valor_promocional")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 produtos.add(produto);

@@ -62,33 +62,33 @@ public class FavoritosDAO {
             rs.first();
 
             Contato contatoLoja = new Contato();
-            contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+            contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                     .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
             Conta contaLoja = new Conta();
-            contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+            contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
             Endereco enderecoLoja = new Endereco();
-            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+            enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
                     .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
                     .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
             Categoria categoria = new Categoria();
-            categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
             Loja loja = new Loja();
             loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
                     .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
 
             Contato contatoConsumidor = new Contato();
-            contatoConsumidor = contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
+            contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
                     .setEmail((rs.getString("consumidor.contato.email"))).setTelefoneComplementar(rs.getString("consumidor.contato.telefone_complementar"));
             Conta contaConsumidor = new Conta();
-            contaConsumidor = contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
+            contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
                     .setSenha(rs.getString("consumidor.conta.senha")).setTipo(rs.getString("consumidor.conta.tipo"));
             Consumidor consumidor = new Consumidor();
-            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contatoLoja).setConta(contaLoja);
             favorito = new Favoritos();
-            favorito = favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
+            favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(FavoritosDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,33 +119,33 @@ public class FavoritosDAO {
 
             while (rs.next()) {
                 Contato contatoLoja = new Contato();
-                contatoLoja = contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                contatoLoja.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                         .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
                 Conta contaLoja = new Conta();
-                contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                         .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
                 Endereco enderecoLoja = new Endereco();
-                enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
                         .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
                         .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
                 Categoria categoria = new Categoria();
-                categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+                categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
                 Loja loja = new Loja();
-                loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                         .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
                         .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
 
                 Contato contatoConsumidor = new Contato();
-                contatoConsumidor = contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
+                contatoConsumidor.setId((rs.getLong("consumidor.contato.id"))).setTelefone(rs.getString("consumidor.contato.telefone")).setDdd(rs.getString("consumidor.contato.ddd"))
                         .setEmail((rs.getString("consumidor.contato.email"))).setTelefoneComplementar(rs.getString("consumidor.contato.telefone_complementar"));
                 Conta contaConsumidor = new Conta();
-                contaConsumidor = contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
+                contaConsumidor.setId(rs.getLong("consumidor.conta.id")).setLogin(rs.getString("consumidor.conta.login"))
                         .setSenha(rs.getString("consumidor.conta.senha")).setTipo(rs.getString("consumidor.conta.tipo"));
                 Consumidor consumidor = new Consumidor();
-                consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                         .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contatoLoja).setConta(contaLoja);
                 Favoritos favorito = new Favoritos();
-                favorito = favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
+                favorito.setId(rs.getLong("favoritos.id")).setConsumidor(consumidor).setLoja(loja);
                 favoritos.add(favorito);
             }
         } catch (ClassNotFoundException | SQLException ex) {

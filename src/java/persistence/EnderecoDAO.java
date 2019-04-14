@@ -38,7 +38,7 @@ public class EnderecoDAO {
             ResultSet rs = st.executeQuery("SELECT * FROM endereco WHERE id =" + id + "");
             rs.first();
             endereco = new Endereco();
-            endereco = endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+            endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
                     .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
                     .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
         } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class EnderecoDAO {
             ResultSet rs = st.executeQuery("SELECT * FROM endereco;");
             while (rs.next()) {
                 Endereco endereco = new Endereco();
-                endereco = endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
+                endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
                         .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
                         .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
                 enderecos.add(endereco);

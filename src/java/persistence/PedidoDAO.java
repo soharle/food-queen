@@ -54,27 +54,27 @@ public class PedidoDAO {
                     + "WHERE id = " + id + ";");
             rs.first();
             Contato contato = new Contato();
-            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                     .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
             Conta conta = new Conta();
-            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
             Consumidor consumidor = new Consumidor();
-            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
 
             Produto produto = new Produto();
-            produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+            produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
                     .setValorPromocional(rs.getString("produto.valor_promocional"));
             Carrinho carrinho = new Carrinho();
-            carrinho = carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
                     .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
             pedido = new Pedido();
-            pedido = pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+            pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -98,27 +98,27 @@ public class PedidoDAO {
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id;");
             while (rs.next()) {
                 Contato contato = new Contato();
-                contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                         .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
                 Conta conta = new Conta();
-                conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                         .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
                 Consumidor consumidor = new Consumidor();
-                consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                         .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
 
                 Produto produto = new Produto();
-                produto = produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
                         .setValorPromocional(rs.getString("produto.valor_promocional"));
                 Carrinho carrinho = new Carrinho();
-                carrinho = carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
                         .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 Pedido pedido = new Pedido();
-                pedido = pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+                pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
                 pedidos.add(pedido);
             }
         } catch (SQLException | ClassNotFoundException ex) {

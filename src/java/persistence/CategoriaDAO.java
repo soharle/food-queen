@@ -38,7 +38,7 @@ public class CategoriaDAO {
             ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
             rs.first();
             categoria = new Categoria();
-            categoria = categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
+            categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -60,7 +60,7 @@ public class CategoriaDAO {
             ResultSet rs = st.executeQuery("SELECT * FROM categoria;");
             while (rs.next()) {
                 Categoria categoria = new Categoria();
-                categoria = categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
+                categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
                 categorias.add(categoria);
             }
         } catch (SQLException e) {
