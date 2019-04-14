@@ -7,37 +7,50 @@
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararEditarLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LerContaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararEditarDadosConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/controller/ActionFactory.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Contato.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/CadastrarProdutoLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/SalvarConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/AtualizarContaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/DeslogarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/finalizarCompra.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/SalvarProdutoLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararEditarConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararPedidosLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/LerProdutoLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/SalvarDadosConsumidor.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararManterCartaoConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Loja.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarDadosConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarSenhaConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/editarEndereco.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/persistence/ProdutoDAO.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/EditarEnderecoConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/CadastrarLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/web/estabelecimento/manterProduto.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararHomeConsumidorAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararEditarEnderecoConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/web/estabelecimento/produtos.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EditarSenhaLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/web/cadastroUsuario.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/persistence/ConsumidorDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/SalvarLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/CartaoDAO.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/CadastrarContaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/SalvarContaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/LerLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/SalvarCartaoConsumidor.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/persistence/LojaDAO.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/EntrarLojaAction.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/ContaDAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Cartao.java</file>
+            <file>file:/E:/Repos/java/food-queen/web/manterCartao.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararProdutosLojaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/web/editarDados.jsp</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/conta/DeletarContaAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/controller/FrontController.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/model/Consumidor.java</file>
         </group>
     </open-files>
 </project-private>

@@ -28,15 +28,6 @@ public class PrepararEditarDadosConsumidorAction implements Action {
 
         Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
         request.setAttribute("consumidor", consumidor);
-//        request.setAttribute("txtLogin", consumidor.getConta().getLogin());
-//        request.setAttribute("senha", consumidor.getConta().getSenha());
-//        request.setAttribute("txtNome", consumidor.getNome());
-//        request.setAttribute("txtDataNascimento", consumidor.getNascimento());
-//        request.setAttribute("txtCpf", consumidor.getCpf());
-//        request.setAttribute("txtDdd", consumidor.getContato().getDdd());
-//        request.setAttribute("txtTelefone", consumidor.getContato().getTelefone());
-//        request.setAttribute("txtTelefoneComplementar", consumidor.getContato().getTelefoneComplementar());
-//        request.setAttribute("txtEmail", consumidor.getContato().getEmail());
 
         RequestDispatcher view = request.getRequestDispatcher("editarDados.jsp");
         view.forward(request, response);

@@ -19,9 +19,12 @@ import javax.servlet.http.HttpSession;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
+import model.Endereco;
+import model.Loja;
 import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
+import persistence.EnderecoDAO;
 
 /**
  *
@@ -43,18 +46,34 @@ public class SalvarConsumidorAction implements Action {
         String email = request.getParameter("txtEmail");
         String telefoneComplementar = request.getParameter("txtTelefone2");
 
+        String cep = request.getParameter("txtCep");
+        String logradouro = request.getParameter("txtLogradouro");
+        String numero = request.getParameter("txtNumero");
+        String complemento = request.getParameter("txtComplemento");
+        String bairro = request.getParameter("txtBairro");
+        String cidade = request.getParameter("txtCidade");
+        String estado = request.getParameter("txtEstado");
+        String pais = request.getParameter("txtPais");
+
         try {
             Conta conta = new Conta();
-            conta = conta.setLogin(login).setSenha(senha).setTipo("Consumidor");
-
+            conta.setLogin(login).setSenha(senha).setTipo("Consumidor");
             conta = ContaDAO.getInstance().save(conta);
+            
             Contato contato = new Contato();
             contato.setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
             contato = ContatoDAO.getInstance().save(contato);
+            
+            Endereco endereco = new Endereco();
+            endereco.setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
+                    .setBairro(bairro).setCidade(cidade).setEstado(estado).setPais(pais);
+            endereco = EnderecoDAO.getInstance().save(endereco);
+            
             Consumidor consumidor = new Consumidor();
-            consumidor = consumidor.setNome(nome).setCpf(cpf).setNascimento(dataNascimento).setContato(contato).setConta(conta);
+            consumidor = consumidor.setNome(nome).setCpf(cpf).setNascimento(dataNascimento).setContato(contato).setConta(conta).setEndereco(endereco);
             ConsumidorDAO.getInstance().save(consumidor);
 
+            
             HttpSession sessao = request.getSession();
             sessao.invalidate();
 

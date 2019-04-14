@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-sm-0 col-md-1 col-lg-2"></div>
                         <div class="col-sm-12 col-md-10 col-lg-8">
-                            <form action="" method="post">
+                            <form action="FrontController?action=EditarEnderecoConsumidor" method="post">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">

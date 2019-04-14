@@ -15,7 +15,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Consumidor;
 import model.Endereco;
+import persistence.ConsumidorDAO;
 import persistence.EnderecoDAO;
 
 /**
@@ -37,11 +39,10 @@ public class EditarEnderecoConsumidorAction implements Action {
         RequestDispatcher view = null;
         HttpSession session = request.getSession();
         try {
-            long id = Long.parseLong((String) session.getAttribute("id"));
-            long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
-            Endereco endereco;
-
-            endereco = EnderecoDAO.getInstance().get(enderecoId);
+            long id = Long.parseLong(session.getAttribute("id").toString());
+            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+            
+            Endereco endereco = consumidor.getEndereco();
 
             endereco.setCep(cep);
             endereco.setLogradouro(logradouro);

@@ -12,11 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Carrinho;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
-import model.StateFactory;
+import model.Endereco;
 
 /**
  *
@@ -41,22 +40,29 @@ public class ConsumidorDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT consumidor.*, contato.*, conta.* "
+            ResultSet rs = st.executeQuery("SELECT consumidor.*, contato.*, conta.*, endereco.* "
                     + "FROM consumidor "
                     + "INNER JOIN contato ON contato.id = consumidor.contato_id "
                     + "INNER JOIN conta ON conta.id = consumidor.conta_id "
+                    + "INNER JOIN endereco ON endereco.id = consumidor.endereco_id "
                     + "WHERE consumidor.id = " + id + ";");
+
             rs.first();
 
             Contato contato = new Contato();
-            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                     .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
             Conta conta = new Conta();
-            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Endereco endereco = new Endereco();
+            endereco.setId(rs.getLong("endereco.id")).setBairro(rs.getString("endereco.bairro")).setCep(rs.getString("endereco.cep"))
+                    .setCidade(rs.getString("endereco.cidade")).setComplemento(rs.getString("endereco.complemento")).setEstado(rs.getString("endereco.estado"))
+                    .setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero")).setPais(rs.getString("endereco.pais"));
             consumidor = new Consumidor();
-            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
-                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta).setEndereco(endereco);
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -168,12 +174,13 @@ public class ConsumidorDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO consumidor ( nome, cpf, nascimento, conta_id, contato_id) "
+            st.execute("INSERT INTO consumidor ( nome, cpf, nascimento, conta_id, contato_id, endereco_id) "
                     + "VALUES ('" + consumidor.getNome() + "', "
                     + "'" + consumidor.getCpf() + "', "
                     + "'" + consumidor.getNascimento() + "', "
                     + "" + consumidor.getConta().getId() + ", "
-                    + "" + consumidor.getContato().getId() + ");");
+                    + "" + consumidor.getContato().getId() + ", "
+                    + "" + consumidor.getEndereco().getId() + ");");
         } catch (SQLException e) {
             System.out.println(e);;
         } finally {
