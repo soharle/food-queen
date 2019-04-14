@@ -14,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Conta;
 import model.Loja;
 import persistence.ContaDAO;
 import persistence.LojaDAO;
@@ -33,7 +34,9 @@ public class EditarSenhaLojaAction implements Action {
         long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
-            loja.getConta().setSenha(senha);
+            Conta conta = new Conta();
+            conta = conta.setSenha(senha).setLogin(loja.getConta().getLogin()).setId(loja.getConta().getId());
+            loja.setConta(conta);
             ContaDAO.getInstance().update(loja.getConta());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
