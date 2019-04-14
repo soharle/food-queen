@@ -31,8 +31,7 @@ public class CartaoDAO {
 
     private CartaoDAO() {
     }
-    
-    
+
     public Cartao get(long id) {
         Cartao cartao = null;
         Connection conn = null;
@@ -175,6 +174,41 @@ public class CartaoDAO {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public ArrayList<Cartao> getAllByConsumidor(long id) {
+        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
+                    + "FROM cartao "
+                    + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "WHERE consumidor.id = " + id + ");");
+            rs.first();
+            Contato contato = new Contato();
+            contato = contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor = consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            Cartao cartao = new Cartao();
+            cartao = cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
+                    .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
+            cartoes.add(cartao);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return cartoes;
     }
 
 }

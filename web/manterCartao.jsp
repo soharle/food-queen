@@ -70,7 +70,7 @@
                                 </div>
                             </c:forEach>
 
-                            <form action="" method="post">
+                            <form action="SalvarCartaoConsumidor" method="post">
                                 <div class="payment-method fix">
                                     <div class="row">
                                         <div class="input-box col-12 mb--20 mt--20">

@@ -173,8 +173,7 @@ public class ConsumidorDAO {
                     + "'" + consumidor.getCpf() + "', "
                     + "'" + consumidor.getNascimento() + "', "
                     + "" + consumidor.getConta().getId() + ", "
-                    + "" + consumidor.getContato().getId() + " "
-                    + ");");
+                    + "" + consumidor.getContato().getId() + ");");
         } catch (SQLException e) {
             System.out.println(e);;
         } finally {

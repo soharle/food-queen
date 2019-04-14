@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package action.loja;
+package action.consumidor;
 
 import controller.Action;
 import java.io.IOException;
@@ -15,46 +15,42 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Categoria;
 import model.Consumidor;
-import model.Loja;
-import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
-import persistence.LojaDAO;
+import persistence.ContatoDAO;
+import persistence.EnderecoDAO;
 
 /**
  *
- * @author soharle
+ * @author mathe
  */
 public class EditarDadosConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String nome = request.getParameter("txtNome");
-        String cpf = request.getParameter("txtCnpj");
-        String nascimento = request.getParameter("txtDescricao");
-
         HttpSession session = request.getSession();
+        long id = Long.parseLong(session.getAttribute("id").toString());
 
-        long id = Long.parseLong((String) session.getAttribute("id"));
-
-        RequestDispatcher view = null;
-
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        String login = request.getParameter("txtLogin");
+        String senha = request.getParameter("txtSenha");
+        String nome = request.getParameter("txtNome");
+        String nascimento = request.getParameter("txtNascimento");
+        String cpf = request.getParameter("txtCpf");
+        String ddd = request.getParameter("txtDdd");
+        String telefone = request.getParameter("txtTelefone");
+        String complementar = request.getParameter("txtComplementar");
+        consumidor.setNascimento(nascimento).setNome(nome).setCpf(cpf).getContato().setDdd(ddd).setTelefone(telefone).setTelefoneComplementar(complementar);
+        consumidor.getConta().setLogin(login).setSenha(senha);
         try {
-            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            consumidor.setNome(nome);
-            consumidor.setCpf(cpf);
-            consumidor.setNascimento(nascimento);
-
             ConsumidorDAO.getInstance().update(consumidor);
-            view = request.getRequestDispatcher("home.jsp");
+            ContatoDAO.getInstance().update(consumidor.getContato());
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+            view.forward(request, response);
 
         } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
-            view.forward(request, response);
+            Logger.getLogger(EditarDadosConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-
 }

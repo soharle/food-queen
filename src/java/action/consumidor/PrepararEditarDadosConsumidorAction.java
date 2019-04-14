@@ -11,17 +11,36 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Consumidor;
+import persistence.ConsumidorDAO;
 
 /**
  *
  * @author Gabriel
  */
-public class PrepararEditarDadosConsumidorAction implements Action{
+public class PrepararEditarDadosConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession();
+        long id = Long.parseLong(session.getAttribute("id").toString());
+
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        request.setAttribute("consumidor", consumidor);
+//        request.setAttribute("txtLogin", consumidor.getConta().getLogin());
+//        request.setAttribute("senha", consumidor.getConta().getSenha());
+//        request.setAttribute("txtNome", consumidor.getNome());
+//        request.setAttribute("txtDataNascimento", consumidor.getNascimento());
+//        request.setAttribute("txtCpf", consumidor.getCpf());
+//        request.setAttribute("txtDdd", consumidor.getContato().getDdd());
+//        request.setAttribute("txtTelefone", consumidor.getContato().getTelefone());
+//        request.setAttribute("txtTelefoneComplementar", consumidor.getContato().getTelefoneComplementar());
+//        request.setAttribute("txtEmail", consumidor.getContato().getEmail());
+
         RequestDispatcher view = request.getRequestDispatcher("editarDados.jsp");
         view.forward(request, response);
+
     }
-    
+
 }

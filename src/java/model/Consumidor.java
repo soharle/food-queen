@@ -79,4 +79,14 @@ public class Consumidor {
 
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public Consumidor setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+        return this;
+    }
+    
+
 }

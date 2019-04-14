@@ -49,7 +49,7 @@
                                         <div class="form-group">
                                             <label for="txtLogradouro">Logradouro</label>
                                             <input type="text" name="txtLogradouro" id="txtLogradouro" <c:if
-                                                       test="${loja.enderecoLoja.logradouro != null}"> value="${loja.enderecoLoja.logradouro}"
+                                                       test="${consumidor.endereco.logradouro != null}"> value="${consumidor.endereco.logradouro}"
                                                    </c:if> class="form-control"/>
                                         </div>
                                     </div>
@@ -57,7 +57,7 @@
                                         <div class="form-group">
                                             <label for="txtNumero">Numero</label>
                                             <input type="text" name="txtNumero" id="txtNumero" <c:if
-                                                       test="${loja.enderecoLoja.numero != null}"> value="${loja.enderecoLoja.numero}"</c:if>
+                                                       test="${consumidor.endereco.numero != null}"> value="${consumidor.endereco.numero}"</c:if>
                                                        class="form-control"/>
                                             </div>
                                         </div>
@@ -67,7 +67,7 @@
                                             <div class="form-group mt-5">
                                                 <label for="txtComplemento">Complemento</label>
                                                 <input type="text" name="txtComplemento" id="txtComplemento" <c:if
-                                                       test="${loja.enderecoLoja.complemento != null}"> value="${loja.enderecoLoja.complemento}"
+                                                       test="${consumidor.endereco.complemento != null}"> value="${consumidor.endereco.complemento}"
                                                    </c:if> class="form-control"/>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                         <div class="form-group mt-5">
                                             <label for="txtBairro">Bairro</label>
                                             <input type="text" name="txtBairro" id="txtBairro" <c:if
-                                                       test="${loja.enderecoLoja.bairro != null}"> value="${loja.enderecoLoja.bairro}"</c:if>
+                                                       test="${consumidor.endereco.bairro != null}"> value="${consumidor.endereco.bairro}"</c:if>
                                                        class="form-control"/>
                                             </div>
                                         </div>
@@ -85,7 +85,7 @@
                                             <div class="form-group mt-5">
                                                 <label for="txtCidade">Cidade</label>
                                                 <input type="text" name="txtCidade" id="txtCidade" <c:if
-                                                       test="${loja.enderecoLoja.cidade != null}"> value="${loja.enderecoLoja.cidade}"</c:if>
+                                                       test="${consumidor.endereco.cidade != null}"> value="${consumidor.endereco.cidade}"</c:if>
                                                        class="form-control"/>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@
                                             <div class="form-group mt-5">
                                                 <label for="txtEstado">Estado</label>
                                                 <input type="text" name="txtEstado" id="txtEstado" <c:if
-                                                       test="${loja.enderecoLoja.estado != null}"> value="${loja.enderecoLoja.estado}"</c:if>
+                                                       test="${consumidor.endereco.estado != null}"> value="${consumidor.endereco.estado}"</c:if>
                                                        class="form-control"/>
                                             </div>
                                         </div>
@@ -103,15 +103,15 @@
                                             <div class="form-group mt-5">
                                                 <label for="txtPais">Pais</label>
                                                 <input type="text" name="txtPais" id="txtPais" <c:if
-                                                       test="${loja.enderecoLoja.pais != null}"> value="${loja.enderecoLoja.pais}"</c:if>
+                                                       test="${consumidor.endereco.pais != null}"> value="${consumidor.endereco.pais}"</c:if>
                                                        class="form-control"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group mt-5">
                                                 <label for="txtCep">CEP</label>
-                                                <input type="text" name="txtCep" id="txtCep" <c:if test="${loja.enderecoLoja.cep != null}">
-                                                   value="${loja.enderecoLoja.cep}"</c:if> class="form-control"/>
+                                                <input type="text" name="txtCep" id="txtCep" <c:if test="${consumidor.endereco.cep != null}">
+                                                   value="${consumidor.endereco.cep}"</c:if> class="form-control"/>
                                             </div>
                                         </div>
                                     </div>

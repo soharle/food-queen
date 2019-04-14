@@ -26,7 +26,7 @@
                                 <div class="bradcaump__inner text-center">
                                     <h2 class="bradcaump-title">Editar dados</h2>
                                     <nav class="bradcaump-inner">
-                                        <a class="breadcrumb-item" href="FrontController?action=PrepararHomeConsumidor">Início</a>
+                                        <a class="breadcrumb-item" href="FrontController?action=PrepararDadosConsumidor">Início</a>
                                         <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
                                         <span class="breadcrumb-item active">Editar dados pessoais</span>
                                     </nav>
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-sm-0 col-md-1 col-lg-2"></div>
                         <div class="col-sm-12 col-md-10 col-lg-8">
-                            <form action="" method="post">
+                            <form action="FrontController?action=EditarDadosConsumidor" method="post">
                                 <div class="form-group">
                                     <label for="txtLogin">Login</label>
                                     <input type="text" class="form-control" <c:if test="${consumidor.conta.login != null}">
@@ -90,7 +90,7 @@
                                             <div class="col-md-9">
                                                 <label for="txtTelefone2">Telefone complementar</label>
                                                 <input type="text" class="form-control" <c:if test="${consumidor.contato.telefoneComplementar != null}">
-                                                   value="${consumidor.contato.telefoneComplementar}"</c:if> id="txtTelefone2" name="txtTelefone2">
+                                                   value="${consumidor.contato.telefoneComplementar}"</c:if> id="txtComplementar" name="txtComplementar">
                                             </div>
                                         </div>
                                     </div>
