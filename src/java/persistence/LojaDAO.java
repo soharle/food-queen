@@ -57,9 +57,9 @@ public class LojaDAO {
             contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
             Endereco enderecoLoja = new Endereco();
-            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
-                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
-                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+            enderecoLoja = enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
+                    .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
+                    .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
             Categoria categoria = new Categoria();
             categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
             loja = new Loja();
@@ -98,9 +98,9 @@ public class LojaDAO {
             contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
             Endereco enderecoLoja = new Endereco();
-            enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
-                    .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
-                    .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+            enderecoLoja = enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
+                    .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
+                    .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
             Categoria categoria = new Categoria();
             categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
             loja = new Loja();
@@ -136,9 +136,9 @@ public class LojaDAO {
                 contaLoja = contaLoja.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                         .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
                 Endereco enderecoLoja = new Endereco();
-                enderecoLoja = enderecoLoja.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
-                        .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
-                        .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
+                enderecoLoja = enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
+                    .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
+                    .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
                 Categoria categoria = new Categoria();
                 categoria = categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
                 Loja loja = new Loja();

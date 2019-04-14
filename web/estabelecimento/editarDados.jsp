@@ -12,7 +12,7 @@
 <html>
 
     <head>
-        <title>Admin - Editar dados</title>
+        <title>Admin - Home</title>
         <%@ include file="shared/head.jsp" %>
 
     </head>
@@ -20,7 +20,7 @@
 
     <body>
         <%@ include file="shared/navbar.jsp" %>
-        <div class="container mt-5">
+        <div class="container my-5">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-item nav-link active" id="nav-dados-tab" data-toggle="tab" href="#nav-dados" role="tab" aria-controls="nav-dados" aria-selected="true">Dados</a>
@@ -36,7 +36,7 @@
                 </li>
             </ul>
             <!-- Tab panes -->
-            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-content">
                 <div class="tab-pane fade show active" id="nav-dados" role="tabpanel" aria-labelledby="nav-dados-tab">
                     <form class="container" action="FrontController?action=EditarDadosLoja" method="post">
                         <div class="row">
@@ -91,7 +91,7 @@
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                    <button type="submit" class="btn btn-md btn-danger">Cancelar</button>
+                                    <a href="FrontController?action=EntrarLoja" class="btn btn-md btn-danger">Cancelar</a>
                                 </div>
                             </div>
                         </form>
@@ -103,7 +103,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtLogradouro">Logradouro</label>
                                         <input type="text" name="txtLogradouro" id="txtLogradouro" <c:if
-                                               test="${loja.enderecoLoja.logradouro != null}"> value="${loja.enderecoLoja.logradouro}"
+                                               test="${loja.endereco.logradouro != null}"> value="${loja.endereco.logradouro}"
                                            </c:if> class="form-control"/>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                                 <div class="form-group mt-5">
                                     <label for="txtNumero">Numero</label>
                                     <input type="text" name="txtNumero" id="txtNumero" <c:if
-                                               test="${loja.enderecoLoja.numero != null}"> value="${loja.enderecoLoja.numero}"</c:if>
+                                               test="${loja.endereco.numero != null}"> value="${loja.endereco.numero}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtComplemento">Complemento</label>
                                         <input type="text" name="txtComplemento" id="txtComplemento" <c:if
-                                               test="${loja.enderecoLoja.complemento != null}"> value="${loja.enderecoLoja.complemento}"
+                                               test="${loja.endereco.complemento != null}"> value="${loja.endereco.complemento}"
                                            </c:if> class="form-control"/>
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                 <div class="form-group mt-5">
                                     <label for="txtBairro">Bairro</label>
                                     <input type="text" name="txtBairro" id="txtBairro" <c:if
-                                               test="${loja.enderecoLoja.bairro != null}"> value="${loja.enderecoLoja.bairro}"</c:if>
+                                               test="${loja.endereco.bairro != null}"> value="${loja.endereco.bairro}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtCidade">Cidade</label>
                                         <input type="text" name="txtCidade" id="txtCidade" <c:if
-                                               test="${loja.enderecoLoja.cidade != null}"> value="${loja.enderecoLoja.cidade}"</c:if>
+                                               test="${loja.endereco.cidade != null}"> value="${loja.endereco.cidade}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -147,7 +147,7 @@
                                     <div class="form-group mt-5">
                                         <label for="txtEstado">Estado</label>
                                         <input type="text" name="txtEstado" id="txtEstado" <c:if
-                                               test="${loja.enderecoLoja.estado != null}"> value="${loja.enderecoLoja.estado}"</c:if>
+                                               test="${loja.endereco.estado != null}"> value="${loja.endereco.estado}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -157,22 +157,22 @@
                                     <div class="form-group mt-5">
                                         <label for="txtPais">Pais</label>
                                         <input type="text" name="txtPais" id="txtPais" <c:if
-                                               test="${loja.enderecoLoja.pais != null}"> value="${loja.enderecoLoja.pais}"</c:if>
+                                               test="${loja.endereco.pais != null}"> value="${loja.endereco.pais}"</c:if>
                                                class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mt-5">
                                         <label for="txtCep">CEP</label>
-                                        <input type="text" name="txtCep" id="txtCep" <c:if test="${loja.enderecoLoja.cep != null}">
-                                           value="${loja.enderecoLoja.cep}"</c:if> class="form-control"/>
+                                        <input type="text" name="txtCep" id="txtCep" <c:if test="${loja.endereco.cep != null}">
+                                           value="${loja.endereco.cep}"</c:if> class="form-control"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 text-right">
                                     <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                    <button type="submit" class="btn btn-md btn-danger">Cancelar</button>
+                                    <a href="FrontController?action=EntrarLoja" class="btn btn-md btn-danger">Cancelar</a>
                                 </div>
                             </div>
                         </form>
@@ -218,7 +218,7 @@
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                <button type="submit" class="btn btn-md btn-danger">Cancelar</button>
+                                <a href="FrontController?action=EntrarLoja" class="btn btn-md btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>
@@ -242,7 +242,7 @@
                         <div class="row">
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                <button type="submit" class="btn btn-md btn-danger">Cancelar</button>
+                                <a href="FrontController?action=EntrarLoja" class="btn btn-md btn-danger">Cancelar</a>
                             </div>
                         </div>
                     </form>
