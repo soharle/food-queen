@@ -39,14 +39,9 @@ public class EditarEnderecoLojaAction implements Action {
         long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
-            loja.getEndereco().setCep(cep);
-            loja.getEndereco().setLogradouro(logradouro);
-            loja.getEndereco().setNumero(numero);
-            loja.getEndereco().setComplemento(complemento);
-            loja.getEndereco().setBairro(bairro);
-            loja.getEndereco().setCidade(cidade);
-            loja.getEndereco().setEstado(estado);
-
+            loja.getEndereco().setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
+                    .setBairro(bairro).setCidade(cidade).setEstado(estado); 
+          
             EnderecoDAO.getInstance().update(loja.getEndereco());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
 

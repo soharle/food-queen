@@ -35,10 +35,7 @@ public class EditarContatoLojaAction implements Action {
         long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
-            loja.getContato().setTelefone(telefone);
-            loja.getContato().setDdd(ddd);
-            loja.getContato().setEmail(email);
-            loja.getContato().setTelefoneComplementar(telefoneComplementar);
+            loja.getContato().setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
             ContatoDAO.getInstance().update(loja.getContato());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
 

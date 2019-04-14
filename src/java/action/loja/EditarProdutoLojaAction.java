@@ -38,7 +38,7 @@ public class EditarProdutoLojaAction implements Action {
 
             long id = Long.parseLong(request.getParameter("txtId"));
             Produto produto = ProdutoDAO.getInstance().get(id);
-            produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem)
+            produto.setDescricao(descricao).setNome(nome).setImagem(imagem)
                     .setPreco(preco).setDisponivel(disponivel).setValorPromocional(valorPromocional);
             
             ProdutoDAO.getInstance().update(produto);

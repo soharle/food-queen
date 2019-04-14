@@ -42,11 +42,7 @@ public class EditarDadosLojaAction implements Action {
         
         try {
             Loja loja = LojaDAO.getInstance().get(id);
-            loja = loja.setNome(nome);
-            loja = loja.setCnpj(cnpj);
-            loja = loja.setDescricao(descricao);
-            loja = loja.setImagem(imagem);
-
+            loja.setNome(nome).setCnpj(cnpj).setDescricao(descricao).setImagem(imagem);
             Categoria categoria = CategoriaDAO.getInstance().get(idCategoria);
             loja.setCategoria(categoria);
 

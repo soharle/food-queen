@@ -25,6 +25,17 @@ public class Produto {
     private String valorPromocional;
     private Loja loja;
     
+    
+    
+    public String getPrecoDeVenda(){
+        if(this.valorPromocional.equals("")){
+            return this.valorPromocional;
+        }else{
+            return this.preco;
+        }
+    }
+    
+    
     public long getId() {
         return id;
     }

@@ -35,7 +35,7 @@ public class EditarSenhaLojaAction implements Action {
         try {
             Loja loja = LojaDAO.getInstance().get(idLoja);
             Conta conta = new Conta();
-            conta = conta.setSenha(senha).setLogin(loja.getConta().getLogin()).setId(loja.getConta().getId());
+            conta.setSenha(senha).setLogin(loja.getConta().getLogin()).setId(loja.getConta().getId());
             loja.setConta(conta);
             ContaDAO.getInstance().update(loja.getConta());
             view = request.getRequestDispatcher("estabelecimento/index.jsp");
