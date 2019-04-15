@@ -22,13 +22,13 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-item nav-link active" id="nav-produto-tab" data-toggle="tab" href="#nav-produto" role="tab" aria-controls="nav-produto" aria-selected="true"><c:if test="${acao == 'editar'}">Editar </c:if>Produto</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="nav-produto" role="tabpanel" aria-labelledby="nav-produto-tab">
-                    <div class="row">
-                        <div class="col-md-12">
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="nav-produto" role="tabpanel" aria-labelledby="nav-produto-tab">
+                        <div class="row">
+                            <div class="col-md-12">
                             <c:if test="${acao == 'criar'}"> 
                                 <form class="container" action="FrontController?action=SalvarProdutoLoja" method="post"> 
                                 </c:if>
@@ -73,12 +73,14 @@
                                                     <option value="1">Disponível</option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="txtValorPromocional">Preço promocional</label>
-                                                    <input type="text" name="txtValorPromocional" id="txtValorPromocional" <c:if test="${produto.valorPromocional != null}">
-                                                       value="${produto.valorPromocional}"</c:if> class="form-control"/>
-                                                </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="optCategoria">Promoção</label>
+                                                    <select class="custom-select" name="optPromocao" id="optPromocao">
+                                                    <c:forEach items="${promocoes}" var="promocao">
+                                                        <option <c:if test="${produto.promocao.getId() == promocao.getId()}"> selected </c:if> value="${promocao.getId()}"> ${promocao.getNome()} - ${promocao.getDesconto()}</option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -86,7 +88,7 @@
                                                 <div class="form-group">
                                                     <label for="txtDescricao">Descrição</label>
                                                     <input type="text" class="form-control" id="txtDescricao" name="txtDescricao" <c:if
-                                                           test="${produto.descricao != null}"> value="${produto.descricao}"</c:if> placeholder="Descrição" />
+                                                               test="${produto.descricao != null}"> value="${produto.descricao}"</c:if> placeholder="Descrição" />
                                                 </div>
                                             </div>
                                         </div>
@@ -96,10 +98,10 @@
                                                 <a href="FrontController?action=PrepararProdutosLoja" class="btn btn-md btn-danger">Cancelar</a>
                                             </div>
                                         </div>
-                                    </form>
-                            </div>
+                                </form>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </body>

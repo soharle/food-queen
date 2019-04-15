@@ -35,7 +35,6 @@ public class PromocaoDAO {
             while (rs.next()) {
                 Promocao promocao
                         = PromocaoFactory.create(rs.getString("nome"));
-
                 promocoes.add(promocao);
 
             }
@@ -58,8 +57,7 @@ public class PromocaoDAO {
             ResultSet rs = st.executeQuery("select * from promocao where promocao.id ='" + promocaoId + "'");
 
             while (rs.next()) {
-                promocao
-                        = PromocaoFactory.create(rs.getString("nome"));
+                promocao = PromocaoFactory.create(rs.getString("nome"));
 
             }
 

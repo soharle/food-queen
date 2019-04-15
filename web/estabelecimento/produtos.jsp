@@ -33,7 +33,6 @@
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Preço</th>
-                                <th scope="col">Preço promocional</th>
                                 <th scope="col">Ação</th>
                             </tr>
                         </thead>
@@ -42,7 +41,6 @@
 
                                     <td>${produto.nome}</td>
                                     <td>${produto.preco}</td>
-                                    <td>${produto.valorPromocional}</td>
                                     <td><a href="FrontController?action=LerProdutoLoja&id=${produto.id}" class="btn btn-sm btn-outline-secondary">Editar</a>
                                         <a href="FrontController?action=DeletarProdutoLoja&id=${produto.id}" class="btn btn-sm btn-outline-danger">Deletar</a></td>
                                 </tr>

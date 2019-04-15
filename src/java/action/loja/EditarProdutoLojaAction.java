@@ -34,7 +34,7 @@ public class EditarProdutoLojaAction implements Action {
         String preco = request.getParameter("txtPreco");
         String disponivel = request.getParameter("optCategoria");
         String descricao = request.getParameter("txtDescricao");
-        String promocaoId = request.getParameter("txtPromocaoId");
+        String promocaoId = request.getParameter("optPromocao");
         
         try {
 
