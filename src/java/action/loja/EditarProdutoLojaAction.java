@@ -18,6 +18,7 @@ import model.Loja;
 import model.Produto;
 import persistence.LojaDAO;
 import persistence.ProdutoDAO;
+import persistence.PromocaoDAO;
 
 /**
  *
@@ -33,16 +34,18 @@ public class EditarProdutoLojaAction implements Action {
         String preco = request.getParameter("txtPreco");
         String disponivel = request.getParameter("optCategoria");
         String descricao = request.getParameter("txtDescricao");
-        String valorPromocional = request.getParameter("txtValorPromocional");
+        String promocaoId = request.getParameter("txtPromocaoId");
+        
         try {
 
             long id = Long.parseLong(request.getParameter("txtId"));
             Produto produto = ProdutoDAO.getInstance().get(id);
             produto.setDescricao(descricao).setNome(nome).setImagem(imagem)
-                    .setPreco(preco).setDisponivel(disponivel).setValorPromocional(valorPromocional);
-            
+                    .setPreco(preco).setDisponivel(disponivel);
+            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(promocaoId)));
             ProdutoDAO.getInstance().update(produto);
             produto.setLoja(LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString())));
+
             RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararProdutosLoja");
 
             view.forward(request, response);

@@ -22,20 +22,14 @@ public class Produto {
     private String disponivel;
     private String descricao;
     private String imagem;
-    private String valorPromocional;
+    private Promocao promocao;
     private Loja loja;
-    
-    
-    
-    public String getPrecoDeVenda(){
-        if(this.valorPromocional.equals("")){
-            return this.valorPromocional;
-        }else{
-            return this.preco;
-        }
+
+    public String getPrecoDeVenda() {
+        float precoNum = Float.parseFloat(preco);
+        return precoNum - precoNum * promocao.getDesconto() + "";
     }
-    
-    
+
     public long getId() {
         return id;
     }
@@ -105,21 +99,20 @@ public class Produto {
 
     }
 
-    public String getValorPromocional() {
-        return valorPromocional;
-    }
-
-    public Produto setValorPromocional(String valorPromocional) {
-        this.valorPromocional = valorPromocional;
-        return this;
-    }
-
     public void save() throws SQLException, ClassNotFoundException {
         ProdutoDAO.getInstance().save(this);
     }
 
     public void update() {
-         ProdutoDAO.getInstance().update(this);
+        ProdutoDAO.getInstance().update(this);
+    }
+
+    public Promocao getPromocao() {
+        return promocao;
+    }
+
+    public void setPromocao(Promocao promocao) {
+        this.promocao = promocao;
     }
 
 }

@@ -67,8 +67,7 @@ public class PedidoDAO {
             Produto produto = new Produto();
             produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                    .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
-                    .setValorPromocional(rs.getString("produto.valor_promocional"));
+                    .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
             Carrinho carrinho = new Carrinho();
             carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
                     .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
@@ -111,9 +110,7 @@ public class PedidoDAO {
                 Produto produto = new Produto();
                 produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
-                        .setValorPromocional(rs.getString("produto.valor_promocional"));
-                Carrinho carrinho = new Carrinho();
+                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);                Carrinho carrinho = new Carrinho();
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
                         .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
