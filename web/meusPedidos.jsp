@@ -31,7 +31,7 @@
                                 <nav class="bradcaump-inner">
                                     <a class="breadcrumb-item" href="FrontController?action=PrepararHomeConsumidor">Início</a>
                                     <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
-                                    <span class="breadcrumb-item active">Meus Pedidos</span>
+                                    <span class="breadcrumb-item active">Meu Pedido</span>
                                 </nav>
                             </div>
                         </div>

@@ -95,12 +95,15 @@
                                     <form action="#">
                                         <ul>
                                             <li><p class="strong">Produto</p><p class="strong">total</p></li>
-                                            <c:forEach items="${produtos}" var="produto">
-                                                <li><p>${produto.nome}</p><p>R$ ${produto.valor}</p></li>
-                                            </c:forEach>
 
-                                            <li><p class="strong">Total</p><p class="strong">$190.98</p></li>
-                                            <li><button class="food__btn">Finalizar Compra</button></li>
+                                            <c:forEach items="${pedidos}" var="pedido">
+                                                <li><p>${pedido.produto.nome} - R$ "${pedido.produto.getPrecoDeVenda()}"</p></li>
+                                                </c:forEach>
+
+                                            <li><p class="strong">Total</p><p class="strong">R$ ${total}</p></li>
+                                            <form method="post" action="FrontController?action=FinalizarCompraConsumidor">
+                                                <li><button value="submit" class="food__btn">Finalizar Compra</button></li>
+                                            </form>
                                         </ul>
                                     </form>
                                 </div>

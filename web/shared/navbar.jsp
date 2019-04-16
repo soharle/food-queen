@@ -91,6 +91,7 @@
             </div>
             <div class="cartbox__total">
                 <ul>
+                    <c:set var="total" scope = "session" value = "${0}" />    
                     <c:forEach items="${sessionScope.pedidos}" var="pedido">
                         <c:set var="total" value="${total + pedido.produto.getPrecoDeVenda()}"/>
                     </c:forEach>

@@ -13,29 +13,28 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
-import model.Cartao;
 import model.Pedido;
+import model.StateFactory;
 import persistence.CarrinhoDAO;
-import persistence.CartaoDAO;
 import persistence.PedidoDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class PrepararFinalizarCompraConsumidorAction implements Action{
+public class FinalizarCompraConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
         Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
-        ArrayList<Cartao> cartoes = CartaoDAO.getInstance().getAllByConsumidor(id);
+        carrinho.setEstado(StateFactory.createCarrinhoEstado("Aguardando"));
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
-        request.setAttribute("cartoes", cartoes);
+        
+        request.setAttribute("carrinho", carrinho);
         request.setAttribute("pedidos", pedidos);
         
-        RequestDispatcher view = request.getRequestDispatcher("finalizarCompra.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("home.jsp");
         view.forward(request, response);
     }
     
