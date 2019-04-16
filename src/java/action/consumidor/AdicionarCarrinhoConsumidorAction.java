@@ -45,12 +45,13 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
                 carrinho = CarrinhoDAO.getInstance().save(carrinho);
             } else {
                 ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
-                if (pedidos.size() > 0) {
-                    if (pedidos.get(0).getProduto().getLoja().getId()
+                for (Pedido pedido : pedidos) {
+                    if (pedido.getProduto().getLoja().getId()
                             != produto.getLoja().getId()) {
                         request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
                         request.getRequestDispatcher("home.jsp").forward(request, response);
                     }
+
                 }
             }
 
@@ -61,7 +62,7 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
             PedidoDAO.getInstance().save(pedido);
             request.getSession().setAttribute("carrinho", carrinho);
             request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
-            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+            RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararListaProdutosLojaConsumidor&id=" + produto.getLoja().getId());
             view.forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AdicionarCarrinhoConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
