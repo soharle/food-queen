@@ -11,19 +11,19 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.ProdutoDAO;
+import persistence.LojaDAO;
 
 /**
  *
- * @author Gabriel
+ * @author mathe
  */
-public class PrepararListaProdutosFiltroConsumidorAction implements Action{
+public class PrepararListaLojaConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String filto = request.getParameter("filtro");
-        request.setAttribute("produtos", ProdutoDAO.getInstance().getAll());
-        RequestDispatcher view = request.getRequestDispatcher("listaProdutos.jsp");
+        /*Fazer uma tela pra listar as lojas*/
+        RequestDispatcher view = request.getRequestDispatcher("");
+        request.setAttribute("lojas", LojaDAO.getInstance().getAll());
         view.forward(request, response);
     }
     

@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
+import model.Entrega;
 import model.Pedido;
 import model.StateFactory;
 import persistence.CarrinhoDAO;
@@ -30,6 +31,9 @@ public class FinalizarCompraConsumidorAction implements Action {
         Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
         carrinho.setEstado(StateFactory.createCarrinhoEstado("Aguardando"));
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+        Entrega entrega = new Entrega();
+        entrega.setCarrinho(carrinho);
+        /* Não terminei, tem que setar uma loja e salvar no banco*/
         
         request.setAttribute("carrinho", carrinho);
         request.setAttribute("pedidos", pedidos);
