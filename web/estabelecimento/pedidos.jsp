@@ -18,51 +18,40 @@
         <%@ include file="shared/navbar.jsp" %>
         <div class="container mt-5">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h3 class="h4 text-center">Pedidos pendentes</h3>
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <c:forEach items="${carrinhosPendentes}" var="carrinho">
-                                <td>${carrinho.consumidor.nome}</td>
-                                <td>${carrinho.valor}</td>
-                                <td>${carrinho.estado}</td>
-                                <td><a href="#" class="btn btn-sm btn-outline-success">Visualizar pedido</a></td>
-                            </c:forEach>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="h4 text-center">Pedidos em processamento</h3>
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Ação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            <c:forEach items="${carrinhos}" var="carrinho">
-                                <td>${carrinho.consumidor.nome}</td>
-                                <td>${carrinho.valor}</td>
-                                <td>${carrinho.estado}</td>
-                                <td><a href="#" class="btn btn-sm btn-outline-success">Visualizar pedido</a></td>
-                            </c:forEach>
-                        </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="accordion" id="accordionExample">
+                        <c:forEach items="${carrinhos}" var="carrinho">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-dark btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Collapsible Group Item #1
+                                        </button>
+                                    </h2>
+                                </div>
+
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        ${pedido.carrinho.carrinhoEstado.estadoNome}
+                                        <h4 class="h4">
+                                            Alterar estado
+                                        </h4>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-secondary">Estado 1</button>
+                                            <button type="button" class="btn btn-secondary">Estado 2</button>                                            
+                                            <button type="button" class="btn btn-secondary">Estado 3</button>
+                                            <button type="button" class="btn btn-secondary">Estado 4</button>
+                                            <button type="button" class="btn btn-secondary">Estado 5</button>
+                                            <button type="button" class="btn btn-secondary">Estado 6</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>
