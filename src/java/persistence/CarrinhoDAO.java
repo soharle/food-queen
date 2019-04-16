@@ -69,6 +69,41 @@ public class CarrinhoDAO {
 
         return carrinho;
     }
+    
+    public Carrinho getByConsumidor(long idConsumidor) {
+        Carrinho carrinho = null;
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT carrinho.*, consumidor.*, contato.*, conta.* "
+                    + "FROM carrinho "
+                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "WHERE carrinho.consumidor_id = " + idConsumidor + ";");
+            rs.first();
+            Contato contato = new Contato();
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            carrinho = new Carrinho();
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
+                    .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+                    .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return carrinho;
+    }
 
     public ArrayList<Carrinho> getAll() {
         ArrayList<Carrinho> carrinhos = new ArrayList<Carrinho>();
