@@ -8,6 +8,7 @@ package action.consumidor;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -42,12 +43,21 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
                 carrinho = new Carrinho();
                 carrinho.setConsumidor(consumidor);
                 carrinho = CarrinhoDAO.getInstance().save(carrinho);
+            } else {
+                ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+                if (pedidos.size() > 0) {
+                    if (pedidos.get(0).getProduto().getLoja().getId()
+                            != produto.getLoja().getId()) {
+                        request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
+                        request.getRequestDispatcher("home.jsp").forward(request, response);
+                    }
+                }
             }
 
             Pedido pedido = new Pedido();
             pedido.setCarrinho(carrinho);
             pedido.setProduto(produto);
-            
+
             PedidoDAO.getInstance().save(pedido);
             request.getSession().setAttribute("carrinho", carrinho);
             request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));

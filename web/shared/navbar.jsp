@@ -27,8 +27,8 @@
                     <div class="main__menu__wrap">
                         <nav class="main__menu__nav d-none d-lg-block">
                             <ul class="mainmenu">
-                                <li class="drop"><a href="FrontController?action=PrepararListaProdutosFiltroConsumidor">Produtos</a></li>
-                                <li class="drop"><a href="">Dados pessoais</a>
+                                <li class="drop"><a href="FrontController?action=PrepararListaLojaConsumidor">Lojas</a></li>
+                                <li class="drop"><a href="#">Dados pessoais</a>
                                     <ul class="dropdown__menu">
                                         <li><a href="FrontController?action=PrepararEditarDadosConsumidor">Editar dados</a></li>
                                         <li><a href="FrontController?action=PrepararEditarEnderecoConsumidor">Editar endereço</a></li>

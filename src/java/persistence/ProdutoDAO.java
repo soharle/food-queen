@@ -100,7 +100,7 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("SELECT produto.*, loja.* "
                     + "FROM produto "
                     + "INNER JOIN loja ON produto.loja_id = loja.id "
-                    + "WHERE loja.id = '" + idLoja + "';");
+                    + "WHERE produto.loja_id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
                 Promocao promocao = PromocaoDAO.getInstance().getPromocao(rs.getInt("produto.promocao_id"));
@@ -171,15 +171,16 @@ public class ProdutoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO produto (loja_id, nome, preco, disponivel, descricao, imagem,promocao_id) "
+            String query = "INSERT INTO produto (loja_id, nome, preco, disponivel, descricao, imagem, promocao_id) "
                     + "VALUES (" + produto.getLoja().getId() + ", "
                     + "'" + produto.getNome() + "', "
                     + "'" + produto.getPreco() + "', "
                     + "'" + produto.getDisponivel() + "', "
                     + "'" + produto.getDescricao() + "', "
-                    + "'" + produto.getImagem() + "' "
-                    + "'" + produto.getPromocao().getId() + "' "
-                    + ");");
+                    + "'" + produto.getImagem() + "', "
+                    + "" + produto.getPromocao().getId() + " "
+                    + ");";
+            st.execute(query);
         } catch (SQLException e) {
             System.out.println(e);;
         } finally {

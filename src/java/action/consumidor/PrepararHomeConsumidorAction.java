@@ -33,6 +33,7 @@ public class PrepararHomeConsumidorAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         String tipo = session.getAttribute("tipo").toString();
+        ArrayList<Pedido> pedidosNaSessao =(ArrayList<Pedido>) session.getAttribute("pedidos");
         if (tipo.equals("Consumidor")) {
             try {
                 ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
@@ -40,7 +41,7 @@ public class PrepararHomeConsumidorAction implements Action {
                 ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
                 request.setAttribute("produtos", produtos);
                 request.setAttribute("categorias", categorias);
-                request.setAttribute("pedidos", pedidos);
+                //request.setAttribute("pedidos", pedidos);
                 RequestDispatcher view = request.getRequestDispatcher("home.jsp");
                 view.forward(request, response);
 

@@ -7,12 +7,14 @@ package action.consumidor;
 
 import controller.Action;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
 import model.Consumidor;
+import model.Pedido;
 import persistence.CarrinhoDAO;
 import persistence.ConsumidorDAO;
 import persistence.PedidoDAO;
@@ -21,7 +23,7 @@ import persistence.PedidoDAO;
  *
  * @author Gabriel
  */
-public class RemoverProdutoCarrinhoConsumidorAction implements Action{
+public class RemoverProdutoCarrinhoConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -29,9 +31,16 @@ public class RemoverProdutoCarrinhoConsumidorAction implements Action{
         PedidoDAO.getInstance().delete(id);
         long idConsumidor = Long.parseLong(request.getSession().getAttribute("id").toString());
         Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor);
-        request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
+        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(idConsumidor);
+        request.getSession().setAttribute("pedidos", pedidos);
+        if (pedidos.size() == 0) {
+            CarrinhoDAO.getInstance().delete(carrinho.getId());
+            request.getSession().removeAttribute("pedidos");
+            request.getSession().removeAttribute("carrinho");
+        }
+
         RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-            view.forward(request, response);
+        view.forward(request, response);
     }
-    
+
 }

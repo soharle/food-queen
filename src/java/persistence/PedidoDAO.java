@@ -201,7 +201,7 @@ public class PedidoDAO {
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
-                    + "WHERE carrinho.id = " + id + ";");
+                    + "WHERE pedido.carrinho_id = " + id + ";");
             while (rs.next()) {
                 Contato contato = new Contato();
                 contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))

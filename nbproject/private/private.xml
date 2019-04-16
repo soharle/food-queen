@@ -3,21 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/Produto.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/CarrinhoEstado.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/controller/ActionFactory.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararFinalizarCompraConsumidorAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/CartaoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/PromocaoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/web/finalizarCompra.jsp</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/CarrinhoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/web/shared/navbar.jsp</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/PedidoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/web/listaProdutos.jsp</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/AdicionarCarrinhoConsumidorAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/controller/FrontController.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/RemoverProdutoCarrinhoConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/PrepararHomeConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/home.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/PrepararListaProdutosLojaConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/manterProduto.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/conta/LogarContaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/PrepararListaLojaConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/SalvarProdutoLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/ProdutoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/conta/DeslogarContaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/PromocaoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/manterCartao.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/meusPedidos.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/CartaoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/PromocaoFactory.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/pedidos.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/PromocaoNenhuma.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/shared/navbar.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/PrepararListarProdutosFiltroConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/PromocaoSextaFeira.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/estabelecimento/produtos.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/CadastrarProdutoLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/PrepararManterCartaoConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/listaLojas.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/loja/PrepararProdutosLojaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/PromocaoPadrao.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/Pedido.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/Carrinho.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/AdicionarCarrinhoConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/PromocaoEspecial.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/web/listaProdutos.jsp</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/SalvarCartaoConsumidorAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/consumidor/RemoverProdutoCarrinhoConsumidorAction.java</file>
         </group>
     </open-files>
 </project-private>

@@ -184,12 +184,13 @@ public class CartaoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
+            String query = "SELECT cartao.*, consumidor.*, conta.*, contato.* "
                     + "FROM cartao "
                     + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
-                    + "WHERE consumidor.id = " + id + ");");
+                    + "WHERE cartao.consumidor_id = " + id + ";";
+            ResultSet rs = st.executeQuery(query);
             rs.first();
             Contato contato = new Contato();
             contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))

@@ -35,6 +35,9 @@
                 </div>
             </div>
             <!-- End Slider Area -->
+            <div>
+                ${msgErro}
+            </div>
             <!-- Start Food Category -->
             <section class=" section-padding--lg" style="background-color: #ffffff;">
                 <div class="container">

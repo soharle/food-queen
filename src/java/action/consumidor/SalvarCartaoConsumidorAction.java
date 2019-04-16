@@ -29,7 +29,7 @@ import persistence.ProdutoDAO;
  *
  * @author mathe
  */
-public class SalvarCartaoConsumidor implements Action {
+public class SalvarCartaoConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -42,7 +42,7 @@ public class SalvarCartaoConsumidor implements Action {
 
         try {
             Cartao cartao = new Cartao();
-            cartao.setCod(cod).setNumero(numero).setTitular(numero).setNumero(numero).setValidade(mes + "/" + ano);
+            cartao.setCod(cod).setNumero(numero).setTitular(nome).setValidade(mes + "/" + ano);
             Consumidor consumidor = ConsumidorDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString()));
             cartao.setConsumidor(consumidor);
             

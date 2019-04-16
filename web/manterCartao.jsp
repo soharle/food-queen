@@ -49,18 +49,18 @@
                                     <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">${cartao.numero}</a>
                                     <div id="payment-method" class="collapse">
                                         <div class="accordion-body payment-method fix">
-                                            <div class="row">
-                                                <div class="input-box col-12 mb--20">
-                                                    <label>Titular </label>
+                                            <div class="row text-center">
+                                                <div class="input-box col-6 mb--20">
+                                                    <label>Titular: </label>
                                                     ${cartao.titular}
                                                 </div>
-                                                <div class="input-box col-12 mb--20">
-                                                    <label>Número </label>
+                                                <div class="input-box col-6 mb--20">
+                                                    <label>Número: </label>
                                                     ${cartao.numero}
                                                 </div>
                                                 <div class="input-box col-12">
                                                     <div class="input-box col-12 mb--20">
-                                                        <label>Data de validade</label>
+                                                        <label>Data de validade: </label>
                                                         ${cartao.validade}
                                                     </div>
                                                 </div>
@@ -70,7 +70,7 @@
                                 </div>
                             </c:forEach>
 
-                            <form action="SalvarCartaoConsumidor" method="post">
+                            <form action="FrontController?action=SalvarCartaoConsumidor" method="post">
                                 <div class="payment-method fix">
                                     <div class="row">
                                         <div class="input-box col-12 mb--20 mt--20">

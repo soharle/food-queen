@@ -1,15 +1,15 @@
 package model;
-public class PromocaoSemPromocao implements Promocao {
+public class PromocaoNenhuma implements Promocao {
 
     public int id;
 
-    public PromocaoSemPromocao() {
+    public PromocaoNenhuma() {
         this.id = 4;
     }
 
     @Override
     public String getNome() {
-        return "SemPromocao";
+        return "Nenhuma";
     }
 
     @Override

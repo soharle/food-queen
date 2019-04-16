@@ -11,19 +11,18 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.LojaDAO;
+import persistence.ProdutoDAO;
 
 /**
  *
- * @author mathe
+ * @author Gabriel
  */
-public class PrepararListaLojaConsumidorAction implements Action {
+public class PrepararListarProdutosFiltroConsumidorAction implements Action{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        /*Fazer uma tela pra listar as lojas*/
-        RequestDispatcher view = request.getRequestDispatcher("listaLojas.jsp");
-        request.setAttribute("lojas", LojaDAO.getInstance().getAll());
+        request.setAttribute("produtos", ProdutoDAO.getInstance().getAll());
+        RequestDispatcher view = request.getRequestDispatcher("listaProdutos.jsp");
         view.forward(request, response);
     }
     

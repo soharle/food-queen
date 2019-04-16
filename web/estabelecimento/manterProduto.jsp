@@ -73,31 +73,30 @@
                                                     <option value="1">Disponível</option>
                                                 </select>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="optCategoria">Promoção</label>
-                                                    <select class="custom-select" name="optPromocao" id="optPromocao">
-                                                    <c:forEach items="${promocoes}" var="promocao">
-                                                        <option <c:if test="${produto.promocao.getId() == promocao.getId()}"> selected </c:if> value="${promocao.getId()}"> ${promocao.getNome()} - ${promocao.getDesconto()}</option>
-                                                    </c:forEach>
-                                                </select>
+                                            <div class="col-md-6">
+                                                <label for="optPromocao">Promoção</label>
+                                                <select class="custom-select" name="optPromocao" id="optPromocao">
+                                                <c:forEach items="${promocoes}" var="promocao">
+                                                    <option <c:if test="${produto.promocao.getId() == promocao.getId()}"> selected </c:if> value="${promocao.getId()}"> ${promocao.getNome()} - ${promocao.getDesconto()}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="txtDescricao">Descrição</label>
+                                                <input type="text" class="form-control" id="txtDescricao" name="txtDescricao" <c:if
+                                                           test="${produto.descricao != null}"> value="${produto.descricao}"</c:if> placeholder="Descrição" />
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="txtDescricao">Descrição</label>
-                                                    <input type="text" class="form-control" id="txtDescricao" name="txtDescricao" <c:if
-                                                               test="${produto.descricao != null}"> value="${produto.descricao}"</c:if> placeholder="Descrição" />
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-right">
+                                            <button type="submit" class="btn btn-md btn-success">Salvar</button>
+                                            <a href="FrontController?action=PrepararProdutosLoja" class="btn btn-md btn-danger">Cancelar</a>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12 text-right">
-                                                <button type="submit" class="btn btn-md btn-success">Salvar</button>
-                                                <a href="FrontController?action=PrepararProdutosLoja" class="btn btn-md btn-danger">Cancelar</a>
-                                            </div>
-                                        </div>
+                                    </div>
                                 </form>
                         </div>
                     </div>
