@@ -26,8 +26,9 @@ public class Produto {
     private Loja loja;
 
     public String getPrecoDeVenda() {
+        
         float precoNum = Float.parseFloat(preco);
-        return precoNum - precoNum * promocao.getDesconto() + "";
+        return precoNum - precoNum * (promocao.getDesconto()/100) + "";
     }
 
     public long getId() {

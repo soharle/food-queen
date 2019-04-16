@@ -11,6 +11,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.ProdutoDAO;
 
 /**
  *
@@ -21,6 +22,7 @@ public class PrepararListaProdutosFiltroConsumidorAction implements Action{
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String filto = request.getParameter("filtro");
+        request.setAttribute("produtos", ProdutoDAO.getInstance().getAll());
         RequestDispatcher view = request.getRequestDispatcher("listaProdutos.jsp");
         view.forward(request, response);
     }

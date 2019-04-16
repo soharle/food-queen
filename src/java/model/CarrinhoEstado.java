@@ -26,7 +26,6 @@ public abstract class CarrinhoEstado {
     public boolean aguardar(Carrinho carrinho){
         return false;
     };
-    
    
     public String getEstadoNome() {
         return estadoNome;

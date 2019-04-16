@@ -38,18 +38,6 @@
             <!-- Start Menu Grid Area -->
             <section class="food__menu__grid__area section-padding--lg">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="food__nav nav nav-tabs" role="tablist">
-                                <a class="active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab">All</a>
-                                <a id="nav-breakfast-tab" data-toggle="tab" href="#nav-breakfast" role="tab">Breakfast</a>
-                                <a id="nav-lunch-tab" data-toggle="tab" href="#nav-lunch" role="tab">Lunch</a>
-                                <a id="nav-dinner-tab" data-toggle="tab" href="#nav-dinner" role="tab">Dinner</a>
-                                <a id="nav-coffee-tab" data-toggle="tab" href="#nav-coffee" role="tab">Coffee</a>
-                                <a id="nav-snacks-tab" data-toggle="tab" href="#nav-snacks" role="tab">Snacks</a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row mt--30">
                         <div class="col-lg-12">
                             <div class="fd__tab__content tab-content" id="nav-tabContent">
@@ -60,7 +48,7 @@
                                         <div class="single__food__list d-flex wow fadeInUp py-5">
                                             <div class="food__list__thumb">
                                                 <a href="menu-details.html">
-                                                    <img src="${produto.imagem}" alt="">
+                                                    <img src="${produto.imagem}" style="max-width:468px;" alt="">
                                                 </a>
                                             </div>
                                             <div class="food__list__inner d-flex align-items-center justify-content-between">
@@ -68,24 +56,17 @@
                                                     <h2><a href="menu-details.html">${produto.nome}</a></h2>
                                                     <p>${produto.descricao}</p>
                                                     <div class="list__btn">
-                                                        <a class="food__btn grey--btn theme--hover" href="menu-details.html">Adicionar ao carrinho</a>
+                                                        <a class="food__btn grey--btn theme--hover" href="FrontController?action=AdicionarCarrinhoConsumidor&id=${produto.id}">Adicionar ao carrinho</a>
                                                     </div>
                                                 </div>
                                                 <div class="food__rating">
                                                     <div class="list__food__prize">
-                                                        <span <c:if test="${produto.valorPromocional != ''}" > style="text-decoration: line-through; color: #444444!important;"</c:if>>${produto.peco}</span>
+                                                        <span style="color: #444444!important;"> R$ ${produto.getPrecoDeVenda()}</span>
                                                         </div>
-                                                    <c:if test="${produto.valorPromocional != ''}" > 
-                                                        <div class="list__food__prize">
-                                                            <span>${produto.pecoPromocional}</span>
-                                                        </div>
-                                                    </c:if>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     </c:forEach>
-                                    <!-- End Single Food -->
-                                    <!-- Start Single Food -->
                                 </div>
                             </div>
                         </div>

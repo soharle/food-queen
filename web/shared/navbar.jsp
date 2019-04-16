@@ -49,7 +49,7 @@
                         <div class="shopping__cart">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>
                             <div class="shop__qun">
-                                <span>${sessionScope.pedidos.count()}</span>
+                                <span>${sessionScope.pedidos.size()}</span>
                             </div>
                         </div>
                     </div>
@@ -79,10 +79,9 @@
                         </div>
                         <div class="cartbox__item__content">
                             <h5><a href="product-details.html" class="product-name">${pedido.produto.nome}</a></h5>
-                            <p>Quantidade: <span>01</span></p>
-                            <span class="price">${pedido.produto.preco}</span>
+                            <span class="price">R$ ${pedido.produto.getPrecoDeVenda()}</span>
                         </div>
-                        <form action="FrontController?RemoverProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
+                        <form action="FrontController?action=RemoverProdutoCarrinhoConsumidor&id=${pedido.id}" method="post">
                             <button type="submit" class="cartbox__item__remove">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -92,7 +91,10 @@
             </div>
             <div class="cartbox__total">
                 <ul>
-                    <li class="grandtotal">Total<span class="price">${sessionScope.carrinho.valor}</span></li>
+                    <c:forEach items="${sessionScope.pedidos}" var="pedido">
+                        <c:set var="total" value="${total + pedido.produto.getPrecoDeVenda()}"/>
+                    </c:forEach>
+                    <li class="grandtotal">Total<span class="price">R$ ${total}</span></li>
                 </ul>
             </div>
             <div class="cartbox__buttons">

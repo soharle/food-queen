@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
+import persistence.PedidoDAO;
 
 /**
  *
@@ -22,6 +24,12 @@ public class Carrinho extends Observable {
 
     Consumidor consumidor;
 
+    public Carrinho() {
+        this.estado = new CarrinhoEstadoNaoConcluido();
+    }
+
+    
+ 
     public long getId() {
         return id;
     }
@@ -32,6 +40,13 @@ public class Carrinho extends Observable {
     }
 
     public String getValor() {
+        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(id);
+        double val = 0;
+        for(Pedido pedido : pedidos){
+           val += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
+        }
+        
+        this.valor = val + "";
         return valor;
     }
 

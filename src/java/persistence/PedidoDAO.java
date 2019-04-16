@@ -19,6 +19,7 @@ import model.Contato;
 import model.Loja;
 import model.Pedido;
 import model.Produto;
+import model.Promocao;
 import model.StateFactory;
 
 /**
@@ -110,7 +111,8 @@ public class PedidoDAO {
                 Produto produto = new Produto();
                 produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);                Carrinho carrinho = new Carrinho();
+                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
+                Carrinho carrinho = new Carrinho();
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
                         .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
@@ -180,6 +182,54 @@ public class PedidoDAO {
             closeResources(conn, st);
         }
 
+    }
+
+    public ArrayList<Pedido> getByCarrinho(long id) {
+        Pedido pedido = null;
+        Connection conn = null;
+        Statement st = null;
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, carrinho.*, produto.*, consumidor.*, contato.*, conta.*, promocao.* "
+                    + "FROM pedido "
+                    + "INNER JOIN carrinho ON pedido.carrinho_id = carrinho.id "
+                    + "INNER JOIN produto ON pedido.produto_id = produto.id "
+                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
+                    + "WHERE carrinho.id = " + id + ";");
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta();
+                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+                Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
+                Produto produto = new Produto();
+                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
+                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
+                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
+                        .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
+                Carrinho carrinho = new Carrinho();
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
+                        .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+                        .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                pedido = new Pedido();
+                pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+                pedidos.add(pedido);
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pedidos;
     }
 
     private void closeResources(Connection conn, Statement st) {
