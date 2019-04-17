@@ -35,30 +35,31 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
         long id = Long.parseLong(request.getParameter("id"));
         Produto produto = ProdutoDAO.getInstance().get(id);
         long idConsumidor = Long.parseLong(request.getSession().getAttribute("id").toString());
+        RequestDispatcher view = null;
         try {
             Consumidor consumidor = ConsumidorDAO.getInstance().get(idConsumidor);
-            Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor);
+            Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
 
             if (carrinho == null) {
                 carrinho = new Carrinho();
                 carrinho.setConsumidor(consumidor);
                 carrinho.setLoja(produto.getLoja());
                 carrinho = CarrinhoDAO.getInstance().save(carrinho);
+            }
+            if (produto.getLoja().getId() == carrinho.getLoja().getId()) {
+                Pedido pedido = new Pedido();
+                pedido.setCarrinho(carrinho);
+                pedido.setProduto(produto);
+                PedidoDAO.getInstance().save(pedido);
+                request.getSession().setAttribute("carrinho", carrinho);
+                request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
+                view = request.getRequestDispatcher("FrontController?action=PrepararListaProdutosLojaConsumidor&id=" + produto.getLoja().getId());
+
             } else {
-                if (produto.getLoja().getId() != carrinho.getLoja().getId()) {
-                    request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
-                    request.getRequestDispatcher("home.jsp").forward(request, response);
-                }
+                request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
+                view = request.getRequestDispatcher("home.jsp");
             }
 
-            Pedido pedido = new Pedido();
-            pedido.setCarrinho(carrinho);
-            pedido.setProduto(produto);
-
-            PedidoDAO.getInstance().save(pedido);
-            request.getSession().setAttribute("carrinho", carrinho);
-            request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
-            RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararListaProdutosLojaConsumidor&id=" + produto.getLoja().getId());
             view.forward(request, response);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(AdicionarCarrinhoConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);

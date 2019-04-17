@@ -30,7 +30,7 @@ public class RemoverProdutoCarrinhoConsumidorAction implements Action {
         long id = Long.parseLong(request.getParameter("id"));
         PedidoDAO.getInstance().delete(id);
         long idConsumidor = Long.parseLong(request.getSession().getAttribute("id").toString());
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor);
+        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         request.getSession().setAttribute("pedidos", pedidos);
         if (pedidos.size() == 0) {

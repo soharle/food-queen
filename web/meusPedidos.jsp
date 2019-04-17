@@ -48,28 +48,22 @@
                     <div class="col-sm-12 col-md-10 col-lg-8">
                         <c:forEach items="${carrinhos}" var="carrinho">
                             <div class="single-accordion">
-                                <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">Não sei como dividir os pedidos pelo model</a>
+                                <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">Pedido da loja ${carrinho.loja.nome}</a>
                                 <div id="payment-method" class="collapse">
                                     <div class="accordion-body payment-method fix">
                                         <div class="row">
                                             <div class="input-box col-12 mb--20">
-                                                <label>Titular </label>
-                                                Algo
+                                                <label> Loja </label>
+                                                <p>${carrinho.loja.nome}</p>
                                             </div>
                                             <div class="input-box col-12 mb--20">
-                                                <label>Número </label>
-                                                Algo
+                                                <label>Valor total </label>
+                                                <p>${carrinho.valor}</p>
                                             </div>
                                             <div class="input-box col-12">
                                                 <div class="input-box col-12 mb--20">
                                                     <label>Estado do pedido</label>
-                                                    Algo
-                                                </div>
-                                            </div>
-                                            <div class="input-box col-12">
-                                                <div class="input-box col-12 mb--20">
-                                                    <label>Forma de pagamento</label>
-                                                    Algo
+                                                    <p>${carrinho.estado.getEstadoMsg()}</p>
                                                 </div>
                                             </div>
                                         </div>

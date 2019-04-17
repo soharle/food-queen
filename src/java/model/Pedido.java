@@ -12,8 +12,6 @@ package model;
 public class Pedido {
 
     private long id;
-    private String observacao;
-
     private Produto produto;
     private Carrinho carrinho;
 
@@ -25,16 +23,6 @@ public class Pedido {
     public Pedido setId(long id) {
         this.id = id;
         return this;
-    }
-
-    public String getObservacao() {
-        return observacao;
-    }
-
-    public Pedido setObservacao(String observacao) {
-        this.observacao = observacao;
-        return this;
-
     }
 
     public Produto getProduto() {

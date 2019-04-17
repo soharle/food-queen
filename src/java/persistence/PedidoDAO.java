@@ -72,7 +72,7 @@ public class PedidoDAO {
             carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
             pedido = new Pedido();
-            pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+            pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -114,7 +114,7 @@ public class PedidoDAO {
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 Pedido pedido = new Pedido();
-                pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+                pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
                 pedidos.add(pedido);
             }
         } catch (SQLException | ClassNotFoundException ex) {
@@ -131,8 +131,7 @@ public class PedidoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.execute("UPDATE produto SET produto_id = " + pedido.getProduto().getId() + ", "
-                    + "carrinho_id = " + pedido.getCarrinho().getId() + ", "
-                    + "observacao = '" + pedido.getObservacao() + "' "
+                    + "carrinho_id = " + pedido.getCarrinho().getId() + ""
                     + "WHERE id = " + pedido.getId() + ";");
 
         } catch (SQLException e) {
@@ -168,10 +167,9 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO pedido (produto_id, carrinho_id, observacao) "
+            st.execute("INSERT INTO pedido (produto_id, carrinho_id) "
                     + "VALUES (" + pedido.getProduto().getId() + ", "
-                    + "" + pedido.getCarrinho().getId() + ", "
-                    + "'" + pedido.getObservacao() + "'"
+                    + "" + pedido.getCarrinho().getId() + ""
                     + ");");
         } catch (SQLException e) {
             System.out.println(e);;
@@ -219,7 +217,7 @@ public class PedidoDAO {
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 pedido = new Pedido();
-                pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
+                pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
                 pedidos.add(pedido);
             }
         } catch (SQLException | ClassNotFoundException ex) {

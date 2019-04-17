@@ -66,12 +66,11 @@ public class LogarContaAction implements Action {
                     if (conta.getTipo().equals("Loja")) {
                         view = request.getRequestDispatcher("estabelecimento/index.jsp");
                     } else {
-                        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
                         ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
                         ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
                         request.setAttribute("produtos", produtos);
                         request.setAttribute("categorias", categorias);
-                        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
+                        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
                         if (carrinho != null) {
                             request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
                         }

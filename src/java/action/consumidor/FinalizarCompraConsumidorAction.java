@@ -31,29 +31,24 @@ public class FinalizarCompraConsumidorAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
 
-        try {
-            Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
-            carrinho.getEstado().aguardar(carrinho);
-            ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
-            Double valor = 0d;
-
-            for (Pedido pedido : pedidos) {
-                valor += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
-            }
-
-            carrinho.setValor(valor.toString());
-            StateFactory.createCarrinhoEstado("Aguardando");
-            CarrinhoDAO.getInstance().save(carrinho);
-
-            request.setAttribute("carrinhoPronto", carrinho);
-            request.setAttribute("pedidosPronto", pedidos);
-
-            request.getSession().removeAttribute("carrinho");
-            request.getSession().removeAttribute("pedidos");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(FinalizarCompraConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
+        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
+        carrinho.getEstado().aguardar(carrinho);
+        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+        Double valor = 0d;
+        
+        for (Pedido pedido : pedidos) {
+            valor += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
         }
+        
+        carrinho.setValor(valor.toString());
+        carrinho.getEstado().aguardar(carrinho);
+        CarrinhoDAO.getInstance().update(carrinho);
+        
+        ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByConsumidor(id);
+        request.setAttribute("carrinhos", carrinhos);
+        
+        request.getSession().removeAttribute("carrinho");
+        request.getSession().removeAttribute("pedidos");
 
         RequestDispatcher view = request.getRequestDispatcher("meusPedidos.jsp");
         view.forward(request, response);
