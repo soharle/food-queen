@@ -17,18 +17,23 @@ public class Carrinho extends Observable {
 
     private long id;
     private String valor;
-    private String data;
-    private String hora;
-    private String pagamento;
     private CarrinhoEstado estado;
 
-    Consumidor consumidor;
+    private Loja loja;
+    private Consumidor consumidor;
 
     public Carrinho() {
         this.estado = new CarrinhoEstadoNaoConcluido();
     }
 
-    
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public Carrinho setLoja(Loja loja) {
+        this.loja = loja;
+        return this;
+    }
  
     public long getId() {
         return id;
@@ -52,36 +57,6 @@ public class Carrinho extends Observable {
 
     public Carrinho setValor(String valor) {
         this.valor = valor;
-        return this;
-
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public Carrinho setData(String data) {
-        this.data = data;
-        return this;
-
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public Carrinho setHora(String hora) {
-        this.hora = hora;
-        return this;
-
-    }
-
-    public String getPagamento() {
-        return pagamento;
-    }
-
-    public Carrinho setPagamento(String pagamento) {
-        this.pagamento = pagamento;
         return this;
 
     }

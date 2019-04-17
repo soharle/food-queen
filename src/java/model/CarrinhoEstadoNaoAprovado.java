@@ -11,7 +11,6 @@ package model;
  */
 public class CarrinhoEstadoNaoAprovado extends CarrinhoEstado{
 
-    
     public CarrinhoEstadoNaoAprovado(){
         this.estadoNome = "NaoAprovado";
         this.estadoMsg = "Carrinho não aprovado";

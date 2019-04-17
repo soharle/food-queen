@@ -16,16 +16,27 @@ public abstract class CarrinhoEstado {
     
     public boolean aprovar(Carrinho carrinho){
         return false;
-    };
+    }
+    
     public boolean naoAprovar(Carrinho carrinho){
         return false;
-    };
+    }
+    
     public boolean cancelar(Carrinho carrinho){
         return false;
-    };
+    }
+    
     public boolean aguardar(Carrinho carrinho){
         return false;
-    };
+    }
+    
+    public boolean sairParaEntrega(Carrinho carrinho){
+        return false;
+    }
+    
+    public boolean entregar(Carrinho carrinho){
+        return false;
+    }
    
     public String getEstadoNome() {
         return estadoNome;

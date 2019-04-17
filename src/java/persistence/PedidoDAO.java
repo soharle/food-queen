@@ -19,7 +19,6 @@ import model.Contato;
 import model.Loja;
 import model.Pedido;
 import model.Produto;
-import model.Promocao;
 import model.StateFactory;
 
 /**
@@ -70,8 +69,7 @@ public class PedidoDAO {
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
             Carrinho carrinho = new Carrinho();
-            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                    .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
             pedido = new Pedido();
             pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
@@ -113,8 +111,7 @@ public class PedidoDAO {
                         .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 Carrinho carrinho = new Carrinho();
-                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                        .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 Pedido pedido = new Pedido();
                 pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);
@@ -219,8 +216,7 @@ public class PedidoDAO {
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
                         .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
                 Carrinho carrinho = new Carrinho();
-                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                        .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 pedido = new Pedido();
                 pedido.setId(rs.getLong("pedido.id")).setObservacao(rs.getString("pedido.observacao")).setProduto(produto).setCarrinho(carrinho);

@@ -16,7 +16,6 @@ import model.Carrinho;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
-import model.Entrega;
 import model.Loja;
 import model.StateFactory;
 
@@ -60,8 +59,7 @@ public class CarrinhoDAO {
             consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
             carrinho = new Carrinho();
-            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                    .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +67,7 @@ public class CarrinhoDAO {
 
         return carrinho;
     }
-    
+
     public ArrayList<Carrinho> getAll() {
         ArrayList<Carrinho> carrinhos = new ArrayList<Carrinho>();
         Connection conn = null;
@@ -94,9 +92,8 @@ public class CarrinhoDAO {
                 consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                         .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
                 Carrinho carrinho = new Carrinho();
-                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                        .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
-                        .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).
+                        setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 carrinhos.add(carrinho);
             }
 
@@ -115,22 +112,16 @@ public class CarrinhoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT carrinho.*, entrega.*, carrinho.* "
+            ResultSet rs = st.executeQuery("SELECT carrinho.*, loja.* "
                     + "FROM carrinho "
-                    + "INNER JOIN carrinho ON entrega.carrinho_id = carrinho.id "
-                    + "INNER JOIN loja ON entrega.loja_id = loja.id "
-                    + "WHERE loja.id = '" + idLoja + "';");
+                    + "INNER JOIN loja ON carrinho.loja_id = loja.id "
+                    + "WHERE carrinho.loja_id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
 
                 Carrinho carrinho = new Carrinho();
-                carrinho = carrinho.setId(rs.getLong("carrinho.id")).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                        .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+                carrinho = carrinho.setId(rs.getLong("carrinho.id")).setValor(rs.getString("carrinho.valor"))
                         .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado")));
-
-                Entrega entrega = new Entrega();
-                entrega = entrega.setId((rs.getLong("entrega.id"))).setEstado(StateFactory.createEntregaEstado(rs.getString("entrega.estado")))
-                        .setLoja(loja).setCarrinho(carrinho);
 
                 carrinhos.add(carrinho);
             }
@@ -153,9 +144,6 @@ public class CarrinhoDAO {
             st = conn.createStatement();
             st.execute("UPDATE carrinho SET consumidor_id= " + carrinho.getConsumidor().getId() + ", "
                     + "valor = '" + carrinho.getValor() + "', "
-                    + "data = '" + carrinho.getData() + "', "
-                    + "hora = '" + carrinho.getHora() + "', "
-                    + "pagamento = '" + carrinho.getPagamento() + "', "
                     + "estado = '" + carrinho.getEstado().getEstadoNome() + "' "
                     + "WHERE id = " + carrinho.getId() + ";");
 
@@ -196,9 +184,6 @@ public class CarrinhoDAO {
             st.execute("INSERT INTO carrinho (consumidor_id, valor, data, hora, pagamento, estado) "
                     + "VALUES (" + carrinho.getConsumidor().getId() + ", "
                     + "" + carrinho.getValor() + ", "
-                    + "'" + carrinho.getData() + "', "
-                    + "'" + carrinho.getHora() + "', "
-                    + "'" + carrinho.getPagamento() + "', "
                     + "'" + carrinho.getEstado().getEstadoNome() + "' "
                     + ");", Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = st.getGeneratedKeys();
@@ -211,7 +196,7 @@ public class CarrinhoDAO {
         } finally {
             closeResources(conn, st);
         }
-        
+
         return carrinho;
 
     }
@@ -254,8 +239,7 @@ public class CarrinhoDAO {
             consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
             carrinho = new Carrinho();
-            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setData(rs.getString("carrinho.data"))
-                    .setHora(rs.getString("carrinho.hora")).setPagamento(rs.getString("carrinho.pagamento"))
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);

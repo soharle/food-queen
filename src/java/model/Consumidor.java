@@ -98,12 +98,5 @@ public class Consumidor implements Observer {
                     + carrinho.getEstado().getEstadoNome());
         }
 
-        if (o instanceof Entrega) {
-            Entrega entrega = (Entrega) o;
-            System.out.println("Atenção " + this.getNome()
-                    + " a sua entrega mudou de estado para "
-                    + entrega.getEstado().getEstadoNome());
-        }
-
     }
 }

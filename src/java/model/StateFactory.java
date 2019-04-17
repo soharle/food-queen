@@ -29,21 +29,4 @@ public class StateFactory {
         return actionObject;
     }
 
-    public static EntregaEstado createEntregaEstado(String state) {
-        EntregaEstado actionObject = null;
-        String nomeClasse = "model.EntregaEstado" + state;
-        Class classe = null;
-        Object objeto = null;
-        try {
-            classe = Class.forName(nomeClasse);
-            objeto = classe.newInstance();
-        } catch (Exception ex) {
-            return null;
-        }
-        if (!(objeto instanceof EntregaEstado)) {
-            return null;
-        }
-        actionObject = (EntregaEstado) objeto;
-        return actionObject;
-    }
 }

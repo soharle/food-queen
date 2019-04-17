@@ -9,10 +9,11 @@ package model;
  *
  * @author mathe
  */
-public class EntregaEstadoRoubado extends EntregaEstado {
+public class CarrinhoEstadoEntregue extends CarrinhoEstado {
 
-    public EntregaEstadoRoubado() {
-        this.estadoNome = "Roubado";
-        this.estadoMsg = "Entrega roubada";
+    public CarrinhoEstadoEntregue() {
+        this.estadoNome = "Entrega";
+        this.estadoMsg = "Carrinho entregue";
     }
+
 }
