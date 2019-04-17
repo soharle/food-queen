@@ -42,16 +42,12 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
             if (carrinho == null) {
                 carrinho = new Carrinho();
                 carrinho.setConsumidor(consumidor);
+                carrinho.setLoja(produto.getLoja());
                 carrinho = CarrinhoDAO.getInstance().save(carrinho);
             } else {
-                ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
-                for (Pedido pedido : pedidos) {
-                    if (pedido.getProduto().getLoja().getId()
-                            != produto.getLoja().getId()) {
-                        request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
-                        request.getRequestDispatcher("home.jsp").forward(request, response);
-                    }
-
+                if (produto.getLoja().getId() != carrinho.getLoja().getId()) {
+                    request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
+                    request.getRequestDispatcher("home.jsp").forward(request, response);
                 }
             }
 

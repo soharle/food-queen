@@ -16,11 +16,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
-import model.Entrega;
 import model.Pedido;
 import model.StateFactory;
 import persistence.CarrinhoDAO;
-import persistence.EntregaDAO;
 import persistence.PedidoDAO;
 
 /**
@@ -38,18 +36,18 @@ public class FinalizarCompraConsumidorAction implements Action {
             carrinho.getEstado().aguardar(carrinho);
             ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
             Double valor = 0d;
-            for(Pedido pedido : pedidos){
+
+            for (Pedido pedido : pedidos) {
                 valor += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
             }
+
             carrinho.setValor(valor.toString());
+            StateFactory.createCarrinhoEstado("Aguardando");
             CarrinhoDAO.getInstance().save(carrinho);
 
-            Entrega entrega = new Entrega();
-            entrega.setCarrinho(carrinho);
-            entrega.setLoja(pedidos.get(0).getProduto().getLoja());
-            EntregaDAO.getInstance().save(entrega);
-            request.setAttribute("carrinho", carrinho);
-            request.setAttribute("pedidos", pedidos);
+            request.setAttribute("carrinhoPronto", carrinho);
+            request.setAttribute("pedidosPronto", pedidos);
+
             request.getSession().removeAttribute("carrinho");
             request.getSession().removeAttribute("pedidos");
 
