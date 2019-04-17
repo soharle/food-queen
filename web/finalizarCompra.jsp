@@ -92,25 +92,23 @@
                             <div class="order-details-wrapper">
                                 <h2>your order</h2>
                                 <div class="order-details">
-                                    <form action="#">
-                                        <ul>
-                                            <li><p class="strong">Produto</p><p class="strong">total</p></li>
+                                    <ul>
+                                        <li><p class="strong">Produto</p><p class="strong">total</p></li>
 
-                                            <c:forEach items="${pedidos}" var="pedido">
-                                                <li><p>${pedido.produto.nome} - R$ "${pedido.produto.getPrecoDeVenda()}"</p></li>
-                                                </c:forEach>
+                                        <c:forEach items="${pedidos}" var="pedido">
+                                            <li><p>${pedido.produto.nome} - R$ "${pedido.produto.getPrecoDeVenda()}"</p></li>
+                                            </c:forEach>
 
-                                            <li><p class="strong">Total</p><p class="strong">R$ ${total}</p></li>
-                                            <form method="post" action="FrontController?action=FinalizarCompraConsumidor">
-                                                <li><button value="submit" class="food__btn">Finalizar Compra</button></li>
-                                            </form>
-                                        </ul>
-                                    </form>
+                                        <li><p class="strong">Total</p><p class="strong">R$ ${total}</p></li>
+                                        <li>
+                                            <form action="FrontController?action=FinalizarCompraConsumidor" method="post">
+                                                <button type="submit" class="food__btn">Finalizar Compra</button>
+                                            </form>    
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div><!-- Checkout Section End-->             

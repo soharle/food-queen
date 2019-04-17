@@ -18,6 +18,10 @@ public class Entrega extends Observable {
     private Loja loja;
     private Carrinho carrinho;
 
+    public Entrega(){
+        this.estado = StateFactory.createEntregaEstado("ACaminho");
+    }
+    
     public long getId() {
         return id;
     }
