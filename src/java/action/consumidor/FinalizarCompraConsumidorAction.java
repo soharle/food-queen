@@ -31,7 +31,7 @@ public class FinalizarCompraConsumidorAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
 
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
+        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
         carrinho.getEstado().aguardar(carrinho);
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         Double valor = 0d;

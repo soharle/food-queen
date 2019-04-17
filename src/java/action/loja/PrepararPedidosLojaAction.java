@@ -14,6 +14,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Carrinho;
 import model.Loja;
 import persistence.CarrinhoDAO;
 import persistence.LojaDAO;
@@ -28,9 +29,8 @@ public class PrepararPedidosLojaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        CarrinhoDAO.getInstance().getAllByLoja(id);
-        //VAI TER QUE MUDAR O BANCO PRO CARRINHO TER UMA ENTREGA E NAO O OPOSTO
-        
+        ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
+        request.setAttribute("carrinhos", carrinhos);
         
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
         try {

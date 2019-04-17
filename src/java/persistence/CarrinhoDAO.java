@@ -347,4 +347,49 @@ public class CarrinhoDAO {
         return carrinhos;
     }
 
+    public ArrayList<Carrinho> getAllByLoja(long idLoja, String estado) {
+        ArrayList<Carrinho> carrinhos = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT carrinho.*, consumidor.*, contato.*, conta.* , loja.*"
+                    + "FROM carrinho "
+                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN loja ON carrinho.loja_id = loja.id "
+                    + "WHERE carrinho.loja_id = " + idLoja + " "
+                    + "AND carrinho.estado != '" + estado + "';"
+            );
+             while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta();
+                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+
+                Loja loja = new Loja();
+                loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+                Carrinho carrinho = new Carrinho();
+                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
+                        .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor).setLoja(loja);
+                carrinhos.add(carrinho);
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return carrinhos;
+    }
+
 }
