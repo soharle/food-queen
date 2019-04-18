@@ -20,5 +20,4 @@ public class CarrinhoEstadoNaoConcluido extends CarrinhoEstado {
         carrinho.setEstado(new CarrinhoEstadoAguardando());
         return true;
     }
-;
 }
