@@ -14,6 +14,8 @@ public class CarrinhoEstadoEntregue extends CarrinhoEstado {
     public CarrinhoEstadoEntregue() {
         this.estadoNome = "Entregue";
         this.estadoMsg = "Carrinho entregue";
+        this.nome = "entregue";
+
     }
 
 }

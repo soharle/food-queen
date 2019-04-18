@@ -14,17 +14,18 @@ public class CarrinhoEstadoAguardando extends CarrinhoEstado {
     public CarrinhoEstadoAguardando(){
         this.estadoNome = "Aguardando";
         this.estadoMsg = "Aguardando aprovação";
+        this.nome = "aguardando";
     }
     
     @Override
     public boolean aprovar(Carrinho carrinho) {
-        carrinho.setEstado(new CarrinhoEstadoAprovado());
+        carrinho.setEstado(StateFactory.createCarrinhoEstado("Aprovado"));
         return true;
     }
 
     @Override
     public boolean naoAprovar(Carrinho carrinho) {
-        carrinho.setEstado(new CarrinhoEstadoNaoAprovado());
+        carrinho.setEstado(StateFactory.createCarrinhoEstado("NaoAprovado"));
         return true;
     }
 

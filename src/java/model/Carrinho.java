@@ -34,7 +34,7 @@ public class Carrinho extends Observable {
         this.loja = loja;
         return this;
     }
- 
+
     public long getId() {
         return id;
     }
@@ -47,10 +47,10 @@ public class Carrinho extends Observable {
     public String getValor() {
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(id);
         double val = 0;
-        for(Pedido pedido : pedidos){
-           val += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
+        for (Pedido pedido : pedidos) {
+            val += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
         }
-        
+
         this.valor = val + "";
         return valor;
     }
@@ -67,17 +67,18 @@ public class Carrinho extends Observable {
 
     public Carrinho setEstado(CarrinhoEstado estado) {
         this.estado = estado;
-        this.notificar();
         return this;
 
     }
 
     public Consumidor getConsumidor() {
+
         return consumidor;
     }
 
     public Carrinho setConsumidor(Consumidor consumidor) {
         this.consumidor = consumidor;
+        this.addObserver(this.consumidor);
         return this;
     }
 
@@ -88,6 +89,7 @@ public class Carrinho extends Observable {
     }
 
     public void notificar() {
+        setChanged();
         notifyObservers();
     }
 

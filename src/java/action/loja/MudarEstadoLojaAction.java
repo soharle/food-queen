@@ -24,14 +24,15 @@ public class MudarEstadoLojaAction implements Action {
         Carrinho carrinho = CarrinhoDAO.getInstance().get(id);
         boolean mudou = StateFactory.invocarMetodoFactory(carrinho, metodo);
         CarrinhoDAO.getInstance().update(carrinho);
-        
+
         String msg;
-        if(mudou){
-            msg = "Estado do carrinho foi trocado!";
-        }else{
-            msg = "Estado do carrinho não pode ser trocado!";
+        if (mudou) {
+            msg = "O carrinho mudou para " + carrinho.getEstado().getNome();
+            carrinho.notificar();
+        } else {
+            msg = "Estado do carrinho " + carrinho.getEstado().getNome() + " não pode ser trocado!";
         }
-        
+
         request.setAttribute("msg", msg);
         RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararPedidosLoja");
         view.forward(request, response);

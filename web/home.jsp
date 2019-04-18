@@ -64,9 +64,7 @@
                                                     <c:forEach items="${produtos}" var="produto">
                                                         <div class="food__menu col-md-3">
                                                             <div class="food__menu__thumb">
-                                                                <a href="menu-details.html">
-                                                                    <img src="${produto.imagem}" alt="product images" style="max-height: 105px; max-width: 109px;">
-                                                                </a>
+                                                                <img src="${produto.imagem}" alt="product images" style="max-height: 105px; max-width: 109px;">
                                                             </div>
                                                             <div class="food__menu__details px-2">
                                                                 <div class="fd__menu__title__prize">

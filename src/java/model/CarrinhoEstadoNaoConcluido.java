@@ -14,10 +14,12 @@ public class CarrinhoEstadoNaoConcluido extends CarrinhoEstado {
     public CarrinhoEstadoNaoConcluido() {
         this.estadoNome = "NaoConcluido";
         this.estadoMsg = "Não concluido";
+        this.nome = "não esta concluido";
+
     }
 
     public boolean aguardar(Carrinho carrinho) {
-        carrinho.setEstado(new CarrinhoEstadoAguardando());
+        carrinho.setEstado(StateFactory.createCarrinhoEstado("Aguardando"));
         return true;
     }
 }

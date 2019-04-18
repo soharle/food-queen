@@ -14,10 +14,12 @@ public class CarrinhoEstadoSaiuParaEntrega extends CarrinhoEstado {
     public CarrinhoEstadoSaiuParaEntrega() {
         this.estadoNome = "SaiuParaEntrega";
         this.estadoMsg = "Carrinho saiu para entrega";
+        this.nome = "saiu para entrega";
+
     }
 
     public boolean entregar(Carrinho carrinho) {
-        carrinho.setEstado(new CarrinhoEstadoEntregue());
+        carrinho.setEstado(StateFactory.createCarrinhoEstado("Entregue"));
         return true;
     }
 

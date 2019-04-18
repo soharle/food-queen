@@ -13,6 +13,7 @@ public abstract class CarrinhoEstado {
     
     protected String estadoNome;
     protected String estadoMsg;
+    protected String nome;
     
     public boolean aprovar(Carrinho carrinho){
         return false;
@@ -21,11 +22,7 @@ public abstract class CarrinhoEstado {
     public boolean naoAprovar(Carrinho carrinho){
         return false;
     }
-    
-    public boolean cancelar(Carrinho carrinho){
-        return false;
-    }
-    
+
     public boolean aguardar(Carrinho carrinho){
         return false;
     }
@@ -44,6 +41,10 @@ public abstract class CarrinhoEstado {
 
     public String getEstadoMsg() {
         return estadoMsg;
+    }
+    
+    public String getNome(){
+        return nome;
     }
     
 }
