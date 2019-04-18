@@ -20,10 +20,17 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="h4 text-center">Pedidos pendentes</h3>
-                    <h4>${msg}</h4>
+                    <c:if test="${msg != null}">
+                        <div class="container alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Atenção</strong> ${msg}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </c:if>
                     <div class="accordion" id="accordionExample">
                         <c:forEach items="${carrinhos}" var="carrinho">
-                            <div class="card">
+                            <div class="card text-center">
                                 <div class="card-header" id="headingOne">
                                     <h2 class="mb-0">
                                         <button class="btn btn-dark btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapse${carrinho.id}" aria-expanded="true" aria-controls="collapse${carrinho.id}">
@@ -34,6 +41,27 @@
 
                                 <div id="collapse${carrinho.id}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
+                                        <c:forEach items="${pedidos}" var="pedido">
+                                            <c:if test="${carrinho.id == pedido.carrinho.id}">
+                                                <c:if test="${pedido.produto.id == produto.id}">
+                                                    <div class="card mb-3" style="max-width: 540px;">
+                                                        <div class="row no-gutters">
+                                                            <div class="col-md-4">
+                                                                <img src="${produto.imagem}" class="card-img" alt="...">
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <h5 class="card-title">${produto.nome}</h5>
+                                                                    <p class="card-text">${produto.descricao}</p>
+                                                                    <p class="card-text"><small class="text-muted">${produto.preco}</small></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
+                                            </c:if>
+                                        </c:forEach>
+
                                         <p>Estado do pedido: ${carrinho.estado.getEstadoMsg()}</p>
                                         <h4 class="h4">
                                             Alterar estado

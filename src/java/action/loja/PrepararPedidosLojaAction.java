@@ -16,9 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
 import model.Loja;
+import model.Produto;
 import persistence.CarrinhoDAO;
 import persistence.LojaDAO;
 import persistence.PedidoDAO;
+import persistence.ProdutoDAO;
 
 /**
  *
@@ -30,8 +32,10 @@ public class PrepararPedidosLojaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
         ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
+        ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAllByLoja(id);
         request.setAttribute("carrinhos", carrinhos);
-        
+        request.setAttribute("produtos", produtos);
+
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
         try {
             view.forward(request, response);

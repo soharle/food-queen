@@ -225,7 +225,7 @@ public class PedidoDAO {
         }
         return pedidos;
     }
-
+    
     private void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {
