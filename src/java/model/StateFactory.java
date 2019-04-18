@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  */
 public class StateFactory {
 
-    public static CarrinhoEstado createCarrinhoEstado(String state) {
-        CarrinhoEstado actionObject = null;
-        String nomeClasse = "model.CarrinhoEstado" + state;
+    public static Object getObject(String state) {
+        Object actionObject = null;
+        String nomeClasse =  state;
+        
         Class classe = null;
         Object objeto = null;
         try {
@@ -27,10 +28,8 @@ public class StateFactory {
         } catch (Exception ex) {
             return null;
         }
-        if (!(objeto instanceof CarrinhoEstado)) {
-            return null;
-        }
-        actionObject = (CarrinhoEstado) objeto;
+        
+        actionObject = objeto;
         return actionObject;
     }
 

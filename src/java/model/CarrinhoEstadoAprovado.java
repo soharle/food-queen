@@ -20,7 +20,7 @@ public class CarrinhoEstadoAprovado extends CarrinhoEstado {
 
     @Override
     public boolean sairParaEntrega(Carrinho carrinho) {
-        carrinho.setEstado(StateFactory.createCarrinhoEstado("SaiuParaEntrega"));
+        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + "SaiuParaEntrega"));
         return true;
     }
 

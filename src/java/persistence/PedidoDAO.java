@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Carrinho;
+import model.CarrinhoEstado;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
@@ -70,7 +71,7 @@ public class PedidoDAO {
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
             Carrinho carrinho = new Carrinho();
             carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                    .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                    .setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
             pedido = new Pedido();
             pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
         } catch (SQLException | ClassNotFoundException ex) {
@@ -112,7 +113,7 @@ public class PedidoDAO {
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 Carrinho carrinho = new Carrinho();
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                        .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                        .setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 Pedido pedido = new Pedido();
                 pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
                 pedidos.add(pedido);
@@ -215,7 +216,7 @@ public class PedidoDAO {
                         .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
                 Carrinho carrinho = new Carrinho();
                 carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                        .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                        .setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
                 pedido = new Pedido();
                 pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
                 pedidos.add(pedido);
@@ -225,7 +226,7 @@ public class PedidoDAO {
         }
         return pedidos;
     }
-    
+
     private void closeResources(Connection conn, Statement st) {
         try {
             if (st != null) {

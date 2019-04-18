@@ -69,7 +69,7 @@
                                                             <div class="food__menu__details px-2">
                                                                 <div class="fd__menu__title__prize">
                                                                     <h4><a href="FrontController?action=AdicionarCarrinhoConsumidor&id=${produto.id}">${produto.nome}</a></h4>
-                                                                    <span class="menu__prize">$ ${produto.preco}</span>
+                                                                    <span class="menu__prize">R$ ${produto.getPrecoDeVenda()}</span>
                                                                 </div>
                                                                 <div class="fd__menu__details">
                                                                     <div class="delivery__time__rating">

@@ -19,7 +19,7 @@ public class CarrinhoEstadoNaoConcluido extends CarrinhoEstado {
     }
 
     public boolean aguardar(Carrinho carrinho) {
-        carrinho.setEstado(StateFactory.createCarrinhoEstado("Aguardando"));
+        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + "Aguardando"));
         return true;
     }
 }

@@ -19,7 +19,7 @@ public class CarrinhoEstadoSaiuParaEntrega extends CarrinhoEstado {
     }
 
     public boolean entregar(Carrinho carrinho) {
-        carrinho.setEstado(StateFactory.createCarrinhoEstado("Entregue"));
+        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + "Entregue"));
         return true;
     }
 

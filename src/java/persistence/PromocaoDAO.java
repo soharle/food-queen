@@ -1,6 +1,5 @@
 package persistence;
 
-import model.PromocaoFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Promocao;
-
-
+import model.StateFactory;
 
 public class PromocaoDAO {
 
@@ -34,7 +32,7 @@ public class PromocaoDAO {
 
             while (rs.next()) {
                 Promocao promocao
-                        = PromocaoFactory.create(rs.getString("nome"));
+                        = (Promocao) StateFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
                 promocoes.add(promocao);
 
             }
@@ -57,7 +55,7 @@ public class PromocaoDAO {
             ResultSet rs = st.executeQuery("select * from promocao where promocao.id ='" + promocaoId + "'");
 
             while (rs.next()) {
-                promocao = PromocaoFactory.create(rs.getString("nome"));
+                promocao = (Promocao) StateFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
 
             }
 
