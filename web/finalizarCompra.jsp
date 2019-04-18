@@ -57,8 +57,9 @@
                                     <div id="shipping-method" class="collapse">
                                         <div class="accordion-body shipping-method fix">
 
-                                            <h5>shipping address</h5>
-                                            <p><span>address&nbsp;</span>Bootexperts, Banasree D-Block, Dhaka 1219, Bangladesh</p>
+                                            <h5>Endereço de entrega</h5>
+                                            <p><span>Endereço&nbsp;</span>${consumidor.endereco.logradouro}, ${consumidor.endereco.numero}, ${consumidor.endereco.bairro}, ${consumidor.endereco.cidade}, ${consumidor.endereco.estado}</p>
+                                            <p>${consumidor.endereco.cep}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -68,17 +69,21 @@
                                     <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">Pagamento</a>
                                     <div id="payment-method" class="collapse">
                                         <div class="accordion-body payment-method fix">
-
                                             <ul class="payment-method-list">
                                                 <li class="active">Dinheiro na entrega</li>
-                                                    <c:forEach items="${cartoes}" var="cartao">
-                                                    <li class="payment-form-toggle">${cartao.numero}</li>
-                                                    </c:forEach>
+                                                <li class="payment-form-toggle">Cartão de crédito</li>
                                             </ul>
-                                            <div class="input-box col-12 mb--20">
-                                                <label for="card-number">Código de segurança</label>
-                                                <input type="text" id="txtCod" class="form-control"/>
-                                            </div>
+                                            <form action="#" class="payment-form">
+                                                <div class="row">
+                                                    <div class="input-box col-12 mb--20">
+                                                        <c:forEach items="${cartoes}" var="cartao">
+                                                            cartão: ${cartao.numero} - ${cartao.titular}
+                                                            <label for="card-number">Código de segurança</label>
+                                                            <input type="text" id="txtCod" class="form-control"/>
+                                                        </c:forEach>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -90,15 +95,13 @@
                         <div class="col-lg-6 col-12 mb-30">
 
                             <div class="order-details-wrapper">
-                                <h2>your order</h2>
+                                <h2>Seu pedido</h2>
                                 <div class="order-details">
                                     <ul>
                                         <li><p class="strong">Produto</p><p class="strong">total</p></li>
-
                                         <c:forEach items="${pedidos}" var="pedido">
                                             <li><p>${pedido.produto.nome} - R$ "${pedido.produto.getPrecoDeVenda()}"</p></li>
-                                            </c:forEach>
-
+                                        </c:forEach>
                                         <li><p class="strong">Total</p><p class="strong">R$ ${total}</p></li>
                                         <li>
                                             <form action="FrontController?action=FinalizarCompraConsumidor" method="post">
@@ -113,7 +116,6 @@
                 </div>
             </div><!-- Checkout Section End-->             
         </section>   
-
     </body>
     <%@ include file="./shared/footer.jsp" %>
 </html>

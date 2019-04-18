@@ -45,6 +45,11 @@
                     <div class="header__right d-flex justify-content-end">
                         <div class="log__in">
                             <a class="accountbox-trigger" href="#"><i class="zmdi zmdi-account-o"></i><span> ${sessionScope.login}</span></a>
+                            
+                                
+                        </div>
+                         <div class="shopping__cart">
+                            <a href="FrontController?action=DeslogarConta" class="accountbox-trigger" >Sair</a>
                         </div>
                         <div class="shopping__cart">
                             <a class="minicart-trigger" href="#"><i class="zmdi zmdi-shopping-basket"></i></a>

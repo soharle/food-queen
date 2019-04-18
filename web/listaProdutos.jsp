@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="food__list__inner d-flex align-items-center justify-content-between">
                                                 <div class="food__list__details">
-                                                    <h2><a href="menu-details.html">${produto.nome}</a></h2>
+                                                    <h2><a href="FrontController?action=AdicionarCarrinhoConsumidor&id=${produto.id}">${produto.nome}</a></h2>
                                                     <p>${produto.descricao}</p>
                                                     <div class="list__btn">
                                                         <a class="food__btn grey--btn theme--hover" href="FrontController?action=AdicionarCarrinhoConsumidor&id=${produto.id}">Adicionar ao carrinho</a>

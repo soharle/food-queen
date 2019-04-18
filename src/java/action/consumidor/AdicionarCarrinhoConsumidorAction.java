@@ -16,10 +16,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Carrinho;
+import model.Categoria;
 import model.Consumidor;
 import model.Pedido;
 import model.Produto;
 import persistence.CarrinhoDAO;
+import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
 import persistence.PedidoDAO;
 import persistence.ProdutoDAO;
@@ -56,6 +58,9 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
                 view = request.getRequestDispatcher("FrontController?action=PrepararListaProdutosLojaConsumidor&id=" + produto.getLoja().getId());
 
             } else {
+                ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
+                request.setAttribute("produtos", produtos);
                 request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");
                 view = request.getRequestDispatcher("home.jsp");
             }

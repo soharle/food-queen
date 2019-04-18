@@ -31,7 +31,7 @@
                                 <nav class="bradcaump-inner">
                                     <a class="breadcrumb-item" href="FrontController?action=PrepararHomeConsumidor">Início</a>
                                     <span class="brd-separetor"><i class="zmdi zmdi-long-arrow-right"></i></span>
-                                    <span class="breadcrumb-item active">Meu Pedido</span>
+                                    <span class="breadcrumb-item active">Meus Pedidos</span>
                                 </nav>
                             </div>
                         </div>
@@ -48,8 +48,8 @@
                     <div class="col-sm-12 col-md-10 col-lg-8">
                         <c:forEach items="${carrinhos}" var="carrinho">
                             <div class="single-accordion">
-                                <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method">Pedido da loja ${carrinho.loja.nome}</a>
-                                <div id="payment-method" class="collapse">
+                                <a class="accordion-head collapsed" data-toggle="collapse" data-parent="#checkout-accordion" href="#payment-method${carrinho.id}">Pedido da loja ${carrinho.loja.nome}</a>
+                                <div id="payment-method${carrinho.id}" class="collapse">
                                     <div class="accordion-body payment-method fix">
                                         <div class="row">
                                             <div class="input-box col-12 mb--20">
