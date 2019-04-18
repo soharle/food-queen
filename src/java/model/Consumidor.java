@@ -23,6 +23,16 @@ public class Consumidor implements Observer {
     private Conta conta;
     private Endereco endereco;
 
+    public void update(Observable o, Object arg) {
+        if (o instanceof Carrinho) {
+            Carrinho carrinho = (Carrinho) o;
+            System.out.println("Atenção " + this.getNome()
+                    + ", o seu Carrinho mudou de estado para "
+                    + carrinho.getEstado().getEstadoNome());
+        }
+
+    }
+
     public long getId() {
         return id;
     }
@@ -90,13 +100,4 @@ public class Consumidor implements Observer {
         return this;
     }
 
-    public void update(Observable o, Object arg) {
-        if (o instanceof Carrinho) {
-            Carrinho carrinho = (Carrinho) o;
-            System.out.println("Atenção " + this.getNome()
-                    + ", o seu Carrinho mudou de estado para "
-                    + carrinho.getEstado().getEstadoNome());
-        }
-
-    }
 }

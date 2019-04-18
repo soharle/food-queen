@@ -32,7 +32,7 @@ public class PrepararFinalizarCompraConsumidorAction implements Action{
         
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
         Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id);
+        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
         ArrayList<Cartao> cartoes = CartaoDAO.getInstance().getAllByConsumidor(id);
         ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         request.setAttribute("cartoes", cartoes);
