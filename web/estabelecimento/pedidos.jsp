@@ -43,22 +43,24 @@
                                     <div class="card-body">
                                         <c:forEach items="${pedidos}" var="pedido">
                                             <c:if test="${carrinho.id == pedido.carrinho.id}">
-                                                <c:if test="${pedido.produto.id == produto.id}">
-                                                    <div class="card mb-3" style="max-width: 540px;">
-                                                        <div class="row no-gutters">
-                                                            <div class="col-md-4">
-                                                                <img src="${produto.imagem}" class="card-img" alt="...">
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <div class="card-body">
-                                                                    <h5 class="card-title">${produto.nome}</h5>
-                                                                    <p class="card-text">${produto.descricao}</p>
-                                                                    <p class="card-text"><small class="text-muted">${produto.preco}</small></p>
+                                                <c:forEach items="${produtos}" var="produto">
+                                                    <c:if test="${pedido.produto.id == produto.id}">
+                                                        <div class="card m-4">
+                                                            <div class="row no-gutters">
+                                                                <div class="col-md-4">
+                                                                    <img src="${produto.imagem}" class="card-img img-responsive" style="max-height: 150px;max-width: 202px;" alt="...">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">${produto.nome}</h5>
+                                                                        <p class="card-text">${produto.descricao}</p>
+                                                                        <p class="card-text"><small class="text-muted">R$ ${produto.preco}</small></p>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </c:if>
+                                                    </c:if>
+                                                </c:forEach>
                                             </c:if>
                                         </c:forEach>
 
