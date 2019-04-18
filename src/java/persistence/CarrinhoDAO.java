@@ -42,10 +42,11 @@ public class CarrinhoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT carrinho.*, consumidor.*, contato.*, conta.* "
+            ResultSet rs = st.executeQuery("SELECT carrinho.*, consumidor.*, contato.*, conta.*, loja.* "
                     + "FROM carrinho "
                     + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN loja On carrinho.loja_id = loja.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                     + "WHERE carrinho.id = " + id + ";");
             rs.first();
@@ -58,8 +59,12 @@ public class CarrinhoDAO {
             Consumidor consumidor = new Consumidor();
             consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+            Loja loja = new Loja();
+            loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+
             carrinho = new Carrinho();
-            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
+            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor")).setLoja(loja)
                     .setEstado(StateFactory.createCarrinhoEstado(rs.getString("carrinho.estado"))).setConsumidor(consumidor);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,7 +369,7 @@ public class CarrinhoDAO {
                     + "WHERE carrinho.loja_id = " + idLoja + " "
                     + "AND carrinho.estado != '" + estado + "';"
             );
-             while (rs.next()) {
+            while (rs.next()) {
                 Contato contato = new Contato();
                 contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                         .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));

@@ -12,7 +12,7 @@ package model;
 public class CarrinhoEstadoEntregue extends CarrinhoEstado {
 
     public CarrinhoEstadoEntregue() {
-        this.estadoNome = "Entrega";
+        this.estadoNome = "Entregue";
         this.estadoMsg = "Carrinho entregue";
     }
 

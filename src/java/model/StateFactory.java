@@ -5,6 +5,11 @@
  */
 package model;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author mathe
@@ -27,6 +32,17 @@ public class StateFactory {
         }
         actionObject = (CarrinhoEstado) objeto;
         return actionObject;
+    }
+
+    public static Boolean invocarMetodoFactory(Carrinho carrinho, String nomeMetodo) {
+        Boolean mudou = false;
+        try {
+            Method metodo = CarrinhoEstado.class.getMethod(nomeMetodo, Carrinho.class);
+            mudou = (Boolean) metodo.invoke(carrinho.getEstado(), carrinho);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(StateFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mudou;
     }
 
 }

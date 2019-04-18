@@ -11,7 +11,7 @@ package model;
  */
 public class CarrinhoEstadoAprovado extends CarrinhoEstado {
 
-    public CarrinhoEstadoAprovado(){
+    public CarrinhoEstadoAprovado() {
         this.estadoNome = "Aprovado";
         this.estadoMsg = "Carrinho aprovado";
     }
@@ -21,5 +21,11 @@ public class CarrinhoEstadoAprovado extends CarrinhoEstado {
         carrinho.setEstado(new CarrinhoEstadoCancelado());
         return true;
     }
-    
+
+    @Override
+    public boolean sairParaEntrega(Carrinho carrinho) {
+        carrinho.setEstado(new CarrinhoEstadoSaiuParaEntrega());
+        return true;
+    }
+
 }

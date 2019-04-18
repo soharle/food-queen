@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 class="h4 text-center">Pedidos pendentes</h3>
-
+                    <h4>${msg}</h4>
                     <div class="accordion" id="accordionExample">
                         <c:forEach items="${carrinhos}" var="carrinho">
                             <div class="card">
@@ -39,12 +39,10 @@
                                             Alterar estado
                                         </h4>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn btn-secondary">Estado 1</button>
-                                            <button type="button" class="btn btn-secondary">Estado 2</button>                                            
-                                            <button type="button" class="btn btn-secondary">Estado 3</button>
-                                            <button type="button" class="btn btn-secondary">Estado 4</button>
-                                            <button type="button" class="btn btn-secondary">Estado 5</button>
-                                            <button type="button" class="btn btn-secondary">Estado 6</button>
+                                            <a href="FrontController?action=MudarEstadoLoja&id=${carrinho.id}&estado=aprovar" type="button" class="btn btn-secondary">Aprovar</a>
+                                            <a href="FrontController?action=MudarEstadoLoja&id=${carrinho.id}&estado=naoAprovar" type="button" class="btn btn-secondary">Não Aprovar</a>                                            
+                                            <a href="FrontController?action=MudarEstadoLoja&id=${carrinho.id}&estado=sairParaEntrega" type="button" class="btn btn-secondary">Saiu para entrega</a>
+                                            <a href="FrontController?action=MudarEstadoLoja&id=${carrinho.id}&estado=entregar" type="button" class="btn btn-secondary">Entregue</a>
                                         </div>
                                     </div>
                                 </div>
