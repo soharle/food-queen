@@ -9,17 +9,17 @@ package model;
  *
  * @author mathe
  */
-public class CarrinhoEstadoNaoConcluido extends CarrinhoEstado {
+public class PedidoEstadoNaoConcluido extends PedidoEstado {
 
-    public CarrinhoEstadoNaoConcluido() {
+    public PedidoEstadoNaoConcluido() {
         this.estadoNome = "NaoConcluido";
         this.estadoMsg = "Não concluido";
         this.nome = "não esta concluido";
 
     }
 
-    public boolean aguardar(Carrinho carrinho) {
-        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + "Aguardando"));
+    public boolean aguardar(Pedido pedido) {
+        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "Aguardando"));
         return true;
     }
 }

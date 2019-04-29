@@ -33,10 +33,10 @@ public class StateFactory {
         return actionObject;
     }
 
-    public static Boolean invocarMetodoFactory(Carrinho carrinho, String nomeMetodo) {
+    public static Boolean invocarMetodoFactory(Pedido carrinho, String nomeMetodo) {
         Boolean mudou = false;
         try {
-            Method metodo = CarrinhoEstado.class.getMethod(nomeMetodo, Carrinho.class);
+            Method metodo = PedidoEstado.class.getMethod(nomeMetodo, Pedido.class);
             mudou = (Boolean) metodo.invoke(carrinho.getEstado(), carrinho);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             Logger.getLogger(StateFactory.class.getName()).log(Level.SEVERE, null, ex);

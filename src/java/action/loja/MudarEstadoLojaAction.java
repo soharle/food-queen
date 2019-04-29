@@ -11,9 +11,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
+import model.Pedido;
 import model.StateFactory;
-import persistence.CarrinhoDAO;
+import persistence.PedidoDAO;
 
 public class MudarEstadoLojaAction implements Action {
 
@@ -21,9 +21,9 @@ public class MudarEstadoLojaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String metodo = request.getParameter("estado");
         long id = Long.parseLong(request.getParameter("id"));
-        Carrinho carrinho = CarrinhoDAO.getInstance().get(id);
+        Pedido carrinho = PedidoDAO.getInstance().get(id);
         boolean mudou = StateFactory.invocarMetodoFactory(carrinho, metodo);
-        CarrinhoDAO.getInstance().update(carrinho);
+        PedidoDAO.getInstance().update(carrinho);
 
         String msg;
         if (mudou) {

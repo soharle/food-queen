@@ -9,9 +9,9 @@ package model;
  *
  * @author mathe
  */
-public class CarrinhoEstadoAprovado extends CarrinhoEstado {
+public class PedidoEstadoAprovado extends PedidoEstado {
 
-    public CarrinhoEstadoAprovado() {
+    public PedidoEstadoAprovado() {
         this.estadoNome = "Aprovado";
         this.estadoMsg = "Carrinho aprovado";
         this.nome = "aprovado";
@@ -19,8 +19,8 @@ public class CarrinhoEstadoAprovado extends CarrinhoEstado {
     }
 
     @Override
-    public boolean sairParaEntrega(Carrinho carrinho) {
-        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + "SaiuParaEntrega"));
+    public boolean sairParaEntrega(Pedido pedido) {
+        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "SaiuParaEntrega"));
         return true;
     }
 

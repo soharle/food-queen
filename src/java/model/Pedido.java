@@ -5,17 +5,36 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.Observable;
+import persistence.ProdutoHasPedidoDAO;
+
 /**
  *
  * @author mathe
  */
-public class Pedido {
+public class Pedido extends Observable {
 
     private long id;
-    private Produto produto;
-    private Carrinho carrinho;
+    private String valor;
+    private PedidoEstado estado;
 
- 
+    private Loja loja;
+    private Consumidor consumidor;
+
+    public Pedido() {
+        this.estado = new PedidoEstadoNaoConcluido();
+    }
+
+    public Loja getLoja() {
+        return loja;
+    }
+
+    public Pedido setLoja(Loja loja) {
+        this.loja = loja;
+        return this;
+    }
+
     public long getId() {
         return id;
     }
@@ -25,22 +44,53 @@ public class Pedido {
         return this;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public String getValor() {
+        ArrayList<ProdutoHasPedido> pedidos = ProdutoHasPedidoDAO.getInstance().getByCarrinho(id);
+        double val = 0;
+        for (ProdutoHasPedido pedido : pedidos) {
+            val += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
+        }
+
+        this.valor = val + "";
+        return valor;
     }
 
-    public Pedido setProduto(Produto produto) {
-        this.produto = produto;
+    public Pedido setValor(String valor) {
+        this.valor = valor;
+        return this;
+
+    }
+
+    public PedidoEstado getEstado() {
+        return estado;
+    }
+
+    public Pedido setEstado(PedidoEstado estado) {
+        this.estado = estado;
+        return this;
+
+    }
+
+    public Consumidor getConsumidor() {
+
+        return consumidor;
+    }
+
+    public Pedido setConsumidor(Consumidor consumidor) {
+        this.consumidor = consumidor;
+        this.addObserver(this.consumidor);
         return this;
     }
 
-    public Carrinho getCarrinho() {
-        return carrinho;
+    public Pedido setCarrinho(Consumidor consumidor) {
+        this.consumidor = consumidor;
+        return this;
+
     }
 
-    public Pedido setCarrinho(Carrinho carrinho) {
-        this.carrinho = carrinho;
-        return this;
+    public void notificar() {
+        setChanged();
+        notifyObservers();
     }
 
 }

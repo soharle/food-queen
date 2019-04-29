@@ -12,14 +12,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Carrinho;
-import model.CarrinhoEstado;
+import model.Pedido;
+import model.PedidoEstado;
 import model.Consumidor;
 import model.Conta;
 import model.Contato;
 import model.Loja;
-import model.Pedido;
-import model.Produto;
 import model.StateFactory;
 
 /**
@@ -45,14 +43,13 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT pedido.*, carrinho.*, produto.*, consumidor.*, contato.*, conta.*  "
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.*, loja.* "
                     + "FROM pedido "
-                    + "INNER JOIN carrinho ON pedido.carrinho_id = carrinho.id "
-                    + "INNER JOIN produto ON pedido.produto_id = produto.id "
-                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN loja On pedido.loja_id = loja.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "WHERE id = " + id + ";");
+                    + "WHERE pedido.id = " + id + ";");
             rs.first();
             Contato contato = new Contato();
             contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
@@ -63,37 +60,33 @@ public class PedidoDAO {
             Consumidor consumidor = new Consumidor();
             consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
-            Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
+            Loja loja = new Loja();
+            loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
 
-            Produto produto = new Produto();
-            produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
-                    .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                    .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
-            Carrinho carrinho = new Carrinho();
-            carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                    .setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
             pedido = new Pedido();
-            pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
+            pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor")).setLoja(loja)
+                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         return pedido;
     }
 
     public ArrayList<Pedido> getAll() {
-        ArrayList<Pedido> pedidos = new ArrayList();
+        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
         Connection conn = null;
         Statement st = null;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT pedido.*, carrinho.*, produto.*, consumidor.*, contato.*, conta.*  "
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.*, loja.* "
                     + "FROM pedido "
-                    + "INNER JOIN carrinho ON pedido.carrinho_id = carrinho.id "
-                    + "INNER JOIN produto ON pedido.produto_id = produto.id "
-                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
                     + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
                     + "INNER JOIN conta ON consumidor.conta_id = conta.id;");
             while (rs.next()) {
                 Contato contato = new Contato();
@@ -105,22 +98,51 @@ public class PedidoDAO {
                 Consumidor consumidor = new Consumidor();
                 consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                         .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
-                Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-
-                Produto produto = new Produto();
-                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
-                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
-                Carrinho carrinho = new Carrinho();
-                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                        .setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
+                Loja loja = new Loja();
+                loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
                 Pedido pedido = new Pedido();
-                pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
+                pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor")).
+                        setEstado((PedidoEstado) StateFactory.getObject((PedidoEstado.class.getName() + rs.getString("pedido.estado")))).setConsumidor(consumidor).setLoja(loja);
+
                 pedidos.add(pedido);
             }
+
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        return pedidos;
+    }
+
+    public ArrayList<Pedido> getAllByLoja(long idLoja) {
+        ArrayList<Pedido> pedidos = new ArrayList();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, loja.* "
+                    + "FROM pedido "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
+                    + "WHERE pedido.loja_id = '" + idLoja + "';");
+            while (rs.next()) {
+                Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
+
+                Pedido pedido = new Pedido();
+                pedido = pedido.setId(rs.getLong("pedido.id")).setValor(rs.getString("pedido.valor"))
+                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado")));
+
+                pedidos.add(pedido);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         return pedidos;
     }
 
@@ -131,8 +153,10 @@ public class PedidoDAO {
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("UPDATE produto SET produto_id = " + pedido.getProduto().getId() + ", "
-                    + "carrinho_id = " + pedido.getCarrinho().getId() + ""
+            st.execute("UPDATE pedido SET consumidor_id= " + pedido.getConsumidor().getId() + ", "
+                    + "valor = '" + pedido.getValor() + "', "
+                    + "estado = '" + pedido.getEstado().getEstadoNome() + "', "
+                    + "loja_id = " + pedido.getLoja().getId() + " "
                     + "WHERE id = " + pedido.getId() + ";");
 
         } catch (SQLException e) {
@@ -161,70 +185,33 @@ public class PedidoDAO {
         }
     }
 
-    public void save(Pedido pedido) throws SQLException, ClassNotFoundException {
+    public Pedido save(Pedido pedido) throws SQLException, ClassNotFoundException {
         Connection conn = null;
         Statement st = null;
+        long key = -1;
 
         try {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
-            st.execute("INSERT INTO pedido (produto_id, carrinho_id) "
-                    + "VALUES (" + pedido.getProduto().getId() + ", "
-                    + "" + pedido.getCarrinho().getId() + ""
-                    + ");");
+            st.execute("INSERT INTO pedido (consumidor_id, loja_id, valor, estado) "
+                    + "VALUES (" + pedido.getConsumidor().getId() + ", "
+                    + "" + pedido.getLoja().getId() + ", "
+                    + "" + pedido.getValor() + ", "
+                    + "'" + pedido.getEstado().getEstadoNome() + "' "
+                    + ");", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            pedido.setId(key);
         } catch (SQLException e) {
             System.out.println(e);;
         } finally {
             closeResources(conn, st);
         }
 
-    }
+        return pedido;
 
-    public ArrayList<Pedido> getByCarrinho(long id) {
-        Pedido pedido = null;
-        Connection conn = null;
-        Statement st = null;
-        ArrayList<Pedido> pedidos = new ArrayList<>();
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT pedido.*, carrinho.*, produto.*, consumidor.*, contato.*, conta.*, promocao.* "
-                    + "FROM pedido "
-                    + "INNER JOIN carrinho ON pedido.carrinho_id = carrinho.id "
-                    + "INNER JOIN produto ON pedido.produto_id = produto.id "
-                    + "INNER JOIN consumidor ON carrinho.consumidor_id = consumidor.id "
-                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
-                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "INNER JOIN promocao ON produto.promocao_id = promocao.id "
-                    + "WHERE pedido.carrinho_id = " + id + ";");
-            while (rs.next()) {
-                Contato contato = new Contato();
-                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
-                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-                Conta conta = new Conta();
-                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-                Consumidor consumidor = new Consumidor();
-                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
-                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
-                Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                Produto produto = new Produto();
-                produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
-                        .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
-                        .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
-                        .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
-                Carrinho carrinho = new Carrinho();
-                carrinho.setId((rs.getLong("carrinho.id"))).setValor(rs.getString("carrinho.valor"))
-                        .setEstado((CarrinhoEstado) StateFactory.getObject(CarrinhoEstado.class.getName() + rs.getString("carrinho.estado"))).setConsumidor(consumidor);
-                pedido = new Pedido();
-                pedido.setId(rs.getLong("pedido.id")).setProduto(produto).setCarrinho(carrinho);
-                pedidos.add(pedido);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return pedidos;
     }
 
     private void closeResources(Connection conn, Statement st) {
@@ -239,4 +226,176 @@ public class PedidoDAO {
             System.out.println(e);
         }
     }
+
+    public Pedido getByConsumidor(long idConsumidor) {
+        Pedido pedido = null;
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.* , loja.*"
+                    + "FROM pedido "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
+                    + "WHERE pedido.consumidor_id = " + idConsumidor + ";");
+            rs.first();
+            Contato contato = new Contato();
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+
+            Loja loja = new Loja();
+            loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+            pedido = new Pedido();
+            pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
+                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return pedido;
+    }
+
+    /*não meche aqui, faz parte de um recurso técnico avançado, um estado da arte da gambiarra*/
+    public Pedido getByConsumidor(long idConsumidor, String estado) {
+        Pedido pedido = null;
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.* , loja.*"
+                    + "FROM pedido "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
+                    + "WHERE pedido.consumidor_id = " + idConsumidor + " "
+                    + "AND pedido.estado = '" + estado + "';"
+            );
+            rs.first();
+            Contato contato = new Contato();
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+            Conta conta = new Conta();
+            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+            Consumidor consumidor = new Consumidor();
+            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+
+            Loja loja = new Loja();
+            loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                    .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+            pedido = new Pedido();
+            pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
+                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return pedido;
+    }
+
+    public ArrayList<Pedido> getAllByConsumidor(long idConsumidor) {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.* , loja.*"
+                    + "FROM pedido "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
+                    + "WHERE pedido.consumidor_id = " + idConsumidor + ";"
+            );
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta();
+                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+
+                Loja loja = new Loja();
+                loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+                Pedido pedido = new Pedido();
+                pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
+                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                pedidos.add(pedido);
+
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return pedidos;
+    }
+
+    public ArrayList<Pedido> getAllByLoja(long idLoja, String estado) {
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT pedido.*, consumidor.*, contato.*, conta.* , loja.*"
+                    + "FROM pedido "
+                    + "INNER JOIN consumidor ON pedido.consumidor_id = consumidor.id "
+                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                    + "INNER JOIN loja ON pedido.loja_id = loja.id "
+                    + "WHERE pedido.loja_id = " + idLoja + " "
+                    + "AND pedido.estado != '" + estado + "';"
+            );
+            while (rs.next()) {
+                Contato contato = new Contato();
+                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+                Conta conta = new Conta();
+                conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+                Consumidor consumidor = new Consumidor();
+                consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
+                        .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
+
+                Loja loja = new Loja();
+                loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
+                        .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
+                Pedido pedido = new Pedido();
+                pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
+                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                pedidos.add(pedido);
+
+            }
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return pedidos;
+    }
+
 }

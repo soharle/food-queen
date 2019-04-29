@@ -24,8 +24,8 @@ public class Consumidor implements Observer {
     private Endereco endereco;
 
     public void update(Observable o, Object arg) {
-        if (o instanceof Carrinho) {
-            Carrinho carrinho = (Carrinho) o;
+        if (o instanceof Pedido) {
+            Pedido carrinho = (Pedido) o;
             System.out.println("Atenção " + this.getNome()
                     + ", o seu Carrinho mudou de estado para "
                     + carrinho.getEstado().getEstadoNome());

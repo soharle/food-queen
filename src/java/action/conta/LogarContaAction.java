@@ -16,19 +16,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Carrinho;
+import model.Pedido;
 import model.Categoria;
 import model.Consumidor;
 import model.Conta;
 import model.Loja;
-import model.Pedido;
+import model.ProdutoHasPedido;
 import model.Produto;
-import persistence.CarrinhoDAO;
+import persistence.PedidoDAO;
 import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
 import persistence.LojaDAO;
-import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 import persistence.ProdutoDAO;
 
 /**
@@ -70,9 +70,9 @@ public class LogarContaAction implements Action {
                         ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
                         request.setAttribute("produtos", produtos);
                         request.setAttribute("categorias", categorias);
-                        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
+                        Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
                         if (carrinho != null) {
-                            request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
+                            request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
                         }
                         view = request.getRequestDispatcher("home.jsp");
                     }

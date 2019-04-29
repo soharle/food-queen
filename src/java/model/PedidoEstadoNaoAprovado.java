@@ -9,9 +9,9 @@ package model;
  *
  * @author mathe
  */
-public class CarrinhoEstadoNaoAprovado extends CarrinhoEstado {
+public class PedidoEstadoNaoAprovado extends PedidoEstado {
 
-    public CarrinhoEstadoNaoAprovado() {
+    public PedidoEstadoNaoAprovado() {
         this.estadoNome = "NaoAprovado";
         this.estadoMsg = "Carrinho não aprovado";
         this.nome = "não aprovado";

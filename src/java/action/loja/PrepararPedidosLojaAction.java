@@ -14,12 +14,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
+import model.Pedido;
 import model.Loja;
 import model.Produto;
-import persistence.CarrinhoDAO;
-import persistence.LojaDAO;
 import persistence.PedidoDAO;
+import persistence.LojaDAO;
+import persistence.ProdutoHasPedidoDAO;
 import persistence.ProdutoDAO;
 
 /**
@@ -31,7 +31,7 @@ public class PrepararPedidosLojaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
+        ArrayList<Pedido> carrinhos = PedidoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
         ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAllByLoja(id);
         request.setAttribute("carrinhos", carrinhos);
         request.setAttribute("produtos", produtos);
