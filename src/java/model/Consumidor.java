@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.pedido.Pedido;
 import java.util.Observable;
 import java.util.Observer;
 

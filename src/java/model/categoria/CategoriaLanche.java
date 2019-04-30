@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.categoria;
 
 /**
  *
  * @author mathe
  */
-public class CategoriaVegetariana extends Categoria {
-
+public class CategoriaLanche extends Categoria{
     @Override
     public String getDescricao() {
-        return "Vende pratos que não utilizam carne";
+        return "Vende hambúrguers, batatas e sanduíches em geral.";
     }
     
-    public CategoriaVegetariana(){
-        this.setNome("Vegetariana");
+    public CategoriaLanche(){
+        this.setNome("Lanche");
     }
+    
 }

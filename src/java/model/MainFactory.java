@@ -5,6 +5,8 @@
  */
 package model;
 
+import model.pedido.Pedido;
+import model.pedido.PedidoEstado;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;

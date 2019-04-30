@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Loja;
 import model.Produto;
-import model.Promocao;
+import model.promocao.Promocao;
 import model.MainFactory;
 
 /**

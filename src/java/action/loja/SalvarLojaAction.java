@@ -15,7 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Categoria;
+import model.categoria.Categoria;
 import model.Conta;
 import model.Contato;
 import model.Endereco;

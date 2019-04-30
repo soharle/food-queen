@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Categoria;
+import model.categoria.Categoria;
 import model.Conta;
 import model.Contato;
 import model.Endereco;
