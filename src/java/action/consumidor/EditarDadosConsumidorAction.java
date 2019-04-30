@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import model.Consumidor;
 import persistence.ConsumidorDAO;
 import persistence.ContatoDAO;
-import persistence.EnderecoDAO;
 
 /**
  *

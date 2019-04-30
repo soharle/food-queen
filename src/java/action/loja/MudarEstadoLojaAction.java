@@ -12,7 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Pedido;
-import model.StateFactory;
+import model.MainFactory;
 import persistence.PedidoDAO;
 
 public class MudarEstadoLojaAction implements Action {
@@ -22,7 +22,7 @@ public class MudarEstadoLojaAction implements Action {
         String metodo = request.getParameter("estado");
         long id = Long.parseLong(request.getParameter("id"));
         Pedido carrinho = PedidoDAO.getInstance().get(id);
-        boolean mudou = StateFactory.invocarMetodoFactory(carrinho, metodo);
+        boolean mudou = MainFactory.invocarMetodoFactory(carrinho, metodo);
         PedidoDAO.getInstance().update(carrinho);
 
         String msg;

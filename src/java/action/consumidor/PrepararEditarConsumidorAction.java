@@ -10,8 +10,6 @@ import model.Categoria;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +33,6 @@ public class PrepararEditarConsumidorAction implements Action {
         RequestDispatcher view = null;
 
         try {
-            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
             HttpSession session = request.getSession();
             
             long id = Long.parseLong((String) session.getAttribute("id"));

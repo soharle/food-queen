@@ -25,21 +25,15 @@ import model.Categoria;
 import model.Conta;
 import model.Contato;
 import model.Endereco;
-import model.Loja;
 import persistence.CategoriaDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;
 import persistence.EnderecoDAO;
-import persistence.LojaDAO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2,
         maxFileSize = 1024 * 1024 * 10,
         maxRequestSize = 1024 * 1024 * 50)
 
-/**
- *
- * @author Gabriel
- */
 public class AtualizarLojaAction implements Action {
 
     @Override

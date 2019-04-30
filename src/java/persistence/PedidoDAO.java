@@ -18,7 +18,7 @@ import model.Consumidor;
 import model.Conta;
 import model.Contato;
 import model.Loja;
-import model.StateFactory;
+import model.MainFactory;
 
 /**
  *
@@ -66,7 +66,7 @@ public class PedidoDAO {
 
             pedido = new Pedido();
             pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor")).setLoja(loja)
-                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
+                    .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -103,7 +103,7 @@ public class PedidoDAO {
                         .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor")).
-                        setEstado((PedidoEstado) StateFactory.getObject((PedidoEstado.class.getName() + rs.getString("pedido.estado")))).setConsumidor(consumidor).setLoja(loja);
+                        setEstado((PedidoEstado) MainFactory.getObject((PedidoEstado.class.getName() + rs.getString("pedido.estado")))).setConsumidor(consumidor).setLoja(loja);
 
                 pedidos.add(pedido);
             }
@@ -132,7 +132,7 @@ public class PedidoDAO {
 
                 Pedido pedido = new Pedido();
                 pedido = pedido.setId(rs.getLong("pedido.id")).setValor(rs.getString("pedido.valor"))
-                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado")));
+                        .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado")));
 
                 pedidos.add(pedido);
             }
@@ -258,7 +258,7 @@ public class PedidoDAO {
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
             pedido = new Pedido();
             pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                    .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,7 +301,7 @@ public class PedidoDAO {
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
             pedido = new Pedido();
             pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                    .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -342,7 +342,7 @@ public class PedidoDAO {
                         .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                        .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
                 pedidos.add(pedido);
 
             }
@@ -386,7 +386,7 @@ public class PedidoDAO {
                         .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"));
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
+                        .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor).setLoja(loja);
                 pedidos.add(pedido);
 
             }

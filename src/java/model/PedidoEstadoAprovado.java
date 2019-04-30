@@ -20,7 +20,7 @@ public class PedidoEstadoAprovado extends PedidoEstado {
 
     @Override
     public boolean sairParaEntrega(Pedido pedido) {
-        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "SaiuParaEntrega"));
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "SaiuParaEntrega"));
         return true;
     }
 

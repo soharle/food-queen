@@ -18,12 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cartao;
 import model.Consumidor;
-import model.Loja;
-import model.Produto;
 import persistence.CartaoDAO;
 import persistence.ConsumidorDAO;
-import persistence.LojaDAO;
-import persistence.ProdutoDAO;
+
 
 /**
  *

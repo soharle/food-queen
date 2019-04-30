@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Promocao;
-import model.StateFactory;
+import model.MainFactory;
 
 public class PromocaoDAO {
 
@@ -32,7 +32,7 @@ public class PromocaoDAO {
 
             while (rs.next()) {
                 Promocao promocao
-                        = (Promocao) StateFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
+                        = (Promocao) MainFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
                 promocoes.add(promocao);
 
             }
@@ -55,7 +55,7 @@ public class PromocaoDAO {
             ResultSet rs = st.executeQuery("select * from promocao where promocao.id ='" + promocaoId + "'");
 
             while (rs.next()) {
-                promocao = (Promocao) StateFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
+                promocao = (Promocao) MainFactory.getObject(Promocao.class.getName() + rs.getString("nome"));
 
             }
 

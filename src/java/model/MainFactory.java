@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author mathe
  */
-public class StateFactory {
+public class MainFactory {
 
     public static Object getObject(String state) {
         Object actionObject = null;
@@ -39,7 +39,7 @@ public class StateFactory {
             Method metodo = PedidoEstado.class.getMethod(nomeMetodo, Pedido.class);
             mudou = (Boolean) metodo.invoke(carrinho.getEstado(), carrinho);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(StateFactory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mudou;
     }

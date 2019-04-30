@@ -19,7 +19,7 @@ public class PedidoEstadoSaiuParaEntrega extends PedidoEstado {
     }
 
     public boolean entregar(Pedido pedido) {
-        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "Entregue"));
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "Entregue"));
         return true;
     }
 

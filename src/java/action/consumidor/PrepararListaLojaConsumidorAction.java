@@ -21,7 +21,6 @@ public class PrepararListaLojaConsumidorAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        /*Fazer uma tela pra listar as lojas*/
         RequestDispatcher view = request.getRequestDispatcher("listaLojas.jsp");
         request.setAttribute("lojas", LojaDAO.getInstance().getAll());
         view.forward(request, response);

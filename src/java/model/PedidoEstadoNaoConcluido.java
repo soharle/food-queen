@@ -19,7 +19,7 @@ public class PedidoEstadoNaoConcluido extends PedidoEstado {
     }
 
     public boolean aguardar(Pedido pedido) {
-        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "Aguardando"));
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "Aguardando"));
         return true;
     }
 }

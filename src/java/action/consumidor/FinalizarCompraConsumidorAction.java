@@ -7,17 +7,13 @@ package action.consumidor;
 
 import controller.Action;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Pedido;
 import model.ProdutoHasPedido;
-import model.StateFactory;
 import persistence.PedidoDAO;
 import persistence.ProdutoHasPedidoDAO;
 

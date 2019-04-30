@@ -20,7 +20,7 @@ import model.Contato;
 import model.Loja;
 import model.ProdutoHasPedido;
 import model.Produto;
-import model.StateFactory;
+import model.MainFactory;
 
 /**
  *
@@ -71,7 +71,7 @@ public class ProdutoHasPedidoDAO {
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
             Pedido pedido = new Pedido();
             pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                    .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
+                    .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
             produtoHasPedido = new ProdutoHasPedido();
             produtoHasPedido.setId(rs.getLong("produto_has_pedido.id")).setProduto(produto).setCarrinho(pedido);
         } catch (SQLException | ClassNotFoundException ex) {
@@ -113,7 +113,7 @@ public class ProdutoHasPedidoDAO {
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
+                        .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
                 ProdutoHasPedido produtoHasPedido = new ProdutoHasPedido();
                 produtoHasPedido.setId(rs.getLong("produto_has_pedido.id")).setProduto(produto).setCarrinho(pedido);
                 produtoHasPedidos.add(produtoHasPedido);
@@ -216,7 +216,7 @@ public class ProdutoHasPedidoDAO {
                         .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
-                        .setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
+                        .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
                 produtoHasPedido = new ProdutoHasPedido();
                 produtoHasPedido.setId(rs.getLong("produto_has_pedido.id")).setProduto(produto).setCarrinho(pedido);
                 produtoHasPedidos.add(produtoHasPedido);

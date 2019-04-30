@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import model.Loja;
 import model.Produto;
 import model.Promocao;
-import model.StateFactory;
+import model.MainFactory;
 
 /**
  *
@@ -49,7 +49,7 @@ public class ProdutoDAO {
             produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
-            produto.setPromocao((Promocao) StateFactory.getObject( Promocao.class.getName() + promocao.getNome()));
+            produto.setPromocao((Promocao) MainFactory.getObject( Promocao.class.getName() + promocao.getNome()));
         } catch (SQLException e) {
             System.out.println(e);
         } catch (ClassNotFoundException ex) {

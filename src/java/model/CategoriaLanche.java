@@ -14,4 +14,9 @@ public class CategoriaLanche extends Categoria{
     public String getDescricao() {
         return "Vende hambúrguers, batatas e sanduíches em geral.";
     }
+    
+    public CategoriaLanche(){
+        this.setNome("Lanche");
+    }
+    
 }

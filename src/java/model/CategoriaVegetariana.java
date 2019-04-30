@@ -9,14 +9,14 @@ package model;
  *
  * @author mathe
  */
-public class CategoriaPizzaria extends Categoria{
+public class CategoriaVegetariana extends Categoria {
+
     @Override
     public String getDescricao() {
-        return "Vende pizzas e massas em geral.";
+        return "Vende pratos que não utilizam carne";
     }
     
-    public CategoriaPizzaria(){
-        this.setNome("Pizzaria");
+    public CategoriaVegetariana(){
+        this.setNome("Vegetariana");
     }
-    
 }

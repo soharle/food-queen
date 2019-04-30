@@ -13,9 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Pedido;
-import model.ProdutoHasPedido;
 import persistence.PedidoDAO;
-import persistence.ProdutoHasPedidoDAO;
 
 /**
  *

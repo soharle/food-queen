@@ -19,13 +19,13 @@ public class PedidoEstadoAguardando extends PedidoEstado {
 
     @Override
     public boolean aprovar(Pedido pedido) {
-        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "Aprovado"));
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "Aprovado"));
         return true;
     }
 
     @Override
     public boolean naoAprovar(Pedido pedido) {
-        pedido.setEstado((PedidoEstado) StateFactory.getObject(PedidoEstado.class.getName() + "NaoAprovado"));
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "NaoAprovado"));
         return true;
     }
 

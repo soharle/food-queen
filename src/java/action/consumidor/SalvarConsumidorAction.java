@@ -20,7 +20,6 @@ import model.Consumidor;
 import model.Conta;
 import model.Contato;
 import model.Endereco;
-import model.Loja;
 import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
 import persistence.ContatoDAO;

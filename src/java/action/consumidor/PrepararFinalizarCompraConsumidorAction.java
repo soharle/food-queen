@@ -21,10 +21,7 @@ import persistence.CartaoDAO;
 import persistence.ConsumidorDAO;
 import persistence.ProdutoHasPedidoDAO;
 
-/**
- *
- * @author Gabriel
- */
+
 public class PrepararFinalizarCompraConsumidorAction implements Action{
 
     @Override

@@ -21,7 +21,6 @@ import model.Categoria;
 import model.Consumidor;
 import model.Conta;
 import model.Loja;
-import model.ProdutoHasPedido;
 import model.Produto;
 import persistence.PedidoDAO;
 import persistence.CategoriaDAO;
