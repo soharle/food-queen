@@ -13,40 +13,39 @@ import java.util.ArrayList;
  */
 public class MementoManager {
 
-    private ArrayList<PedidoMemento> mementos;
+    private ArrayList<PedidoEstado> mementos;
+    private int index;
 
-    public MementoManager() {
-        mementos = new ArrayList<PedidoMemento>();
+    public MementoManager(PedidoEstado pe) {
+        mementos = new ArrayList<PedidoEstado>();
+        mementos.add(pe);
+        index = 0;
     }
 
-    public void adicionarMemento(PedidoMemento memento) {
+    public void adicionarMemento(PedidoEstado memento) {
         mementos.add(memento);
+        index++;
     }
 
-    public PedidoMemento retornarUm(PedidoMemento memento) {
-        if (!this.mementos.contains(memento)) {
-            return memento;
+    public PedidoEstado atual() {
+        return mementos.get(index);
+    }
+
+    public void retroceder() {
+        if (index > 0) {
+            index--;
         }
-
-        return mementos.get(mementos.indexOf(memento) - 1);
     }
 
-    public PedidoMemento avancaUm(PedidoMemento memento) {
-        if (!this.mementos.contains(memento)) {
-            if (mementos.size() > mementos.indexOf(memento)) {
-                return mementos.get(mementos.indexOf(memento) + 1);
-            }
+    public void avancar() {
+        if (index < mementos.size() - 1) {
+            index++;
         }
-
-        return memento;
     }
 
-    public void esquecerFuturo(PedidoMemento memento) {
-        if (this.mementos.contains(memento)) 
-            for (int i = mementos.size(); i > 0; i--) {
-                if(mementos.get(i).equals(memento))
-                    break;
-                this.mementos.remove(i);
-            }
+    public void esquecerProximos() {
+        for (int i = mementos.size() - 1; i > index; i--) {
+            mementos.remove(i);
+        }
     }
 }

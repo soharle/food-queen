@@ -14,10 +14,9 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.pedido.Pedido;
-import model.Produto;
 import persistence.PedidoDAO;
-import persistence.ProdutoDAO;
 
 /**
  *
@@ -27,11 +26,15 @@ public class PrepararPedidosLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        ArrayList<Pedido> carrinhos = PedidoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
-        ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAllByLoja(id);
-        request.setAttribute("carrinhos", carrinhos);
-        request.setAttribute("produtos", produtos);
+        HttpSession session = request.getSession();
+        long id = Long.parseLong(session.getAttribute("id").toString());
+
+        ArrayList<Pedido> pedidos = (ArrayList<Pedido>) session.getAttribute("pedidos");
+        
+        if (pedidos == null) {
+            pedidos = PedidoDAO.getInstance().getAllByLoja(id, "NaoConcluido");
+        }
+        request.setAttribute("pedidos", pedidos);
 
         RequestDispatcher view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
         try {

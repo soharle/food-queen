@@ -13,62 +13,63 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.pedido.Pedido;
 import model.MainFactory;
 import model.pedido.MementoManager;
+import model.pedido.Pedido;
 import persistence.PedidoDAO;
 
-public class MudarEstadoLojaAction implements Action {
+/**
+ *
+ * @author mathe
+ */
+public class MementoEstadoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String metodo = request.getParameter("estado");
-        long id = Long.parseLong(request.getParameter("id"));
-
         HttpSession session = request.getSession();
-        long idLoja = Long.parseLong(session.getAttribute("id").toString());
-
+        long id = Long.parseLong(request.getParameter("id"));
         ArrayList<Pedido> pedidos = (ArrayList<Pedido>) session.getAttribute("pedidos");
 
         if (pedidos == null) {
+            long idLoja = Long.parseLong(session.getAttribute("id").toString());
             pedidos = PedidoDAO.getInstance().getAllByLoja(idLoja, "NaoConcluido");
         }
 
         int pedidoIndex = 0;
-        Pedido pedido = null;
-
         for (int i = 0; i < pedidos.size(); i++) {
             if (pedidos.get(i).getId() == id) {
                 pedidoIndex = i;
-                pedido = pedidos.get(i);
                 break;
             }
         }
 
+        RequestDispatcher view = null;
         MementoManager mm = (MementoManager) session.getAttribute("mementoManager" + id);
+        if (mm != null) {
+            String metodo = request.getParameter("memento");
+            if (!metodo.equals("salvar")) {
+                MainFactory.invocarMemento(mm, metodo);
+                pedidos.get(pedidoIndex).setEstado(mm.atual());
 
-        if (mm == null) {
-            mm = new MementoManager(pedido.getEstado());
-        }
+            } else {
+                pedidos.get(pedidoIndex).notificar();
+                mm.esquecerProximos();
+                PedidoDAO.getInstance().update(pedidos.get(pedidoIndex));
+            }
 
-        boolean mudou = MainFactory.invocarMetodoFactory(pedido, metodo);
-        String msg;
-        if (mudou) {
-            msg = "O carrinho mudou para " + pedido.getEstado().getNome();
-
-            mm.adicionarMemento(pedido.getEstado());
             session.setAttribute("mementoManager" + id, mm);
+            request.setAttribute("pedidos", pedidos);
+            session.setAttribute("pedidos", pedidos);
+
+            view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
+
         } else {
-            msg = "Estado do carrinho " + pedido.getEstado().getNome() + " não pode ser trocado!";
+            String msg = "O pedido não tem histórico, mude seu estado antes!";
+            request.setAttribute("msg", msg);
+            view = request.getRequestDispatcher("FrontController?action=PrepararPedidosLoja");
         }
 
-        request.setAttribute("msg", msg);
-
-        session.setAttribute("pedidos", pedidos);
-        request.setAttribute("pedidos", pedidos);
-
-        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
         view.forward(request, response);
-    }
 
+    }
 }

@@ -15,7 +15,7 @@ public class PedidoEstadoAprovado extends PedidoEstado {
 
     public PedidoEstadoAprovado() {
         this.estadoNome = "Aprovado";
-        this.estadoMsg = "Carrinho aprovado";
+        this.estadoMsg = "Pedido aprovado";
         this.nome = "aprovado";
 
     }

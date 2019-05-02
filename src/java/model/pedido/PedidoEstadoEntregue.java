@@ -13,7 +13,7 @@ public class PedidoEstadoEntregue extends PedidoEstado {
 
     public PedidoEstadoEntregue() {
         this.estadoNome = "Entregue";
-        this.estadoMsg = "Carrinho entregue";
+        this.estadoMsg = "Pedido entregue";
         this.nome = "entregue";
 
     }

@@ -11,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.pedido.MementoManager;
 
 /**
  *
@@ -20,8 +21,8 @@ public class MainFactory {
 
     public static Object getObject(String state) {
         Object actionObject = null;
-        String nomeClasse =  state;
-        
+        String nomeClasse = state;
+
         Class classe = null;
         Object objeto = null;
         try {
@@ -30,7 +31,7 @@ public class MainFactory {
         } catch (Exception ex) {
             return null;
         }
-        
+
         actionObject = objeto;
         return actionObject;
     }
@@ -44,6 +45,17 @@ public class MainFactory {
             Logger.getLogger(MainFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mudou;
+    }
+
+    public static void invocarMemento(MementoManager mm, String nomeMetodo) {
+
+        try {
+            Method metodo = MementoManager.class.getMethod(nomeMetodo);
+            metodo.invoke(mm);
+        } catch (SecurityException | IllegalArgumentException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
+            Logger.getLogger(MainFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

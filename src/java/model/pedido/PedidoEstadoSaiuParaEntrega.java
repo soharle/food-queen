@@ -15,7 +15,7 @@ public class PedidoEstadoSaiuParaEntrega extends PedidoEstado {
 
     public PedidoEstadoSaiuParaEntrega() {
         this.estadoNome = "SaiuParaEntrega";
-        this.estadoMsg = "Carrinho saiu para entrega";
+        this.estadoMsg = "Pedido saiu para entrega";
         this.nome = "saiu para entrega";
 
     }
