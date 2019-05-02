@@ -61,7 +61,7 @@ public class MudarEstadoLojaAction implements Action {
         } else {
             msg = "Estado do carrinho " + pedido.getEstado().getNome() + " não pode ser trocado!";
         }
-
+        PedidoDAO.getInstance().update(pedido);
         request.setAttribute("msg", msg);
 
         session.setAttribute("pedidos", pedidos);

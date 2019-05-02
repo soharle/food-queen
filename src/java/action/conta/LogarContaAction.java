@@ -65,7 +65,12 @@ public class LogarContaAction implements Action {
                     if (conta.getTipo().equals("Loja")) {
                         view = request.getRequestDispatcher("estabelecimento/index.jsp");
                     } else {
-                        ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
+                        ArrayList<Produto> produtos = null;
+                        try {
+                            produtos = ProdutoDAO.getInstance().getAll();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
                         ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
                         request.setAttribute("produtos", produtos);
                         request.setAttribute("categorias", categorias);

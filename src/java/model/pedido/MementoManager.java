@@ -23,6 +23,7 @@ public class MementoManager {
     }
 
     public void adicionarMemento(PedidoEstado memento) {
+        esquecerProximos();
         mementos.add(memento);
         index++;
     }

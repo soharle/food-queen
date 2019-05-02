@@ -62,6 +62,7 @@ public class MementoEstadoLojaAction implements Action {
             session.setAttribute("pedidos", pedidos);
 
             view = request.getRequestDispatcher("estabelecimento/pedidos.jsp");
+            PedidoDAO.getInstance().update(pedidos.get(pedidoIndex));
 
         } else {
             String msg = "O pedido não tem histórico, mude seu estado antes!";
