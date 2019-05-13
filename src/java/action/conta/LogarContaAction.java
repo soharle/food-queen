@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import model.pedido.Pedido;
 import model.categoria.Categoria;
 import model.Consumidor;
-import model.Conta;
+import model.conta.Conta;
 import model.Loja;
 import model.Produto;
 import persistence.PedidoDAO;
@@ -53,18 +53,10 @@ public class LogarContaAction implements Action {
                     if (conta.getTipo().equals("Loja")) {
                         Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
                         id = loja.getId();
+                        view = request.getRequestDispatcher("estabelecimento/index.jsp");
                     } else {
                         Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
                         id = consumidor.getId();
-                    }
-
-                    session.setAttribute("id", id);
-                    session.setAttribute("tipo", conta.getTipo());
-                    session.setAttribute("login", conta.getLogin());
-
-                    if (conta.getTipo().equals("Loja")) {
-                        view = request.getRequestDispatcher("estabelecimento/index.jsp");
-                    } else {
                         ArrayList<Produto> produtos = null;
                         try {
                             produtos = ProdutoDAO.getInstance().getAll();
@@ -79,7 +71,13 @@ public class LogarContaAction implements Action {
                             request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
                         }
                         view = request.getRequestDispatcher("home.jsp");
+
                     }
+
+                    session.setAttribute("id", id);
+                    session.setAttribute("tipo", conta.getTipo());
+                    session.setAttribute("login", conta.getLogin());
+
                 }
             } else {
                 view = request.getRequestDispatcher("index.jsp");

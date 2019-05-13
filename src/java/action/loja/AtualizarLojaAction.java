@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.categoria.Categoria;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 import model.Endereco;
 import persistence.CategoriaDAO;

@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.conta;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,7 +19,7 @@ public class Conta {
     private long id;
     private String login;
     private String senha;
-    private String tipo;
+    private TipoConta tipo;
 
     public long getId() {
         return id;
@@ -46,13 +51,19 @@ public class Conta {
     }
 
     public String getTipo() {
-        return tipo;
+        return tipo.getDescricaoConta();
     }
 
     public Conta setTipo(String tipo) {
-        this.tipo = tipo;
+        try {
+            Class c = Class.forName("model.conta.TipoConta" + tipo);
+            this.tipo = (TipoConta) c.newInstance();
+        } catch (IllegalAccessException | ClassNotFoundException | IllegalArgumentException | SecurityException ex) {
+            System.out.println(ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Conta.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return this;
-
     }
 
 }

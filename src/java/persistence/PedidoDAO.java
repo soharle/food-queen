@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 import model.pedido.Pedido;
 import model.pedido.PedidoEstado;
 import model.Consumidor;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 import model.Loja;
 import model.MainFactory;
