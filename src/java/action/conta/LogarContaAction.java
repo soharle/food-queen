@@ -50,34 +50,37 @@ public class LogarContaAction implements Action {
                 if (conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
                     HttpSession session = request.getSession();
                     long id = 0;
-                    if (conta.getTipo().equals("Loja")) {
-                        Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
-                        id = loja.getId();
-                        view = request.getRequestDispatcher("estabelecimento/index.jsp");
+                    if (conta.getTipoConta().logar(conta)) {
+                        if (conta.getTipo().equals("Loja")) {
+                            Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
+                            id = loja.getId();
+                            view = request.getRequestDispatcher("estabelecimento/index.jsp");
+                        } else {
+                            Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
+                            id = consumidor.getId();
+                            ArrayList<Produto> produtos = null;
+                            try {
+                                produtos = ProdutoDAO.getInstance().getAll();
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+                            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
+                            request.setAttribute("produtos", produtos);
+                            request.setAttribute("categorias", categorias);
+                            Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
+                            if (carrinho != null) {
+                                request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
+                            }
+                            view = request.getRequestDispatcher("home.jsp");
+
+                            session.setAttribute("id", id);
+                            session.setAttribute("tipo", conta.getTipo());
+                            session.setAttribute("login", conta.getLogin());
+
+                        }
                     } else {
-                        Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
-                        id = consumidor.getId();
-                        ArrayList<Produto> produtos = null;
-                        try {
-                            produtos = ProdutoDAO.getInstance().getAll();
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-                        request.setAttribute("produtos", produtos);
-                        request.setAttribute("categorias", categorias);
-                        Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
-                        if (carrinho != null) {
-                            request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
-                        }
-                        view = request.getRequestDispatcher("home.jsp");
-
+                        view = request.getRequestDispatcher("erro.jsp");
                     }
-
-                    session.setAttribute("id", id);
-                    session.setAttribute("tipo", conta.getTipo());
-                    session.setAttribute("login", conta.getLogin());
-
                 }
             } else {
                 view = request.getRequestDispatcher("index.jsp");

@@ -20,6 +20,7 @@ public class Conta {
     private String login;
     private String senha;
     private TipoConta tipo;
+    
 
     public long getId() {
         return id;
@@ -64,6 +65,10 @@ public class Conta {
             Logger.getLogger(Conta.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this;
+    }
+    
+    public TipoConta getTipoConta() {
+        return tipo;
     }
 
 }

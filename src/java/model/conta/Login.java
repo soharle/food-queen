@@ -5,10 +5,6 @@
  */
 package model.conta;
 
-/**
- *
- * @author mathe
- */
 public class Login {
 
     private TipoLogin tipoLogin;
@@ -17,12 +13,11 @@ public class Login {
         this.tipoLogin = tipoLogin;
     }
 
-    public TipoLogin getTipoConta() {
+    public TipoLogin getTipoLogin() {
         return tipoLogin;
     }
 
-    public void setTipoConta(TipoLogin tipoLogin) {
+    public void setTipoLogin(TipoLogin tipoLogin) {
         this.tipoLogin = tipoLogin;
     }
-
 }
