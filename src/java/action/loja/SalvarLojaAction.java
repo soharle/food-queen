@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.categoria.Categoria;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 import model.Endereco;
 import model.Loja;

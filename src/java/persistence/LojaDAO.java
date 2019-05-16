@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.categoria.Categoria;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 import model.Endereco;
 import model.Loja;

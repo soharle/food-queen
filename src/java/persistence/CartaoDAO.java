@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Cartao;
 import model.Consumidor;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 
 /**
