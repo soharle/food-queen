@@ -13,15 +13,14 @@ public abstract class TipoConta {
     
     public abstract String getDescricaoConta();
 
-    public boolean logar(Conta conta) {
-        if (listaPermissao.contains(conta.getTipo())) {
-            return true;
+    public String logar(Conta conta) {
+        if (listaPermissao.contains(conta.getTipoLogin())) {
+            return getDescricaoConta();
         } else {
             if (contaSuperior != null) {
                 return contaSuperior.logar(conta);
-
-            } else {
-                return false;
+            }else{
+                return "Invalido";
             }
         }
     }

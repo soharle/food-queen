@@ -6,7 +6,6 @@
 package model.conta;
 
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,7 +19,7 @@ public class Conta {
     private String login;
     private String senha;
     private TipoConta tipo;
-    
+    private TipoLogin tipoLogin;
 
     public long getId() {
         return id;
@@ -59,16 +58,22 @@ public class Conta {
         try {
             Class c = Class.forName("model.conta.TipoConta" + tipo);
             this.tipo = (TipoConta) c.newInstance();
+            Class c2 = Class.forName("model.conta.TipoLogin" + tipo);
+            this.tipoLogin = (TipoLogin) c2.getDeclaredMethod("getTipoLogin" + tipo).invoke(c2.newInstance());
         } catch (IllegalAccessException | ClassNotFoundException | IllegalArgumentException | SecurityException ex) {
             System.out.println(ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException | NoSuchMethodException | InvocationTargetException ex) {
             Logger.getLogger(Conta.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this;
     }
-    
+
     public TipoConta getTipoConta() {
         return tipo;
+    }
+
+    public TipoLogin getTipoLogin() {
+        return tipoLogin;
     }
 
 }
