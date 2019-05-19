@@ -3,45 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Repos/java/food-queen/web/estabelecimento/pedidos.jsp</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstado.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoContaLoja.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoAprovado.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoNaoAprovado.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/PrepararContaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararEditarLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LerContaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/CategoriaDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoLoginConsumidor.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/controller/ActionFactory.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/PrepararPedidosLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/MudarEstadoLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoAguardando.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/LerProdutoLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaConsumidor.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaLoja.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoConta.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoContaConsumidor.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoLoginLoja.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarConta.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/TipoLogin.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/conta/Conta.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaInvalido.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/conta/LogarContaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/CartaoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/controller/Action.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoEntregue.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/LerLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/action/loja/MementoEstadoLojaAction.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/LojaDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/MementoManager.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/PedidoDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/persistence/ContaDAO.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/Pedido.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoNaoConcluido.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoSaiuParaEntrega.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/controller/FrontController.java</file>
-            <file>file:/E:/Repos/java/food-queen/src/java/model/MainFactory.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoLoginConsumidor.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/conta/LogarContaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/action/conta/LerContaAction.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoContaConsumidor.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/CategoriaDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/CartaoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/Conta.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/ProdutoHasPedidoDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoLogin.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoConta.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoContaLoja.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/persistence/ComboDAO.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/conta/TipoLoginLoja.java</file>
+            <file>file:/E:/Documentos/BSI/LP5/food-queen/src/java/model/Combo.java</file>
         </group>
     </open-files>
 </project-private>
