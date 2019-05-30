@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import model.Consumidor;
 import model.Loja;
+import model.Produto;
 import model.ProdutoHasPedido;
 import persistence.ProdutoHasPedidoDAO;
 
@@ -21,6 +22,7 @@ public class Pedido extends Observable {
     private long id;
     private String valor;
     private PedidoEstado estado;
+    private ArrayList<ProdutoHasPedido> produtosDoPedido;
 
     private Loja loja;
     private Consumidor consumidor;
@@ -91,9 +93,31 @@ public class Pedido extends Observable {
 
     }
 
+    public ArrayList<ProdutoHasPedido> getProdutosDoPedido() {
+        return produtosDoPedido;
+    }
+
+    public void setProdutosDoPedido(ArrayList<ProdutoHasPedido> produtosDoPedido) {
+        this.produtosDoPedido = produtosDoPedido;
+    }
+
+
     public void notificar() {
         setChanged();
         notifyObservers();
     }
 
+    @Override
+    public String toString() {
+        String produtosString = "Pedido " + this.id + '\n' +
+                "Para: " + this.consumidor.getNome() + '\n';
+        
+        for(ProdutoHasPedido p : produtosDoPedido){
+            produtosString += p.toString() + '\n';
+        }
+        
+        return produtosString;
+    }
+
+    
 }

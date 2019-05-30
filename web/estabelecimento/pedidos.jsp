@@ -56,7 +56,7 @@
                                         <hr>
                                         <div>
                                             <a href="FrontController?action=MementoEstadoLoja&id=${pedido.id}&memento=retroceder" type="button" class="btn btn-secondary"><-</a>
-                                            <a href="FrontController?action=MementoEstadoLoja&id=${pedido.id}&memento=salvar" type="button" class="btn btn-secondary">Salvar</a>
+                                         <!--   <a href="FrontController?action=MementoEstadoLoja&id=${pedido.id}&memento=salvar" type="button" class="btn btn-secondary">Salvar</a> -->
                                             <a href="FrontController?action=MementoEstadoLoja&id=${pedido.id}&memento=avancar" type="button" class="btn btn-secondary">-></a>
 
                                         </div>

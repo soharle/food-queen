@@ -45,4 +45,10 @@ public class ProdutoHasPedido {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return this.produto.toString();
+    }
+    
+    
 }

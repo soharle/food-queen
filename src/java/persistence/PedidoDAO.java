@@ -67,6 +67,7 @@ public class PedidoDAO {
             pedido = new Pedido();
             pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor")).setLoja(loja)
                     .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
+            pedido.setProdutosDoPedido(ProdutoHasPedidoDAO.getInstance().getByCarrinho(pedido.getId()));
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

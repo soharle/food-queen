@@ -117,4 +117,11 @@ public class Produto {
         this.promocao = promocao;
     }
 
+    @Override
+    public String toString() {
+        return this.nome + " : R$" + this.preco;
+    }
+    
+    
+
 }
