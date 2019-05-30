@@ -16,9 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Carrinho;
-import model.Categoria;
-import model.Pedido;
+import model.categoria.Categoria;
+import model.ProdutoHasPedido;
 import model.Produto;
 import persistence.CategoriaDAO;
 import persistence.ProdutoDAO;
@@ -33,15 +32,13 @@ public class PrepararHomeConsumidorAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
         String tipo = session.getAttribute("tipo").toString();
-        ArrayList<Pedido> pedidosNaSessao =(ArrayList<Pedido>) session.getAttribute("pedidos");
+        
         if (tipo.equals("Consumidor")) {
             try {
-                ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
                 ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
                 request.setAttribute("produtos", produtos);
                 request.setAttribute("categorias", categorias);
-                //request.setAttribute("pedidos", pedidos);
                 RequestDispatcher view = request.getRequestDispatcher("home.jsp");
                 view.forward(request, response);
 

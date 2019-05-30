@@ -7,19 +7,15 @@ package action.consumidor;
 
 import controller.Action;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
-import model.Pedido;
-import model.StateFactory;
-import persistence.CarrinhoDAO;
+import model.pedido.Pedido;
+import model.ProdutoHasPedido;
 import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 
 /**
  *
@@ -31,20 +27,20 @@ public class FinalizarCompraConsumidorAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
 
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
+        Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
         carrinho.getEstado().aguardar(carrinho);
-        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+        ArrayList<ProdutoHasPedido> pedidos = ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         Double valor = 0d;
         
-        for (Pedido pedido : pedidos) {
+        for (ProdutoHasPedido pedido : pedidos) {
             valor += Double.parseDouble(pedido.getProduto().getPrecoDeVenda());
         }
         
         carrinho.setValor(valor.toString());
         carrinho.getEstado().aguardar(carrinho);
-        CarrinhoDAO.getInstance().update(carrinho);
+        PedidoDAO.getInstance().update(carrinho);
         
-        ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByConsumidor(id);
+        ArrayList<Pedido> carrinhos = PedidoDAO.getInstance().getAllByConsumidor(id);
         request.setAttribute("carrinhos", carrinhos);
         
         request.getSession().removeAttribute("carrinho");

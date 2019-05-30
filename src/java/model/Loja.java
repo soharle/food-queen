@@ -5,6 +5,9 @@
  */
 package model;
 
+import model.conta.Conta;
+import model.categoria.Categoria;
+
 /**
  *
  * @author mathe

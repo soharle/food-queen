@@ -5,6 +5,7 @@
  */
 package model;
 
+import model.promocao.Promocao;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -115,5 +116,12 @@ public class Produto {
     public void setPromocao(Promocao promocao) {
         this.promocao = promocao;
     }
+
+    @Override
+    public String toString() {
+        return this.nome + " : R$" + this.preco;
+    }
+    
+    
 
 }

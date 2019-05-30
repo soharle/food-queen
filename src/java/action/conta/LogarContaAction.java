@@ -16,19 +16,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Carrinho;
-import model.Categoria;
+import model.pedido.Pedido;
+import model.categoria.Categoria;
 import model.Consumidor;
-import model.Conta;
+import model.conta.Conta;
 import model.Loja;
-import model.Pedido;
+import model.MainFactory;
 import model.Produto;
-import persistence.CarrinhoDAO;
+import persistence.PedidoDAO;
 import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
 import persistence.ContaDAO;
 import persistence.LojaDAO;
-import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 import persistence.ProdutoDAO;
 
 /**
@@ -47,48 +47,14 @@ public class LogarContaAction implements Action {
         try {
             conta = ContaDAO.getInstance().get(login);
 
-            if (conta != null) {
-                if (conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
-                    HttpSession session = request.getSession();
-                    long id = 0;
-                    if (conta.getTipo().equals("Loja")) {
-                        Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
-                        id = loja.getId();
-                    } else {
-                        Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
-                        id = consumidor.getId();
-                    }
-
-                    session.setAttribute("id", id);
-                    session.setAttribute("tipo", conta.getTipo());
-                    session.setAttribute("login", conta.getLogin());
-
-                    if (conta.getTipo().equals("Loja")) {
-                        view = request.getRequestDispatcher("estabelecimento/index.jsp");
-                    } else {
-                        ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
-                        ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-                        request.setAttribute("produtos", produtos);
-                        request.setAttribute("categorias", categorias);
-                        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
-                        if (carrinho != null) {
-                            request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
-                        }
-                        view = request.getRequestDispatcher("home.jsp");
-                    }
-                }
-            } else {
-                view = request.getRequestDispatcher("index.jsp");
+            if (conta != null && conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
+                String tipo = conta.getTipoConta().logar(conta);
+                LogarConta lc = (LogarConta) MainFactory.getObject("action.conta.LogarConta" + tipo);
+                lc.logar(request, response, conta);
             }
 
         } catch (ClassNotFoundException | SQLException ex) {
             view = request.getRequestDispatcher("index.jsp");
-        } finally {
-            try {
-                view.forward(request, response);
-            } catch (ServletException | IOException ex) {
-                Logger.getLogger(LogarContaAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 }

@@ -5,22 +5,24 @@
  */
 package model;
 
+import model.pedido.Pedido;
+
 /**
  *
  * @author mathe
  */
-public class Pedido {
+public class ProdutoHasPedido {
 
     private long id;
     private Produto produto;
-    private Carrinho carrinho;
+    private Pedido carrinho;
 
  
     public long getId() {
         return id;
     }
 
-    public Pedido setId(long id) {
+    public ProdutoHasPedido setId(long id) {
         this.id = id;
         return this;
     }
@@ -29,18 +31,24 @@ public class Pedido {
         return produto;
     }
 
-    public Pedido setProduto(Produto produto) {
+    public ProdutoHasPedido setProduto(Produto produto) {
         this.produto = produto;
         return this;
     }
 
-    public Carrinho getCarrinho() {
+    public Pedido getCarrinho() {
         return carrinho;
     }
 
-    public Pedido setCarrinho(Carrinho carrinho) {
+    public ProdutoHasPedido setCarrinho(Pedido carrinho) {
         this.carrinho = carrinho;
         return this;
     }
 
+    @Override
+    public String toString() {
+        return this.produto.toString();
+    }
+    
+    
 }

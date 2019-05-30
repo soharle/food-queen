@@ -5,7 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.Categoria;
+import model.categoria.Categoria;
+import model.MainFactory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,8 +38,8 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
             rs.first();
-            categoria = new Categoria();
-            categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
+            categoria = (Categoria) MainFactory.getObject( Categoria.class.getName()+ rs.getString("nome"));
+            categoria.setId(rs.getInt("id"));
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -59,8 +60,8 @@ public class CategoriaDAO {
             st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM categoria;");
             while (rs.next()) {
-                Categoria categoria = new Categoria();
-                categoria.setId(rs.getInt("id")).setNome(rs.getString("nome"));
+                Categoria categoria = (Categoria) MainFactory.getObject( Categoria.class.getName()+ rs.getString("nome"));
+                categoria.setId(rs.getInt("id"));
                 categorias.add(categoria);
             }
         } catch (SQLException e) {

@@ -15,15 +15,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
-import model.Categoria;
+import model.pedido.Pedido;
 import model.Consumidor;
-import model.Pedido;
+import model.ProdutoHasPedido;
 import model.Produto;
-import persistence.CarrinhoDAO;
+import persistence.PedidoDAO;
 import persistence.CategoriaDAO;
 import persistence.ConsumidorDAO;
-import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 import persistence.ProdutoDAO;
 
 /**
@@ -40,25 +39,25 @@ public class AdicionarCarrinhoConsumidorAction implements Action {
         RequestDispatcher view = null;
         try {
             Consumidor consumidor = ConsumidorDAO.getInstance().get(idConsumidor);
-            Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
+            Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
 
             if (carrinho == null) {
-                carrinho = new Carrinho();
+                carrinho = new Pedido();
                 carrinho.setConsumidor(consumidor);
                 carrinho.setLoja(produto.getLoja());
-                carrinho = CarrinhoDAO.getInstance().save(carrinho);
+                carrinho = PedidoDAO.getInstance().save(carrinho);
             }
             if (produto.getLoja().getId() == carrinho.getLoja().getId()) {
-                Pedido pedido = new Pedido();
+                ProdutoHasPedido pedido = new ProdutoHasPedido();
                 pedido.setCarrinho(carrinho);
                 pedido.setProduto(produto);
-                PedidoDAO.getInstance().save(pedido);
+                ProdutoHasPedidoDAO.getInstance().save(pedido);
                 request.getSession().setAttribute("carrinho", carrinho);
-                request.getSession().setAttribute("pedidos", PedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
+                request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
                 view = request.getRequestDispatcher("FrontController?action=PrepararListaProdutosLojaConsumidor&id=" + produto.getLoja().getId());
 
             } else {
-                ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+                ArrayList<ProdutoHasPedido> pedidos = new ArrayList<ProdutoHasPedido>();
                 ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
                 request.setAttribute("produtos", produtos);
                 request.setAttribute("msgErro", "Você não pode comprar produtos de lojas diferentes no mesmo carrinho");

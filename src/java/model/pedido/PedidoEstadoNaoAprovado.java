@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.pedido;
 
 /**
  *
  * @author mathe
  */
-public class CarrinhoEstadoNaoAprovado extends CarrinhoEstado {
+public class PedidoEstadoNaoAprovado extends PedidoEstado {
 
-    public CarrinhoEstadoNaoAprovado() {
+    public PedidoEstadoNaoAprovado() {
         this.estadoNome = "NaoAprovado";
-        this.estadoMsg = "Carrinho não aprovado";
+        this.estadoMsg = "Pedido não aprovado";
         this.nome = "não aprovado";
 
     }

@@ -1,4 +1,4 @@
-package model;
+package model.promocao;
 public class PromocaoSextaFeira implements Promocao {
 
     public int id;

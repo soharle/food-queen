@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Consumidor;
-import model.Conta;
+import model.conta.Conta;
 import model.Contato;
 import model.Endereco;
 
@@ -64,7 +64,7 @@ public class ConsumidorDAO {
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta).setEndereco(endereco);
 
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return consumidor;
@@ -94,7 +94,7 @@ public class ConsumidorDAO {
             consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
                     .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return consumidor;
@@ -127,7 +127,7 @@ public class ConsumidorDAO {
             }
 
         } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return consumidores;

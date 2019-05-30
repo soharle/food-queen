@@ -3,25 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.categoria;
 
 /**
  *
  * @author mathe
  */
-public class Categoria {
+public abstract class Categoria {
 
     private long id;
     private String nome;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public Categoria setNome(String nome) {
-        this.nome = nome;
-        return this;
-    }
+    public abstract String getDescricao();
 
     public long getId() {
         return id;
@@ -32,4 +25,16 @@ public class Categoria {
         return this;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public Categoria setNome(String nome) {
+        this.nome = nome;
+        return this;
+    }
+
+    public String categoriaDescricao() {
+        return "A categoria " + this.getNome() + " " + this.getDescricao();
+    }
 }

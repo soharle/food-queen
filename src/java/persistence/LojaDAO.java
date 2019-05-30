@@ -12,11 +12,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Categoria;
-import model.Conta;
+import model.categoria.Categoria;
+import model.conta.Conta;
 import model.Contato;
 import model.Endereco;
 import model.Loja;
+import model.MainFactory;
 
 /**
  *
@@ -60,8 +61,8 @@ public class LojaDAO {
             enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
                     .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
                     .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
-            Categoria categoria = new Categoria();
-            categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            Categoria categoria = (Categoria) MainFactory.getObject(Categoria.class.getName() + rs.getString("categoria.nome"));
+            categoria.setId(rs.getInt("categoria.id"));
             loja = new Loja();
             loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
@@ -101,8 +102,8 @@ public class LojaDAO {
             enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
                     .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
                     .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
-            Categoria categoria = new Categoria();
-            categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+            Categoria categoria = (Categoria) MainFactory.getObject(Categoria.class.getName() + rs.getString("categoria.nome"));
+            categoria.setId(rs.getInt("categoria.id"));
             loja = new Loja();
             loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
@@ -139,8 +140,8 @@ public class LojaDAO {
                 enderecoLoja.setId(rs.getInt("endereco.id")).setCep(rs.getString("endereco.cep")).setLogradouro(rs.getString("endereco.logradouro")).setNumero(rs.getString("endereco.numero"))
                         .setComplemento(rs.getString("endereco.complemento")).setBairro(rs.getString("endereco.bairro")).setCidade(rs.getString("endereco.cidade"))
                         .setEstado(rs.getString("endereco.estado")).setPais(rs.getString("endereco.pais"));
-                Categoria categoria = new Categoria();
-                categoria.setId(rs.getInt("categoria.id")).setNome(rs.getString("categoria.nome"));
+                Categoria categoria = (Categoria) MainFactory.getObject(Categoria.class.getName() + rs.getString("categoria.nome"));
+                categoria.setId(rs.getInt("categoria.id"));
                 Loja loja = new Loja();
                 loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                         .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))

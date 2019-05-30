@@ -12,19 +12,16 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
+import model.pedido.Pedido;
 import model.Cartao;
 import model.Consumidor;
-import model.Pedido;
-import persistence.CarrinhoDAO;
+import model.ProdutoHasPedido;
+import persistence.PedidoDAO;
 import persistence.CartaoDAO;
 import persistence.ConsumidorDAO;
-import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 
-/**
- *
- * @author Gabriel
- */
+
 public class PrepararFinalizarCompraConsumidorAction implements Action{
 
     @Override
@@ -32,9 +29,9 @@ public class PrepararFinalizarCompraConsumidorAction implements Action{
         
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
         Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
+        Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(id, "NaoConcluido");
         ArrayList<Cartao> cartoes = CartaoDAO.getInstance().getAllByConsumidor(id);
-        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+        ArrayList<ProdutoHasPedido> pedidos = ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         request.setAttribute("cartoes", cartoes);
         request.setAttribute("pedidos", pedidos);
         request.setAttribute("consumidor", consumidor);

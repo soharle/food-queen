@@ -5,21 +5,25 @@
  */
 package model;
 
+import model.pedido.Pedido;
+import model.pedido.PedidoEstado;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.conta.Conta;
+import model.pedido.MementoManager;
 
 /**
  *
  * @author mathe
  */
-public class StateFactory {
+public class MainFactory {
 
     public static Object getObject(String state) {
         Object actionObject = null;
-        String nomeClasse =  state;
-        
+        String nomeClasse = state;
+
         Class classe = null;
         Object objeto = null;
         try {
@@ -28,20 +32,31 @@ public class StateFactory {
         } catch (Exception ex) {
             return null;
         }
-        
+
         actionObject = objeto;
         return actionObject;
     }
 
-    public static Boolean invocarMetodoFactory(Carrinho carrinho, String nomeMetodo) {
+    public static Boolean invocarMetodoFactory(Pedido carrinho, String nomeMetodo) {
         Boolean mudou = false;
         try {
-            Method metodo = CarrinhoEstado.class.getMethod(nomeMetodo, Carrinho.class);
+            Method metodo = PedidoEstado.class.getMethod(nomeMetodo, Pedido.class);
             mudou = (Boolean) metodo.invoke(carrinho.getEstado(), carrinho);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-            Logger.getLogger(StateFactory.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainFactory.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mudou;
+    }
+
+    public static void invocarMemento(MementoManager mm, String nomeMetodo) {
+
+        try {
+            Method metodo = MementoManager.class.getMethod(nomeMetodo);
+            metodo.invoke(mm);
+        } catch (SecurityException | IllegalArgumentException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ex) {
+            Logger.getLogger(MainFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }

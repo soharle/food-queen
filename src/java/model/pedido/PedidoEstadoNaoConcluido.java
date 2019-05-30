@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.pedido;
+
+import model.MainFactory;
 
 /**
  *
  * @author mathe
  */
-public class CarrinhoEstadoNaoConcluido extends CarrinhoEstado {
+public class PedidoEstadoNaoConcluido extends PedidoEstado {
 
-    public CarrinhoEstadoNaoConcluido() {
+    public PedidoEstadoNaoConcluido() {
         this.estadoNome = "NaoConcluido";
         this.estadoMsg = "Não concluido";
         this.nome = "não esta concluido";
 
     }
 
-    public boolean aguardar(Carrinho carrinho) {
-        carrinho.setEstado((CarrinhoEstado) StateFactory.getObject( CarrinhoEstado.class.getName() + "Aguardando"));
+    public boolean aguardar(Pedido pedido) {
+        pedido.setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + "Aguardando"));
         return true;
     }
 }

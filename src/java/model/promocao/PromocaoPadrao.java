@@ -1,4 +1,4 @@
-package model;
+package model.promocao;
 public class PromocaoPadrao implements Promocao {
 
     public int id;

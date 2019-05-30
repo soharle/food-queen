@@ -12,9 +12,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
-import model.Pedido;
-import persistence.CarrinhoDAO;
+import model.pedido.Pedido;
 import persistence.PedidoDAO;
 
 /**
@@ -26,7 +24,7 @@ public class PrepararPedidosConsumidorAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getSession().getAttribute("id").toString());
-        ArrayList<Carrinho> carrinhos = CarrinhoDAO.getInstance().getAllByConsumidor(id);
+        ArrayList<Pedido> carrinhos = PedidoDAO.getInstance().getAllByConsumidor(id);
         request.setAttribute("carrinhos", carrinhos);
 
         RequestDispatcher view = request.getRequestDispatcher("meusPedidos.jsp");

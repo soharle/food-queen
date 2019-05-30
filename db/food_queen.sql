@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 18-Abr-2019 às 05:17
+-- Generation Time: 14-Maio-2019 às 02:25
 -- Versão do servidor: 10.1.37-MariaDB
 -- versão do PHP: 7.3.1
 
@@ -21,28 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `food_queen`
 --
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `carrinho`
---
-
-CREATE TABLE `carrinho` (
-  `id` int(11) NOT NULL,
-  `consumidor_id` int(11) NOT NULL,
-  `loja_id` int(11) NOT NULL,
-  `valor` varchar(45) COLLATE utf8_bin DEFAULT NULL,
-  `estado` varchar(45) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Extraindo dados da tabela `carrinho`
---
-
-INSERT INTO `carrinho` (`id`, `consumidor_id`, `loja_id`, `valor`, `estado`) VALUES
-(33, 10, 4, '57.0', 'Entregue'),
-(35, 10, 4, '0.0', 'NaoConcluido');
 
 -- --------------------------------------------------------
 
@@ -83,12 +61,7 @@ CREATE TABLE `categoria` (
 
 INSERT INTO `categoria` (`id`, `nome`) VALUES
 (1, 'Pizzaria'),
-(3, 'Comida japonesa '),
-(8, 'Almoço'),
-(9, 'Jantar'),
-(10, 'Lanches'),
-(11, 'Vegana'),
-(12, 'Comida árabe');
+(10, 'Lanche');
 
 -- --------------------------------------------------------
 
@@ -219,24 +192,18 @@ INSERT INTO `loja` (`id`, `endereco_id`, `conta_id`, `nome`, `cnpj`, `descricao`
 
 CREATE TABLE `pedido` (
   `id` int(11) NOT NULL,
-  `produto_id` int(11) NOT NULL,
-  `carrinho_id` int(11) NOT NULL
+  `consumidor_id` int(11) NOT NULL,
+  `loja_id` int(11) NOT NULL,
+  `valor` varchar(45) COLLATE utf8_bin DEFAULT NULL,
+  `estado` varchar(45) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Extraindo dados da tabela `pedido`
 --
 
-INSERT INTO `pedido` (`id`, `produto_id`, `carrinho_id`) VALUES
-(64, 21, 30),
-(65, 21, 31),
-(68, 20, 32),
-(69, 21, 32),
-(70, 20, 33),
-(71, 21, 33),
-(82, 21, 35),
-(83, 21, 35),
-(84, 20, 35);
+INSERT INTO `pedido` (`id`, `consumidor_id`, `loja_id`, `valor`, `estado`) VALUES
+(37, 10, 4, '27.0', 'Aguardando');
 
 -- --------------------------------------------------------
 
@@ -274,6 +241,33 @@ INSERT INTO `produto` (`id`, `loja_id`, `nome`, `preco`, `disponivel`, `descrica
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `produto_has_pedido`
+--
+
+CREATE TABLE `produto_has_pedido` (
+  `id` int(11) NOT NULL,
+  `produto_id` int(11) NOT NULL,
+  `pedido_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Extraindo dados da tabela `produto_has_pedido`
+--
+
+INSERT INTO `produto_has_pedido` (`id`, `produto_id`, `pedido_id`) VALUES
+(64, 21, 30),
+(65, 21, 31),
+(68, 20, 32),
+(69, 21, 32),
+(70, 20, 33),
+(71, 21, 33),
+(93, 20, 36),
+(94, 21, 36),
+(95, 21, 37);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `promocao`
 --
 
@@ -295,14 +289,6 @@ INSERT INTO `promocao` (`id`, `nome`) VALUES
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `carrinho`
---
-ALTER TABLE `carrinho`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`),
-  ADD KEY `loja.id` (`loja_id`);
 
 --
 -- Indexes for table `cartao`
@@ -359,12 +345,20 @@ ALTER TABLE `loja`
 --
 ALTER TABLE `pedido`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+  ADD UNIQUE KEY `id_UNIQUE` (`id`),
+  ADD KEY `loja.id` (`loja_id`);
 
 --
 -- Indexes for table `produto`
 --
 ALTER TABLE `produto`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+
+--
+-- Indexes for table `produto_has_pedido`
+--
+ALTER TABLE `produto_has_pedido`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_UNIQUE` (`id`);
 
@@ -379,12 +373,6 @@ ALTER TABLE `promocao`
 --
 
 --
--- AUTO_INCREMENT for table `carrinho`
---
-ALTER TABLE `carrinho`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
 -- AUTO_INCREMENT for table `cartao`
 --
 ALTER TABLE `cartao`
@@ -394,7 +382,7 @@ ALTER TABLE `cartao`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `consumidor`
@@ -430,13 +418,19 @@ ALTER TABLE `loja`
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `produto`
 --
 ALTER TABLE `produto`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `produto_has_pedido`
+--
+ALTER TABLE `produto_has_pedido`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

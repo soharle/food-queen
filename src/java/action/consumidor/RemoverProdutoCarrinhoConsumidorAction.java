@@ -12,12 +12,10 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Carrinho;
-import model.Consumidor;
-import model.Pedido;
-import persistence.CarrinhoDAO;
-import persistence.ConsumidorDAO;
+import model.pedido.Pedido;
+import model.ProdutoHasPedido;
 import persistence.PedidoDAO;
+import persistence.ProdutoHasPedidoDAO;
 
 /**
  *
@@ -28,13 +26,13 @@ public class RemoverProdutoCarrinhoConsumidorAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getParameter("id"));
-        PedidoDAO.getInstance().delete(id);
+        ProdutoHasPedidoDAO.getInstance().delete(id);
         long idConsumidor = Long.parseLong(request.getSession().getAttribute("id").toString());
-        Carrinho carrinho = CarrinhoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
-        ArrayList<Pedido> pedidos = PedidoDAO.getInstance().getByCarrinho(carrinho.getId());
+        Pedido carrinho = PedidoDAO.getInstance().getByConsumidor(idConsumidor, "NaoConcluido");
+        ArrayList<ProdutoHasPedido> pedidos = ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId());
         request.getSession().setAttribute("pedidos", pedidos);
         if (pedidos.size() == 0) {
-            CarrinhoDAO.getInstance().delete(carrinho.getId());
+            PedidoDAO.getInstance().delete(carrinho.getId());
             request.getSession().removeAttribute("pedidos");
             request.getSession().removeAttribute("carrinho");
         }

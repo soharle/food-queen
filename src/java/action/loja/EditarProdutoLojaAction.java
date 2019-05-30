@@ -14,7 +14,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Loja;
 import model.Produto;
 import persistence.LojaDAO;
 import persistence.ProdutoDAO;

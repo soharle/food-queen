@@ -3,35 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.pedido;
 
 /**
  *
  * @author mathe
  */
-public abstract class CarrinhoEstado {
+public abstract class PedidoEstado {
     
     protected String estadoNome;
     protected String estadoMsg;
     protected String nome;
     
-    public boolean aprovar(Carrinho carrinho){
+    public boolean aprovar(Pedido pedido){
         return false;
     }
     
-    public boolean naoAprovar(Carrinho carrinho){
+    public boolean naoAprovar(Pedido pedido){
         return false;
     }
 
-    public boolean aguardar(Carrinho carrinho){
+    public boolean aguardar(Pedido pedido){
         return false;
     }
     
-    public boolean sairParaEntrega(Carrinho carrinho){
+    public boolean sairParaEntrega(Pedido pedido){
         return false;
     }
     
-    public boolean entregar(Carrinho carrinho){
+    public boolean entregar(Pedido pedido){
         return false;
     }
    
