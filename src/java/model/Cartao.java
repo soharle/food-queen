@@ -5,6 +5,12 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.CartaoDAO;
+
 /**
  *
  * @author mathe
@@ -73,6 +79,32 @@ public class Cartao {
     public Cartao setConsumidor(Consumidor consumidor) {
         this.consumidor = consumidor;
         return this;
+    }
+    
+    public void save(){
+        try {
+            CartaoDAO.getInstance().save(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Cartao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Cartao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void delete(){
+        CartaoDAO.getInstance().delete(this.id);
+    }
+    
+    public void update(){
+        CartaoDAO.getInstance().update(this);
+    }
+    
+    public Cartao get(){
+        return CartaoDAO.getInstance().get(id);
+    }
+    
+    public static ArrayList<Cartao> getAll(){
+        return CartaoDAO.getInstance().getAll();
     }
 
 }

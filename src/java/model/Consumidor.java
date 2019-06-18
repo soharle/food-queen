@@ -5,10 +5,15 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import model.conta.Conta;
 import model.pedido.Pedido;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.ConsumidorDAO;
 
 /**
  *
@@ -101,5 +106,35 @@ public class Consumidor implements Observer {
         this.endereco = endereco;
         return this;
     }
-
+    
+    public void update(){
+        try {
+            ConsumidorDAO.getInstance().update(this);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void delete(){
+        ConsumidorDAO.getInstance().delete(id);
+    }
+    
+    public void save(){
+        try {
+            ConsumidorDAO.getInstance().save(this);
+        } catch (SQLException ex) {
+            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public Consumidor get(){
+        return ConsumidorDAO.getInstance().get(id);
+    }
+    
+    public static ArrayList<Consumidor> getAll(){
+        return ConsumidorDAO.getInstance().getAll();
+    }
 }
