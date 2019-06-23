@@ -44,16 +44,16 @@ public class ProdutoDAO {
                     + "WHERE produto.id = " + id + ";");
             rs.first();
             Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-            Promocao promocao = PromocaoDAO.getInstance().getPromocao(rs.getInt("produto.promocao_id"));
+            Promocao promocao = PromocaoDAO.getInstance().get(rs.getInt("produto.promocao_id"));
             produto = new Produto();
             produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                     .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                     .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja);
             produto.setPromocao((Promocao) MainFactory.getObject( Promocao.class.getName() + promocao.getNome()));
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return produto;
@@ -70,7 +70,7 @@ public class ProdutoDAO {
             ResultSet rs = st.executeQuery("SELECT * from produto;");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                Promocao promocao = PromocaoDAO.getInstance().getPromocao(rs.getInt("produto.promocao_id"));
+                Promocao promocao = PromocaoDAO.getInstance().get(rs.getInt("produto.promocao_id"));
 
                 Produto produto = new Produto();
                 produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
@@ -80,10 +80,10 @@ public class ProdutoDAO {
                 produtos.add(produto);
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return produtos;
@@ -103,7 +103,7 @@ public class ProdutoDAO {
                     + "WHERE produto.loja_id = '" + idLoja + "';");
             while (rs.next()) {
                 Loja loja = LojaDAO.getInstance().get(rs.getLong("produto.loja_id"));
-                Promocao promocao = PromocaoDAO.getInstance().getPromocao(rs.getInt("produto.promocao_id"));
+                Promocao promocao = PromocaoDAO.getInstance().get(rs.getInt("produto.promocao_id"));
 
                 Produto produto = new Produto();
                 produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
@@ -113,10 +113,10 @@ public class ProdutoDAO {
                 produtos.add(produto);
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return produtos;
@@ -138,10 +138,8 @@ public class ProdutoDAO {
                     + "promocao_id = " + produto.getPromocao().getId() + " "
                     + "WHERE id = " + produto.getId() + ";");
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -155,16 +153,14 @@ public class ProdutoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM produto WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void save(Produto produto) throws SQLException, ClassNotFoundException {
+    public void save(Produto produto){
         Connection conn = null;
         Statement st = null;
 
@@ -181,8 +177,8 @@ public class ProdutoDAO {
                     + "" + produto.getPromocao().getId() + " "
                     + ");";
             st.execute(query);
-        } catch (SQLException e) {
-            System.out.println(e);;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }

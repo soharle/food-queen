@@ -8,6 +8,8 @@ package action.conta;
 import controller.Action;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.conta.Conta;
@@ -20,7 +22,7 @@ import persistence.ContaDAO;
 public class SalvarContaAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void execute(HttpServletRequest request, HttpServletResponse response){
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
         String tipo = request.getParameter("optTipo");
@@ -28,12 +30,12 @@ public class SalvarContaAction implements Action {
         Conta conta = new Conta();
         conta = conta.setLogin(login).setSenha(senha).setTipo(tipo);
 
-        try {
             ContaDAO.getInstance().save(conta);
-        } catch (SQLException | ClassNotFoundException ex) {
-            response.sendRedirect("erro.jsp");
+        try {
+            response.sendRedirect("index.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-        response.sendRedirect("index.jsp");
 
     }
 }

@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
+import persistence.EnderecoDAO;
+
 /**
  *
  * @author mathe
@@ -107,6 +110,26 @@ public class Endereco {
     public Endereco setPais(String pais) {
         this.pais = pais;
         return this;
+    }
+    
+    public void save(){
+        EnderecoDAO.getInstance().save(this);
+    }
+    
+    public void update(){
+        EnderecoDAO.getInstance().update(this);
+    }
+    
+    public void delete(){
+        EnderecoDAO.getInstance().delete(id);
+    }
+    
+    public Endereco get(){
+        return EnderecoDAO.getInstance().get(id);
+    }
+    
+    public static ArrayList<Endereco> getAll(){
+        return EnderecoDAO.getInstance().getAll();
     }
 
 }

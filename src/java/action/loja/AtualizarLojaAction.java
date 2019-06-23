@@ -88,10 +88,6 @@ public class AtualizarLojaAction implements Action {
                 response.sendRedirect("sucesso.jsp");
             } catch (IOException ex) {
                 Logger.getLogger(AtualizarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AtualizarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(AtualizarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

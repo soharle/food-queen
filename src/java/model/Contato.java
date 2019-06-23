@@ -5,6 +5,12 @@
  */
 package model;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistence.ContatoDAO;
+
 /**
  *
  * @author mathe
@@ -17,7 +23,6 @@ public class Contato {
     private String email;
     private String telefoneComplementar;
 
-  
     public long getId() {
         return id;
     }
@@ -63,7 +68,25 @@ public class Contato {
         this.telefoneComplementar = telefoneComplementar;
         return this;
     }
-    
-    
+
+    public void save() {
+        ContatoDAO.getInstance().save(this);
+    }
+
+    public void update() {
+        ContatoDAO.getInstance().update(this);
+    }
+
+    public void delete() {
+        ContatoDAO.getInstance().delete(this.id);
+    }
+
+    public Contato get() {
+        return ContatoDAO.getInstance().get(id);
+    }
+
+    public static ArrayList<Contato> getAll() {
+        return ContatoDAO.getInstance().getAll();
+    }
 
 }

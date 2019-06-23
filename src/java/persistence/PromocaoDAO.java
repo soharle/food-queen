@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.promocao.Promocao;
 import model.MainFactory;
 
@@ -21,7 +23,7 @@ public class PromocaoDAO {
     private PromocaoDAO() {
     }
 
-    public ArrayList<Promocao> getPromocoes() throws SQLException, ClassNotFoundException {
+    public ArrayList<Promocao> get(){
         Connection conn = null;
         Statement st = null;
         ArrayList<Promocao> promocoes = new ArrayList<Promocao>();
@@ -37,15 +39,15 @@ public class PromocaoDAO {
 
             }
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
         return promocoes;
     }
 
-    public Promocao getPromocao(int promocaoId) throws SQLException, ClassNotFoundException {
+    public Promocao get(int promocaoId){
         Connection conn = null;
         Statement st = null;
         Promocao promocao = null;
@@ -59,8 +61,8 @@ public class PromocaoDAO {
 
             }
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }

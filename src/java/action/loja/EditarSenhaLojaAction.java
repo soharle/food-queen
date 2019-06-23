@@ -26,24 +26,23 @@ import persistence.LojaDAO;
 public class EditarSenhaLojaAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response){
         String senha = request.getParameter("txtNovaSenha");
-       
-        RequestDispatcher view = null;
-        
-        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
-        try {
-            Loja loja = LojaDAO.getInstance().get(idLoja);
-            Conta conta = new Conta();
-            conta.setSenha(senha).setLogin(loja.getConta().getLogin()).setId(loja.getConta().getId());
-            loja.setConta(conta);
-            ContaDAO.getInstance().update(loja.getConta());
-            view = request.getRequestDispatcher("estabelecimento/index.jsp");
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
+        RequestDispatcher view = null;
+
+        long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
+        Loja loja = LojaDAO.getInstance().get(idLoja);
+        Conta conta = new Conta();
+        conta.setSenha(senha).setLogin(loja.getConta().getLogin()).setId(loja.getConta().getId());
+        loja.setConta(conta);
+        ContaDAO.getInstance().update(loja.getConta());
+        view = request.getRequestDispatcher("estabelecimento/index.jsp");
+
+        try {
             view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(EditarSenhaLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

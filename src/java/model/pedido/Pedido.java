@@ -11,6 +11,7 @@ import model.Consumidor;
 import model.Loja;
 import model.Produto;
 import model.ProdutoHasPedido;
+import persistence.PedidoDAO;
 import persistence.ProdutoHasPedidoDAO;
 
 /**
@@ -101,7 +102,6 @@ public class Pedido extends Observable {
         this.produtosDoPedido = produtosDoPedido;
     }
 
-
     public void notificar() {
         setChanged();
         notifyObservers();
@@ -109,15 +109,54 @@ public class Pedido extends Observable {
 
     @Override
     public String toString() {
-        String produtosString = "Pedido " + this.id + '\n' +
-                "Para: " + this.consumidor.getNome() + '\n';
-        
-        for(ProdutoHasPedido p : produtosDoPedido){
+        String produtosString = "Pedido " + this.id + '\n'
+                + "Para: " + this.consumidor.getNome() + '\n';
+
+        for (ProdutoHasPedido p : produtosDoPedido) {
             produtosString += p.toString() + '\n';
         }
-        
+
         return produtosString;
     }
 
-    
+    public void save() {
+        PedidoDAO.getInstance().save(this);
+    }
+
+    public void update() {
+        PedidoDAO.getInstance().update(this);
+    }
+
+    public void delete() {
+        PedidoDAO.getInstance().delete(id);
+    }
+
+    public Pedido get() {
+        return PedidoDAO.getInstance().get(id);
+    }
+
+    public Pedido getByConsumidor() {
+        if (!this.estado.toString().equals(null) && !this.estado.toString().equals("")) {
+            return PedidoDAO.getInstance().getByConsumidor(id, estado.toString());
+        } else {
+            return PedidoDAO.getInstance().getByConsumidor(id);
+        }
+    }
+
+    public static ArrayList<Pedido> getAll() {
+        return PedidoDAO.getInstance().getAll();
+    }
+
+    public ArrayList<Pedido> getAllByConsumidor() {
+        return PedidoDAO.getInstance().getAllByConsumidor(consumidor.getId());
+    }
+
+    public ArrayList<Pedido> getAllByLoja() {
+        if (this.estado.toString() != null && !this.estado.toString().equals("")) {
+            return PedidoDAO.getInstance().getAllByLoja(loja.getId(), estado.toString());
+        } else {
+            return PedidoDAO.getInstance().getAllByLoja(loja.getId());
+        }
+    }
+
 }

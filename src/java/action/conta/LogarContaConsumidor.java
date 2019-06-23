@@ -33,10 +33,10 @@ public class LogarContaConsumidor implements LogarConta {
 
     @Override
     public void logar(HttpServletRequest request, HttpServletResponse response, Conta conta) {
-        Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
-        HttpSession session = request.getSession();
-        ArrayList<Produto> produtos = null;
         try {
+            Consumidor consumidor = ConsumidorDAO.getInstance().getByConta(conta.getId());
+            HttpSession session = request.getSession();
+            ArrayList<Produto> produtos = null;
             produtos = ProdutoDAO.getInstance().getAll();
             ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
             request.setAttribute("produtos", produtos);
@@ -49,9 +49,10 @@ public class LogarContaConsumidor implements LogarConta {
                 request.getSession().setAttribute("pedidos", ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId()));
             }
             request.getRequestDispatcher("home.jsp").forward(request, response);
-        } catch (ClassNotFoundException | SQLException | ServletException | IOException ex) {
-            System.out.println(ex);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(LogarContaConsumidor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
 }

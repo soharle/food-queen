@@ -27,7 +27,7 @@ import persistence.PromocaoDAO;
 public class SalvarProdutoLojaAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response){
 
         String nome = request.getParameter("txtNome");
         String imagem = request.getParameter("txtImagem");
@@ -42,7 +42,7 @@ public class SalvarProdutoLojaAction implements Action {
             Produto produto = new Produto();
             produto = produto.setDescricao(descricao).setNome(nome).setImagem(imagem).setPreco(preco)
                     .setDisponivel(disponivel).setLoja(loja);
-            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(promocaoId)));
+            produto.setPromocao(PromocaoDAO.getInstance().get(Integer.parseInt(promocaoId)));
             ProdutoDAO.getInstance().save(produto);
 
             RequestDispatcher view = request.getRequestDispatcher("FrontController?action=PrepararProdutosLoja");
@@ -50,8 +50,6 @@ public class SalvarProdutoLojaAction implements Action {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(EditarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

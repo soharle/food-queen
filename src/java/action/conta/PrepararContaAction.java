@@ -27,12 +27,12 @@ public class PrepararContaAction implements Action {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
-        try {
             ArrayList<Conta> contas = ContaDAO.getInstance().getAll();
             request.setAttribute("contas", contas);
             RequestDispatcher view = request.getRequestDispatcher("pages/conta/listar.jsp");
+        try {
             view.forward(request, response);
-        } catch (ClassNotFoundException | SQLException | ServletException | IOException ex) {
+        } catch (ServletException | IOException ex) {
             Logger.getLogger(PrepararContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

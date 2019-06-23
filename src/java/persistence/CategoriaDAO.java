@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.categoria.Categoria;
 import model.MainFactory;
 
@@ -28,7 +30,7 @@ public class CategoriaDAO {
     private CategoriaDAO() {
     }
 
-    public Categoria get(long id) throws ClassNotFoundException, SQLException {
+    public Categoria get(long id){
         Categoria categoria = null;
         Connection conn = null;
         Statement st = null;
@@ -40,8 +42,8 @@ public class CategoriaDAO {
             rs.first();
             categoria = (Categoria) MainFactory.getObject( Categoria.class.getName()+ rs.getString("nome"));
             categoria.setId(rs.getInt("id"));
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -50,7 +52,7 @@ public class CategoriaDAO {
 
     }
 
-    public ArrayList<Categoria> getAll() throws ClassNotFoundException, SQLException {
+    public ArrayList<Categoria> getAll(){
         ArrayList<Categoria> categorias = new ArrayList<Categoria>();
         Connection conn = null;
         Statement st = null;
@@ -64,8 +66,8 @@ public class CategoriaDAO {
                 categoria.setId(rs.getInt("id"));
                 categorias.add(categoria);
             }
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -74,7 +76,7 @@ public class CategoriaDAO {
 
     }
 
-    public void update(Categoria categoria) throws ClassNotFoundException, SQLException {
+    public void update(Categoria categoria){
 
         Connection conn = null;
         Statement st = null;
@@ -84,14 +86,14 @@ public class CategoriaDAO {
             st = conn.createStatement();
             st.execute("UPDATE categoria SET nome = '" + categoria.getNome() + "' WHERE id = " + categoria.getId() + ";");
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void delete(long id) throws ClassNotFoundException, SQLException {
+    public void delete(long id){
         Connection conn = null;
         Statement st = null;
 
@@ -99,14 +101,14 @@ public class CategoriaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM categoria WHERE id = " + id + ";");
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public Categoria save(Categoria categoria) throws SQLException, ClassNotFoundException {
+    public Categoria save(Categoria categoria){
         Connection conn = null;
         Statement st = null;
         long key = -1l;
@@ -119,8 +121,8 @@ public class CategoriaDAO {
             }
             categoria.setId(key);
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
             return categoria;

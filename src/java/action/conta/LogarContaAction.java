@@ -44,17 +44,14 @@ public class LogarContaAction implements Action {
 
         Conta conta;
         RequestDispatcher view = null;
-        try {
-            conta = ContaDAO.getInstance().get(login);
+        conta = ContaDAO.getInstance().get(login);
 
-            if (conta != null && conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
-                String tipo = conta.getTipoConta().logar(conta);
-                LogarConta lc = (LogarConta) MainFactory.getObject("action.conta.LogarConta" + tipo);
-                lc.logar(request, response, conta);
-            }
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            view = request.getRequestDispatcher("index.jsp");
+        if (conta != null && conta.getLogin().equals(login) && conta.getSenha().equals(senha)) {
+            String tipo = conta.getTipoConta().logar(conta);
+            LogarConta lc = (LogarConta) MainFactory.getObject("action.conta.LogarConta" + tipo);
+            lc.logar(request, response, conta);
         }
+
+        view = request.getRequestDispatcher("index.jsp");
     }
 }

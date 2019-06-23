@@ -34,7 +34,7 @@ public class LojaDAO {
     private LojaDAO() {
     }
 
-    public Loja get(long id) throws SQLException, ClassNotFoundException {
+    public Loja get(long id){
         Loja loja = null;
         Connection conn = null;
         Statement st = null;
@@ -67,14 +67,16 @@ public class LojaDAO {
             loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
                     .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
-
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
         return loja;
     }
 
-    public Loja getByConta(long contaId) throws SQLException, ClassNotFoundException {
+    public Loja getByConta(long contaId) {
         Loja loja = null;
         Connection conn = null;
         Statement st = null;
@@ -108,6 +110,8 @@ public class LojaDAO {
             loja = loja.setId(rs.getLong("loja.id")).setNome(rs.getString("loja.nome")).setCnpj(rs.getString("loja.cnpj"))
                     .setDescricao(rs.getString("loja.descricao")).setImagem(rs.getString("loja.imagem"))
                     .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -148,10 +152,8 @@ public class LojaDAO {
                         .setEndereco(enderecoLoja).setConta(contaLoja).setContato(contatoLoja).setCategoria(categoria);
                 lojas.add(loja);
             }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -176,10 +178,8 @@ public class LojaDAO {
                     + "WHERE id = " + loja.getId() + ";";
             st.execute(query);
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -193,16 +193,14 @@ public class LojaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM loja WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public Loja save(Loja loja) throws SQLException, ClassNotFoundException {
+    public Loja save(Loja loja) {
         Connection conn = null;
         Statement st = null;
         long key = -1l;
@@ -224,8 +222,8 @@ public class LojaDAO {
                 key = rs.getLong(1);
             }
             loja.setId(key);
-        } catch (SQLException e) {
-            System.out.println(e);;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
             return loja;

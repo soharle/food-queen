@@ -8,6 +8,8 @@ package model.conta;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import persistence.ContaDAO;
+import java.util.ArrayList;
 
 /**
  *
@@ -74,6 +76,30 @@ public class Conta {
 
     public TipoLogin getTipoLogin() {
         return tipoLogin;
+    }
+
+    public void save() {
+        ContaDAO.getInstance().save(this);
+    }
+
+    public void update() {
+        ContaDAO.getInstance().update(this);
+    }
+
+    public void delete() {
+        ContaDAO.getInstance().delete(id);
+    }
+
+    public Conta get() {
+        if (login != null && !login.equals("")) {
+            return ContaDAO.getInstance().get(login);
+        }else{
+            return ContaDAO.getInstance().get(id);
+        }
+    }
+    
+    public static ArrayList<Conta> getAll(){
+        return ContaDAO.getInstance().getAll();
     }
 
 }

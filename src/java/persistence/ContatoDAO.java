@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Contato;
 
 /*
@@ -27,7 +29,7 @@ public class ContatoDAO {
     private ContatoDAO() {
     }
 
-    public Contato get(long id) throws ClassNotFoundException, SQLException {
+    public Contato get(long id) {
         Contato contato = null;
         Connection conn = null;
         Statement st = null;
@@ -40,8 +42,8 @@ public class ContatoDAO {
             contato = new Contato();
             contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                     .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -50,7 +52,7 @@ public class ContatoDAO {
 
     }
 
-    public ArrayList<Contato> getAll() throws ClassNotFoundException, SQLException {
+    public ArrayList<Contato> getAll(){
         ArrayList<Contato> contatos = new ArrayList<Contato>();
         Connection conn = null;
         Statement st = null;
@@ -65,8 +67,8 @@ public class ContatoDAO {
                         .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
                 contatos.add(contato);
             }
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -75,7 +77,7 @@ public class ContatoDAO {
 
     }
 
-    public void update(Contato contato) throws ClassNotFoundException, SQLException {
+    public void update(Contato contato){
 
         Connection conn = null;
         Statement st = null;
@@ -90,14 +92,14 @@ public class ContatoDAO {
                     + "telefone_complementar = '" + contato.getTelefoneComplementar() + "' "
                     + "WHERE id = " + contato.getId() + ";");
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void delete(long id) throws ClassNotFoundException, SQLException {
+    public void delete(long id){
         Connection conn = null;
         Statement st = null;
 
@@ -105,14 +107,14 @@ public class ContatoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM contato WHERE id =" + id + "");
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public Contato save(Contato contato) throws SQLException, ClassNotFoundException {
+    public Contato save(Contato contato){
         Connection conn = null;
         Statement st = null;
         long key = -1l;
@@ -129,8 +131,8 @@ public class ContatoDAO {
                 key = rs.getLong(1);
             }
             contato.setId(key);
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
             return contato;

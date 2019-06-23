@@ -41,7 +41,7 @@ public class EditarProdutoLojaAction implements Action {
             Produto produto = ProdutoDAO.getInstance().get(id);
             produto.setDescricao(descricao).setNome(nome).setImagem(imagem)
                     .setPreco(preco).setDisponivel(disponivel);
-            produto.setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(promocaoId)));
+            produto.setPromocao(PromocaoDAO.getInstance().get(Integer.parseInt(promocaoId)));
             ProdutoDAO.getInstance().update(produto);
             produto.setLoja(LojaDAO.getInstance().get(Long.parseLong(request.getSession().getAttribute("id").toString())));
 
@@ -50,8 +50,6 @@ public class EditarProdutoLojaAction implements Action {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(EditarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

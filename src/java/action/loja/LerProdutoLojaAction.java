@@ -28,17 +28,13 @@ public class LerProdutoLojaAction implements Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getParameter("id"));
 
-        try {
             Produto produto = ProdutoDAO.getInstance().get(id);
             request.setAttribute("produto", produto);
-            request.setAttribute("promocoes", PromocaoDAO.getInstance().getPromocoes());
+            request.setAttribute("promocoes", PromocaoDAO.getInstance().get());
 
             request.setAttribute("acao", "editar");
             RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
             view.forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(LerProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

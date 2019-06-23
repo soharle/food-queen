@@ -26,7 +26,7 @@ public class DeletarContaAction implements Action {
         try {
             ContaDAO.getInstance().delete(id);
             response.sendRedirect("sucesso.jsp");
-        } catch (IOException | SQLException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(SalvarContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

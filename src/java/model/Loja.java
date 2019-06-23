@@ -5,8 +5,10 @@
  */
 package model;
 
+import java.util.ArrayList;
 import model.conta.Conta;
 import model.categoria.Categoria;
+import persistence.LojaDAO;
 
 /**
  *
@@ -109,5 +111,30 @@ public class Loja {
         this.categoria = categoria;
         return this;
     }
+    
+    public void save(){
+        LojaDAO.getInstance().save(this);
+    }
+    
+    public void update(){
+        LojaDAO.getInstance().update(this);
+    }
+    
+    public void delete(){
+        LojaDAO.getInstance().delete(id);
+    }
+    
+    public Loja get(){
+        return LojaDAO.getInstance().get(id);
+    }
+    
+    public Loja getByConta(){
+        return LojaDAO.getInstance().getByConta(conta.getId());
+    }
+    
+    public static ArrayList<Loja> getAll(){
+        return LojaDAO.getInstance().getAll();
+    }
 
+    
 }

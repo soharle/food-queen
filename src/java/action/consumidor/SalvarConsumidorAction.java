@@ -32,7 +32,7 @@ import persistence.EnderecoDAO;
 public class SalvarConsumidorAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) {
         String login = request.getParameter("txtLogin");
         String senha = request.getParameter("txtSenha");
 
@@ -58,32 +58,29 @@ public class SalvarConsumidorAction implements Action {
             Conta conta = new Conta();
             conta.setLogin(login).setSenha(senha).setTipo("Consumidor");
             conta = ContaDAO.getInstance().save(conta);
-            
+
             Contato contato = new Contato();
             contato.setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
             contato = ContatoDAO.getInstance().save(contato);
-            
+
             Endereco endereco = new Endereco();
             endereco.setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
                     .setBairro(bairro).setCidade(cidade).setEstado(estado).setPais(pais);
             endereco = EnderecoDAO.getInstance().save(endereco);
-            
+
             Consumidor consumidor = new Consumidor();
             consumidor = consumidor.setNome(nome).setCpf(cpf).setNascimento(dataNascimento).setContato(contato).setConta(conta).setEndereco(endereco);
             ConsumidorDAO.getInstance().save(consumidor);
 
-            
             HttpSession sessao = request.getSession();
             sessao.invalidate();
 
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
             view.forward(request, response);
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException | IOException ex) {
-            Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SalvarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
 
+    }
 }

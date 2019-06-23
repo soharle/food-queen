@@ -36,7 +36,7 @@ public class LerContaAction implements Action {
             request.setAttribute("acao", "Editar");
             RequestDispatcher view = request.getRequestDispatcher("pages/conta/conta.jsp");
             view.forward(request, response);
-        } catch (ServletException | IOException | ClassNotFoundException | SQLException ex) {
+        } catch (ServletException | IOException ex) {
             Logger.getLogger(LerContaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 

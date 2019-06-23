@@ -81,8 +81,6 @@ public class SalvarLojaAction implements Action {
             RequestDispatcher view = request.getRequestDispatcher("index.jsp");
             view.forward(request, response);
 
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(SalvarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }

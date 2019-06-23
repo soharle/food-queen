@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.conta.Conta;
 
 /*
@@ -28,7 +30,7 @@ public class ContaDAO {
 
     }
 
-    public Conta get(long id) throws ClassNotFoundException, SQLException {
+    public Conta get(long id){
         Conta conta = null;
         Connection conn = null;
         Statement st = null;
@@ -41,8 +43,8 @@ public class ContaDAO {
             conta = new Conta();
             conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -51,7 +53,7 @@ public class ContaDAO {
 
     }
 
-    public Conta get(String login) throws ClassNotFoundException, SQLException {
+    public Conta get(String login){
         Conta conta = null;
         Connection conn = null;
         Statement st = null;
@@ -65,8 +67,8 @@ public class ContaDAO {
             conta = new Conta();
             conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
                     .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -75,7 +77,7 @@ public class ContaDAO {
 
     }
 
-    public ArrayList<Conta> getAll() throws ClassNotFoundException, SQLException {
+    public ArrayList<Conta> getAll(){
         ArrayList<Conta> contas = new ArrayList<Conta>();
         Connection conn = null;
         Statement st = null;
@@ -90,9 +92,9 @@ public class ContaDAO {
                         .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
                 contas.add(conta);
             }
-        } catch (SQLException e) {
-            throw e;
-        } finally {
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
             closeResources(conn, st);
         }
 
@@ -100,7 +102,7 @@ public class ContaDAO {
 
     }
 
-    public void update(Conta conta) throws ClassNotFoundException, SQLException {
+    public void update(Conta conta){
 
         Connection conn = null;
         Statement st = null;
@@ -113,14 +115,14 @@ public class ContaDAO {
                     + "senha = '" + conta.getSenha() + "' "
                     + "WHERE id = " + conta.getId() + ";");
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void delete(long id) throws ClassNotFoundException, SQLException {
+    public void delete(long id){
         Connection conn = null;
         Statement st = null;
 
@@ -128,14 +130,14 @@ public class ContaDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM conta WHERE id = " + id + "");
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public Conta save(Conta conta) throws SQLException, ClassNotFoundException {
+    public Conta save(Conta conta) {
         Connection conn = null;
         Statement st = null;
         long key = -1l;
@@ -152,8 +154,8 @@ public class ContaDAO {
             }
             conta.setId(key);
 
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
             return conta;

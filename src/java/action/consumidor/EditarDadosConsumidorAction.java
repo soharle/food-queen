@@ -26,7 +26,7 @@ import persistence.ContatoDAO;
 public class EditarDadosConsumidorAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         long id = Long.parseLong(session.getAttribute("id").toString());
 
@@ -41,13 +41,12 @@ public class EditarDadosConsumidorAction implements Action {
         String complementar = request.getParameter("txtComplementar");
         consumidor.setNascimento(nascimento).setNome(nome).setCpf(cpf).getContato().setDdd(ddd).setTelefone(telefone).setTelefoneComplementar(complementar);
         consumidor.getConta().setLogin(login).setSenha(senha);
+        ConsumidorDAO.getInstance().update(consumidor);
+        ContatoDAO.getInstance().update(consumidor.getContato());
+        RequestDispatcher view = request.getRequestDispatcher("home.jsp");
         try {
-            ConsumidorDAO.getInstance().update(consumidor);
-            ContatoDAO.getInstance().update(consumidor.getContato());
-            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
             view.forward(request, response);
-
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (ServletException | IOException ex) {
             Logger.getLogger(EditarDadosConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
 

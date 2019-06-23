@@ -106,35 +106,24 @@ public class Consumidor implements Observer {
         this.endereco = endereco;
         return this;
     }
-    
-    public void update(){
-        try {
-            ConsumidorDAO.getInstance().update(this);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    public void update() {
+        ConsumidorDAO.getInstance().update(this);
     }
-    public void delete(){
+
+    public void delete() {
         ConsumidorDAO.getInstance().delete(id);
     }
-    
-    public void save(){
-        try {
-            ConsumidorDAO.getInstance().save(this);
-        } catch (SQLException ex) {
-            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    public void save() {
+        ConsumidorDAO.getInstance().save(this);
     }
-    
-    public Consumidor get(){
+
+    public Consumidor get() {
         return ConsumidorDAO.getInstance().get(id);
     }
-    
-    public static ArrayList<Consumidor> getAll(){
+
+    public static ArrayList<Consumidor> getAll() {
         return ConsumidorDAO.getInstance().getAll();
     }
 }

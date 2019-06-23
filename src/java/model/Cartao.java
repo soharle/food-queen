@@ -80,30 +80,24 @@ public class Cartao {
         this.consumidor = consumidor;
         return this;
     }
-    
-    public void save(){
-        try {
-            CartaoDAO.getInstance().save(this);
-        } catch (SQLException ex) {
-            Logger.getLogger(Cartao.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Cartao.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    public void save() {
+        CartaoDAO.getInstance().save(this);
     }
-    
-    public void delete(){
+
+    public void delete() {
         CartaoDAO.getInstance().delete(this.id);
     }
-    
-    public void update(){
+
+    public void update() {
         CartaoDAO.getInstance().update(this);
     }
-    
-    public Cartao get(){
+
+    public Cartao get() {
         return CartaoDAO.getInstance().get(id);
     }
-    
-    public static ArrayList<Cartao> getAll(){
+
+    public static ArrayList<Cartao> getAll() {
         return CartaoDAO.getInstance().getAll();
     }
 

@@ -5,7 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
 import model.pedido.Pedido;
+import persistence.ProdutoHasPedidoDAO;
 
 /**
  *
@@ -48,6 +50,30 @@ public class ProdutoHasPedido {
     @Override
     public String toString() {
         return this.produto.toString();
+    }
+    
+    public void save(){
+        ProdutoHasPedidoDAO.getInstance().save(this);
+    }
+    
+    public void update(){
+        ProdutoHasPedidoDAO.getInstance().update(this);
+    }
+    
+    public void delete(){
+        ProdutoHasPedidoDAO.getInstance().delete(id);
+    }
+    
+    public ProdutoHasPedido get(){
+        return ProdutoHasPedidoDAO.getInstance().get(id);
+    }
+    
+    public static ArrayList<ProdutoHasPedido> getAll(){
+        return ProdutoHasPedidoDAO.getInstance().getAll();
+    }
+    
+    public ArrayList<ProdutoHasPedido> getAllByCarrinho(){
+        return ProdutoHasPedidoDAO.getInstance().getByCarrinho(carrinho.getId());
     }
     
     

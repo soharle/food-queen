@@ -26,15 +26,11 @@ public class CadastrarProdutoLojaAction implements Action {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        try {
-            ArrayList<Promocao> promocoes = PromocaoDAO.getInstance().getPromocoes();
-            request.setAttribute("acao", "criar");
-            request.setAttribute("promocoes", promocoes);
-            RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
-            view.forward(request, response);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(CadastrarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ArrayList<Promocao> promocoes = PromocaoDAO.getInstance().get();
+        request.setAttribute("acao", "criar");
+        request.setAttribute("promocoes", promocoes);
+        RequestDispatcher view = request.getRequestDispatcher("estabelecimento/manterProduto.jsp");
+        view.forward(request, response);
 
     }
 

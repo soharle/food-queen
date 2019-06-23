@@ -70,6 +70,8 @@ import model.MainFactory;
             pedido.setProdutosDoPedido(ProdutoHasPedidoDAO.getInstance().getByCarrinho(pedido.getId()));
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedido;
@@ -111,6 +113,8 @@ import model.MainFactory;
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedidos;
@@ -138,96 +142,14 @@ import model.MainFactory;
                 pedidos.add(pedido);
             }
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedidos;
     }
-    
-    public void update(Pedido pedido) {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("UPDATE pedido SET consumidor_id= " + pedido.getConsumidor().getId() + ", "
-                    + "valor = '" + pedido.getValor() + "', "
-                    + "estado = '" + pedido.getEstado().getEstadoNome() + "', "
-                    + "loja_id = " + pedido.getLoja().getId() + " "
-                    + "WHERE id = " + pedido.getId() + ";");
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void delete(long id) {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.executeUpdate("DELETE FROM pedido WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public Pedido save(Pedido pedido) throws SQLException, ClassNotFoundException {
-        Connection conn = null;
-        Statement st = null;
-        long key = -1;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("INSERT INTO pedido (consumidor_id, loja_id, valor, estado) "
-                    + "VALUES (" + pedido.getConsumidor().getId() + ", "
-                    + "" + pedido.getLoja().getId() + ", "
-                    + "" + pedido.getValor() + ", "
-                    + "'" + pedido.getEstado().getEstadoNome() + "' "
-                    + ");", Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs != null && rs.next()) {
-                key = rs.getLong(1);
-            }
-            pedido.setId(key);
-        } catch (SQLException e) {
-            System.out.println(e);;
-        } finally {
-            closeResources(conn, st);
-        }
-
-        return pedido;
-
-    }
-
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
     public Pedido getByConsumidor(long idConsumidor) {
         Pedido pedido = null;
         Connection conn = null;
@@ -263,8 +185,9 @@ import model.MainFactory;
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
-
         return pedido;
     }
 
@@ -306,6 +229,8 @@ import model.MainFactory;
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedido;
@@ -349,6 +274,8 @@ import model.MainFactory;
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedidos;
@@ -394,9 +321,90 @@ import model.MainFactory;
 
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
 
         return pedidos;
     }
+    
+    public void update(Pedido pedido) {
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            st.execute("UPDATE pedido SET consumidor_id= " + pedido.getConsumidor().getId() + ", "
+                    + "valor = '" + pedido.getValor() + "', "
+                    + "estado = '" + pedido.getEstado().getEstadoNome() + "', "
+                    + "loja_id = " + pedido.getLoja().getId() + " "
+                    + "WHERE id = " + pedido.getId() + ";");
+
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+
+    public void delete(long id) {
+        Connection conn = null;
+        Statement st = null;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            st.executeUpdate("DELETE FROM pedido WHERE id = " + id + "");
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, st);
+        }
+    }
+
+    public Pedido save(Pedido pedido){
+        Connection conn = null;
+        Statement st = null;
+        long key = -1;
+
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
+            st.execute("INSERT INTO pedido (consumidor_id, loja_id, valor, estado) "
+                    + "VALUES (" + pedido.getConsumidor().getId() + ", "
+                    + "" + pedido.getLoja().getId() + ", "
+                    + "" + pedido.getValor() + ", "
+                    + "'" + pedido.getEstado().getEstadoNome() + "' "
+                    + ");", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = st.getGeneratedKeys();
+            if (rs != null && rs.next()) {
+                key = rs.getLong(1);
+            }
+            pedido.setId(key);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResources(conn, st);
+        }
+
+        return pedido;
+
+    }
+
+    private void closeResources(Connection conn, Statement st) {
+        try {
+            if (st != null) {
+                st.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    
 
 }

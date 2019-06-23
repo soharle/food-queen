@@ -133,21 +133,24 @@ public class ConsumidorDAO {
         return consumidores;
     }
 
-    public void update(Consumidor consumidor) throws ClassNotFoundException, SQLException {
+    public void update(Consumidor consumidor){
         Connection conn = null;
         Statement st = null;
 
-        conn = DatabaseLocator.getInstance().getConnection();
-        st = conn.createStatement();
+        try {
+            conn = DatabaseLocator.getInstance().getConnection();
+            st = conn.createStatement();
         st.execute("UPDATE consumidor SET nome = '" + consumidor.getNome() + "', "
                 + "cpf = '" + consumidor.getCpf() + "', "
                 + "nascimento = '" + consumidor.getNascimento() + "', "
                 + "conta_id = " + consumidor.getConta().getId() + ", "
                 + "contato_id = " + consumidor.getContato().getId() + " "
                 + "WHERE id = " + consumidor.getId() + ";");
-
-        closeResources(conn, st);
-
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
+        }
     }
 
     public void delete(long id) {
@@ -158,16 +161,14 @@ public class ConsumidorDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM consumidor WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void save(Consumidor consumidor) throws SQLException, ClassNotFoundException {
+    public void save(Consumidor consumidor){
         Connection conn = null;
         Statement st = null;
 
@@ -181,8 +182,8 @@ public class ConsumidorDAO {
                     + "" + consumidor.getConta().getId() + ", "
                     + "" + consumidor.getContato().getId() + ", "
                     + "" + consumidor.getEndereco().getId() + ");");
-        } catch (SQLException e) {
-            System.out.println(e);;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }

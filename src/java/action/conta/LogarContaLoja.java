@@ -25,17 +25,16 @@ public class LogarContaLoja implements LogarConta {
 
     @Override
     public void logar(HttpServletRequest request, HttpServletResponse response, Conta conta) {
+        Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
+        HttpSession session = request.getSession();
+
+        session.setAttribute("id", loja.getId());
+        session.setAttribute("tipo", conta.getTipo());
+        session.setAttribute("login", conta.getLogin());
         try {
-            Loja loja = LojaDAO.getInstance().getByConta(conta.getId());
-            HttpSession session = request.getSession();
-
-            session.setAttribute("id", loja.getId());
-            session.setAttribute("tipo", conta.getTipo());
-            session.setAttribute("login", conta.getLogin());
             request.getRequestDispatcher("estabelecimento/index.jsp").forward(request, response);
-
-        } catch (SQLException | ClassNotFoundException | ServletException | IOException ex) {
-            System.out.println(ex);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(LogarContaLoja.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -7,6 +7,7 @@ package model;
 
 import model.promocao.Promocao;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import persistence.ProdutoDAO;
@@ -100,15 +101,6 @@ public class Produto {
         return this;
 
     }
-
-    public void save() throws SQLException, ClassNotFoundException {
-        ProdutoDAO.getInstance().save(this);
-    }
-
-    public void update() {
-        ProdutoDAO.getInstance().update(this);
-    }
-
     public Promocao getPromocao() {
         return promocao;
     }
@@ -122,6 +114,28 @@ public class Produto {
         return this.nome + " : R$" + this.preco;
     }
     
+    public void save(){
+        ProdutoDAO.getInstance().save(this);
+    }
+
+    public void update() {
+        ProdutoDAO.getInstance().update(this);
+    }
     
+    public void delete(){
+        ProdutoDAO.getInstance().delete(id);
+    }
+    
+    public Produto get(){
+        return ProdutoDAO.getInstance().get(id);
+    }
+    
+    public static ArrayList<Produto> getAll(){
+        return ProdutoDAO.getInstance().getAll();
+    }
+    
+    public ArrayList<Produto> getAllByLoja(){
+        return ProdutoDAO.getInstance().getAllByLoja(loja.getId());
+    }
 
 }

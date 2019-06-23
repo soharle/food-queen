@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Endereco;
 
 /*
@@ -27,7 +29,7 @@ public class EnderecoDAO {
     private EnderecoDAO() {
     }
 
-    public Endereco get(long id) throws ClassNotFoundException, SQLException {
+    public Endereco get(long id){
         Endereco endereco = null;
         Connection conn = null;
         Statement st = null;
@@ -41,8 +43,8 @@ public class EnderecoDAO {
             endereco.setId(rs.getInt("id")).setCep(rs.getString("cep")).setLogradouro(rs.getString("logradouro")).setNumero(rs.getString("numero"))
                     .setComplemento(rs.getString("complemento")).setBairro(rs.getString("bairro")).setCidade(rs.getString("cidade"))
                     .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -51,7 +53,7 @@ public class EnderecoDAO {
 
     }
 
-    public ArrayList<Endereco> getAll() throws ClassNotFoundException, SQLException {
+    public ArrayList<Endereco> getAll(){
         ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
         Connection conn = null;
         Statement st = null;
@@ -67,8 +69,8 @@ public class EnderecoDAO {
                         .setEstado(rs.getString("estado")).setPais(rs.getString("pais"));
                 enderecos.add(endereco);
             }
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -77,7 +79,7 @@ public class EnderecoDAO {
 
     }
 
-    public void update(Endereco endereco) throws ClassNotFoundException, SQLException {
+    public void update(Endereco endereco){
 
         Connection conn = null;
         Statement st = null;
@@ -95,14 +97,14 @@ public class EnderecoDAO {
                     + "pais = '" + endereco.getPais() + "' "
                     + "WHERE id = " + endereco.getId() + ";");
 
-        } catch (SQLException e) {
-            throw e;
-        } finally {
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
             closeResources(conn, st);
         }
     }
 
-    public void delete(long id) throws ClassNotFoundException, SQLException {
+    public void delete(long id){
         Connection conn = null;
         Statement st = null;
 
@@ -110,14 +112,14 @@ public class EnderecoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM endereco WHERE id = " + id + "");
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public Endereco save(Endereco endereco) throws SQLException, ClassNotFoundException {
+    public Endereco save(Endereco endereco) {
         Connection conn = null;
         Statement st = null;
         long key = -1;
@@ -139,8 +141,8 @@ public class EnderecoDAO {
                 key = rs.getLong(1);
             }
             endereco.setId(key);
-        } catch (SQLException e) {
-            throw e;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
             return endereco;

@@ -24,24 +24,20 @@ import persistence.ConsumidorDAO;
 public class EditarSenhaConsumidorAction implements Action {
 
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void execute(HttpServletRequest request, HttpServletResponse response) {
         String senha = request.getParameter("txtSenha");
 
         RequestDispatcher view = null;
 
         long id = Long.parseLong((String) request.getSession().getAttribute("id"));
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        consumidor.getConta().setSenha(senha);
+        ConsumidorDAO.getInstance().update(consumidor);
+        view = request.getRequestDispatcher("home.jsp");
         try {
-            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            consumidor.getConta().setSenha(senha);
-            ConsumidorDAO.getInstance().update(consumidor);
-            view = request.getRequestDispatcher("home.jsp");
-
-        } catch (ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } catch (SQLException ex) {
-            Logger.getLogger(EditarSenhaConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
             view.forward(request, response);
+        } catch (ServletException | IOException ex) {
+            Logger.getLogger(EditarSenhaConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

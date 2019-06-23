@@ -76,6 +76,8 @@ public class ProdutoHasPedidoDAO {
             produtoHasPedido.setId(rs.getLong("produto_has_pedido.id")).setProduto(produto).setCarrinho(pedido);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProdutoHasPedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
         return produtoHasPedido;
     }
@@ -120,6 +122,8 @@ public class ProdutoHasPedidoDAO {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProdutoHasPedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
         return produtoHasPedidos;
     }
@@ -135,10 +139,8 @@ public class ProdutoHasPedidoDAO {
                     + "pedido_id = " + produtoHasPedido.getCarrinho().getId() + ""
                     + "WHERE id = " + produtoHasPedido.getId() + ";");
 
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -152,16 +154,14 @@ public class ProdutoHasPedidoDAO {
             conn = DatabaseLocator.getInstance().getConnection();
             st = conn.createStatement();
             st.executeUpdate("DELETE FROM produto_has_pedido WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
     }
 
-    public void save(ProdutoHasPedido produtoHasPedido) throws SQLException, ClassNotFoundException {
+    public void save(ProdutoHasPedido produtoHasPedido){
         Connection conn = null;
         Statement st = null;
 
@@ -172,8 +172,8 @@ public class ProdutoHasPedidoDAO {
                     + "VALUES (" + produtoHasPedido.getProduto().getId() + ", "
                     + "" + produtoHasPedido.getCarrinho().getId() + ""
                     + ");");
-        } catch (SQLException e) {
-            System.out.println(e);;
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closeResources(conn, st);
         }
@@ -213,7 +213,7 @@ public class ProdutoHasPedidoDAO {
                 produto.setId((rs.getLong("produto.id"))).setNome(rs.getString("produto.nome"))
                         .setPreco(rs.getString("produto.preco")).setDisponivel(rs.getString("produto.disponivel"))
                         .setDescricao(rs.getString("produto.descricao")).setImagem(rs.getString("produto.imagem")).setLoja(loja)
-                        .setPromocao(PromocaoDAO.getInstance().getPromocao(Integer.parseInt(rs.getString("promocao.id"))));
+                        .setPromocao(PromocaoDAO.getInstance().get(Integer.parseInt(rs.getString("promocao.id"))));
                 Pedido pedido = new Pedido();
                 pedido.setId((rs.getLong("pedido.id"))).setValor(rs.getString("pedido.valor"))
                         .setEstado((PedidoEstado) MainFactory.getObject(PedidoEstado.class.getName() + rs.getString("pedido.estado"))).setConsumidor(consumidor);
@@ -223,6 +223,8 @@ public class ProdutoHasPedidoDAO {
             }
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProdutoHasPedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            closeResources(conn, st);
         }
         return produtoHasPedidos;
     }
