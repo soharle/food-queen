@@ -46,6 +46,7 @@
             <file>file:/E:/Repos/java/food-queen/src/java/model/pedido/PedidoEstadoNaoConcluido.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/PrepararListaProdutosLojaConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/persistence/DAO.java</file>
+            <file>file:/E:/Repos/java/food-queen/src/java/persistence/ContatoDAO.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/action/consumidor/CadastrarConsumidorAction.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/model/MainFactory.java</file>
             <file>file:/E:/Repos/java/food-queen/src/java/model/Consumidor.java</file>

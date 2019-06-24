@@ -30,6 +30,8 @@ public class DAO {
             if(result){
                 return st.getResultSet();
             }
+            conn.close();
+            st.close();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
