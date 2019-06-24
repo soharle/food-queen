@@ -50,8 +50,6 @@ public class SalvarCartaoConsumidorAction implements Action {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(PrepararLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(EditarProdutoLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

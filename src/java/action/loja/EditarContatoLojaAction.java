@@ -33,17 +33,11 @@ public class EditarContatoLojaAction implements Action {
         RequestDispatcher view = null;
         
         long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
-        try {
-            Loja loja = LojaDAO.getInstance().get(idLoja);
-            loja.getContato().setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
-            ContatoDAO.getInstance().update(loja.getContato());
-            view = request.getRequestDispatcher("estabelecimento/index.jsp");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
-            view.forward(request, response);
-        }
+        Loja loja = LojaDAO.getInstance().get(idLoja);
+        loja.getContato().setTelefone(telefone).setDdd(ddd).setEmail(email).setTelefoneComplementar(telefoneComplementar);
+        ContatoDAO.getInstance().update(loja.getContato());
+        view = request.getRequestDispatcher("estabelecimento/index.jsp");
+        view.forward(request, response);
     }
 
 }

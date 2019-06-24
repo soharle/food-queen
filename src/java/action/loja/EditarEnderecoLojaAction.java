@@ -37,19 +37,12 @@ public class EditarEnderecoLojaAction implements Action {
         RequestDispatcher view = null;
 
         long idLoja = Long.parseLong(request.getSession().getAttribute("id").toString());
-        try {
-            Loja loja = LojaDAO.getInstance().get(idLoja);
-            loja.getEndereco().setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
-                    .setBairro(bairro).setCidade(cidade).setEstado(estado); 
-          
-            EnderecoDAO.getInstance().update(loja.getEndereco());
-            view = request.getRequestDispatcher("estabelecimento/index.jsp");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
-            view.forward(request, response);
-        }
+        Loja loja = LojaDAO.getInstance().get(idLoja);
+        loja.getEndereco().setCep(cep).setLogradouro(logradouro).setNumero(numero).setComplemento(complemento)
+                .setBairro(bairro).setCidade(cidade).setEstado(estado);
+        EnderecoDAO.getInstance().update(loja.getEndereco());
+        view = request.getRequestDispatcher("estabelecimento/index.jsp");
+        view.forward(request, response);
     }
 
 }

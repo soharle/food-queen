@@ -27,8 +27,6 @@ public class CadastrarLojaAction implements Action {
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CadastrarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CadastrarLojaAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

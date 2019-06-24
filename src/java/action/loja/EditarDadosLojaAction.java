@@ -38,20 +38,13 @@ public class EditarDadosLojaAction implements Action {
 
         RequestDispatcher view = null;
         
-        try {
-            Loja loja = LojaDAO.getInstance().get(id);
-            loja.setNome(nome).setCnpj(cnpj).setDescricao(descricao).setImagem(imagem);
-            Categoria categoria = CategoriaDAO.getInstance().get(idCategoria);
-            loja.setCategoria(categoria);
-
-            LojaDAO.getInstance().update(loja);
-            view = request.getRequestDispatcher("estabelecimento/index.jsp");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        }finally{
-            view.forward(request, response);
-        }
+        Loja loja = LojaDAO.getInstance().get(id);
+        loja.setNome(nome).setCnpj(cnpj).setDescricao(descricao).setImagem(imagem);
+        Categoria categoria = CategoriaDAO.getInstance().get(idCategoria);
+        loja.setCategoria(categoria);
+        LojaDAO.getInstance().update(loja);
+        view = request.getRequestDispatcher("estabelecimento/index.jsp");
+        view.forward(request, response);
 
     }
 

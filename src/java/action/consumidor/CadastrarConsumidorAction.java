@@ -31,8 +31,6 @@ public class CadastrarConsumidorAction implements Action{
             view.forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger.getLogger(CadastrarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CadastrarConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

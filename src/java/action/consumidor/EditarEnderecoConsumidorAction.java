@@ -38,25 +38,19 @@ public class EditarEnderecoConsumidorAction implements Action {
 
         RequestDispatcher view = null;
         HttpSession session = request.getSession();
-        try {
-            long id = Long.parseLong(session.getAttribute("id").toString());
-            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            
-            Endereco endereco = consumidor.getEndereco();
-
-            endereco.setCep(cep);
-            endereco.setLogradouro(logradouro);
-            endereco.setNumero(numero);
-            endereco.setComplemento(complemento);
-            endereco.setBairro(bairro);
-            endereco.setCidade(cidade);
-            endereco.setEstado(estado);
-            EnderecoDAO.getInstance().update(endereco);
-            view = request.getRequestDispatcher("home.jsp");
-            view.forward(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(EditarEnderecoConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        long id = Long.parseLong(session.getAttribute("id").toString());
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        Endereco endereco = consumidor.getEndereco();
+        endereco.setCep(cep);
+        endereco.setLogradouro(logradouro);
+        endereco.setNumero(numero);
+        endereco.setComplemento(complemento);
+        endereco.setBairro(bairro);
+        endereco.setCidade(cidade);
+        endereco.setEstado(estado);
+        EnderecoDAO.getInstance().update(endereco);
+        view = request.getRequestDispatcher("home.jsp");
+        view.forward(request, response);
     }
 
 }

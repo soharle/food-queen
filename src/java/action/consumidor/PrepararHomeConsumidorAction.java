@@ -34,17 +34,12 @@ public class PrepararHomeConsumidorAction implements Action {
         String tipo = session.getAttribute("tipo").toString();
         
         if (tipo.equals("Consumidor")) {
-            try {
-                ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
-                ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
-                request.setAttribute("produtos", produtos);
-                request.setAttribute("categorias", categorias);
-                RequestDispatcher view = request.getRequestDispatcher("home.jsp");
-                view.forward(request, response);
-
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(PrepararHomeConsumidorAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ArrayList<Produto> produtos = ProdutoDAO.getInstance().getAll();
+            ArrayList<Categoria> categorias = CategoriaDAO.getInstance().getAll();
+            request.setAttribute("produtos", produtos);
+            request.setAttribute("categorias", categorias);
+            RequestDispatcher view = request.getRequestDispatcher("home.jsp");
+            view.forward(request, response);
         } else {
             response.sendRedirect("");
         }

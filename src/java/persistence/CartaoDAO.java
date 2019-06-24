@@ -34,20 +34,96 @@ public class CartaoDAO {
 
     public Cartao get(long id) {
         Cartao cartao = null;
-        Connection conn = null;
-        Statement st = null;
 
+        ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
+                + "FROM cartao "
+                + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
+                + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                + "WHERE cartao.id = " + id + ";");
+
+        cartao = create(rs);
+
+        return cartao;
+    }
+
+    public ArrayList<Cartao> getAll() {
+        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
+        ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
+                + "FROM cartao "
+                + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
+                + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                + "INNER JOIN contato ON consumidor.contato_id = contato.id ;");
+        cartoes = createAll(rs);
+        return cartoes;
+    }
+
+    public ArrayList<Cartao> getAllByConsumidor(long id) {
+        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
+        ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
+                + "FROM cartao "
+                + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
+                + "INNER JOIN conta ON consumidor.conta_id = conta.id "
+                + "INNER JOIN contato ON consumidor.contato_id = contato.id "
+                + "WHERE cartao.consumidor_id = " + id + ";");
+        cartoes = createAll(rs);
+
+        return cartoes;
+    }
+
+    public void update(Cartao cartao) {
+        DAO.executeQuery("UPDATE cartao SET numero = '" + cartao.getNumero() + "', "
+                + "cod = '" + cartao.getCod() + "', "
+                + "titular = '" + cartao.getTitular() + "', "
+                + "validade = '" + cartao.getValidade() + "', "
+                + "consumidor_id = " + cartao.getConsumidor().getId() + " "
+                + "WHERE id = " + cartao.getId() + ";");
+    }
+
+    public void delete(long id) {
+        DAO.executeQuery("DELETE FROM cartao WHERE id = " + id + "");
+    }
+
+    public void save(Cartao cartao) {
+        ResultSet st = DAO.executeQuery("INSERT INTO cartao (numero, cod, titular, validade, consumidor_id) "
+                + "VALUES ('" + cartao.getNumero() + "', "
+                + "'" + cartao.getCod() + "', "
+                + "'" + cartao.getTitular() + "', "
+                + "'" + cartao.getValidade() + "', "
+                + "" + cartao.getConsumidor().getId() + ""
+                + ");");
+
+    }
+
+    private Cartao create(ResultSet rs) {
+        Cartao cartao = null;
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
-                    + "FROM cartao "
-                    + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
-                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
-                    + "WHERE cartao.id = " + id + ";");
             rs.first();
-            Contato contato = new Contato();
+            cartao = builderCartao(rs);
+            return cartao;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cartao;
+    }
+
+    private ArrayList<Cartao> createAll(ResultSet rs) {
+        ArrayList<Cartao> listaCartao = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                listaCartao.add(builderCartao(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return listaCartao;
+    }
+
+    private Cartao builderCartao(ResultSet rs) {
+        Cartao cartao = null;
+        Contato contato = new Contato();
+        try {
             contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
                     .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
             Conta conta = new Conta();
@@ -59,157 +135,9 @@ public class CartaoDAO {
             cartao = new Cartao();
             cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
                     .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return cartao;
     }
-
-    public ArrayList<Cartao> getAll() {
-        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
-                    + "FROM cartao "
-                    + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
-                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "INNER JOIN contato ON consumidor.contato_id = contato.id ;");
-            rs.first();
-            Contato contato = new Contato();
-            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
-                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta();
-            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor();
-            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
-                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
-            Cartao cartao = new Cartao();
-            cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
-                    .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
-            cartoes.add(cartao);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return cartoes;
-    }
-
-    public ArrayList<Cartao> getAllByConsumidor(long id) {
-        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            String query = "SELECT cartao.*, consumidor.*, conta.*, contato.* "
-                    + "FROM cartao "
-                    + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
-                    + "INNER JOIN conta ON consumidor.conta_id = conta.id "
-                    + "INNER JOIN contato ON consumidor.contato_id = contato.id "
-                    + "WHERE cartao.consumidor_id = " + id + ";";
-            ResultSet rs = st.executeQuery(query);
-            rs.first();
-            Contato contato = new Contato();
-            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
-                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-            Conta conta = new Conta();
-            conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-            Consumidor consumidor = new Consumidor();
-            consumidor.setId(rs.getLong("consumidor.id")).setNome(rs.getString("consumidor.nome"))
-                    .setCpf(rs.getString("consumidor.cpf")).setNascimento(rs.getString("consumidor.nascimento")).setContato(contato).setConta(conta);
-            Cartao cartao = new Cartao();
-            cartao.setId(rs.getLong("cartao.id")).setNumero(rs.getString("cartao.numero")).setCod(rs.getString("cartao.cod"))
-                    .setTitular(rs.getString("cartao.titular")).setValidade(rs.getString("cartao.validade")).setConsumidor(consumidor);
-            cartoes.add(cartao);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return cartoes;
-    }
-
-    public void update(Cartao cartao) {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            String query = "UPDATE cartao SET numero = '" + cartao.getNumero() + "', "
-                    + "cod = '" + cartao.getCod() + "', "
-                    + "titular = '" + cartao.getTitular() + "', "
-                    + "validade = '" + cartao.getValidade() + "', "
-                    + "consumidor_id = " + cartao.getConsumidor().getId() + " "
-                    + "WHERE id = " + cartao.getId() + ";";
-            st.execute(query);
-
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void delete(long id) {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.executeUpdate("DELETE FROM cartao WHERE id = " + id + "");
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LojaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void save(Cartao cartao) {
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("INSERT INTO cartao (numero, cod, titular, validade, consumidor_id) "
-                    + "VALUES ('" + cartao.getNumero() + "', "
-                    + "'" + cartao.getCod() + "', "
-                    + "'" + cartao.getTitular() + "', "
-                    + "'" + cartao.getValidade() + "', "
-                    + "" + cartao.getConsumidor().getId() + ""
-                    + ");");
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-
-    }
-
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-
 }

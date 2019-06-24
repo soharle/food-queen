@@ -30,20 +30,14 @@ public class EditarContatoConsumidorAction implements Action {
         RequestDispatcher view = null;
         
         long id = Long.parseLong((String) request.getSession().getAttribute("id"));
-        try {
-            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            consumidor.getContato().setTelefone(telefone);
-            consumidor.getContato().setDdd(ddd);
-            consumidor.getContato().setEmail(email);
-            consumidor.getContato().setTelefoneComplementar(telefoneComplementar);
-            ConsumidorDAO.getInstance().update(consumidor);
-            view = request.getRequestDispatcher("home.jsp");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-        } finally {
-            view.forward(request, response);
-        }
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        consumidor.getContato().setTelefone(telefone);
+        consumidor.getContato().setDdd(ddd);
+        consumidor.getContato().setEmail(email);
+        consumidor.getContato().setTelefoneComplementar(telefoneComplementar);
+        ConsumidorDAO.getInstance().update(consumidor);
+        view = request.getRequestDispatcher("home.jsp");
+        view.forward(request, response);
     }
 
 }

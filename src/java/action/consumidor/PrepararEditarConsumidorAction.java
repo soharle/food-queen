@@ -32,24 +32,15 @@ public class PrepararEditarConsumidorAction implements Action {
 
         RequestDispatcher view = null;
 
-        try {
-            HttpSession session = request.getSession();
-            
-            long id = Long.parseLong((String) session.getAttribute("id"));
-            long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
-
-            Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
-            Endereco endereco = EnderecoDAO.getInstance().get(enderecoId);
-            request.setAttribute("consumidor", consumidor);
-            request.setAttribute("endereco", endereco);
-            view = request.getRequestDispatcher("editarDados.jsp");
-
-        } catch (ClassNotFoundException | SQLException ex) {
-            view = request.getRequestDispatcher("erro.jsp");
-
-        } finally {
-            view.forward(request, response);
-        }
+        HttpSession session = request.getSession();
+        long id = Long.parseLong((String) session.getAttribute("id"));
+        long enderecoId = Long.parseLong((String) session.getAttribute("enderecoId"));
+        Consumidor consumidor = ConsumidorDAO.getInstance().get(id);
+        Endereco endereco = EnderecoDAO.getInstance().get(enderecoId);
+        request.setAttribute("consumidor", consumidor);
+        request.setAttribute("endereco", endereco);
+        view = request.getRequestDispatcher("editarDados.jsp");
+        view.forward(request, response);
     }
 
 }
