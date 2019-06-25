@@ -30,126 +30,86 @@ public class ContatoDAO {
     }
 
     public Contato get(long id) {
-        Contato contato = null;
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM contato WHERE id = " + id + "");
-            rs.first();
-            contato = new Contato();
-            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
-                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-
-        return contato;
-
+        ResultSet rs = DAO.executeQuery("SELECT * FROM contato WHERE id = " + id + "");
+        return create(rs);
     }
 
-    public ArrayList<Contato> getAll(){
-        ArrayList<Contato> contatos = new ArrayList<Contato>();
-        Connection conn = null;
-        Statement st = null;
+    public ArrayList<Contato> getAll() {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM contato;");
+        return createAll(rs);
+    }
 
+    public void update(Contato contato) {
+        DAO.executeQuery("UPDATE contato SET "
+                + "telefone = '" + contato.getTelefone() + "', "
+                + "ddd = '" + contato.getDdd() + "', "
+                + "email = '" + contato.getEmail() + "', "
+                + "telefone_complementar = '" + contato.getTelefoneComplementar() + "' "
+                + "WHERE id = " + contato.getId() + ";");
+    }
+
+    public void delete(long id) {
+        DAO.executeQuery("DELETE FROM contato WHERE id =" + id + "");
+    }
+
+    public Contato save(Contato contato) {
+        long key = -1l;
+        Statement st = DAO.executeQuery("INSERT INTO contato (telefone, ddd, email, telefone_complementar)" + " "
+                + "VALUES ('" + contato.getTelefone() + "', "
+                + "'" + contato.getDdd() + "', "
+                + "'" + contato.getEmail() + "', "
+                + "'" + contato.getTelefoneComplementar() + "');", Statement.RETURN_GENERATED_KEYS);
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM contato;");
-            while (rs.next()) {
-                Contato contato = new Contato();
-                contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
-                        .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
-                contatos.add(contato);
+            if (st.getGeneratedKeys().next()) {
+                key = st.getGeneratedKeys().getLong(1);
+                contato.setId(key);
             }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return contato;
+    }
+
+    private ArrayList<Contato> createAll(ResultSet rs) {
+        ArrayList<Contato> contatos = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                contatos.add(builderContato(rs));
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
         return contatos;
-
     }
 
-    public void update(Contato contato){
-
-        Connection conn = null;
-        Statement st = null;
-
+    private Contato create(ResultSet rs) {
+        Contato contato = null;
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("UPDATE contato SET "
-                    + "telefone = '" + contato.getTelefone() + "', "
-                    + "ddd = '" + contato.getDdd() + "', "
-                    + "email = '" + contato.getEmail() + "', "
-                    + "telefone_complementar = '" + contato.getTelefoneComplementar() + "' "
-                    + "WHERE id = " + contato.getId() + ";");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void delete(long id){
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.executeUpdate("DELETE FROM contato WHERE id =" + id + "");
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public Contato save(Contato contato){
-        Connection conn = null;
-        Statement st = null;
-        long key = -1l;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("INSERT INTO contato (telefone, ddd, email, telefone_complementar)" + " "
-                    + "VALUES ('" + contato.getTelefone() + "', "
-                    + "'" + contato.getDdd() + "', "
-                    + "'" + contato.getEmail() + "', "
-                    + "'" + contato.getTelefoneComplementar() + "');", Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs != null && rs.next()) {
-                key = rs.getLong(1);
-            }
-            contato.setId(key);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
+            rs.first();
+            contato = builderContato(rs);
             return contato;
-        }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return contato;
     }
 
-    private void closeResources(Connection conn, Statement st) {
+    private Contato builderContato(ResultSet rs) {
+        Contato contato = null;
         try {
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
+            contato = new Contato();
+            contato.setId((rs.getLong("contato.id"))).setTelefone(rs.getString("contato.telefone")).setDdd(rs.getString("contato.ddd"))
+                    .setEmail((rs.getString("contato.email"))).setTelefoneComplementar(rs.getString("contato.telefone_complementar"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
+        return contato;
     }
 }

@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Contato;
 import model.conta.Conta;
 
 /*
@@ -30,149 +31,92 @@ public class ContaDAO {
 
     }
 
-    public Conta get(long id){
-        Conta conta = null;
-        Connection conn = null;
-        Statement st = null;
+    public Conta get(long id) {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM conta WHERE id = " + id + "");
+        return create(rs);
+    }
 
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE id = " + id + "");
-            rs.first();
-            conta = new Conta();
-            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-
-        return conta;
+    public Conta get(String login) {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM conta WHERE login = '" + login + "'");
+        return create(rs);
 
     }
 
-    public Conta get(String login){
-        Conta conta = null;
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM conta WHERE login = '" + login + "'");
-            rs.first();
-
-            conta = new Conta();
-            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-
-        return conta;
-
+    public ArrayList<Conta> getAll() {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM conta;");
+        return createAll(rs);
     }
 
-    public ArrayList<Conta> getAll(){
-        ArrayList<Conta> contas = new ArrayList<Conta>();
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM conta;");
-            while (rs.next()) {
-                Conta conta = new Conta();
-                conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
-                        .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
-                contas.add(conta);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            closeResources(conn, st);
-        }
-
-        return contas;
-
+    public void update(Conta conta) {
+        DAO.executeQuery("UPDATE conta "
+                + "SET login = '" + conta.getLogin() + "', "
+                + "senha = '" + conta.getSenha() + "' "
+                + "WHERE id = " + conta.getId() + ";");
     }
 
-    public void update(Conta conta){
-
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("UPDATE conta "
-                    + "SET login = '" + conta.getLogin() + "', "
-                    + "senha = '" + conta.getSenha() + "' "
-                    + "WHERE id = " + conta.getId() + ";");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void delete(long id){
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.executeUpdate("DELETE FROM conta WHERE id = " + id + "");
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
+    public void delete(long id) {
+        DAO.executeQuery("DELETE FROM conta WHERE id = " + id + "");
     }
 
     public Conta save(Conta conta) {
-        Connection conn = null;
-        Statement st = null;
         long key = -1l;
+        Statement st = DAO.executeQuery("INSERT INTO conta (login, senha, tipo)" + " "
+                + "VALUES ('" + conta.getLogin() + "', "
+                + "'" + conta.getSenha() + "', "
+                + "'" + conta.getTipo() + "');", Statement.RETURN_GENERATED_KEYS);
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("INSERT INTO conta (login, senha, tipo)" + " "
-                    + "VALUES ('" + conta.getLogin() + "', "
-                    + "'" + conta.getSenha() + "', "
-                    + "'" + conta.getTipo() + "');", Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = st.getGeneratedKeys();
-            if (rs != null && rs.next()) {
-                key = rs.getLong(1);
+            if (st.getGeneratedKeys().next()) {
+                key = st.getGeneratedKeys().getLong(1);
+                conta.setId(key);
             }
-            conta.setId(key);
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-            return conta;
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        return conta;
     }
 
-    private void closeResources(Connection conn, Statement st) {
+    private ArrayList<Conta> createAll(ResultSet rs) {
+        ArrayList<Conta> contas = new ArrayList<>();
         try {
-            if (st != null) {
-                st.close();
+            while (rs.next()) {
+                contas.add(builderConta(rs));
+
             }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
+
+        return contas;
     }
+
+    private Conta create(ResultSet rs) {
+        Conta contas = null;
+        try {
+            rs.first();
+            contas = builderConta(rs);
+            return contas;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return contas;
+    }
+
+    private Conta builderConta(ResultSet rs) {
+        Conta conta = null;
+        try {
+            conta = new Conta();
+            conta = conta.setId(rs.getLong("conta.id")).setLogin(rs.getString("conta.login"))
+                    .setSenha(rs.getString("conta.senha")).setTipo(rs.getString("conta.tipo"));
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return conta;
+    }
+
 }

@@ -33,42 +33,32 @@ public class CartaoDAO {
     }
 
     public Cartao get(long id) {
-        Cartao cartao = null;
-
         ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
                 + "FROM cartao "
                 + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
                 + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                 + "INNER JOIN contato ON consumidor.contato_id = contato.id "
                 + "WHERE cartao.id = " + id + ";");
-
-        cartao = create(rs);
-
-        return cartao;
+        return create(rs);
     }
 
     public ArrayList<Cartao> getAll() {
-        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
         ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
                 + "FROM cartao "
                 + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
                 + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                 + "INNER JOIN contato ON consumidor.contato_id = contato.id ;");
-        cartoes = createAll(rs);
-        return cartoes;
+        return  createAll(rs);
     }
 
     public ArrayList<Cartao> getAllByConsumidor(long id) {
-        ArrayList<Cartao> cartoes = new ArrayList<Cartao>();
         ResultSet rs = DAO.executeQuery("SELECT cartao.*, consumidor.*, conta.*, contato.* "
                 + "FROM cartao "
                 + "INNER JOIN consumidor ON cartao.consumidor_id = consumidor.id "
                 + "INNER JOIN conta ON consumidor.conta_id = conta.id "
                 + "INNER JOIN contato ON consumidor.contato_id = contato.id "
                 + "WHERE cartao.consumidor_id = " + id + ";");
-        cartoes = createAll(rs);
-
-        return cartoes;
+        return createAll(rs);
     }
 
     public void update(Cartao cartao) {
@@ -85,14 +75,13 @@ public class CartaoDAO {
     }
 
     public void save(Cartao cartao) {
-        ResultSet st = DAO.executeQuery("INSERT INTO cartao (numero, cod, titular, validade, consumidor_id) "
+        DAO.executeQuery("INSERT INTO cartao (numero, cod, titular, validade, consumidor_id) "
                 + "VALUES ('" + cartao.getNumero() + "', "
                 + "'" + cartao.getCod() + "', "
                 + "'" + cartao.getTitular() + "', "
                 + "'" + cartao.getValidade() + "', "
                 + "" + cartao.getConsumidor().getId() + ""
                 + ");");
-
     }
 
     private Cartao create(ResultSet rs) {

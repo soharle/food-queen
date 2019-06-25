@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Cartao;
 import model.categoria.Categoria;
 import model.MainFactory;
 
@@ -30,117 +31,74 @@ public class CategoriaDAO {
     private CategoriaDAO() {
     }
 
-    public Categoria get(long id){
-        Categoria categoria = null;
-        Connection conn = null;
-        Statement st = null;
+    public Categoria get(long id) {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
+        return create(rs);
+    }
 
+    public ArrayList<Categoria> getAll() {
+        ResultSet rs = DAO.executeQuery("SELECT * FROM categoria;");
+        return createAll(rs);
+    }
+
+    public void update(Categoria categoria) {
+        DAO.executeQuery("UPDATE categoria SET nome = '" + categoria.getNome() + "' WHERE id = " + categoria.getId() + ";");
+    }
+
+    public void delete(long id) {
+        DAO.executeQuery("DELETE FROM categoria WHERE id = " + id + ";");
+    }
+
+    public Categoria save(Categoria categoria) {
+        long key = -1l;
+        Statement st = DAO.executeQuery("INSERT INTO categoria (nome)" + " VALUES ('" + categoria.getNome() + "');", Statement.RETURN_GENERATED_KEYS);
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM categoria WHERE id =" + id + "");
-            rs.first();
-            categoria = (Categoria) MainFactory.getObject( Categoria.class.getName()+ rs.getString("nome"));
-            categoria.setId(rs.getInt("id"));
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
+            if (st.getGeneratedKeys().next()) {
+                key = st.getGeneratedKeys().getLong(1);
+                categoria.setId(key);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return categoria;
+    }
+
+    private ArrayList<Categoria> createAll(ResultSet rs) {
+        ArrayList<Categoria> categorias = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                categorias.add(builderCategoria(rs));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        return categorias;
+    }
+
+    private Categoria create(ResultSet rs) {
+
+        Categoria categoria = null;
+        try {
+            rs.first();
+            categoria = builderCategoria(rs);
+            return categoria;
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return categoria;
 
     }
 
-    public ArrayList<Categoria> getAll(){
-        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-        Connection conn = null;
-        Statement st = null;
-
+    private Categoria builderCategoria(ResultSet rs) {
+        Categoria categoria = null;
         try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM categoria;");
-            while (rs.next()) {
-                Categoria categoria = (Categoria) MainFactory.getObject( Categoria.class.getName()+ rs.getString("nome"));
-                categoria.setId(rs.getInt("id"));
-                categorias.add(categoria);
-            }
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
+            categoria = (Categoria) MainFactory.getObject(Categoria.class.getName() + rs.getString("nome"));
+            categoria.setId(rs.getInt("id"));
+        } catch (SQLException ex) {
+            Logger.getLogger(CartaoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return categorias;
-
+        return categoria;
     }
 
-    public void update(Categoria categoria){
-
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("UPDATE categoria SET nome = '" + categoria.getNome() + "' WHERE id = " + categoria.getId() + ";");
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public void delete(long id){
-        Connection conn = null;
-        Statement st = null;
-
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.executeUpdate("DELETE FROM categoria WHERE id = " + id + ";");
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-        }
-    }
-
-    public Categoria save(Categoria categoria){
-        Connection conn = null;
-        Statement st = null;
-        long key = -1l;
-        try {
-            conn = DatabaseLocator.getInstance().getConnection();
-            st = conn.createStatement();
-            st.execute("INSERT INTO categoria (nome)" + " VALUES ('" + categoria.getNome() + "');", Statement.RETURN_GENERATED_KEYS);
-            if (st.getGeneratedKeys().next()) {
-                key = st.getGeneratedKeys().getLong(1);
-            }
-            categoria.setId(key);
-
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ContatoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            closeResources(conn, st);
-            return categoria;
-        }
-
-    }
-
-    private void closeResources(Connection conn, Statement st) {
-        try {
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-    }
-    
 }
